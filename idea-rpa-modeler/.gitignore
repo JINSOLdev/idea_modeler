@@ -1,0 +1,8 @@
+frontend/build/
+frontend/dist/
+frontend/node_modules/
+frontend/coverage
+server/node_modules/
+.idea/
+#.env
+*.bat

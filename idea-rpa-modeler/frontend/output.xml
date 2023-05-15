@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230504 17:48:58.276" rpa="true" schemaversion="3">
+<suite id="s1" name="My Test Case" source="C:\Users\kimsanghoon\idea-rpa\frontend\my_test_case.robot">
+<test id="s1-t1" name="New Task" line="4">
+<kw name="Click">
+<msg timestamp="20230504 17:48:58.292" level="FAIL">No keyword with name 'Click' found.</msg>
+<status status="FAIL" starttime="20230504 17:48:58.291" endtime="20230504 17:48:58.292"/>
+</kw>
+<status status="FAIL" starttime="20230504 17:48:58.290" endtime="20230504 17:48:58.292">No keyword with name 'Click' found.</status>
+</test>
+<test id="s1-t2" name="END" line="6">
+<status status="FAIL" starttime="20230504 17:48:58.292" endtime="20230504 17:48:58.293">Task contains no keywords.</status>
+</test>
+<status status="FAIL" starttime="20230504 17:48:58.277" endtime="20230504 17:48:58.293"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="2" skip="0" id="s1" name="My Test Case">My Test Case</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
