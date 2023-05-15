@@ -8,27 +8,27 @@
             <v-card-text>
                 <variables-field
                         :label="'Row'"
-                        :hint="'index of row"
-                        :value.sync="value.property.row"
+                        :hint="'index of row'"
+                        :value.sync=value.property.row
                 ></variables-field>
 
                 <variables-field
                         :label="'Column'"
-                        :hint="'Name or index of column"
-                        :value.sync="value.property.column"
+                        :hint="'Name or index of column'"
+                        :value.sync=value.property.column
                 ></variables-field>
 
                 <variables-field
                         :label="'Fmt'"
                         :hint="'Format code for cell'"
-                        :value.sync="value.property.fmt"
+                        :value.sync=value.property.fmt
                 ></variables-field>
                 <variables-field
                         :label="'Name'"
-                        :hint="'Name of worksheet"
-                        :value.sync="value.property.name"
+                        :hint="'Name of worksheet'"
+                        :value.sync=value.property.name
                 ></variables-field>
-                
+            </v-card-text>   
 
         </v-card>
 

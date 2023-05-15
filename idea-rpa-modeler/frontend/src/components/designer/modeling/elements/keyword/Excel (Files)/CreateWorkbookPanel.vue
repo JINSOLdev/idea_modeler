@@ -21,7 +21,7 @@
                 ></variables-field>
 
                 <v-switch
-                        v-model="value.property.Exist Ok"
+                        v-model=value.property.Exist Ok
                         label="Exist Ok"
                         hint="Raise an error if name exist"
                         persistent-hint

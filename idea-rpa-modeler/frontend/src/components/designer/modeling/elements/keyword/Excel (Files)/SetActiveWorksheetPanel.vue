@@ -11,7 +11,7 @@
                         :hint="'Index or name of worksheet'"
                         :value.sync="value.property.value"
                 ></variables-field>
-
+            </v-card-text>
         </v-card>
 
         <return-values-field

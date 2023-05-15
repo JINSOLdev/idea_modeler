@@ -7,8 +7,8 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Name"
-                        :hint="'Name of worksheet"
+                        :label="'Name'"
+                        :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
 

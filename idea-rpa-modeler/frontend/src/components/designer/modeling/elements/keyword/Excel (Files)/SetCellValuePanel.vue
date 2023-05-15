@@ -7,26 +7,26 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Row"
-                        :hint="'Index of row"
+                        :label="'Row'"
+                        :hint="'Index of row'"
                         :value.sync="value.property.row"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Column"
-                        :hint="'Name or index of column"
+                        :label="'Column'"
+                        :hint="'Name or index of column'"
                         :value.sync="value.property.column"
                 ></variables-field>
 
               <variables-field
-                        :label="'Value"
-                        :hint="'New Value for cell"
+                        :label="'Value'"
+                        :hint="'New Value for cell'"
                         :value.sync="value.property.value"
                 ></variables-field>
 
                 <variables-field
                         :label="'Name'"
-                        :hint="'Name of worksheet"
+                        :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
                 
@@ -35,7 +35,7 @@
                         :hint="'Format code for cell'"
                         :value.sync="value.property.fmt"
                 ></variables-field>
-                
+            </v-card-text>   
                 
                 
                 

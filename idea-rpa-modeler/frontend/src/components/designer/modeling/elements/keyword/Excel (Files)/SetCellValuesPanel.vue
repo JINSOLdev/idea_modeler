@@ -7,14 +7,14 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Start Cell"
-                        :hint="'Cell range or single cell (e.g. E2:E10 or G2)"
+                        :label="'Start Cell'"
+                        :hint="'Cell range or single cell (e.g. E2:E10 or G2)'"
                         :value.sync="value.property.row"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Values"
-                        :hint="'List of lists or a table"
+                        :label="'Values'"
+                        :hint="'List of lists or a table'"
                         :value.sync="value.property.column"
                 ></variables-field>
 
@@ -25,9 +25,7 @@
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-                
-                
-            
+            </v-card-text>    
 
         </v-card>
 

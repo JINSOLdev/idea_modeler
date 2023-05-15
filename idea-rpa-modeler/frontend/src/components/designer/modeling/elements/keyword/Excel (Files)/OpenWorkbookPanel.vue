@@ -8,7 +8,7 @@
             <v-card-text>
                 <variables-field
                         :label="'Path'"
-                        :hint="'Path to Excel file"
+                        :hint="'Path to Excel file'"
                         :value.sync="value.property.path"
                 ></variables-field>
 

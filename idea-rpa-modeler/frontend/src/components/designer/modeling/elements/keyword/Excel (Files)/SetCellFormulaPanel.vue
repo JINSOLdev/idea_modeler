@@ -8,14 +8,14 @@
             <v-card-text>
                 <variables-field
                         :label="'Range String'"
-                        :hint="'Cell range (e.g. E2:E10)"
-                        :value.sync="value.property.range_string"
+                        :hint="'Cell range (e.g. E2:E10)'"
+                        :value.sync=value.property.range_string
                 ></variables-field>
 
                 <variables-field
                         :label="'Formula'"
-                        :hint="'Formula to insert into cell(s)"
-                        :value.sync="value.property.formula"
+                        :hint="'Formula to insert into cell(s)'"
+                        :value.sync=value.property.formula
                 ></variables-field>
 
                 <v-switch
@@ -25,7 +25,7 @@
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-                
+            </v-card-text>   
                 
 
 

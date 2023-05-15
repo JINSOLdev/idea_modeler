@@ -8,7 +8,7 @@
             <v-card-text>
                 <variables-field
                         :label="'Start'"
-                        :hint="'Column or name to start deletion from"
+                        :hint="'Column or name to start deletion from'"
                         :value.sync="value.property.start"
                 ></variables-field>
 

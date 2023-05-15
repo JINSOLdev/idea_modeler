@@ -9,12 +9,12 @@
                 <variables-field
                         :label="'Source Range'"
                         :hint="'Single cell or range of cells (e.g. A1:D4)'"
-                        :value.sync="value.property.source_range"
+                        :value.sync=value.property.source_range
                 ></variables-field>
                 <variables-field
                         :label="'Target'"
-                        :hint="'Copy to this cell (e.g. G10)"
-                        :value.sync="value.property."
+                        :hint="'Copy to this cell (e.g. G10)'"
+                        :value.sync=value.property.target
                 ></variables-field>
 
             </v-card-text>

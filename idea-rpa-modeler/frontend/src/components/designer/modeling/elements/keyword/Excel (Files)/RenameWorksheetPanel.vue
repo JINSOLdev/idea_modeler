@@ -17,7 +17,7 @@
                         :hint="'Future name of worksheet'"
                         :value.sync="value.property.dst_name"
                 ></variables-field>
-
+            </v-card-text>
         </v-card>
 
         <return-values-field

@@ -22,6 +22,7 @@
     "browserify-fs": "^1.0.0",
     "change-case": "^4.1.2",
     "core-js": "^3.8.3",
+    "electron": "^24.3.0",
     "fs": "0.0.1-security",
     "iconv-lite": "^0.6.3",
     "node-polyfill-webpack-plugin": "^2.0.1",
