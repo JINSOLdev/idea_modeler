@@ -7,8 +7,11 @@
             KeywordElement,
         }
     })
-    export default class ChangeFileExtension extends Mixins(KeywordElement) {
+    export default class JoinPath extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'path'
+            }]
             
         }
     }

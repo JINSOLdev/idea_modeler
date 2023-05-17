@@ -7,8 +7,11 @@
             KeywordElement,
         }
     })
-    export default class ChangeFileExtension extends Mixins(KeywordElement) {
+    export default class GetFileStem extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'stem'
+            }]
             
         }
     }

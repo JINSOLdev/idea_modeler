@@ -7,9 +7,9 @@
             KeywordElement,
         }
     })
-    export default class ChangeFileExtension extends Mixins(KeywordElement) {
+    export default class CreateBinaryFile extends Mixins(KeywordElement) {
         mounted() {
-            
+           
         }
     }
 </script>

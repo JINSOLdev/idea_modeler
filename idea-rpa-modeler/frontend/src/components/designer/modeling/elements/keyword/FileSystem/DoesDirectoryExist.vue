@@ -7,9 +7,11 @@
             KeywordElement,
         }
     })
-    export default class ChangeFileExtension extends Mixins(KeywordElement) {
+    export default class DoesDirectoryExist extends Mixins(KeywordElement) {
         mounted() {
-            
+            this.value.property.returnVal = [{
+                value: 'exists'
+            }]
         }
     }
 </script>

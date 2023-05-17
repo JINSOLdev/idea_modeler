@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ChangeFileExtension extends Mixins(KeywordElement) {
+    export default class EmptyDirectory extends Mixins(KeywordElement) {
         mounted() {
             
         }

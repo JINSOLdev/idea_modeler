@@ -10,9 +10,7 @@
     })
     export default class AppendToFile extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'absolute'
-            }]
+            
         }
     }
 </script>
