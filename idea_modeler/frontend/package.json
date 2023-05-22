@@ -39,7 +39,7 @@
   "devDependencies": {
     "@mdi/font": "^7.1.96",
     "@types/electron-devtools-installer": "^2.2.0",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.16.14",
     "@vue/cli-plugin-typescript": "^5.0.8",
     "@vue/cli-service": "~5.0.0",
     "electron": "^13.6.9",

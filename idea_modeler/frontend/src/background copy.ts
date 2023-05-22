@@ -1,11 +1,9 @@
 'use strict'
  
-import { app, protocol, BrowserWindow, ipcMain, Menu } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
-let win
  
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -35,97 +33,6 @@ async function createWindow() {
     win.loadURL('app://./index.html')
   }
 }
-
-const template = [
-   {
-      label: 'File',
-      submenu: [
-         {
-            role: 'New File'
-         },
-         {
-            role: 'Import'
-         },
-         {
-            role: 'Export'
-         }
-      ]
-   },
-   {
-      label: 'Edit',
-      submenu: [
-         {
-            role: 'undo'
-         },
-         {
-            role: 'redo'
-         },
-         {
-            type: 'separator'
-         },
-         {
-            role: 'cut'
-         },
-         {
-            role: 'copy'
-         },
-         {
-            role: 'paste'
-         },
-      ]
-   },
-   {
-      label: 'View',
-      submenu: [
-         {
-            role: 'reload'
-         },
-         {
-            role: 'toggledevtools'
-         },
-         {
-            type: 'separator'
-         },
-         {
-            role: 'resetzoom'
-         },
-         {
-            role: 'zoomin'
-         },
-         {
-            role: 'zoomout'
-         },
-         {
-            type: 'separator'
-         },
-         {
-            role: 'togglefullscreen'
-         }
-      ]
-   },
-   {
-      role: 'window',
-      submenu: [
-         {
-            role: 'minimize',
-         },
-         {
-            role: 'close'
-         }
-      ]
-   },
-   {
-      role: 'help',
-      submenu: [
-         {
-            label: 'Learn More'
-         }
-      ]
-   }
-]
-
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
  
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
