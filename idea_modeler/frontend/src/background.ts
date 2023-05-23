@@ -41,13 +41,16 @@ const template = [
       label: 'File',
       submenu: [
          {
-            role: 'New File'
+            label: 'New File',
+            // Click () { win.webContents.send('newfile'); }
          },
          {
-            role: 'Import'
+            label: 'Import',
+            // Click () { win.webContents.send('newfile'); }
          },
          {
-            role: 'Export'
+            label: 'Export',
+            // Click () { win.webContents.send('newfile'); }
          }
       ]
    },
