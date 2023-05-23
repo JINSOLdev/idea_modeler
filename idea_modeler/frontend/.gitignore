@@ -2,11 +2,14 @@
 node_modules
 /dist
 
+<<<<<<< HEAD
 # robot execute output
 log.html
 my_test_case.robot
 output.xml
 report.html
+=======
+>>>>>>> 0519
 
 # local env files
 .env.local

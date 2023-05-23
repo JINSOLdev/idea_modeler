@@ -129,6 +129,7 @@ const template = [
 
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
+19
  
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

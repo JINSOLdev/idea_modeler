@@ -2,6 +2,7 @@
     <!--
         TODO: 1. 변수 할당 필요함. UI만 작업 하였음.
         TODO: 2. Locator를 Task단위로 등록하여 사용 할 수 있도록.
+<<<<<<< HEAD
     -->
     <div class="mb-2">
         <div class="ml-2">
@@ -91,11 +92,58 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+=======
+
+    -->
+    <div>
+        Locator
+        <v-row class="pa-3">
+            <v-autocomplete
+                v-if="!editMode"
+                :items="varItems"
+                item-disabled="disabled"
+                :hint="hint"
+                :rules="rules"
+                persistent-hint
+                outlined
+                dense
+                required
+            ></v-autocomplete>
+            <v-text-field outlined
+                dense v-else></v-text-field>
+            <v-tooltip bottom v-if="!editMode">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn primary 
+                        @click="editMode = !editMode" 
+                        v-bind="attrs"
+                        v-on="on"
+                    >
+                        &lt; &gt;
+                    </v-btn>
+                </template>
+                <span>Edit as code</span>
+            </v-tooltip>
+            <v-tooltip bottom v-else>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn 
+                        @click="editMode = !editMode" 
+                        v-bind="attrs"
+                        v-on="on"
+                    >
+                        <v-icon>mdi-view-headline</v-icon>
+                    </v-btn>
+                </template>
+                <span>Select from list</span>
+            </v-tooltip>
+        </v-row>
+        
+>>>>>>> 0519
     </div>
 </template>
 
 
 <script lang="ts">
+<<<<<<< HEAD
     import { Vue, Component, Prop, Watch } from "vue-property-decorator";
     import OpenChildBrowser from "../../util/OpenChildBrowser.vue";
 
@@ -103,11 +151,17 @@
         OpenChildBrowser
     }})
     
+=======
+    import { Vue, Component, Prop } from "vue-property-decorator";
+    import { Variables } from "../../../../../../types/Variables";
+    @Component
+>>>>>>> 0519
     export default class LocatorField extends Vue {
         @Prop() public value!: any
         @Prop() public rules!: any[]
         @Prop() public label!: string
         @Prop() public hint!: string
+<<<<<<< HEAD
         
         
         locator: any[] = []
@@ -150,6 +204,20 @@
 
         mounted() {
             if (this.value) {
+=======
+        @Prop() public isMultiple!: boolean
+
+        varItems: any[] = []
+        newValue: any = null
+        editMode: Boolean = false
+        mounted() {
+            var variables = new Variables()
+            this.varItems = variables.getVarList()
+            
+            if (this.isMultiple && (!this.value || this.value.length < 1)) {
+                this.newValue = [ "" ]
+            } else {
+>>>>>>> 0519
                 this.newValue = this.value
             }
         }
@@ -163,12 +231,25 @@
             this.$emit('update:value', this.newValue)
         }
 
+<<<<<<< HEAD
         closeLocator() {
             this.openSelectLocator = true
         }
 
         capitalize(word: string) {
             return word.charAt(0).toUpperCase() + word.slice(1)
+=======
+        addValue() {
+            var lastIdx = this.newValue.length - 1
+            if (lastIdx == -1 || (lastIdx >= 0 && this.newValue[lastIdx] != "")) {
+                this.newValue.push("")
+            }
+        }
+
+        delValue(idx: number) {
+            this.newValue.splice(idx, 1)
+            this.updateValue()
+>>>>>>> 0519
         }
     }
 </script>

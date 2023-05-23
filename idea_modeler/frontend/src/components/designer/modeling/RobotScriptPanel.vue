@@ -1,7 +1,10 @@
 <template>
+<<<<<<< HEAD
     <!-- 
         TODO: scriptText 를 모델로 전환하는 parse 기능 필요.
     -->
+=======
+>>>>>>> 0519
     <v-navigation-drawer
             absolute
             permanent
@@ -33,33 +36,47 @@
                         :value="alert"
                 >Copy!</v-alert>
                 
+<<<<<<< HEAD
                 <pre>{{ scriptText }}</pre>
                 <!-- <v-textarea
                         v-model="scriptText"
                         @keydown.tab.prevent="addTabKey"
                         auto-grow
                 ></v-textarea> -->
+=======
+                <pre class="scirpt-text">{{ scriptText }}</pre>
+>>>>>>> 0519
             </v-card-text>
         </v-card>
     </v-navigation-drawer>
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
     import { Vue, Component, Prop, Watch } from "vue-property-decorator"
     import { Robot, Task, Keyword } from "@/types/Task";
+=======
+    import { Vue, Component, Prop } from "vue-property-decorator"
+>>>>>>> 0519
 
     @Component
     export default class RobotScriptPanel extends Vue {
         @Prop() public robot!: any;
 
+<<<<<<< HEAD
         public scriptText: string = ""
         public alert: boolean = false
+=======
+        public scriptText: string = ''
+        alert: boolean = false
+>>>>>>> 0519
 
         get scriptTextLines() {
             return this.scriptText.split("\n");
         }
 
         mounted () {
+<<<<<<< HEAD
             this.scriptText = this.robot.toRobot(0);
         }
 
@@ -70,6 +87,12 @@
         //     }
         // }
 
+=======
+            this.scriptText = this.robot.toRobot(0)
+            console.log(this.scriptText)
+        }
+
+>>>>>>> 0519
         copyScriptText() {
             window.navigator.clipboard.writeText(this.scriptText)
             this.alert = true
@@ -77,6 +100,7 @@
                 this.alert = false
             }, 1000)
         }
+<<<<<<< HEAD
 
         addTabKey(event: any) {
             var start = event.target.selectionStart;
@@ -145,8 +169,16 @@
                 console.log(error)
             }            
         }
+=======
+>>>>>>> 0519
     }
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+    .scirpt-text {
+        font-family: Roboto,sans-serif;
+    }
+>>>>>>> 0519
 </style>
