@@ -6,11 +6,19 @@
             </v-card-title>
             
             <v-card-text>
+                <v-text-field
+                        :v-model.number="'numberValue'"
+                        :label="'Expression'"
+                        :hint="'Python expression to evaluate'"
+                        :value.sync="value.property.expression"
+                ></v-text-field>
+
                 <variables-field
                         :label="'Expression'"
                         :hint="'Python expression to evaluate'"
                         :value.sync="value.property.expression"
                 ></variables-field>
+
 
                 <variables-field
                         :label="'Modules'"
