@@ -31,6 +31,6 @@
             KeywordPanel,
         }
     })
-    export default class DoesFileExistNotPanel extends Mixins(KeywordPanel) {
+    export default class DoesFileNotExistPanel extends Mixins(KeywordPanel) {
     }
 </script>

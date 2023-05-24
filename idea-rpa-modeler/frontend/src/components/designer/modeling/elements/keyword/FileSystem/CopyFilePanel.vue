@@ -16,6 +16,8 @@
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
                 ></path-field>
+               
+                
             </v-card-text>
         </v-card>
 

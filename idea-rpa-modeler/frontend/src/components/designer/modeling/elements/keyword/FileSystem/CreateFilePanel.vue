@@ -24,6 +24,15 @@
                         :value.sync="value.property.encoding"
                 ></variables-field>
 
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Overwrite"
+                        hint="Replace existing file"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+                
+
 
                
             </v-card-text>

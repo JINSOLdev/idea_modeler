@@ -11,6 +11,24 @@
                         :hint="'Search pattern in glob format, e.g. *.xlsx'"
                         :value.sync="value.property.pattern"
                 ></variables-field>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Include Dirs"
+                        hint="Include directories in result"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Include Files"
+                        hint="Include files in result"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+
+                
                
             </v-card-text>
         </v-card>

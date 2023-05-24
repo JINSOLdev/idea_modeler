@@ -12,14 +12,18 @@
                         :value.sync="value.property.path"
                 ></path-field>
 
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Recursive"
+                        hint="Remove all subdirectories and files"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+
 
             </v-card-text>
         </v-card>
 
-        <return-values-field
-  
-
-    </div>    
 </template>
 
 <script lang="ts">

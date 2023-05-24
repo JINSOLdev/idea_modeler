@@ -16,6 +16,15 @@
                         :hint="'Content to write'"
                         :value.sync="value.property.content"
                 ></variables-field>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Overwrite"
+                        hint="Replace existing file"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+
             </v-card-text>
         </v-card>
 

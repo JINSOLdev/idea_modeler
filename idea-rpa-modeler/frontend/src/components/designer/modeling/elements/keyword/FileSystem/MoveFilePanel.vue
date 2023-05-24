@@ -17,6 +17,14 @@
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
                 ></path-field>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Overwrite"
+                        hint="Replace destination file"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
                
             </v-card-text>
         </v-card>

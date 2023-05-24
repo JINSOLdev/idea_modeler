@@ -11,6 +11,22 @@
                         :hint="'Path to directory'"
                         :value.sync="value.property.path"
                 ></path-field>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpty"
+                        label="Parents"
+                        hint="Create missing parent directories"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
+
+                <v-switch
+                        v-model="value.property.formattingAsEmpy"
+                        label="Exist Ok"
+                        hint="Continue without errors if directory exists"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
                
             </v-card-text>
         </v-card>
