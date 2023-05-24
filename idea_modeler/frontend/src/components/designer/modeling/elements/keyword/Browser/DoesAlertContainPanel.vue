@@ -11,9 +11,7 @@
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
                 ></Variables-field>
-            </v-card-text>
-
-            <v-card-text>
+                
                 <Variables-field
                         :label="'Timeout'"
                         :hint="'Time out wait, e.g. 5 seconds or 1 min'"

@@ -9,9 +9,10 @@
   "author": "JIN",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^24.2.0"
+    "electron": "^24.3.1"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.9"
+    "@electron/remote": "^2.0.9",
+    "vue.js": "^0.3.2"
   }
 }
