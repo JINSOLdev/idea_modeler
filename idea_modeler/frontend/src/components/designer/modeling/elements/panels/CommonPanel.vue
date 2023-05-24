@@ -16,7 +16,7 @@
                         {{ value.name }}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        {{ description }}
+                        {{ value.library }}
                     </v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -26,7 +26,6 @@
             </v-list-item>
         </template>
 
-        <v-divider></v-divider>
         <control-panel
                 v-if="isControl"
                 :value.sync="value"
@@ -46,7 +45,6 @@
         
         // Data
         public controlList: any[] = Vue.prototype.$controlList
-        public description: string = ""
         public elementIcon: string = "mdi-square"
 
         // Computed
@@ -62,9 +60,6 @@
         }
 
         mounted() {
-            if (this.value.type == "DefinitionKeyword") {
-                this.description = "User Keywords"
-            }
         }
         
         // Methods
@@ -78,10 +73,6 @@
 
         closePanel() {
             this.$emit('close')
-        }
-
-        includePanel() {
-            console.log(document.querySelectorAll("input"))
         }
     }
 </script>

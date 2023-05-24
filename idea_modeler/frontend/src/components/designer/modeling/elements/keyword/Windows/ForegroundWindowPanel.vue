@@ -4,11 +4,11 @@
 <template>
     <div>
         <v-card flat>
+            <v-card-title class="subtitle-1">
+                Input Arguments
+            </v-card-title>
+            
             <v-card-text>
-                <div class="subtitle-1">
-                    Input Arguments
-                </div>
-                
                 <locator-field
                     :value.sync="value.property.locator"
                     :hint="'Optional locator for window'"

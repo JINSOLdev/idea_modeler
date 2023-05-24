@@ -10,6 +10,7 @@
                         :label="'List'"
                         :hint="'List to copy'"
                         :value.sync="value.property.list"
+                        :required="true"
                 ></variables-field>
 
                 <v-switch

@@ -10,12 +10,14 @@
                         :label="'List'"
                         :hint="'List to search'"
                         :value.sync="value.property.list"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Value'"
                         :hint="'Value being counted'"
                         :value.sync="value.property.value"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field

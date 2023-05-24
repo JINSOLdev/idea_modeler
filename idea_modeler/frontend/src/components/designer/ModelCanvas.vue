@@ -25,16 +25,11 @@
                 Robot
             </v-btn>
             <execute-python :task="robot"
-                            @record="addRecord"
+                            @record="getRecordResult"
+                            @openExecute="openExecutePanel"
+                            @executeResult="getExecuteResult"
+                            @endExecution="endExecution"
             ></execute-python>
-            <!-- <v-btn text color="primary" @click="executePython(robot)">
-                <v-icon>mdi-script-text</v-icon>
-                execute
-            </v-btn>
-            <v-btn text color="red" @click="recordPython">
-                <v-icon>mdi-record</v-icon>
-                record
-            </v-btn> -->
             <!-- <v-btn text color="green" @click="saveModel">
                 <v-icon>mdi-content-save</v-icon>
                 Save
@@ -96,6 +91,7 @@
         <!-- Element List -->
         <element-list 
                 @updateKeywords="updateKeywords"
+                ref="elementList"
         ></element-list>
 
         <!-- Variables Dialogs -->
@@ -109,9 +105,19 @@
         <!-- Robot Script Panel -->
         <robot-script-panel
                 v-if="isOpenScript"
-                :robot="robot"
+                :robot.sync="robot"
                 v-click-outside="closeScriptPanel"
+                @addElement="addElement"
         ></robot-script-panel>
+
+        <!-- Execute Panel-->
+        <execute-panel
+                v-if="isOpenExecute"
+                :taskName.sync="taskName"
+                :resultText.sync="executeResultText"
+                :isExecuting.sync="isExecuting"
+                @close="closeExecutePanel"
+        ></execute-panel>
 
         <!-- Context Menu -->
         <v-menu
@@ -145,11 +151,12 @@
 
     import Draggable from "vuedraggable";
     import { Watch, Component, Vue } from "vue-property-decorator";
-    import { Robot, Task } from "../../types/Task";
+    import { Robot, Task, Keyword } from "../../types/Task";
 
     import ElementList from "./modeling/ElementList.vue";
     import RobotScriptPanel from "./modeling/RobotScriptPanel.vue";
     import VariablesDialog from "./modeling/VariablesDialog.vue";
+    import ExecutePanel from "./modeling/ExecutePanel.vue";
     import ExecutePython from "./modeling/elements/util/ExecutePython.vue";
     import ModelRelation from "./modeling/ModelRelation.vue";
 
@@ -163,6 +170,7 @@
             ElementList,
             RobotScriptPanel,
             VariablesDialog,
+            ExecutePanel,
             ControlElement,
             KeywordElement,
             ModelPanel,
@@ -173,39 +181,103 @@
     
     export default class ModelCanvas extends Vue {
         // Data
-        taskName: string = "New Task"
-        robot: Task = new Robot(1, this.taskName, "Task", [])
+        // taskName: string = "New Task"
+        robot: Task = new Robot(1, "New Task", "Task", [])
         isOpenPanel: boolean = false
         isOpenMenu: boolean = false
         menuStyle: any = {}
         selectedValue: any = null
         isOpenScript: boolean = false
+        isOpenExecute: boolean = false
+        isExecuting: boolean = false
         variableDialog: boolean = false
+        public executeResultText: any = ""
+
+        $refs!: {
+            elementList: ElementList
+        }
+
+        
+        get taskName() {
+            return this.robot.getName()
+        }
+        set taskName(newVal: any) {
+            this.robot.setName(newVal)
+        }
 
         // Watch
-        @Watch("taskName", {immediate: true, deep: true})
-        updateTaskName(val: any) {
+        @Watch("robot", {immediate: true, deep: true})
+        updateRobot(val: any) {
             if (val) {
-                this.robot.setName(val)
+                val.name = this.taskName
             }
         }
 
         mounted() {
-            //
         }
 
         // Methods
+        addElement(value: any, type: string, settings: any) {
+            if (value.length > 0) {
+                if (type == "taskName") {
+                    this.taskName = value
+
+                } else {
+                    var controlList = this.$refs.elementList.controlList
+                    var keywordList = this.$refs.elementList.keywordList
+
+                    // controlList.forEach((ctrl: any) => {
+                    //     if(value.includes(ctrl.name.toUpperCase())) {
+                    //     }
+                    // })
+
+                    keywordList.forEach((item: any) => {
+                        item.list.forEach((keyword: string) => {
+                            if(value.includes(keyword)) {
+                                const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
+                                this.robot.child.push(element)
+                            }
+                        })
+                    })
+
+                }
+            }
+        }
+
         deleteElement(value: any) {
             var newChild = this.robot.delChild(value, this.robot.child)
             this.robot.child = newChild
 
             if(value.type == "DefinitionKeyword") {
-                this.robot.delKeyowrd(value)
+                this.robot.delKeyword(value)
             }
         }
-        addRecord(record: any) {
-            console.log(record)
+        
+        getRecordResult(result: any) {
+            result.forEach((str: string) => {
+                if (str) {
+                    this.addElement(str, "Keyword", null)
+                }
+            })
         }
+
+        getExecuteResult(result: any) {
+            if (result && result != undefined && result != null) {
+                this.executeResultText += result.replace("undefined", "")
+            }
+        }
+        endExecution() {
+            this.isExecuting = false
+        }
+        openExecutePanel() {
+            this.executeResultText = ""
+            this.isExecuting = true
+            this.isOpenExecute = true
+        }
+        closeExecutePanel() {
+            this.isOpenExecute = false
+        }
+
         getComponentName(task: any) {
             if (task.type == "DefinitionKeyword") {
                 return "keyword-element"

@@ -1,10 +1,5 @@
 <template>
     <div>
-        <v-card flat>
-            <v-card-title class="subtitle-1">
-                Clears control anchor set by Set Anchor
-            </v-card-title>
-        </v-card>
     </div>
 </template>
 
@@ -18,5 +13,9 @@
         }
     })
     export default class ClareArchorPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clears control anchor set by Set Anchor."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

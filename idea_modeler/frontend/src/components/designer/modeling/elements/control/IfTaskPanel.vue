@@ -19,11 +19,11 @@
                 <div></div>
                 <v-row>
                     <v-col :cols="editIndex == index || condition.operator != null ? 4 : 6">
-                        <v-autocomplete
+                        <v-combobox
                                 v-model="condition.variable"
                                 :items="varItems"
                                 dense
-                        ></v-autocomplete>
+                        ></v-combobox>
                     </v-col>
                     <v-col v-if="condition.type != 'Else' && editIndex != index && condition.operator == null"
                             cols="1"
@@ -46,11 +46,11 @@
                     <v-col v-if="editIndex == index || condition.operator != null"
                             cols="4"
                     >
-                        <v-autocomplete
+                        <v-combobox
                                 v-model="condition.compareVariable"
                                 :items="varItems"
                                 dense
-                        ></v-autocomplete>
+                        ></v-combobox>
                     </v-col>
                     <v-col v-if="editIndex == index || condition.operator != null"
                             cols="1"

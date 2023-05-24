@@ -19,14 +19,14 @@
                         style="max-height: 70px;"
                 >
                     <v-col>
-                        <v-autocomplete
+                        <v-combobox
                                 v-if="isVars"
                                 v-model="newValue[idx].value"
                                 :items="varItems"
                                 item-disabled="disabled"
                                 outlined
                                 dense
-                        ></v-autocomplete>
+                        ></v-combobox>
                         <v-text-field
                                 v-else
                                 v-model="newValue[idx].value"

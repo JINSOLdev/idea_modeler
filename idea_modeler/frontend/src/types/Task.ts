@@ -20,7 +20,15 @@ class Task extends Construct{
         this.child = child;
     }
 
-    public setName(name: string): any {
+    public getId() {
+        return this.id
+    }
+
+    public getName() {
+        return this.name
+    }
+
+    public setName(name: any) {
         this.name = name
     }
 
@@ -40,7 +48,7 @@ class Task extends Construct{
     public setProperty(value: any) {
     }
 
-    public delKeyowrd(value: any) {
+    public delKeyword(value: any) {
     }
 
 
@@ -95,7 +103,7 @@ class SeqTask extends Task {
         
         this.child?.forEach(child=> robot += "\n"+child.toRobot(tab + 1));
 
-        robot += "\n"+Construct.tabs.substr(0, tab)+"END";
+        robot += "\n";
         
 
         return robot; 
@@ -321,36 +329,50 @@ class Robot extends SeqTask{
         }
     }
 
-    public delKeyowrd(value: any) {
+    public delKeyword(value: any) {
         this.keywords = this.keywords.filter((obj: any) => obj.id != value.id)
     }
 
 
     public toRobot(tab: number): string {
-        let robot = "*** Settings ***\n";
-        
-        console.log(this)
-        
-        robot+= "*** Variables ***\n";
-        
-        this.variables.forEach(
-            variable => robot += variable.toRobot(tab+1)
-        );
+        let robot = "";
 
-        robot+="\n*** Tasks ****\n";
+        if (this.child.length > 0) {
+            robot += "*** Settings ***\n";
+            this.child.forEach((keyword: any) => {
+                if (keyword.library && keyword.library != "") {
+                    if (!robot.includes(keyword.library)) {
+                        robot += "Library" + Construct.tabs.substr(0, tab+1) + `${keyword.library}\n`;
+                    }
+                }
+            });
+            robot+= "\n";
+        }
+        
+        if (this.variables.length > 0) {
+            robot+= "\n*** Variables ***\n";
+        
+            this.variables.forEach(
+                variable => robot += variable.toRobot(tab+1)
+            );
+            robot+= "\n";
+        }
+        
+        robot+="\n*** Tasks ***\n";
 
         robot+=super.toRobot(tab) + "\n";
 
-        robot+="\n*** Keywords ****\n";
+        if (this.keywords.length > 0) {
+            robot+="\n*** Keywords ***\n";
 
-        this.keywords.forEach(keyword => {
-            robot += keyword.toRobot(tab) + "\n";
+            this.keywords.forEach(keyword => {
+                robot += keyword.toRobot(tab) + "\n";
 
-            if (keyword.child.length > 0) {
-                keyword.child.forEach(child => robot += child.toRobot(tab+1) + "\n")
-            }
-        });
-
+                if (keyword.child.length > 0) {
+                    keyword.child.forEach(child => robot += child.toRobot(tab+1) + "\n")
+                }
+            });
+        }
 
         robot+="\n";
 
@@ -377,6 +399,23 @@ class Variable extends Construct{
 class Keyword extends SeqTask {
 
     public property: any = {}
+    public library: string = ""
+
+    public setKeyValue() {
+        let keys = Object.keys(this.property)
+        keys = keys.filter((key: string) => key != 'returnVal')
+
+        let values: any[] = []
+        keys.forEach((key: string) => {
+            values.push(this.property[key])
+        })
+
+        if (values.includes(undefined)) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     public toRobot(tab: number): string{
 
@@ -400,6 +439,20 @@ class Keyword extends SeqTask {
 
             keys.forEach((key: string, index: number) => {
                 if (key != 'returnVal') {
+                    if (key == 'url') {
+                        robot += Construct.tabs.substr(0, tab+1) + `${this.property[key]}`
+                        return
+                    }
+                    if (key == 'locator') {
+                        if (this.property[key].class && this.property[key].class != null) {
+                            robot += Construct.tabs.substr(0, tab+1) + `class:${this.property[key].class}`
+                        } else if (this.property[key].id && this.property[key].id != null) {
+                            robot += Construct.tabs.substr(0, tab+1) + `id:${this.property[key].id}`
+                        } else {
+                            robot += Construct.tabs.substr(0, tab+1) + `alias:${this.property[key].ref}`
+                        }
+                        return
+                    }
                     if (typeof this.property[key] == 'object' && this.property[key].length > 0) {
                         
                         this.property[key].forEach((val: any) => {
@@ -413,8 +466,12 @@ class Keyword extends SeqTask {
                         })
 
                     } else {
-                        if (this.property[key] != ""  && this.property[key] != undefined) {
-                            robot += Construct.tabs.substr(0, tab+1) + `${key}=\$\{${this.property[key]}\}`
+                        if (this.setKeyValue()) {
+                            if (this.property[key] != ""  && this.property[key] != undefined) {
+                                robot += Construct.tabs.substr(0, tab+1) + `${key}=\$\{${this.property[key]}\}`
+                            }
+                        } else {
+                            robot += Construct.tabs.substr(0, tab+1) + `${this.property[key]}`
                         }
                     }
                 }

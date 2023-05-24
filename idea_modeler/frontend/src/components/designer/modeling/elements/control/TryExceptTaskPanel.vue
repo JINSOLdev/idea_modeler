@@ -29,7 +29,7 @@
                         style="max-height: 70px;"
                 >
                     <v-col>
-                        <v-autocomplete
+                        <v-combobox
                                 v-model="value[idx]"
                                 :items="varItems"
                                 item-disabled="disabled"
@@ -37,7 +37,7 @@
                                 outlined
                                 dense
                                 @change="updateValue(value[idx], idx)"
-                        ></v-autocomplete>
+                        ></v-combobox>
                     </v-col>
                     <v-col cols="1" style="padding: 12px 0px;">
                         <v-btn icon @click="delValue(idx)">

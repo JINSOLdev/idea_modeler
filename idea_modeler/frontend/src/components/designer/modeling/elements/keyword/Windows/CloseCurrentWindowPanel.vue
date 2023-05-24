@@ -1,13 +1,8 @@
 <template>
     <div>
-        <v-card flat>
-            <v-card-text>
-                Closes current activate window or logs a warning message.
-                <v-divider></v-divider>
-                <!-- <div class="subtitle-1">Assign Return Values</div> -->
-                <ReturnValuesField></ReturnValuesField>
-            </v-card-text>
-        </v-card>
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 
@@ -21,5 +16,9 @@
         }
     })
     export default class CloseCurrentWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Closes current activate window or logs a warning message."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

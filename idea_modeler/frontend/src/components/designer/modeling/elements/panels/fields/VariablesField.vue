@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-2">
         <div v-if="isMultiple" flat>
             <div class="d-flex">
                 <div class="mr-auto ml-2">
@@ -15,15 +15,15 @@
                     style="max-height: 70px;"
             >
                 <v-col>
-                    <v-autocomplete
+                    <v-combobox
                             v-model="newValue[idx]"
                             :items="varItems"
                             item-disabled="disabled"
-                            :rules="rules"
                             persistent-hint
                             outlined
                             dense
-                    ></v-autocomplete>
+                            clearable
+                    ></v-combobox>
                 </v-col>
                 <v-col cols="1" style="padding: 12px 0px;">
                     <v-btn icon @click="delValue(idx)">
@@ -35,18 +35,20 @@
         </div>
 
         <div v-else>
-            <v-autocomplete
+            <div class="d-flex mb-1">
+                <div class="mr-auto ml-2">{{ label }}</div>
+                <div v-if="required" class="mr-2">required</div>
+            </div>
+            <v-combobox
                     v-model="newValue"
-                    :value="value"
                     :items="varItems"
                     item-disabled="disabled"
-                    :rules="rules"
-                    :label="label"
                     :hint="hint"
                     persistent-hint
                     outlined
                     dense
-            ></v-autocomplete>
+                    clearable
+            ></v-combobox>
         </div>
     </div>
 </template>
@@ -59,10 +61,11 @@
     @Component
     export default class VariablesField extends Vue {
         @Prop() public value!: any
-        @Prop() public rules!: any[]
         @Prop() public label!: string
         @Prop() public hint!: string
         @Prop() public isMultiple!: boolean
+        @Prop() public required!: boolean
+
         
         varItems: any[] = []
         newValue: any = null

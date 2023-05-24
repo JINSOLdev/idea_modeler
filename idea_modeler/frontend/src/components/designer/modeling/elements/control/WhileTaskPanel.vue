@@ -8,11 +8,11 @@
             <v-card-text>
                 <v-row>
                     <v-col :cols="isOperator ? 4 : 6">
-                        <v-autocomplete
+                        <v-combobox
                                 v-model="value.condition.variable"
                                 :items="varItems"
                                 dense
-                        ></v-autocomplete>
+                        ></v-combobox>
                     </v-col>
                     <v-col v-if="!isOperator" cols="1">
                         <v-btn @click="addOperator"

@@ -1,6 +1,12 @@
 <template>
     <div>
-        <v-btn @click="getXpath">Locator Button</v-btn>
+        <v-btn 
+                @click="getXpath"
+                outlined
+                block
+        >
+            Locator Button
+        </v-btn>
         <!-- <v-autocomplete
                 :items="records"
                 item-disabled="disabled"
@@ -9,7 +15,6 @@
                 dense
                 required
         ></v-autocomplete> -->
-        
     </div>
 </template>
 
@@ -22,9 +27,28 @@
     export default class OpenChildBrowser extends Vue {
 
         @Prop() public records!: any[]
+        public listener: any
+
+        messageProcessing(msg: any, arg: any, domPickerWindow: any) {
+            const me = this
+            if(arg.type == 'close') {
+                // me.listener = null
+                domPickerWindow.destroy()
+                // ipcRenderer.removeListener('fromMain', me.messageProcessing)
+                ipcRenderer.removeAllListeners('fromMain')
+                this.$emit('update:records',this.records)
+                this.$emit('closeLocator')
+            } else {
+                console.log(msg,arg);
+                if (arg.id || arg.class) {
+                    this.records.push(arg)
+                }
+            }   
+        }
 
         getXpath() {
-            const domPickerWindow = new remote.BrowserWindow({
+            let me = this
+            let domPickerWindow = new remote.BrowserWindow({
                 width: 800,
                 height: 600,
                 webPreferences: {
@@ -43,15 +67,9 @@
                 // // console.log('Clicked at position:', x, y, 'with button:', button)
                 // // Do whatever you want to do when the window is clicked
                 // })
-                const iframe = domPickerWindow.webContents
-                const listener = ipcRenderer.on('fromMain', (msg, arg) => {
-                    if(arg.type == 'close') {
-                        domPickerWindow.close();
-                        this.$emit('update:records',this.records)
-                    } else {
-                        console.log(msg,arg);
-                        this.records.push(arg)
-                    }   
+                let iframe = domPickerWindow.webContents
+                this.listener = ipcRenderer.on('fromMain', (msg, arg) => {
+                    me.messageProcessing(msg,arg,domPickerWindow)
                 })
                 domPickerWindow.setIgnoreMouseEvents(false)
                 iframe.executeJavaScript(`
