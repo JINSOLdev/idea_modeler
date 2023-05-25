@@ -1,0 +1,21 @@
+{
+  "opts": {
+    "template": "../frontend/node_modules/better-docs",
+    "destination": "./../documentationWebsite"
+  },
+  "tags": {
+    "allowUnknownTags": ["category", "component"]
+  },
+  "plugins": ["node_modules/better-docs/category"],
+  "source": {
+    "include": [
+      "./../frontend/src",
+      "./../server/utils/ssotToRobotParsing",
+      "./../server/socket/socketHelperFunctions.js",
+      "./../server/utils/testing/testDatabaseHandler.js"
+    ],
+    "exclude": ["./../frontend/node_modules", "./../server/node_modules"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  }
+}
