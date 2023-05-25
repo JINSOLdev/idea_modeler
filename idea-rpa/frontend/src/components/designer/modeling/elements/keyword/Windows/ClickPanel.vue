@@ -28,5 +28,9 @@
         }
     })
     export default class ClickPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Mouse click on element matching given locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
