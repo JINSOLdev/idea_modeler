@@ -12,6 +12,7 @@ import Collection from '@/components/designer/modeling/elements/keyword/Collecti
 import FileSystem from '@/components/designer/modeling/elements/keyword/FileSystem'
 import String from '@/components/designer/modeling/elements/keyword/String'
 import DateTime from '@/components/designer/modeling/elements/keyword/DateTime'
+import Desktop from '@/components/designer/modeling/elements/keyword/Desktop'
 import JSON from '@/components/designer/modeling/elements/keyword/JSON'
 import Browser from '@/components/designer/modeling/elements/keyword/Browser'
 import HTTP from '@/components/designer/modeling/elements/keyword/HTTP'
@@ -37,6 +38,7 @@ Vue.use(Collection)
 Vue.use(FileSystem)
 Vue.use(String)
 Vue.use(DateTime)
+Vue.use(Desktop)
 Vue.use(JSON)
 Vue.use(Browser)
 Vue.use(HTTP)

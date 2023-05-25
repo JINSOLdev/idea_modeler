@@ -180,6 +180,13 @@
             }
             this.keywordList.push(dateTimeList)
 
+            const desktopList = {
+                keywordType: 'Desktop',
+                library: 'Desktop',
+                list: Vue.prototype.$desktopList
+            }
+            this.keywordList.push(desktopList)
+
             const jsonList = {
                 keywordType: 'JSON',
                 library: 'RPA.JSON',
