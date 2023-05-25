@@ -36,5 +36,9 @@
         }
     })
     export default class ClickLinkPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clicks a link identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -27,5 +27,9 @@
         }
     })
     export default class ClearElementTextPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clears the value of the text-input-element identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

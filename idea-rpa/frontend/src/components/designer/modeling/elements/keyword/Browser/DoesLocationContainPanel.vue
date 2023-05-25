@@ -31,5 +31,9 @@
         }
     })
     export default class DoesLocationContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does current URL contain expected"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

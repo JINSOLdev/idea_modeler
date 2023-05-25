@@ -46,5 +46,9 @@
         }
     })
     export default class DoesElementContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does element contain expected text"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

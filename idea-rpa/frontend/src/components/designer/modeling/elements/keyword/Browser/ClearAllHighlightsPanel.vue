@@ -19,5 +19,9 @@
         }
     })
     export default class ClearAllHighlightsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove all highlighting made by Highlight Elements."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
