@@ -57,5 +57,9 @@
     })
     
     export default class AddCookiePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Adds a cookie to your current session."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

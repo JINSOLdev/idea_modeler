@@ -37,5 +37,9 @@
         }
     })
     export default class ChooseFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Inputs the file_path into the file input field locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

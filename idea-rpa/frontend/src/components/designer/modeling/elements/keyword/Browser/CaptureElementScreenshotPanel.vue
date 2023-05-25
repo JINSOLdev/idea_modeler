@@ -39,6 +39,10 @@
         }
     })
     export default class CaptureElementScreenshotPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Captures a screenshot from the element identified by locator and embeds it into log file."
+            this.$emit("setDescription", description)
+        }
 
         records: any[] = []
 

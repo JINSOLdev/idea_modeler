@@ -37,5 +37,9 @@
         }
     })
     export default class DoesFrameContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does frame contain expected text"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

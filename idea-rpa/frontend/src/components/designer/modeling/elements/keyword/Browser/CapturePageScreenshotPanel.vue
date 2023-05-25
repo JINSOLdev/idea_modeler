@@ -30,6 +30,9 @@
         }
     })
     export default class CapturePageScreenshotPanel extends Mixins(KeywordPanel) {
-
+        mounted() {
+            var description = "Takes a screenshot of the current page and embeds it into a log file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

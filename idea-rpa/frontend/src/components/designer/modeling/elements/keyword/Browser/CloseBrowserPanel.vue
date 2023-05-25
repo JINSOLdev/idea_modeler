@@ -19,5 +19,9 @@
         }
     })
     export default class CloseBrowserPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Closes the current browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

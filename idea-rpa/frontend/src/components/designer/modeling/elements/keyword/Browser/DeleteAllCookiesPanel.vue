@@ -19,5 +19,9 @@
         }
     })
     export default class DeleteAllCookiesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Deletes all cookies."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

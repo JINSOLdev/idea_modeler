@@ -19,5 +19,9 @@
         }
     })
     export default class CloseAllBrowsers extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Closes all open browsers and resets the browser cache."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

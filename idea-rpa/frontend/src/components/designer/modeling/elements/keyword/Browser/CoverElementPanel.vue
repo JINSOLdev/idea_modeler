@@ -28,5 +28,9 @@
         }
     })
     export default class CoverElementPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Will cover elements identified by locator with a blue div without breaking page layout."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

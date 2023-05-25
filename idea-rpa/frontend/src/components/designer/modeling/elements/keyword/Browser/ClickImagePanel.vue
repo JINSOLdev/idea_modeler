@@ -36,5 +36,9 @@
         }
     })
     export default class ClickImagePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clicks an image identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -36,5 +36,9 @@
         }
     })
     export default class DoesAlertNotContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does alert not contain text."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

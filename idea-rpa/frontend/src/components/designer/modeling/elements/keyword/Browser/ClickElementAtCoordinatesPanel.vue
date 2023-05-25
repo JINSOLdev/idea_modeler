@@ -45,5 +45,9 @@
         }
     })
     export default class ClickElementAtCoordinatesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Click the element locator at xoffset/yoffset."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

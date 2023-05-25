@@ -28,5 +28,9 @@
         }
     })
     export default class ClickElementIfVisiblePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Click element if it is visible"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

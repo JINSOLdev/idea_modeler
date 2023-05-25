@@ -36,5 +36,9 @@
         }
     })
     export default class ClickElementWhenVisiblePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Click element identified by locator, once it becomes visible."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
