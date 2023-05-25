@@ -1,23 +1,18 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            
+
             <v-card-text>
-                <locator-field
-                    :value.sync="value.property.locator"
-                ></locator-field>
+                <path-field
+                        :label="'Archive Name'"
+                        :hint="'Path to the archive file'"
+                        :value.sync="value.property.archive_name"
+                        :required ="true"
+                ></path-field>
                 
-                <variables-field
-                        :label="'Timeout'"
-                        :hint="'Time to wait for locator match (in seconds)'"
-                        :value.sync="value.property.timeout"
-                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -36,9 +31,10 @@
             KeywordPanel,
         }
     })
-    export default class DoubleClickPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Double mouse click on element matching given locator."
+    
+    export default class GetArchiveInfoPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get information about the archive"
             this.$emit("setDescription", description)
         }
     }

@@ -34,5 +34,9 @@
         }
     })
     export default class CloseWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Closes idenfied windows or logs the problems."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
