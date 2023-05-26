@@ -8,7 +8,5 @@
         }
     })
     export default class WaitUntilLocationDoesNotContain extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

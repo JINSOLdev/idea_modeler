@@ -29,5 +29,9 @@
     })
     
     export default class SetScreenshotDirectoryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the directory for captured screenshots."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

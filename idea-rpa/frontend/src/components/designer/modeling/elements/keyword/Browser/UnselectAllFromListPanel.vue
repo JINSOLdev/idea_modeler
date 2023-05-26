@@ -28,5 +28,9 @@
     })
     
     export default class UnSelectAllFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Unselects all options from multi-selection list locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

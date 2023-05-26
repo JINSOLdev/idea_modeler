@@ -37,5 +37,9 @@
     })
     
     export default class PressKeysPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Simulates the user pressing key(s) to an element or on the active browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

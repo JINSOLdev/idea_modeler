@@ -22,5 +22,9 @@
         }
     })
     export default class LogLocationPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs and returns the current browser window URL."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

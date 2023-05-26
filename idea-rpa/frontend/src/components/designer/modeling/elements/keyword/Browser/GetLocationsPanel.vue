@@ -25,5 +25,9 @@
         }
     })
     export default class GetLocationsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs URLs of all windows of the selected browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

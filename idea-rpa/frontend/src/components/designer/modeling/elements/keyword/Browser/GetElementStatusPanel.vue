@@ -8,11 +8,12 @@
             <v-card-text>
 
                     <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
             </v-card-text>
 
@@ -33,5 +34,9 @@
         }
     })
     export default class GetElementStatusPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return dictionary containing element status of:"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

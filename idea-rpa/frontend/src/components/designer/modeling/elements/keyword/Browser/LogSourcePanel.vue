@@ -22,5 +22,9 @@
         }
     })
     export default class LogSourcePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs and returns the HTML source of the current page or frame."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

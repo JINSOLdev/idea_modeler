@@ -8,7 +8,5 @@
         }
     })
     export default class SubmitForm extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

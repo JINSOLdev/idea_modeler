@@ -26,5 +26,9 @@
         }
     })
     export default class GetTitlePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the title of the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

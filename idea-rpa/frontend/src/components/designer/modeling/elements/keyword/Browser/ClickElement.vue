@@ -8,7 +8,5 @@
         }
     })
     export default class ClickElement extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

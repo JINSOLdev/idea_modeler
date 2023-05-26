@@ -10,7 +10,7 @@
     export default class ExecuteJavascript extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'contains'
+                value: 'return_value'
             }]
         }
     }

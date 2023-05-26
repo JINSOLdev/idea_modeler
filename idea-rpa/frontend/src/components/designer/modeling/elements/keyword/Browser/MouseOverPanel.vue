@@ -6,11 +6,12 @@
             </v-card-title>
             <v-card-text>       
             <!--locator-->
-            <variables-field 
+            <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
             </v-card-text>
 
 
@@ -29,5 +30,9 @@
         }
     })
     export default class MouseOverPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Simulates hovering the mouse over the element locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

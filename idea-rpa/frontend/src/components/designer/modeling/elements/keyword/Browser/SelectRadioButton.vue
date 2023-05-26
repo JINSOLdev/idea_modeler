@@ -8,7 +8,5 @@
         }
     })
     export default class SelectRadioButton extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

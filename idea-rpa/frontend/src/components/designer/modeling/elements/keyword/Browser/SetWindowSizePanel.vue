@@ -10,6 +10,7 @@
                         :label="'Width'"
                         :hint="'Width of browser window'"
                         :value.sync="value.property.width"
+                        :required="true"
                 ></variables-field>
             </v-card-text>
 
@@ -18,15 +19,18 @@
                         :label="'Height'"
                         :hint="'Height of browser window'"
                         :value.sync="value.property.height"
+                        :required="true"
                 ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <variables-field
-                        :label="'Inner'"
-                        :hint="'Resize browsers inner width/height'"
-                        :value.sync="value.property.inner"
-                ></variables-field>
+                <v-switch
+                        v-model="value.property.inner"
+                        label="Inne'"
+                        hint="'Resize browsers inner width/height'"
+                        persistent-hint
+                        class="py-0"
+                ></v-switch>
             </v-card-text>
 
         </v-card>
@@ -44,5 +48,9 @@
     })
     
     export default class SetWindowSizePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets current windows size to given width and height."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -7,22 +7,25 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field>  
+                        :required="true"
+                    ></locator-field>  
 
                     <variables-field 
                         :label="'Xoffset'"
                         :hint="'X-axis offset in pixels'"
                         :value.sync="value.property.xoffset"
+                        :required="true"
                     ></variables-field>  
 
                     <variables-field 
                         :label="'Yoffset'"
                         :hint="'Y-axis offset in pixels'"
                         :value.sync="value.property.yoffset"
+                        :required="true"
                     ></variables-field>  
             </v-card-text>
         </v-card>
@@ -40,5 +43,9 @@
         }
     })
     export default class DragAndDropByOffsetPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Drags the element identified with locator by xoffset/yoffset."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -8,7 +8,5 @@
         }
     })
     export default class CoverElement extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

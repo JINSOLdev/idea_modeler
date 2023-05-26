@@ -8,7 +8,5 @@
         }
     })
     export default class SelectFrame extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

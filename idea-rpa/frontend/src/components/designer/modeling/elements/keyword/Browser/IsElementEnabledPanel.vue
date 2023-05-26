@@ -6,14 +6,14 @@
             </v-card-title>
             <v-card-text>                      
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field>
+                    ></locator-field>
 
                     <v-switch
-                        v-model="value.property.secure"
+                        v-model="value.property.missing_ok"
                         label="Missing Ok"
                         hint="Allow element to not exist"
                         persistent-hint
@@ -36,5 +36,9 @@
         }
     })
     export default class IsElementEnabledPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is element enabled"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

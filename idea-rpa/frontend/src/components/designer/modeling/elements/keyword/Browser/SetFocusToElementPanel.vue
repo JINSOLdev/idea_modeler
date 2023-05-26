@@ -29,5 +29,9 @@
     })
     
     export default class SetFocusToElementPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the focus to the element identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

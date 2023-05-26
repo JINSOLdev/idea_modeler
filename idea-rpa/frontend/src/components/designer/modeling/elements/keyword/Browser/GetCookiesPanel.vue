@@ -8,7 +8,7 @@
             <v-card-text>
 
                 <v-switch
-                        v-model="value.property.asdict"
+                        v-model="value.property.as_dict"
                         label="As Dict"
                         hint="Return cookies as dictionary instead of string"
                         persistent-hint
@@ -33,5 +33,9 @@
         }
     })
     export default class GetCookiesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns all cookies of the current page"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

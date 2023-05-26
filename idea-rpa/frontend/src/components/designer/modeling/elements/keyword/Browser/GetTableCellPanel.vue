@@ -7,22 +7,25 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
                     <variables-field
                         :label="'Row'"
                         :hint="'Table row index'"
                         :value.sync="value.property.row"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Column'"
                         :hint="'Table column index'"
                         :value.sync="value.property.column"
+                        :required="true"
                 ></variables-field>
 
             </v-card-text>
@@ -44,5 +47,9 @@
         }
     })
     export default class GetTableCellPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns contents of a table cell."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

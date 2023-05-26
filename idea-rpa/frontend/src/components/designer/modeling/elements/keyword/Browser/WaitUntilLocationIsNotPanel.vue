@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilLocationIsNotPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until the current URL is not location."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -26,5 +26,9 @@
         }
     })
     export default class GetWindowHandlesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns all child window handles of the selected browser as a list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -29,5 +29,9 @@
     })
     
     export default class OpenContextMenuPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Opens the context menu on the element identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

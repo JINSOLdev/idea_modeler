@@ -54,5 +54,9 @@
     })
     
     export default class WaitUntilElementDoesNotContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until the element locator does not contain text."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

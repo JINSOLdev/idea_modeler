@@ -11,6 +11,7 @@
                         :label="'Name'"
                         :hint="'Name of cookie'"
                         :value.sync="value.property.name"
+                        :required="true"
                     ></variables-field>   
             </v-card-text>
 
@@ -31,5 +32,9 @@
         }
     })
     export default class GetCookiePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns information of cookie with name as an object."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

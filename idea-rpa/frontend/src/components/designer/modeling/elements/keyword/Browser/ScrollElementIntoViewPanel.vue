@@ -28,5 +28,9 @@
     })
     
     export default class ScrollElementIntoViewPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Scrolls the element identified by locator into view."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

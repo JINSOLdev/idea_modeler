@@ -18,5 +18,9 @@
         }
     })
     export default class GoBackPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Simulates the user clicking the back button on their browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

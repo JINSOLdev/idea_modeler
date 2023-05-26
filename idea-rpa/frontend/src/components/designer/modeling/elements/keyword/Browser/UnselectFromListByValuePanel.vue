@@ -38,5 +38,9 @@
     })
     
     export default class UnselectFromListByValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Unselects options from selection list locator by values."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

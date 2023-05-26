@@ -26,5 +26,9 @@
         }
     })
     export default class GetWindowPositionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns current window position."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

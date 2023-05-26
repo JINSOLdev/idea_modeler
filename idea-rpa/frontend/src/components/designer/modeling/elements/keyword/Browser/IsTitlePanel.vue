@@ -9,9 +9,8 @@
                         :label="'Title'"
                         :hint="'Expected title value'"
                         :value.sync="value.property.title"
+                        :required=true
                 ></variables-field>
-
-
             </v-card-text>
         </v-card> 
 
@@ -28,5 +27,9 @@
         }
     })
     export default class IsTitlePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is page title expected"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

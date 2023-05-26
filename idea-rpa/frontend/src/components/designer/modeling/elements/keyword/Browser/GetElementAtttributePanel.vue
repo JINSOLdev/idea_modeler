@@ -8,16 +8,18 @@
             <v-card-text>
 
                     <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
                     <variables-field
                         :label="'Attribute'"
                         :hint="'Name of attribute '"
                         :value.sync="value.property.attribute"
+                        :required="true"
                 ></variables-field>
 
 
@@ -39,6 +41,10 @@
             KeywordPanel,
         }
     })
-    export default class GetElementAtttributePanel extends Mixins(KeywordPanel) {
+    export default class GetElementAttributePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the value of attribute from the element locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

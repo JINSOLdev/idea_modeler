@@ -28,5 +28,9 @@
     })
     
     export default class SubmitFormPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Submits a form identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

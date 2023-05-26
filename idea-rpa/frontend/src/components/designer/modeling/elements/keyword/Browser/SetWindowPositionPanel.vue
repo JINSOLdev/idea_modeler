@@ -10,6 +10,7 @@
                         :label="'X'"
                         :hint="'Position along the X-axis'"
                         :value.sync="value.property.x"
+                        :required="true"
                 ></variables-field>
             </v-card-text>
 
@@ -18,6 +19,7 @@
                         :label="'Y'"
                         :hint="'Position along the Y-axis'"
                         :value.sync="value.property.y"
+                        :required="true"
                 ></variables-field>
             </v-card-text>
 
@@ -36,5 +38,9 @@
     })
     
     export default class SetWindowPositionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets window position using x and y coordinates."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

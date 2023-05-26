@@ -45,5 +45,9 @@
     })
     
     export default class WaitForConditionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until condition is true or timeout expires."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -8,7 +8,5 @@
         }
     })
     export default class WaitForCondition extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

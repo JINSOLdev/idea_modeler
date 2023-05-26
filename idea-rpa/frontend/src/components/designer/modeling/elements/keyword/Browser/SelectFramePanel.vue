@@ -28,5 +28,9 @@
     })
     
     export default class SelectFramePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets frame identified by locator as the current frame."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

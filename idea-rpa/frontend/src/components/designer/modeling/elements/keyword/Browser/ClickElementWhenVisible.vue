@@ -8,7 +8,5 @@
         }
     })
     export default class ClickElementWhenVisible extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilPageContainsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until text appears on the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

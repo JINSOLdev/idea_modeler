@@ -8,11 +8,12 @@
             <v-card-text>
 
                     <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
                     
                     <v-switch
                         v-model="value.property.values"
@@ -40,5 +41,9 @@
         }
     })
     export default class GetListItemsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns all labels or values of selection list locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

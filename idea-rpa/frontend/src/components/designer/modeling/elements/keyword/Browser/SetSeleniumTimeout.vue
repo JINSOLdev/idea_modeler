@@ -8,7 +8,5 @@
         }
     })
     export default class SetSeleniumTimeout extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

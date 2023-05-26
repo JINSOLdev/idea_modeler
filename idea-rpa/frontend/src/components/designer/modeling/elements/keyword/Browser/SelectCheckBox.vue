@@ -8,7 +8,5 @@
         }
     })
     export default class SelectCheckBox extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

@@ -10,6 +10,7 @@
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></Locator-field>
             </v-card-text>
 
@@ -28,5 +29,9 @@
     })
     
     export default class UnselectCheckboxPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove the selection of checkbox identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

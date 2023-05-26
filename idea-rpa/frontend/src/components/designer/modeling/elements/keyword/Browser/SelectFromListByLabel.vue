@@ -8,7 +8,5 @@
         }
     })
     export default class SelectFromListByLabel extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

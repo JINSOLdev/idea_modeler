@@ -8,10 +8,6 @@
         }
     })
     export default class IsElementDisabled extends Mixins(KeywordElement) {
-        mounted() {
-            this.value.property.returnVal = [{
-                value: 'contains'
-            }]
-        }
+       
     }
 </script>

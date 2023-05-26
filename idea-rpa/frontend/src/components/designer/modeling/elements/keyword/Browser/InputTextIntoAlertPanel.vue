@@ -9,6 +9,7 @@
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
+                        :required="true"
                     ></variables-field> 
 
                 <variables-field 
@@ -39,5 +40,9 @@
         }
     })
     export default class InputTextIntoAlertPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Types the given text into an input field in an alert."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -5,10 +5,6 @@
                 Input Arguments
             </v-card-title>
 
-            <v-card-text>
- 
-            </v-card-text>
-
         </v-card>
         <return-values-field
                 :value.sync="value.property.titles"
@@ -26,5 +22,9 @@
         }
     })
     export default class GetWindowTitlesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs titles of all windows of the selected browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

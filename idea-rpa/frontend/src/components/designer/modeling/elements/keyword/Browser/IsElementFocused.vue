@@ -7,11 +7,6 @@
             KeywordElement,
         }
     })
-    export default class IsElementFocused extends Mixins(KeywordElement) {
-        mounted() {
-            this.value.property.returnVal = [{
-                value: 'contains'
-            }]
-        }
+    export default class IsElementFocused extends Mixins(KeywordElement) { 
     }
 </script>

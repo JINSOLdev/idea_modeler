@@ -8,7 +8,5 @@
         }
     })
     export default class OpenAvailableBrowser extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

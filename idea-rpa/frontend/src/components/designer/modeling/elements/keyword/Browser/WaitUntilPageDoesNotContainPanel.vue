@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilPageDoesNotContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until text disappears from the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

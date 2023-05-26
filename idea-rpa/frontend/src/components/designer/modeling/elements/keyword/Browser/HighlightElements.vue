@@ -8,10 +8,5 @@
         }
     })
     export default class HighlightElements extends Mixins(KeywordElement) {
-        mounted() {
-            this.value.property.returnVal = [{
-                value: 'contains'
-            }]
-        }
     }
 </script>

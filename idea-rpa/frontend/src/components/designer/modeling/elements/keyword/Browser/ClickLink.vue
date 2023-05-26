@@ -8,7 +8,5 @@
         }
     })
     export default class ClickLink extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

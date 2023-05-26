@@ -36,5 +36,9 @@
     })
     
     export default class SwitchWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Switches to browser window matching locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

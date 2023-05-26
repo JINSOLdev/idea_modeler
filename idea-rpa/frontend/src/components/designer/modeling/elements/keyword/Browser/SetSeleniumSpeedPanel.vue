@@ -29,5 +29,9 @@
     })
     
     export default class SetSeleniumSpeedPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the delay that is waited after each Selenium command."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

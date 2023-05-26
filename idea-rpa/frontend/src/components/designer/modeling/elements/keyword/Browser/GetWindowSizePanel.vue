@@ -33,5 +33,9 @@
         }
     })
     export default class GetWindowSizePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns current window width and height as integers."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

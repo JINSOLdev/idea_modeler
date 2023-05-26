@@ -37,5 +37,9 @@
     })
     
     export default class SelectFromListByIndexPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Selects options from selection list locator by indexes."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

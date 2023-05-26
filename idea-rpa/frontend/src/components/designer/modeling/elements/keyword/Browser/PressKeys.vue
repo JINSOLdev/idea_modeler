@@ -8,7 +8,5 @@
         }
     })
     export default class PressKeys extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>
