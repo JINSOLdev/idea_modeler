@@ -58,5 +58,9 @@
         }
     })
     export default class WaitUntilKeywordsSucceedsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Runs the specified keyword and retried if it fails."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

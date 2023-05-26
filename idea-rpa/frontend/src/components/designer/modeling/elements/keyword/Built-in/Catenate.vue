@@ -9,6 +9,9 @@
     })
     export default class Catenate extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'str'
+            }]
         }
     }
 </script>

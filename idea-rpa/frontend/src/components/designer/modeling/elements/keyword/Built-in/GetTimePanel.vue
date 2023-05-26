@@ -34,5 +34,9 @@
         }
     })
     export default class GetTimePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the given time in the requested format."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

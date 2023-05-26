@@ -48,5 +48,9 @@
         }
     })
     export default class ConvertToNumberPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to an octal string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

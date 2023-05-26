@@ -31,5 +31,9 @@
         }
     })
     export default class SetLogLevelPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the log threshold to the specified level and returns the old level."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

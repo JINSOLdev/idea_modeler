@@ -9,6 +9,9 @@
     })
     export default class CallMethod extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'value'
+            }]
         }
     }
 </script>

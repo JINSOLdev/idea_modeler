@@ -31,5 +31,9 @@
         }
     })
     export default class FailPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Fails the test with the given message and optionally alters its tags."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

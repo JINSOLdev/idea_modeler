@@ -31,5 +31,9 @@
         }
     })
     export default class CreateListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns a list containing given items."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

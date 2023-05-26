@@ -47,5 +47,9 @@
         }
     })
     export default class ConvertToBinaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a binary string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

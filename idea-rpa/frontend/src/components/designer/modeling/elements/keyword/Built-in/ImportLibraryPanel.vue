@@ -7,17 +7,18 @@
             
             <v-card-text>
                 <variables-field
-                        :label="'Items'"
-                        :hint="'Items in ``key=value`` syntax'"
-                        :value.sync="value.property.item"
-                        :isMultiple = "true"
+                        :label="'Name'"
+                        :hint="'Name of library to import'"
+                        :value.sync="value.property.name"
                 ></variables-field>
-            </v-card-text>
+
+                <variables-field
+                        :label="'Args'"
+                        :hint="'Arguments for library'"
+                        :value.sync="value.property.args"
+                ></variables-field>
+            </v-card-text>                   
         </v-card>
-        
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -30,9 +31,9 @@
             KeywordPanel,
         }
     })
-    export default class CreateDictionaryPanel extends Mixins(KeywordPanel) {
+    export default class ImportLibraryPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Creates and returns a dictionary based on the given items."
+            var description = "Imports a library with the given name and optional arguments."
             this.$emit("setDescription", description)
         }
     }

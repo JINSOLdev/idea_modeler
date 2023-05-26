@@ -27,5 +27,9 @@
         }
     })
     export default class PassExecutionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Skips rest of the current test, or teardown with PASS status."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

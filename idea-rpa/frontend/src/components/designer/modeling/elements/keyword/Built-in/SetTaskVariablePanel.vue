@@ -37,5 +37,9 @@
         }
     })
     export default class SetTaskVariablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Makes a variable available everywhere within the scope of the current task."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

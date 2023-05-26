@@ -55,6 +55,10 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToHex extends Mixins(KeywordPanel) {
+    export default class ConvertToHexPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a hexadecimal string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

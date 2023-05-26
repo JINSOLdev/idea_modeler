@@ -28,5 +28,10 @@
         }
     })
     export default class ImportResourcePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Imports a resource file with the given path."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

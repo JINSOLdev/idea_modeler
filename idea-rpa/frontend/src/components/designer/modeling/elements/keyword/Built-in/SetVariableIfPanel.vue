@@ -36,5 +36,9 @@
         }
     })
     export default class SetVariableIfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets variable based on the given condition."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

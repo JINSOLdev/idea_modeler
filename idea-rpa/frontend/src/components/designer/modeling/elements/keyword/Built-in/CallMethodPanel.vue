@@ -48,5 +48,9 @@
         }
     })
     export default class CallMethodPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Calls the named method of the given object with the provided arguments."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

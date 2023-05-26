@@ -31,5 +31,9 @@
         }
     })
     export default class GetLengthPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs the length of the given item as an integer."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
