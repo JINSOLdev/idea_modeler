@@ -11,6 +11,7 @@
                 :label="'Text'"
                 :hint="'Text to search for'"
                 :value.sync="value.property.text"
+                :required="true"
                 ></Variables-field>
             </v-card-text>
         </v-card>
@@ -31,5 +32,9 @@
         }
     })
     export default class DoesPageContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does page contain expected text"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

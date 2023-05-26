@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class DoesPageContainButtonCheckbox extends Mixins(KeywordElement) {
+    export default class DoesPageContainCheckbox extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
                 value: 'contains'

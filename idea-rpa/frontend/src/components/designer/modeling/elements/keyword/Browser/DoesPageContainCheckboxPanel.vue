@@ -7,11 +7,12 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
             </v-card-text>
         </v-card>
 
@@ -30,6 +31,10 @@
             KeywordPanel,
         }
     })
-    export default class DoesPageContainButtonCheckbox extends Mixins(KeywordPanel) {
+    export default class DoesPageContainCheckboxPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does page contain expected checkbox"
+            this.$emit("setDescription", description)
+        }
     }
 </script>
