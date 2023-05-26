@@ -7,15 +7,15 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Date'"
-                        :hint="'Date to add time to'"
-                        :value.sync="value.property.date"
+                        :label="'Time1'"
+                        :hint="'Time to subtract from'"
+                        :value.sync="value.property.time1"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Time'"
-                        :hint="'Time to add'"
-                        :value.sync="value.property.time"
+                        :label="'Time2'"
+                        :hint="'Time that is subtracted'"
+                        :value.sync="value.property.time2"
                 ></variables-field>
 
                 <variables-field
@@ -31,12 +31,6 @@
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-
-                <variables-field
-                        :label="'Date Format'"
-                        :hint="'Custom timestamp format'"
-                        :value.sync="value.property.dateFormat"
-                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -56,9 +50,9 @@
             KeywordPanel,
         }
     })
-    export default class AddTimeToDatePanel extends Mixins(KeywordPanel) {
+    export default class SubtractTimeFromTimePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Adds time to date and returns the resulting date."
+            var description = "Subtracts time from another time and returns the resulting time."
             this.$emit("setDescription", description)
         }
     }

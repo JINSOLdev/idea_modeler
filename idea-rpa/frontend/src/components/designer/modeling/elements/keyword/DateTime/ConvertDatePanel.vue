@@ -8,14 +8,8 @@
             <v-card-text>
                 <variables-field
                         :label="'Date'"
-                        :hint="'Date to add time to'"
+                        :hint="'Date to convert'"
                         :value.sync="value.property.date"
-                ></variables-field>
-
-                <variables-field
-                        :label="'Time'"
-                        :hint="'Time to add'"
-                        :value.sync="value.property.time"
                 ></variables-field>
 
                 <variables-field
@@ -23,13 +17,13 @@
                         :hint="'Format of returned date'"
                         :value.sync="value.property.resultFormat"
                 ></variables-field>
-
+                
                 <v-switch
-                        v-model="value.property.excludeMillis"
-                        label="Exclude Millis"
-                        hint="Round and hide milliseconds"
-                        persistent-hint
-                        class="py-0 mb-6"
+                v-model="value.property.excludeMillis"
+                label="Exclude Millis"
+                hint="Round and hide milliseconds"
+                persistent-hint
+                class="py-0 mb-6"
                 ></v-switch>
 
                 <variables-field
@@ -56,9 +50,9 @@
             KeywordPanel,
         }
     })
-    export default class AddTimeToDatePanel extends Mixins(KeywordPanel) {
+    export default class ConvertDatePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Adds time to date and returns the resulting date."
+            var description = "Converts between supported date formats"
             this.$emit("setDescription", description)
         }
     }

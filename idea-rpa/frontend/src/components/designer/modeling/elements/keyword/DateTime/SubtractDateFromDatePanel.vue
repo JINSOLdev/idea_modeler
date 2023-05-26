@@ -7,35 +7,21 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Date'"
-                        :hint="'Date to add time to'"
-                        :value.sync="value.property.date"
+                        :label="'Date1'"
+                        :hint="'Date to subtract from'"
+                        :value.sync="value.property.date1"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Time'"
-                        :hint="'Time to add'"
-                        :value.sync="value.property.time"
+                        :label="'Date2'"
+                        :hint="'Date that is subtracted'"
+                        :value.sync="value.property.date2"
                 ></variables-field>
 
                 <variables-field
                         :label="'Result Format'"
                         :hint="'Format of returned date'"
                         :value.sync="value.property.resultFormat"
-                ></variables-field>
-
-                <v-switch
-                        v-model="value.property.excludeMillis"
-                        label="Exclude Millis"
-                        hint="Round and hide milliseconds"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <variables-field
-                        :label="'Date Format'"
-                        :hint="'Custom timestamp format'"
-                        :value.sync="value.property.dateFormat"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -56,9 +42,9 @@
             KeywordPanel,
         }
     })
-    export default class AddTimeToDatePanel extends Mixins(KeywordPanel) {
+    export default class SubtractDateFromDatePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Adds time to date and returns the resulting date."
+            var description = "Subtracts date from another date and returns time between."
             this.$emit("setDescription", description)
         }
     }

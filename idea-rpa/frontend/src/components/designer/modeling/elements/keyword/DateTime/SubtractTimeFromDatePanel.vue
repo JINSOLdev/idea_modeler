@@ -8,13 +8,13 @@
             <v-card-text>
                 <variables-field
                         :label="'Date'"
-                        :hint="'Date to add time to'"
+                        :hint="'Date to subtract from'"
                         :value.sync="value.property.date"
                 ></variables-field>
 
                 <variables-field
                         :label="'Time'"
-                        :hint="'Time to add'"
+                        :hint="'Time that is being subtracted'"
                         :value.sync="value.property.time"
                 ></variables-field>
 
@@ -56,9 +56,9 @@
             KeywordPanel,
         }
     })
-    export default class AddTimeToDatePanel extends Mixins(KeywordPanel) {
+    export default class SubtractTimeFromDatePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Adds time to date and returns the resulting date."
+            var description = "Subtracts time from date and returns the resulting date."
             this.$emit("setDescription", description)
         }
     }
