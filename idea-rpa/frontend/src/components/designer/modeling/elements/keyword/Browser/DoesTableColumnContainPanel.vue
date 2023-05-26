@@ -7,22 +7,25 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field>  
+                        :required="true"
+                    ></locator-field>  
 
                 <variables-field
                         :label="'Column'"
                         :hint="'Table column index'"
                         :value.sync="value.property.column"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Expected'"
                         :hint="'Expected value'"
                         :value.sync="value.property.expected"
+                        :required="true"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -44,5 +47,9 @@
         }
     })
     export default class DoesTableColumnContain extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does table column contain expected text"
+            this.$emit("setDescription", description)
+        }
     }
 </script>
