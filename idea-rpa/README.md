@@ -32,6 +32,7 @@ Before running, it is required to install ***vue + electron*** in the projects f
 # Run python 
 1. python -m robot (parameter)
 - ex. python -m robot tasks.robot
+</br>
 
 
 ###### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
