@@ -116,7 +116,7 @@
 </script>
 
 <style scoped>
-    .scirpt-text {
+    .script-text {
         font-family: Roboto,sans-serif;
     }
 </style>
