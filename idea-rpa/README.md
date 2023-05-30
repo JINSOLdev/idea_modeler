@@ -28,11 +28,14 @@ Before running, it is required to install ***vue + electron*** in the projects f
 2. ***pip install rpaframework-windows***
 3. ***npm run electron:serve***
 
+
 # Run python 
 1. python -m robot (parameter)
 - ex. python -m robot tasks.robot
 
+
 ###### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
+</br>
 
 
 
