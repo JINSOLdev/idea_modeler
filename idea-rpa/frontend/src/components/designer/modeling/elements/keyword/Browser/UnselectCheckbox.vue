@@ -8,7 +8,5 @@
         }
     })
     export default class UnselectCheckbox extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

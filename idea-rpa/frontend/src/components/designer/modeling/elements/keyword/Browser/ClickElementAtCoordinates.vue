@@ -8,7 +8,5 @@
         }
     })
     export default class ClickElementAtCoordinates extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

@@ -37,5 +37,9 @@
         }
     })
     export default class GetCountPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs how many times item is found from container."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

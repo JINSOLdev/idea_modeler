@@ -8,7 +8,5 @@
         }
     })
     export default class SetWindowPosition extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

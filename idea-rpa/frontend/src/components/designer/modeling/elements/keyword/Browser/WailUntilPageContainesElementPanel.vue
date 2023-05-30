@@ -6,12 +6,12 @@
             </v-card-title>
 
             <v-card-text>
-                <Variables-field
+                <locator-field
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
                         :required="true"
-                ></Variables-field>
+                ></locator-field>
             </v-card-text>
 
             <v-card-text>
@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilPageContainsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until the element locator appears on the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

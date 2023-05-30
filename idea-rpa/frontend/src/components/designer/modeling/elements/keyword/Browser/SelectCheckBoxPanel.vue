@@ -28,5 +28,9 @@
     })
     
     export default class SelectCheckBoxPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Selects the checkbox identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -8,7 +8,5 @@
         }
     })
     export default class UnselectFromListByIndex extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

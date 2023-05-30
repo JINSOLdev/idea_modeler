@@ -30,5 +30,9 @@
         }
     })
     export default class SetVariablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the given values which can then be assigned to a variables."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

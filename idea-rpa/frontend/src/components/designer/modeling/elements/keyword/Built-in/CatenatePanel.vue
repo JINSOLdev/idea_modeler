@@ -30,5 +30,9 @@
         }
     })
     export default class CallMethodPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Catenates the given items together and returns the resulted string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

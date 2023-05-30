@@ -36,5 +36,9 @@
         }
     })
     export default class IsAlertPresentPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is alert box present, which can be identified with text and action can also be done which by defaults is ACCEPT."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

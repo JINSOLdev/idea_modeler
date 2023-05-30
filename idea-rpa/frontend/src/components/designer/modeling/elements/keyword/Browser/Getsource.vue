@@ -7,10 +7,10 @@
             KeywordElement,
         }
     })
-    export default class Getsource extends Mixins(KeywordElement) {
+    export default class GetSource extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'contains'
+                value: 'source'
             }]
         }
     }

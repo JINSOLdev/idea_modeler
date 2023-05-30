@@ -8,7 +8,7 @@
                 <variables-field 
                         :label="'Action'"
                         :hint="'How to handle alert, i.e. ACCEPT,DISMISS, or LEAVE'"
-                        :value.sync="value.property.url"
+                        :value.sync="value.property.action"
                     ></variables-field> 
 
                     <variables-field 
@@ -34,5 +34,9 @@
         }
     })
     export default class HandleAlertPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Handles the current alert and returns its message."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

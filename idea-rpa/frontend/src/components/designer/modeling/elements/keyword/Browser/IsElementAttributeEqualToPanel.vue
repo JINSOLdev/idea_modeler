@@ -6,22 +6,25 @@
             </v-card-title>
             <v-card-text>                      
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field>
+                        :required="true"
+                    ></locator-field>
 
                     <variables-field
                         :label="'Attribute'"
                         :hint="'Name of attribute'"
                         :value.sync="value.property.attribute"
+                        :required="true"
                     ></variables-field>
 
                     <variables-field
                         :label="'Expected'"
                         :hint="'Expected value'"
                         :value.sync="value.property.expected"
+                        :required="true"
                     ></variables-field>
                      
             </v-card-text>
@@ -40,5 +43,9 @@
         }
     })
     export default class IsElementAttributeEqualToPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is element attribute equal to expected value"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

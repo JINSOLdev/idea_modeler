@@ -35,5 +35,9 @@
         }
     })
     export default class SleepPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Pauses the test executed for the given time."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

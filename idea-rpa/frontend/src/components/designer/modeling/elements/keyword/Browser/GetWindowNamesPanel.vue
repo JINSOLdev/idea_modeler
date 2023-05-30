@@ -26,5 +26,9 @@
         }
     })
     export default class GetWindowNamesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs names of all windows of the selected browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -32,5 +32,9 @@
         }
     })
     export default class SetGlobalVariablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Makes a variable available globally in all tests and suites."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

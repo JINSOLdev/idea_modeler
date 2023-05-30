@@ -7,17 +7,19 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field>  
+                        :required="true"
+                    ></locator-field>  
                         <!--Locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Target'"
                         :hint="'Locator for drag target'"
                         :value.sync="value.property.target"
-                    ></variables-field>  
+                        :required="true"
+                    ></locator-field>  
             </v-card-text>
         </v-card>
 
@@ -34,5 +36,9 @@
         }
     })
     export default class DragAndDrop extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Drags the element identified by locator into the target element"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

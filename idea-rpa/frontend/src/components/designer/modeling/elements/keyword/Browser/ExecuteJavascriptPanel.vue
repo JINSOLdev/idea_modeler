@@ -31,5 +31,9 @@
         }
     })
     export default class ExecuteJavascriptPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Executes the given JavaScript code with possible arguments "
+            this.$emit("setDescription", description)
+        }
     }
 </script>

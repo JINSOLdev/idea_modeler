@@ -26,5 +26,9 @@
         }
     })
     export default class CommentPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Displays the given messages in the log file as keyword arguments."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

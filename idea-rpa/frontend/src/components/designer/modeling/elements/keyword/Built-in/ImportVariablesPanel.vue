@@ -37,5 +37,9 @@
         }
     })
     export default class ImportVariablesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Imports a variable file with the given path and optional arguments."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

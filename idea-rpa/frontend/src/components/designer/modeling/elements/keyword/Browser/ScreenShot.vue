@@ -8,7 +8,5 @@
         }
     })
     export default class ScreenShot extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilElementIsNotVisiblePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until the element locator is not visible."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

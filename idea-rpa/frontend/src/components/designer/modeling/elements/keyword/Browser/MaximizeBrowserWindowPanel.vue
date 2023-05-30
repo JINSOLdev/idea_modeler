@@ -19,5 +19,9 @@
         }
     })
     export default class MaximizeBrowserWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Maximizes current browser window."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -8,7 +8,5 @@
         }
     })
     export default class CloseAllBrowsers extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

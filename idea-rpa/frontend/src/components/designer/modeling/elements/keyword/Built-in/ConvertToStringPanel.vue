@@ -30,5 +30,9 @@
         }
     })
     export default class ConvertToStringPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a Unicode string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

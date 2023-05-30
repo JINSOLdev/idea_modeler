@@ -26,5 +26,9 @@
         }
     })
     export default class GoToPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Navigates the current browser window to the provided url."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

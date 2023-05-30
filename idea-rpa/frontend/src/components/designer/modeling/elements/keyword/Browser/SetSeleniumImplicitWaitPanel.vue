@@ -10,6 +10,7 @@
                         :label="'Value'"
                         :hint="'Time in human-readable format, e.g. 1 second'"
                         :value.sync="value.property.value"
+                        :required="true"
                 ></Variables-field>
             </v-card-text>
 
@@ -28,5 +29,9 @@
     })
     
     export default class SetSeleniumImplicitWaitPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the implicit wait value used by Selenium."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

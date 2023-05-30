@@ -45,5 +45,9 @@
     })
     
     export default class WaitUntilPageDoesNotContainElementPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Waits until the element locator disappears from the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

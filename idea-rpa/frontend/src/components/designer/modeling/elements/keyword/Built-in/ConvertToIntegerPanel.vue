@@ -36,5 +36,9 @@
         }
     })
     export default class ConvertToIntegerPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to an integer number."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

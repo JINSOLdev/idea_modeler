@@ -62,5 +62,9 @@
         }
     })
     export default class LogPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs the given message with the given level."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

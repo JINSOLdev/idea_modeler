@@ -8,7 +8,5 @@
         }
     })
     export default class WaitUntilElementIsEnabled extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

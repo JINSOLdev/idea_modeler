@@ -8,7 +8,5 @@
         }
     })
     export default class SetFocusToElement extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

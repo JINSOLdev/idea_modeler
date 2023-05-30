@@ -7,11 +7,12 @@
 
             <v-card-text>
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
             </v-card-text>
 
         </v-card>
@@ -31,5 +32,9 @@
         }
     })
     export default class GetValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the value attribute of the element identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -10,7 +10,7 @@
     export default class GetWindowSize extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'contains'
+                value: 'size'
             }]
         }
     }

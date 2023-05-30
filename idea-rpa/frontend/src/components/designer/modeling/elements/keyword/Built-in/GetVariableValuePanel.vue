@@ -36,5 +36,9 @@
         }
     })
     export default class GetVariableValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns variable value or default if the variable does not exist."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

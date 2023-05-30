@@ -26,5 +26,9 @@
         }
     })
     export default class GetSeleniumSpeedPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Gets the delay that is waited after each Selenium command."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -37,5 +37,9 @@
     })
     
     export default class WaitAndCLickButtonPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Click button identified by locator, once it becomes visible."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

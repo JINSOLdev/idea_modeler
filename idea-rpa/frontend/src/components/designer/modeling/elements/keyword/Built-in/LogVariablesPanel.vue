@@ -21,5 +21,9 @@
         }
     })
     export default class LogVariablesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs all variables in the current scope with given log level."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

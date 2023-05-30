@@ -6,11 +6,12 @@
             </v-card-title>
             <v-card-text>     
                 <!--locator-->
-                <variables-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
                 <variables-field 
                         :label="'Width'"
@@ -46,5 +47,9 @@
         }
     })
     export default class HighlightElementsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Highlight all matching elements by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

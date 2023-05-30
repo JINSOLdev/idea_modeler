@@ -6,11 +6,12 @@
             </v-card-title>
             <v-card-text>     
                 <!--locator-->
-                <variables-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
                 <variables-field 
                         :label="'Text'"
@@ -43,5 +44,9 @@
         }
     })
     export default class InputTextPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Types the given text into the text field identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

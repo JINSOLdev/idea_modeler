@@ -26,5 +26,9 @@
         }
     })
     export default class GetWindowIdentifiersPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns and logs id attributes of all windows of the selected browser."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

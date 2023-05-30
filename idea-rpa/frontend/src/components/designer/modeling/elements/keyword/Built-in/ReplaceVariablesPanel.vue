@@ -30,5 +30,9 @@
         }
     })
     export default class LogReplaceVariablesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Replaces variables in the given text with their current values."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

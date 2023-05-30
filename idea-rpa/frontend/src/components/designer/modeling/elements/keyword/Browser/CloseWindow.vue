@@ -8,7 +8,5 @@
         }
     })
     export default class CloseWindow extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

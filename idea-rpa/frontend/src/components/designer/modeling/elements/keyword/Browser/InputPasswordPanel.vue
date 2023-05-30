@@ -6,16 +6,18 @@
             </v-card-title>
             <v-card-text>     
                 <!--locator-->
-                <variables-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
 
                 <variables-field 
                         :label="'Password'"
                         :hint="'Password value'"
                         :value.sync="value.property.password"
+                        :required="true"
                     ></variables-field> 
 
                     <v-switch
@@ -43,5 +45,9 @@
         }
     })
     export default class InputPasswordPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Types the given password into the text field identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

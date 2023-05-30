@@ -8,7 +8,5 @@
         }
     })
     export default class ChooseFile extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

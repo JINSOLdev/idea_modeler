@@ -26,5 +26,9 @@
         }
     })
     export default class GetSeleniumTimeoutPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get the timeout that is used by various keywords."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

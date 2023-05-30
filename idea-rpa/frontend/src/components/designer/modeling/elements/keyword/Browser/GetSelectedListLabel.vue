@@ -10,7 +10,7 @@
     export default class GetSelectedListLabel extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'contains'
+                value: 'label'
             }]
         }
     }

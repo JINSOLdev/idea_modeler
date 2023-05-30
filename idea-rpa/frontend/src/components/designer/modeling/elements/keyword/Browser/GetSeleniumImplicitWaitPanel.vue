@@ -26,5 +26,9 @@
         }
     })
     export default class GetSeleniumImplicitWaitPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Gets the implicit wait value used by Selenium."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

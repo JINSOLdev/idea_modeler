@@ -8,7 +8,5 @@
         }
     })
     export default class SetSeleniumImplicitWait extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

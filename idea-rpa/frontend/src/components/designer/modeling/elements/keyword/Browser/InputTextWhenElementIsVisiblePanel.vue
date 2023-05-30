@@ -7,16 +7,18 @@
             <v-card-text> 
                 
                 <!--locator-->
-                <variables-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                        :required="true"
+                    ></locator-field> 
                     
                 <variables-field 
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
+                        :required="true"
                     ></variables-field> 
 
 
@@ -36,5 +38,9 @@
         }
     })
     export default class InputTextWhenElementIsVisiblePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Input text into locator after it has become visible."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

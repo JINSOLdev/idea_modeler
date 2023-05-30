@@ -8,7 +8,5 @@
         }
     })
     export default class ClearElementText extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

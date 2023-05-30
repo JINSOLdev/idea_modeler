@@ -8,10 +8,5 @@
         }
     })
     export default class InputTextWhenElementIsVisible extends Mixins(KeywordElement) {
-        mounted() {
-            this.value.property.returnVal = [{
-                value: 'contains'
-            }]
-        }
     }
 </script>

@@ -29,5 +29,9 @@
         }
     })
     export default class ConvertToBooleanPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to Boolean true or false."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

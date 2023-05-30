@@ -8,7 +8,5 @@
         }
     })
     export default class WaitUntilPageContains extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

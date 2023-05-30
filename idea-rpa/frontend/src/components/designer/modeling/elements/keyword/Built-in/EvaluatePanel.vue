@@ -36,5 +36,9 @@
         }
     })
     export default class EvaluatePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Evaluates the given expression in Python and returns the result."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

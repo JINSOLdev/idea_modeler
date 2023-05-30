@@ -11,12 +11,14 @@
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                     ></variables-field>  
                     
                     <variables-field
                         :label="'Expected'"
                         :hint="'Expected value'"
                         :value.sync="value.property.expected"
+                        :required="true"
                     ></variables-field>
             </v-card-text>
         </v-card>
@@ -38,5 +40,9 @@
         }
     })
     export default class DoesTextfieldContainPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does textfield contain expected text"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

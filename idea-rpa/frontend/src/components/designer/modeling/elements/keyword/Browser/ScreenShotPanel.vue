@@ -36,5 +36,9 @@
     })
     
     export default class ScreenShotPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Capture page and/or element screenshot."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

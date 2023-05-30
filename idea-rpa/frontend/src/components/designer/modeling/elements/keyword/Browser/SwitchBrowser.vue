@@ -8,7 +8,5 @@
         }
     })
     export default class SwitchBrowser extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

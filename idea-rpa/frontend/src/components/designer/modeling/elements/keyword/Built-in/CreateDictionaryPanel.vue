@@ -31,5 +31,9 @@
         }
     })
     export default class CreateDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Creates and returns a dictionary based on the given items."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

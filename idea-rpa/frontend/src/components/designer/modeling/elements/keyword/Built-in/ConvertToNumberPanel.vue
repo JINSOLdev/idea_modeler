@@ -36,5 +36,9 @@
         }
     })
     export default class ConvertToNumberPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a floating point number."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

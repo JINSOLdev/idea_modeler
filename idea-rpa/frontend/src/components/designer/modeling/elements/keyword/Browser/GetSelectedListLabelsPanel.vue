@@ -11,6 +11,7 @@
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                     ></variables-field> 
 
             </v-card-text>
@@ -32,5 +33,9 @@
         }
     })
     export default class GetSelectedListLabelsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns labels of selected options from selection list locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

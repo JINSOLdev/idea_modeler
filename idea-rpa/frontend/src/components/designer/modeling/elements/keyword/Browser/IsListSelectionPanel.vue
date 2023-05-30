@@ -6,13 +6,18 @@
             </v-card-title>
             <v-card-text>                      
 <!--locator-->
-                    <variables-field 
+                    <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
+                    ></locator-field>
+
+                    <variables-field 
+                        :label="'Expected'"
+                        :hint="'Expected value'"
+                        :value.sync="value.property.expected"
                     ></variables-field>
-
-
             </v-card-text>
         </v-card> 
 
@@ -29,5 +34,9 @@
         }
     })
     export default class IsListSelectionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is list selected with expected values"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

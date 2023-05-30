@@ -28,5 +28,9 @@
     })
     
     export default class SelectAllFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Selects all options from multi-selection list locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

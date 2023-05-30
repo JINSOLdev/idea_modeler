@@ -8,7 +8,5 @@
         }
     })
     export default class SetSeleniumSpeed extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

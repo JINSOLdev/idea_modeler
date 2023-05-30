@@ -22,5 +22,9 @@
         }
     })
     export default class LogTitlePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs and returns the title of the current page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

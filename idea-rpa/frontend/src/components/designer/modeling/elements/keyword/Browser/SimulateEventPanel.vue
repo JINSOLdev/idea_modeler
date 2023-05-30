@@ -38,5 +38,9 @@
     })
     
     export default class SimulateEventPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Simulates event on the element identified by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

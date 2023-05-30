@@ -21,5 +21,9 @@
         }
     })
     export default class NoOperationPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does absolutely nothing."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

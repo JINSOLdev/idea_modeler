@@ -8,7 +8,5 @@
         }
     })
     export default class WaitAndCLickButton extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

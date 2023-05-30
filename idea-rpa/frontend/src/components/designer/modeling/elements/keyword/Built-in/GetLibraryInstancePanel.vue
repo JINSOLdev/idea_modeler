@@ -36,5 +36,9 @@
         }
     })
     export default class GetLibraryInstancePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the currently active instance of the specified library."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

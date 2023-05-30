@@ -25,6 +25,10 @@
             KeywordPanel,
         }
     })
-    export default class GetsourcePanel extends Mixins(KeywordPanel) {
+    export default class GetSourcePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the entire HTML source of the current page or frame."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

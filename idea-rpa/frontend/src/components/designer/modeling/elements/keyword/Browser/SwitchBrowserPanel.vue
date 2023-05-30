@@ -29,5 +29,9 @@
     })
     
     export default class SwitchBrowserPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Switches between active browsers using index_or_alias."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

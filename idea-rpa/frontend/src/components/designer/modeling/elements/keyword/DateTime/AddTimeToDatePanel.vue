@@ -57,5 +57,9 @@
         }
     })
     export default class AddTimeToDatePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Adds time to date and returns the resulting date."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

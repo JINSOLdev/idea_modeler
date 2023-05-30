@@ -35,5 +35,9 @@
         }
     })
     export default class ConvertToBytesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given input to bytes according to the input_type."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

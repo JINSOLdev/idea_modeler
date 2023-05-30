@@ -8,7 +8,5 @@
         }
     })
     export default class SetWindowSize extends Mixins(KeywordElement) {
-        mounted() {
-        }
     }
 </script>

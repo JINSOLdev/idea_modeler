@@ -8,10 +8,9 @@
                     <variables-field 
                         :label="'Group Name'"
                         :hint="'radio button group name'"
-                        :value.sync="value.property.groupname"
+                        :value.sync="value.property.group_name"
+                        :required="true"
                     ></variables-field>
-
-
             </v-card-text>
         </v-card> 
 
@@ -28,5 +27,9 @@
         }
     })
     export default class IsRadioButtonSelectedPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Is any radio button selected in the button group"
+            this.$emit("setDescription", description)
+        }
     }
 </script>
