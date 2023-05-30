@@ -7,9 +7,11 @@ Please install :
 
 # Run idea-rpa
 Before running, it is required to install vue + electron in the projects frontend directory. 
-To run this app, navigate to the frontend directory and run npm run electron:serve.
+To run this app, navigate to the frontend directory and run ***npm run electron:serve.***
 
-### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
+
+###### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
+
 
 
 
