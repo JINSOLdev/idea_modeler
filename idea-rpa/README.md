@@ -1,16 +1,38 @@
 # Local Setup for idea-rpa 
 
 Please install :
-1. Node.js v16.18.0
-2. npm v7.23.0
-3. python at least v3.6
+1. Node.js v16.18.0 (https://nodejs.org/ko/download)
+2. npm v7.23.0 (https://www.npmjs.com/get-npm)
+3. python at least v3.6 (https://www.python.org/downloads/)
+
+### How to change Node.js with a specific version
+1. Check the version with ***node -v*** command in terminal
+2. Install NVM (https://github.com/coreybutler/nvm-windows/)
+3. Click ***Download Now!***  
+4. Click and download ***npm-setup.zip***
+5. After installing, check the available node.js version : ***nvm list available*** 
+6. Type ***nvm install (verison)***
+7. Change the version : ***nvm use (version)***
+
+
+### How to change npm with a specific version
+1. Open terminal and type ***npm install -g npm@(version)***
+
+### Install Pyinstaller
+1. ***pip install pyinstaller*** 
+
 
 # Run idea-rpa
-Before running, it is required to install vue + electron in the projects frontend directory. 
-To run this app, navigate to the frontend directory and run ***npm run electron:serve.***
+Before running, it is required to install ***vue + electron*** in the projects frontend directory. Please enter the followings :
+1. ***npm install***
+2. ***pip install rpaframework-windows***
+3. ***npm run electron:serve***
+</br>
+
 
 
 ###### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
+</br>
 
 
 
