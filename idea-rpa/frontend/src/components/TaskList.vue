@@ -17,7 +17,7 @@
     </v-container>
   </div>
 </template>
-
+ 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import fs from 'fs';
@@ -29,7 +29,7 @@ export default class TaskList extends Vue {
       this.lists.push(file.replace('.json', ''));
     });
   }
-
+ 
   removeFile(fileName: string) {
     fs.rmSync(`./tasks/${fileName}.json`, {
         force: true
@@ -39,7 +39,7 @@ export default class TaskList extends Vue {
   }
 }
 </script>
-
+ 
 <style scoped>
 .v-text-field.v-text-field--enclosed .v-text-field__details {
   height: 0px !important;
