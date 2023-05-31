@@ -1,4 +1,4 @@
-const Excel = {
+const Excel_Files = {
     install (Vue: any, opts = {}) {
         const requireComponent = require.context('./', false, /\.vue$/);
         const excelList: string[] = [];
@@ -14,4 +14,4 @@ const Excel = {
         });
 }}
 
-export default Excel
+export default Excel_Files
