@@ -13,16 +13,14 @@
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :required="true"
                 ></locator-field>
             </v-card-text>
 
             <v-card-text>
                 <variables-field 
-                        :label="'Attribute'"
-                        :hint="'Name of the attribute to get'"
-                        :value.sync="value.property.text"
-                        :required="true"
+                        :label="'Timeout'"
+                        :hint="'Time to wait for locator match (in seconds)'"
+                        :value.sync="value.property.timeout"
                 ></variables-field> 
             </v-card-text>
         </v-card>
@@ -42,7 +40,7 @@
             KeywordPanel,
         }
     })
-    export default class GetAttribute extends Mixins(KeywordPanel) {
+    export default class GetElementPanel extends Mixins(KeywordPanel) {
         mounted(){
             var description = "Get attribute value of the element defined by the locator."
             this.$emit("setDescription", description)

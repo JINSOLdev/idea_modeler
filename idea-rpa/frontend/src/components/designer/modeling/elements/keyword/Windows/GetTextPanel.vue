@@ -9,21 +9,12 @@
             </v-card-title>
             
             <v-card-text>
-                <locator-field
+                <Locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                ></locator-field>
-            </v-card-text>
-
-            <v-card-text>
-                <variables-field 
-                        :label="'Attribute'"
-                        :hint="'Name of the attribute to get'"
-                        :value.sync="value.property.text"
-                        :required="true"
-                ></variables-field> 
+                ></Locator-field>
             </v-card-text>
         </v-card>
 
@@ -42,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class GetAttribute extends Mixins(KeywordPanel) {
+    export default class GetTextPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get attribute value of the element defined by the locator."
+            var description = "Get text from Control element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

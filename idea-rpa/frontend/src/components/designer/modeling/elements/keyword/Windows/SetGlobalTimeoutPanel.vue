@@ -6,24 +6,15 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
-                        :label="'Locator'"
-                        :hint="'Locator for element or window to screenshot'"
-                        :value.sync="value.property.locator"
+                <variables-field 
+                        :label="'Timeout'"
+                        :hint="'Timeout value in seconds'"
+                        :value.sync="value.property.timeout"
                         :required="true"
-                ></Locator-field>
-            </v-card-text>
-
-            <v-card-text>
-                <path-field
-                        :label="'Filename'"
-                        :hint="'Path to saved screenshot'"
-                        :value.sync="value.property.filename"
-                        :required="true"
-                ></path-field>
+                ></variables-field> 
             </v-card-text>
         </v-card>
-
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -39,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class ScreenshotPanel extends Mixins(KeywordPanel) {
+    export default class SetGlobalTimeoutPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Take a screenshot of the element defined by the locator."
+            var description = "Set global timeout for element search. Applies also to Control Window keyword."
             this.$emit("setDescription", description)
         }
     }

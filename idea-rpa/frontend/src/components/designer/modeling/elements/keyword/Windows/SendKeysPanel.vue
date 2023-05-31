@@ -8,22 +8,38 @@
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element or window to screenshot'"
+                        :hint="'Locator'"
                         :value.sync="value.property.locator"
-                        :required="true"
                 ></Locator-field>
             </v-card-text>
 
             <v-card-text>
-                <path-field
-                        :label="'Filename'"
-                        :hint="'Path to saved screenshot'"
-                        :value.sync="value.property.filename"
-                        :required="true"
-                ></path-field>
+                <variables-field 
+                        :label="'Keys'"
+                        :hint="'Keys to send'"
+                        :value.sync="value.property.keys"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
+                        :label="'Interval'"
+                        :hint="'Time to wait between keys (in seconds)'"
+                        :value.sync="value.property.interval"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.send_enter"
+                        label="Send Enter"
+                        hint="Send Enter key after given keys"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
             </v-card-text>
         </v-card>
-
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -39,9 +55,9 @@
             KeywordPanel,
         }
     })
-    export default class ScreenshotPanel extends Mixins(KeywordPanel) {
+    export default class SendKeysPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Take a screenshot of the element defined by the locator."
+            var description = "Send keys to desktop, current window or to Control element defined by given locator."
             this.$emit("setDescription", description)
         }
     }

@@ -33,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class GetValuePanel extends Mixins(KeywordPanel) {
+    export default class ListAttributesPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get text from Control element defined by the locator."
+            var description = "List all element attributes."
             this.$emit("setDescription", description)
         }
     }

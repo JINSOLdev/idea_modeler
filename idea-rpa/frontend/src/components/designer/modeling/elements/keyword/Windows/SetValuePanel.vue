@@ -8,22 +8,50 @@
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element or window to screenshot'"
+                        :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :required="true"
                 ></Locator-field>
             </v-card-text>
 
             <v-card-text>
-                <path-field
-                        :label="'Filename'"
-                        :hint="'Path to saved screenshot'"
-                        :value.sync="value.property.filename"
-                        :required="true"
-                ></path-field>
+                <variables-field 
+                        :label="'Value'"
+                        :hint="'Value to set'"
+                        :value.sync="value.property.value"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.append"
+                        label="Append"
+                        hint="Append value instead of overriding"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.enter"
+                        label="Enter"
+                        hint="Send Enter key after setting the value"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.newline"
+                        label="Newline"
+                        hint="Add newline to the end of the value"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
             </v-card-text>
         </v-card>
-
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -39,9 +67,9 @@
             KeywordPanel,
         }
     })
-    export default class ScreenshotPanel extends Mixins(KeywordPanel) {
+    export default class SetValuePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Take a screenshot of the element defined by the locator."
+            var description = "Set value of the element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

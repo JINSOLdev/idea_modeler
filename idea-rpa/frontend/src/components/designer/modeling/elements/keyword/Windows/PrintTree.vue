@@ -7,11 +7,8 @@
             KeywordElement,
         }
     })
-    export default class GetAttribute extends Mixins(KeywordElement) {
+    export default class PrintTree extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'value'
-            }]
         }
     }
 </script>

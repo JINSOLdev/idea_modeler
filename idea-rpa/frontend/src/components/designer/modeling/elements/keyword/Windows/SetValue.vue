@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class Click extends Mixins(KeywordElement) {
+    export default class SetValue extends Mixins(KeywordElement) {
         mounted() {
         }
     }

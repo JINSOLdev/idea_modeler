@@ -7,10 +7,13 @@
 
             <v-card-text>
                 <locator-field
+                        :label="'Locator'"
                         :value.sync="value.property.locator"
                         :hint="'Locator for window to control'"
                 ></locator-field>
-                
+            </v-card-text>
+
+            <v-card-text>
                 <v-switch
                         v-model="value.property.secure"
                         label="Secure"
@@ -19,7 +22,9 @@
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-                
+            </v-card-text>
+
+            <v-card-text>
                 <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"

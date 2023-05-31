@@ -10,9 +10,14 @@
             
             <v-card-text>
                 <locator-field
-                    :value.sync="value.property.locator"
+                        :label="'Locator'"
+                        :hint="'Locator for element to click'"
+                        :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field>
-                
+            </v-card-text>
+
+            <v-card-text>    
                 <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"

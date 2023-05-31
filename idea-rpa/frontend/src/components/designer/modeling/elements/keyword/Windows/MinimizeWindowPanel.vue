@@ -34,7 +34,7 @@
     })
     export default class MinimizeWindowPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get text from Control element defined by the locator."
+            var description = "Minimize the current active window or the window defined by the locator."
             this.$emit("setDescription", description)
         }
     }

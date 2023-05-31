@@ -11,16 +11,20 @@
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element'"
+                        :hint="'Locator for root element'"
                         :value.sync="value.property.locator"
-                        :required="true"
                 ></Locator-field>
             </v-card-text>
-        </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>        
+            <v-card-text>
+                <variables-field 
+                        :label="'Max Depth'"
+                        :hint="'Maximum search depth'"
+                        :value.sync="value.property.max_depth"
+                ></variables-field> 
+            </v-card-text>
+        </v-card>
+     
     </div>
 </template>
 
@@ -33,9 +37,9 @@
             KeywordPanel,
         }
     })
-    export default class GetValuePanel extends Mixins(KeywordPanel) {
+    export default class PrintTreePanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get text from Control element defined by the locator."
+            var description = "Print Control element tree."
             this.$emit("setDescription", description)
         }
     }

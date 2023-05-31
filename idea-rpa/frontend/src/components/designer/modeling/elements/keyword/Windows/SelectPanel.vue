@@ -8,25 +8,22 @@
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element or window to screenshot'"
+                        :hint="'Locator for element to control'"
                         :value.sync="value.property.locator"
                         :required="true"
                 ></Locator-field>
             </v-card-text>
 
             <v-card-text>
-                <path-field
-                        :label="'Filename'"
-                        :hint="'Path to saved screenshot'"
-                        :value.sync="value.property.filename"
+                <variables-field 
+                        :label="'Value'"
+                        :hint="'Value to select'"
+                        :value.sync="value.property.value"
                         :required="true"
-                ></path-field>
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -39,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class ScreenshotPanel extends Mixins(KeywordPanel) {
+    export default class SelectPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Take a screenshot of the element defined by the locator."
+            var description = "Select value on Control element if action is supported."
             this.$emit("setDescription", description)
         }
     }

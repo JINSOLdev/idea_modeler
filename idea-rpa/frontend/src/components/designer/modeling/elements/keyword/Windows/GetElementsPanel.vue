@@ -20,7 +20,7 @@
                 <Locator-field
                         :label="'Root Element'"
                         :hint="'Locator will be used as search root element object if provided'"
-                        :value.sync="value.property.locator"
+                        :value.sync="value.property.root_element"
                 ></Locator-field>
             </v-card-text>
 
@@ -28,13 +28,13 @@
                 <variables-field 
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
-                        :value.sync="value.property.text"
+                        :value.sync="value.property.timeout"
                 ></variables-field> 
             </v-card-text>
 
             <v-card-text>
                     <v-switch
-                        v-model="value.property.clear"
+                        v-model="value.property.sibling_only"  
                         label="Siblings Only"
                         hint="Filter for elements on the same level as the initially found one"
                         persistent-hint

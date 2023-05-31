@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class Click extends Mixins(KeywordElement) {
+    export default class SetGlobalTimeout extends Mixins(KeywordElement) {
         mounted() {
         }
     }
