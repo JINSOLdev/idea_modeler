@@ -1,25 +1,20 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            
+
             <v-card-text>
                 <locator-field
-                    :label="'Locator'"
-                    :hint="'Optional locator for window'"
-                    :value.sync="value.property.locator"
+                        :value.sync="value.property.locator"
                 ></locator-field>
             </v-card-text>
         </v-card>
 
         <return-values-field
                 :value.sync="value.property.returnVal"
-        ></return-values-field>        
+        ></return-values-field>
     </div>
 </template>
 
@@ -32,9 +27,9 @@
             KeywordPanel,
         }
     })
-    export default class ForegroundWindowPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Bring the current active window or the window defined by the locator to the foreground."
+    export default class ClickPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Mouse click on element matching given locator."
             this.$emit("setDescription", description)
         }
     }

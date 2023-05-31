@@ -10,10 +10,20 @@
             
             <v-card-text>
                 <locator-field
-                    :label="'Locator'"
-                    :hint="'Optional locator for window'"
-                    :value.sync="value.property.locator"
+                        :label="'Locator'"
+                        :hint="'Locator for element'"
+                        :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field>
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
+                        :label="'Attribute'"
+                        :hint="'Name of the attribute to get'"
+                        :value.sync="value.property.text"
+                        :required="true"
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
@@ -32,9 +42,9 @@
             KeywordPanel,
         }
     })
-    export default class ForegroundWindowPanel extends Mixins(KeywordPanel) {
+    export default class GetAttribute extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Bring the current active window or the window defined by the locator to the foreground."
+            var description = "Get attribute value of the element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

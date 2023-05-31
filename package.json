@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "electron": "^25.0.0",
+    "vue.js": "^0.3.2"
+  }
+}

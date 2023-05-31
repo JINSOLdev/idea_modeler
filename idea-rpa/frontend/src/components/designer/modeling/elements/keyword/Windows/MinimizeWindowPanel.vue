@@ -9,11 +9,11 @@
             </v-card-title>
             
             <v-card-text>
-                <locator-field
-                    :label="'Locator'"
-                    :hint="'Optional locator for window'"
-                    :value.sync="value.property.locator"
-                ></locator-field>
+                <Locator-field
+                        :label="'Locator'"
+                        :hint="'Locator for window to minimize'"
+                        :value.sync="value.property.locator"
+                ></Locator-field>
             </v-card-text>
         </v-card>
 
@@ -32,9 +32,9 @@
             KeywordPanel,
         }
     })
-    export default class ForegroundWindowPanel extends Mixins(KeywordPanel) {
+    export default class MinimizeWindowPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Bring the current active window or the window defined by the locator to the foreground."
+            var description = "Get text from Control element defined by the locator."
             this.$emit("setDescription", description)
         }
     }
