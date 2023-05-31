@@ -1,25 +1,23 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            
+
             <v-card-text>
-                <locator-field
-                    :label="'Locator'"
-                    :hint="'Optional locator for window'"
-                    :value.sync="value.property.locator"
-                ></locator-field>
+                <variables-field 
+                        :label="'Timeout'"
+                        :hint="'Timeout value in seconds'"
+                        :value.sync="value.property.timeout"
+                        :required="true"
+                ></variables-field> 
             </v-card-text>
         </v-card>
-
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
-        ></return-values-field>        
+        ></return-values-field>
     </div>
 </template>
 
@@ -32,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class ForegroundWindowPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Bring the current active window or the window defined by the locator to the foreground."
+    export default class SetGlobalTimeoutPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set global timeout for element search. Applies also to Control Window keyword."
             this.$emit("setDescription", description)
         }
     }

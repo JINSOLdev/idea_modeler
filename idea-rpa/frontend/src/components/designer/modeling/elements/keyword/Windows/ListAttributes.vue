@@ -7,8 +7,11 @@
             KeywordElement,
         }
     })
-    export default class DoubleClick extends Mixins(KeywordElement) {
+    export default class ListAttributes extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'attributes'
+            }]
         }
     }
 </script>

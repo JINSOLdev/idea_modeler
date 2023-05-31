@@ -7,9 +7,13 @@
 
             <v-card-text>
                 <locator-field
+                        :label="'Locator'"
+                        :hint="'Locator for window to close'"
                         :value.sync="value.property.locator"
                 ></locator-field>
+            </v-card-text>        
 
+            <v-card-text>                
                 <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"

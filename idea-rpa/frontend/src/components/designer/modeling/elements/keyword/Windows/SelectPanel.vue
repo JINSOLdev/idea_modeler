@@ -8,7 +8,7 @@
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element to click'"
+                        :hint="'Locator for element to control'"
                         :value.sync="value.property.locator"
                         :required="true"
                 ></Locator-field>
@@ -16,16 +16,14 @@
 
             <v-card-text>
                 <variables-field 
-                        :label="'Timeout'"
-                        :hint="'Time to wait for locator match (in seconds)'"
-                        :value.sync="value.property.timeout"
+                        :label="'Value'"
+                        :hint="'Value to select'"
+                        :value.sync="value.property.value"
+                        :required="true"
                 ></variables-field> 
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -38,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class ClickPanel extends Mixins(KeywordPanel) {
+    export default class SelectPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Mouse click on element matching given locator."
+            var description = "Select value on Control element if action is supported."
             this.$emit("setDescription", description)
         }
     }

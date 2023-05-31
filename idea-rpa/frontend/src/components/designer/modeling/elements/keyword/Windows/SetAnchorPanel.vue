@@ -6,36 +6,23 @@
             </v-card-title>
 
             <v-card-text>
-                <locator-field
+                <Locator-field
                         :label="'Locator'"
+                        :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :hint="'Locator for window to control'"
-                ></locator-field>
+                        :required="true"
+                ></Locator-field>
             </v-card-text>
 
             <v-card-text>
-                <v-switch
-                        v-model="value.property.secure"
-                        label="Secure"
-                        color="success"
-                        hint="Bring window to foreground"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
-                <variables-field
+                <variables-field 
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
                         :value.sync="value.property.timeout"
-                ></variables-field>
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -48,9 +35,9 @@
             KeywordPanel,
         }
     })
-    export default class ContorlWindowPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Controls the window defined by the locator."
+    export default class SetAnchorPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set anchor to an element specified by the locator."
             this.$emit("setDescription", description)
         }
     }

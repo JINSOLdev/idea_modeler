@@ -1,16 +1,26 @@
+<!--
+    TODO: 변수 할당 필요함. UI만 작업하였음
+-->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-
+            
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element to click'"
+                        :hint="'Locator for elements'"
                         :value.sync="value.property.locator"
-                        :required="true"
+                ></Locator-field>
+            </v-card-text>
+
+            <v-card-text>
+                <Locator-field
+                        :label="'Root Element'"
+                        :hint="'Locator will be used as search root element object if provided'"
+                        :value.sync="value.property.root_element"
                 ></Locator-field>
             </v-card-text>
 
@@ -21,11 +31,21 @@
                         :value.sync="value.property.timeout"
                 ></variables-field> 
             </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.sibling_only"  
+                        label="Siblings Only"
+                        hint="Filter for elements on the same level as the initially found one"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
         </v-card>
 
         <return-values-field
                 :value.sync="value.property.returnVal"
-        ></return-values-field>
+        ></return-values-field>        
     </div>
 </template>
 
@@ -38,9 +58,9 @@
             KeywordPanel,
         }
     })
-    export default class ClickPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Mouse click on element matching given locator."
+    export default class GetElementsPanel extends Mixins(KeywordPanel) {
+        mounted(){
+            var description = "Get a list of elements matching the locator."
             this.$emit("setDescription", description)
         }
     }
