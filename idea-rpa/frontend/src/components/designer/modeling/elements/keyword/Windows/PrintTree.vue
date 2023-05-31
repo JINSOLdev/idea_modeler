@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class DoubleClick extends Mixins(KeywordElement) {
+    export default class PrintTree extends Mixins(KeywordElement) {
         mounted() {
         }
     }

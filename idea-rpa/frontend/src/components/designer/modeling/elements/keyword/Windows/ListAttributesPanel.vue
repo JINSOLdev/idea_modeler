@@ -9,11 +9,12 @@
             </v-card-title>
             
             <v-card-text>
-                <locator-field
-                    :label="'Locator'"
-                    :hint="'Optional locator for window'"
-                    :value.sync="value.property.locator"
-                ></locator-field>
+                <Locator-field
+                        :label="'Locator'"
+                        :hint="'Locator for element'"
+                        :value.sync="value.property.locator"
+                        :required="true"
+                ></Locator-field>
             </v-card-text>
         </v-card>
 
@@ -32,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class ForegroundWindowPanel extends Mixins(KeywordPanel) {
+    export default class ListAttributesPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Bring the current active window or the window defined by the locator to the foreground."
+            var description = "List all element attributes."
             this.$emit("setDescription", description)
         }
     }

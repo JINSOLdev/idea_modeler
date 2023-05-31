@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class DoubleClick extends Mixins(KeywordElement) {
+    export default class RightClick extends Mixins(KeywordElement) {
         mounted() {
         }
     }

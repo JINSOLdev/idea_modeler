@@ -9,26 +9,22 @@
             </v-card-title>
             
             <v-card-text>
-                <locator-field
+                <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element to click'"
+                        :hint="'Locator for root element'"
                         :value.sync="value.property.locator"
-                        :required="true"
-                ></locator-field>
+                ></Locator-field>
             </v-card-text>
 
-            <v-card-text>    
-                <variables-field
-                        :label="'Timeout'"
-                        :hint="'Time to wait for locator match (in seconds)'"
-                        :value.sync="value.property.timeout"
-                ></variables-field>
+            <v-card-text>
+                <variables-field 
+                        :label="'Max Depth'"
+                        :hint="'Maximum search depth'"
+                        :value.sync="value.property.max_depth"
+                ></variables-field> 
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
+     
     </div>
 </template>
 
@@ -41,9 +37,9 @@
             KeywordPanel,
         }
     })
-    export default class DoubleClickPanel extends Mixins(KeywordPanel) {
+    export default class PrintTreePanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Double mouse click on element matching given locator."
+            var description = "Print Control element tree."
             this.$emit("setDescription", description)
         }
     }

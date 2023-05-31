@@ -1,41 +1,33 @@
+<!--
+    TODO: 변수 할당 필요함. UI만 작업하였음
+-->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-
+            
             <v-card-text>
                 <locator-field
                         :label="'Locator'"
+                        :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :hint="'Locator for window to control'"
                 ></locator-field>
             </v-card-text>
 
             <v-card-text>
-                <v-switch
-                        v-model="value.property.secure"
-                        label="Secure"
-                        color="success"
-                        hint="Bring window to foreground"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
-                <variables-field
+                <variables-field 
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
                         :value.sync="value.property.timeout"
-                ></variables-field>
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
         <return-values-field
                 :value.sync="value.property.returnVal"
-        ></return-values-field>
+        ></return-values-field>        
     </div>
 </template>
 
@@ -48,9 +40,9 @@
             KeywordPanel,
         }
     })
-    export default class ContorlWindowPanel extends Mixins(KeywordPanel) {
+    export default class GetElementPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Controls the window defined by the locator."
+            var description = "Get attribute value of the element defined by the locator."
             this.$emit("setDescription", description)
         }
     }
