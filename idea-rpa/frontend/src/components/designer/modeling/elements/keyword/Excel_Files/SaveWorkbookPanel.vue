@@ -6,12 +6,12 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field
-                        :label="'Value'"
-                        :hint="'Index or name of worksheet'"
-                        :value.sync="value.property.value"
-                        :required="true"
-                ></variables-field>
+                <Path-field
+                        :label="'Path'"
+                        :hint="'Path to save to'"
+                        :value.sync="value.property.path"
+                ></Path-field>
+
             </v-card-text>
         </v-card>
 
@@ -28,9 +28,9 @@
             KeywordPanel,
         }
     })
-    export default class SetActiveWorksheetPanel extends Mixins(KeywordPanel) {
+    export default class SaveWorkbookPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Set the active worksheet."
+            var description = "Save the active workbook."
             this.$emit("setDescription", description)
         }
     }

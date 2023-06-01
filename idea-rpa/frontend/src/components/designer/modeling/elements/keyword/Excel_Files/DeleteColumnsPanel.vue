@@ -12,20 +12,17 @@
                         :value.sync="value.property.start"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'End'"
                         :hint="'Optional column number or name for last column to delete'"
                         :value.sync="value.property.end"
                 ></variables-field>
-
-               
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>
@@ -40,5 +37,9 @@
         }
     })
     export default class DeleteColumnsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Delete column or columns beginning from start column number/name to possible end column number/name."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

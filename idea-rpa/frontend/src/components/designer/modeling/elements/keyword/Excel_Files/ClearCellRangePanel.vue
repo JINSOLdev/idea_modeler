@@ -12,7 +12,6 @@
                         :value.sync="value.property.range_string"
                         :required="true"
                 ></variables-field>
-
                 
             </v-card-text>
         </v-card>
@@ -31,5 +30,9 @@
         }
     })
     export default class ClearCellRangePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clear cell values for a given range."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

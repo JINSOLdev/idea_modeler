@@ -12,21 +12,26 @@
                         :value.sync="value.property.start_cell"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Values'"
                         :hint="'List of lists or a table'"
                         :value.sync="value.property.values"
                         :required="true"
                 ></variables-field>
-
-                 <Variables-field
-                        :label="'Table Heading'"
-                        :hint="'If values are given as a table, this parameter defines if Table headings should be inserted as a row'"
-                        :value.sync="value.property.table_heading"
-                ></Variables-field>
-            </v-card-text>    
-
+            </v-card-text>
+    
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.table_heading"
+                        label="Table Heading"
+                        hint="If values are given as a table, this parameter defines if Table headings should be inserted as a row"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
         </v-card>
 
     </div>
@@ -43,5 +48,9 @@
         }
     })
     export default class SetCellValuesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set cell values given as list of lists or as a RPA.Tables.Table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

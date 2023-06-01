@@ -6,25 +6,25 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
-                        :label="'Locator'"
-                        :hint="'Locator for element to control'"
-                        :value.sync="value.property.locator"
+                <variables-field
+                        :label="'Column'"
+                        :hint="'Insert before the column'"
+                        :value.sync="value.property.column"
                         :required="true"
-                ></Locator-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <variables-field 
-                        :label="'Value'"
-                        :hint="'Value to select'"
-                        :value.sync="value.property.value"
-                        :required="true"
-                ></variables-field> 
+                <variables-field
+                        :label="'Amount'"
+                        :hint="'Number of columns to insert, default 1'"
+                        :value.sync="value.property.amount"
+                ></variables-field>
             </v-card-text>
         </v-card>
 
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -36,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class SelectPanel extends Mixins(KeywordPanel) {
+    export default class InsertColumnsBeforePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Select value on Control element if action is supported."
+            var description = "Insert column or columns before a column number/name."
             this.$emit("setDescription", description)
         }
     }

@@ -12,13 +12,18 @@
                         :value.sync="value.property.row"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
+
+            <v-card-text>
                 <variables-field
                         :label="'Column'"
                         :hint="'Name or index of column'"
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of worksheet'"
@@ -44,5 +49,10 @@
         }
     })
     export default class GetCellValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get a cell value in the given worksheet."
+            this.$emit("setDescription", description)
+        }
     }
+    
 </script>

@@ -9,23 +9,29 @@
                 <variables-field
                         :label="'Range String'"
                         :hint="'Cell range (e.g. E2:E10)'"
-                        :value.sync=value.property.range_string
+                        :value.sync="value.property.range_string"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Formula'"
                         :hint="'Formula to insert into cell(s)'"
-                        :value.sync=value.property.formula
+                        :value.sync="value.property.formula"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
-                <variables-field
-                        :label="'Transpose'"
-                        :hint="'If the the cell formulas will be transposed'"
-                        :value.sync=value.property.transpose
-                ></variables-field>
-            </v-card-text>   
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.transpose"
+                        label="Transpose"
+                        hint="If the the cell formulas will be transposed"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
         </v-card>
 
     </div>
@@ -42,5 +48,9 @@
         }
     })
     export default class SetCellFormulaPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set cell formula for given range of cells."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

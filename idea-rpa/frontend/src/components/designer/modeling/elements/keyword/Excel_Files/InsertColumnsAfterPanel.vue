@@ -7,17 +7,19 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Start'"
-                        :hint="'Row number to start deletion from'"
-                        :value.sync="value.property.start"
+                        :label="'Column'"
+                        :hint="'Insert after the column'"
+                        :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
-                        :label="'End'"
-                        :hint="'Optional row number for last column to delete'"
-                        :value.sync="value.property.end"
-                ></variables-field>             
+                        :label="'Amount'"
+                        :hint="'Number of columns to insert, default 1'"
+                        :value.sync="value.property.amount"
+                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -34,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class DeleteRowsPanel extends Mixins(KeywordPanel) {
+    export default class InsertColumnsAfterPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Delete row or rows beginning from start row number to possible end row number."
+            var description = "Insert column or columns after a column number/name."
             this.$emit("setDescription", description)
         }
     }
