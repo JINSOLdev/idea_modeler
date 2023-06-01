@@ -6,23 +6,16 @@
             </v-card-title>
 
             <v-card-text>
-                
-
-                <v-switch
-                        v-model="value.property.save_changes"
-                        label="Save changes"
-                        hint="Save changes if exist"
+                    <v-switch
+                        v-model="value.property.save_change"
+                        label="Save Change"
+                        hint="Save change"
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-
-             
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>
@@ -37,5 +30,9 @@
         }
     })
     export default class CloseDocumentPanel extends Mixins(KeywordPanel) {
+        mounted(){
+            var description = "Close the active document (if open)."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

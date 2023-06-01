@@ -6,58 +6,50 @@
             </v-card-title>
 
             <v-card-text>
-               
-                <variables-field
+                <variables-field 
                         :label="'Worksheet'"
-                        :hint="'Worksheet to handle, defaults to active worksheet if None'"
+                        :hint="'worksheet to handle'"
                         :value.sync="value.property.worksheet"
-                ></variables-field>
-                
-                <variables-field
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
                         :label="'Row'"
-                        :hint="'Target row, defaults to none'"
+                        :hint="'target row'"
                         :value.sync="value.property.row"
-                ></variables-field>
-                <variables-field
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
                         :label="'Column'"
-                        :hint="'Target column, defaults to none'"
+                        :hint="'target column'"
                         :value.sync="value.property.column"
-                ></variables-field>
-                <variables-field
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
                         :label="'Value'"
-                        :hint="'Possible value to set, defaults to None'"
+                        :hint="'Value to set'"
                         :value.sync="value.property.value"
-                ></variables-field>
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
 
-                <variables-field
-                        :label="'Number format'"
-                        :hint="'Possible number format to set, defaults to None'"
+            <v-card-text>
+                <variables-field 
+                        :label="'Number Format'"
+                        :hint="'possible number format to set with excel number format, write as number_format= (e. g. number_format=0, #,##0,00, 0%, etc)'"
                         :value.sync="value.property.number_format"
-                ></variables-field>
-
-                <variables-field
-                        :label="'Formula'"
-                        :hint="'Possible format to set, defaults to None'"
-                        :value.sync="value.property.formula"
-                ></variables-field>
-
-
-
-                <v-switch
-                        v-model="value.property.create_workbook"
-                        label="Create workbook"
-                        hint="Create workbook if does not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>
@@ -72,5 +64,9 @@
         }
     })
     export default class WriteToCellsPanel extends Mixins(KeywordPanel) {
+        mounted(){
+            var description = "Write value, number_format and/or formula into cell."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

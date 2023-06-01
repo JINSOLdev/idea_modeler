@@ -6,33 +6,23 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field
-                        :label="'Pdf filename'"
+                <path-field
+                        :label="'PDF Filename'"
                         :hint="'PDF filename to save'"
                         :value.sync="value.property.pdf_filename"
-                ></variables-field>
+                        :required="true"
+                ></path-field>
+            </v-card-text>
 
-                <variables-field
-                        :label="'Excel filename'"
-                        :hint="'Excel filename to open. If not given, the current workbook will open.'"
+            <v-card-text>
+                <path-field
+                        :label="'Excel Filename'"
+                        :hint="'Excel filename to open'"
                         :value.sync="value.property.excel_filename"
-                ></variables-field>
-
-                <v-switch
-                        v-model="value.property.create_workbook"
-                        label="Create workbook"
-                        hint="Create workbook if does not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                ></path-field>
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>
@@ -46,6 +36,10 @@
             KeywordPanel,
         }
     })
-    export default class AddNewSheetPanel extends Mixins(KeywordPanel) {
+    export default class ExportAsPdfPanel extends Mixins(KeywordPanel) {
+        mounted(){
+            var description = "Export Excel as PDF file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

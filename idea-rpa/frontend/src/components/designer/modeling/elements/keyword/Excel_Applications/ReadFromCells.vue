@@ -9,6 +9,9 @@
     })
     export default class ReadFromCells extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'Value'
+            }]
         }
     }
 </script>
