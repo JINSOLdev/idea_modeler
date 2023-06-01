@@ -5,14 +5,12 @@
                 Input Arguments
             </v-card-title>
 
-            <v-card-text>
-                
+            <v-card-text>                
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of worksheet to remove'"
                         :value.sync="value.property.name"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
 
@@ -30,5 +28,9 @@
         }
     })
     export default class RemoveWorksheetPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove a worksheet from the active workbook."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

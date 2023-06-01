@@ -6,17 +6,25 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field
+                <Locator-field
+                        :label="'Locator'"
+                        :hint="'Locator for element to control'"
+                        :value.sync="value.property.locator"
+                        :required="true"
+                ></Locator-field>
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
                         :label="'Value'"
-                        :hint="'Index or name of worksheet'"
+                        :hint="'Value to select'"
                         :value.sync="value.property.value"
                         :required="true"
-                ></variables-field>
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
     </div>
-    
 </template>
 
 <script lang="ts">
@@ -28,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class SetActiveWorksheetPanel extends Mixins(KeywordPanel) {
+    export default class SelectEPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Set the active worksheet."
+            var description = "Select value on Control element if action is supported."
             this.$emit("setDescription", description)
         }
     }

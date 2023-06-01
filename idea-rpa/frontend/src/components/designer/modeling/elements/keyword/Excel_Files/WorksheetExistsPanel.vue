@@ -34,5 +34,9 @@
         }
     })
     export default class WorksheetExistsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return True if worksheet with given name is in workbook."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

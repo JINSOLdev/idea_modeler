@@ -5,46 +5,44 @@
                 Input Arguments
             </v-card-title>
 
-            <v-card-text>                
-                <variables-field
+            <v-card-text>
+                <variables-field 
                         :label="'Name'"
-                        :hint="'Name of worksheet'"
+                        :hint="'Name of new worksheet'"
                         :value.sync="value.property.name"
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field
+                        :label="'Content'"
+                        :hint="'Content for new worksheet'"
+                        :value.sync="value.property.content"
                 ></variables-field>
+            </v-card-text>
+
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.exist_ok"
+                        label="Exist Ok"
+                        hint="Raise an error if name exists"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
             </v-card-text>
 
             <v-card-text>
                     <v-switch
                         v-model="value.property.header"
                         label="Header"
-                        hint="Use first row as header"
+                        hint="Write headers to worksheet"
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.trim"
-                        label="Trim"
-                        hint="Remove empty rows from end"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
-                <variables-field
-                        :label="'Start'"
-                        :hint="'Start row index'"
-                        :value.sync="value.property.start"
-                ></variables-field>
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>
@@ -58,9 +56,9 @@
             KeywordPanel,
         }
     })
-    export default class ReadWorksheetAsTablePanel extends Mixins(KeywordPanel) {
+    export default class CreateWorksheetPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Read the contents of a worksheet into a Table container. Allows sorting/filtering/manipulating using the RPA.Tables library."
+            var description = "Create a new worksheet in the current workbook."
             this.$emit("setDescription", description)
         }
     }

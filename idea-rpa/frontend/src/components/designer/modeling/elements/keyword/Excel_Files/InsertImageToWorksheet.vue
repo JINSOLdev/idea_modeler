@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class Select extends Mixins(KeywordElement) {
+    export default class InsertImageToWorksheet extends Mixins(KeywordElement) {
         mounted() {
         }
     }
