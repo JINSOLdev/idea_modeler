@@ -21,7 +21,7 @@
                 ></v-switch>
 
                 <v-switch
-                        v-model="value.property.formattingAsEmpy"
+                        v-model="value.property.formattingAsEmpty"
                         label="Exist Ok"
                         hint="Continue without errors if directory exists"
                         persistent-hint
