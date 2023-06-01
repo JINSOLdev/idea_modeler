@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class AddNewSheet extends Mixins(KeywordElement) {
+    export default class ExportAsPdf extends Mixins(KeywordElement) {
         mounted() {
         }
     }

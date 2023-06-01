@@ -9,6 +9,9 @@
     })
     export default class FindFirstAvailableRow extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'Row'
+            }]
         }
     }
 </script>
