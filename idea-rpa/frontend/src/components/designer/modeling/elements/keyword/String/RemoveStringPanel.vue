@@ -8,9 +8,15 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to modify.'"
                         :value.sync="value.property.string"
                         :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Removables'"
+                        :hint="'Text to remove'"
+                        :value.sync="value.property.removables"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -30,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class RemoveStringPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Removes all removables from the given string."
             this.$emit("setDescription", description)
         }
     }

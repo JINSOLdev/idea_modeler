@@ -8,9 +8,22 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to encode'"
                         :value.sync="value.property.string"
                         :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Encoding'"
+                        :hint="'Output encoding'"
+                        :value.sync="value.property.encoding"
+                        :required="true"
+                ></variables-field>
+           
+                <variables-field
+                        :label="'Errors'"
+                        :hint="'How to handle errors, i.e. `strict`, `ignore`, or `replace`'"
+                        :value.sync="value.property.string"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -30,9 +43,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class EncodeStringToBytesPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Encodes the given Unicode string to bytes using the given encoding."
             this.$emit("setDescription", description)
         }
     }

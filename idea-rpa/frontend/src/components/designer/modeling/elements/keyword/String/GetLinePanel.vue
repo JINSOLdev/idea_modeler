@@ -8,8 +8,15 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to read.'"
                         :value.sync="value.property.string"
+                        :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Line Number'"
+                        :hint="'Line number in string'"
+                        :value.sync="value.property.line_number"
                         :required="true"
                 ></variables-field>
             </v-card-text>
@@ -30,9 +37,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class GetLinePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Returns the specified line from the given string."
             this.$emit("setDescription", description)
         }
     }

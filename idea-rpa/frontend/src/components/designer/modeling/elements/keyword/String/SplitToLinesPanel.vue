@@ -8,10 +8,24 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to split.'"
                         :value.sync="value.property.string"
                         :required="true"
                 ></variables-field>
+
+                <variables-field
+                        :label="'Start'"
+                        :hint="'Start line index.'"
+                        :value.sync="value.property.start"
+                ></variables-field>
+
+                <variables-field
+                        :label="'End'"
+                        :hint="'End line index.'"
+                        :value.sync="value.property.end"
+                ></variables-field>
+
+                
             </v-card-text>
         </v-card>
 
@@ -30,9 +44,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class SplitToLinesPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Splits the given string to lines."
             this.$emit("setDescription", description)
         }
     }
