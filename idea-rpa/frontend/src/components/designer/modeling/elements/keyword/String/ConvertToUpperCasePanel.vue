@@ -30,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class ConvertToUpperCasePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Converts string to upper case."
             this.$emit("setDescription", description)
         }
     }

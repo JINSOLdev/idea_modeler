@@ -8,9 +8,22 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to read.'"
                         :value.sync="value.property.string"
                         :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Start'"
+                        :hint="'Start index'"
+                        :value.sync="value.property.start"
+                        :required="true"
+                ></variables-field>
+
+                <variables-field
+                        :label="'End'"
+                        :hint="'End index'"
+                        :value.sync="value.property.end"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -30,9 +43,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class GetSubstringPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Returns a substring from start index to end index."
             this.$emit("setDescription", description)
         }
     }

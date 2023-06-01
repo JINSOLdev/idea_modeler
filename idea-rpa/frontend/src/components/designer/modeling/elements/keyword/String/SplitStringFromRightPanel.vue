@@ -8,9 +8,21 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to split.'"
                         :value.sync="value.property.string"
                         :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Separator'"
+                        :hint="'String to use as delimiter'"
+                        :value.sync="value.property.separator"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Max Split'"
+                        :hint="'Maximum number of splits'"
+                        :value.sync="value.property.max_split"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -30,9 +42,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class SplitStringFromRightPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Splits the string using separator starting from right."
             this.$emit("setDescription", description)
         }
     }

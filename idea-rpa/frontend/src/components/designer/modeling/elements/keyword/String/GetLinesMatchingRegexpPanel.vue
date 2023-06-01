@@ -8,10 +8,25 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to read.'"
                         :value.sync="value.property.string"
                         :required="true"
                 ></variables-field>
+            
+                <variables-field
+                        :label="'Pattern'"
+                        :hint="'Text to match'"
+                        :value.sync="value.property.pattern"
+                        :required="true"
+                ></variables-field>
+
+                <v-switch
+                        v-model="value.property.partial_match"
+                        label="Partial Match"
+                        hint="Allow partial match"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
             </v-card-text>
         </v-card>
 
@@ -30,9 +45,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class GetLinesMatchingRegexpPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Returns lines of the given string that match the regexp pattern."
             this.$emit("setDescription", description)
         }
     }

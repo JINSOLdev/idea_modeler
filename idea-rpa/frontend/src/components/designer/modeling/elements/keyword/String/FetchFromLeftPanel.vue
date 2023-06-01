@@ -8,8 +8,15 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to read'"
                         :value.sync="value.property.string"
+                        :required="true"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Marker'"
+                        :hint="'Marker for splitting string'"
+                        :value.sync="value.property.marker"
                         :required="true"
                 ></variables-field>
             </v-card-text>
@@ -30,9 +37,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class FetchFromLeftPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Returns contents of the string before the first occurrence of marker."
             this.$emit("setDescription", description)
         }
     }

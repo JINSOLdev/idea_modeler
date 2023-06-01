@@ -7,10 +7,15 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'String'"
-                        :hint="'String to modify'"
-                        :value.sync="value.property.string"
-                        :required="true"
+                        :label="'Length'"
+                        :hint="'Amount of characters in string'"
+                        :value.sync="value.property.length"
+                ></variables-field>
+            
+                <variables-field
+                        :label="'Chars'"
+                        :hint="'Allowed characters in string'"
+                        :value.sync="value.property.chars"
                 ></variables-field>
             </v-card-text>
         </v-card>
@@ -30,9 +35,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class GenerateRandomStringPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Generates a string with a desired length from the given chars."
             this.$emit("setDescription", description)
         }
     }

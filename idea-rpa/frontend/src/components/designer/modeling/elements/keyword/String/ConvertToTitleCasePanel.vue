@@ -12,6 +12,12 @@
                         :value.sync="value.property.string"
                         :required="true"
                 ></variables-field>
+       
+                <variables-field
+                        :label="'Exclude'"
+                        :hint="'Words to not convert'"
+                        :value.sync="value.property.exclude"
+                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -30,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class ConvertToTitleCasePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Converts string to title case."
             this.$emit("setDescription", description)
         }
     }

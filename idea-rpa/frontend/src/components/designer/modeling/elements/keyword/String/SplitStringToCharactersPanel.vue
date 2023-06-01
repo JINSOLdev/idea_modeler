@@ -8,7 +8,7 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to split.'"
                         :value.sync="value.property.string"
                         :required="true"
                 ></variables-field>
@@ -30,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class SplitStringToCharactersPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Splits the given string to characters."
             this.$emit("setDescription", description)
         }
     }

@@ -7,11 +7,22 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'String'"
-                        :hint="'String to modify'"
-                        :value.sync="value.property.string"
+                        :label="'Template'"
+                        :hint="'Text template to format'"
+                        :value.sync="value.property.template"
                         :required="true"
                 ></variables-field>
+            
+                <variables-field
+                        :label="'Positional'"
+                        :hint="'Positional arguments to insert'"
+                        :value.sync="value.property.positional"
+                ></variables-field>
+
+                <keyword-args-field
+                        :label="'Named'"
+                        :value.sync="value.property.named"
+                ></keyword-args-field>
             </v-card-text>
         </v-card>
 
@@ -30,9 +41,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class FormatStringPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Formats a template using the given positional and named arguments."
             this.$emit("setDescription", description)
         }
     }

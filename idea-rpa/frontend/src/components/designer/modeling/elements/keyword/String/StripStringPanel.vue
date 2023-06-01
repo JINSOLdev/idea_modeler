@@ -8,10 +8,24 @@
             <v-card-text>
                 <variables-field
                         :label="'String'"
-                        :hint="'String to modify'"
+                        :hint="'String to modify.'"
                         :value.sync="value.property.string"
                         :required="true"
                 ></variables-field>
+
+                <variables-field
+                        :label="'Mode'"
+                        :hint="'Type of split, e.g. `left`, `right`, or `both`.'"
+                        :value.sync="value.property.start"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Characters'"
+                        :hint="'Characters to strip'"
+                        :value.sync="value.property.characters"
+                ></variables-field>
+
+                
             </v-card-text>
         </v-card>
 
@@ -30,9 +44,9 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToLowerCasePanel extends Mixins(KeywordPanel) {
+    export default class StripStringPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Converts string to lower case."
+            var description = "Remove leading and/or trailing whitespaces from the given string."
             this.$emit("setDescription", description)
         }
     }
