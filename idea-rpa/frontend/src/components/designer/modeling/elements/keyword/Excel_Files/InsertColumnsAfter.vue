@@ -7,11 +7,8 @@
             KeywordElement,
         }
     })
-    export default class GetCellValue extends Mixins(KeywordElement) {
+    export default class InsertColumnsAfter extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'value'
-            }]
         }
     }
 </script>

@@ -32,5 +32,9 @@
         }
     })
     export default class FindEmptyRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Find the first empty row after existing content, and return the row number."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

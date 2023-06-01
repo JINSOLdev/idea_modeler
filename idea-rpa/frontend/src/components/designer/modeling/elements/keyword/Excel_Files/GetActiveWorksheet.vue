@@ -7,10 +7,10 @@
             KeywordElement,
         }
     })
-    export default class GetCellValue extends Mixins(KeywordElement) {
+    export default class GetActiveWorksheet extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'value'
+                value: 'name'
             }]
         }
     }

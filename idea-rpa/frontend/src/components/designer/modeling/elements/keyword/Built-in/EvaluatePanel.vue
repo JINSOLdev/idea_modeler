@@ -10,6 +10,7 @@
                         :label="'Expression'"
                         :hint="'Python expression to evaluate'"
                         :value.sync="value.property.expression"
+                        :isMultiple="true"
                 ></variables-field>
 
                 <variables-field

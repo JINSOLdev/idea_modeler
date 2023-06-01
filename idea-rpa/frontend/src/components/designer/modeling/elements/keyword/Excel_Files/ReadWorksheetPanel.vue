@@ -5,26 +5,30 @@
                 Input Arguments
             </v-card-title>
 
-            <v-card-text>
-                
+            <v-card-text>                
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
+            </v-card-text>
 
-                <variables-field
-                        :label="'Header'"
-                        :hint="'Use first row as header'"
-                        :value.sync="value.property.header"
-                ></variables-field>
+            <v-card-text>
+                    <v-switch
+                        v-model="value.property.header"
+                        label="Header"
+                        hint="Use first row as header"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Start'"
                         :hint="'Start row index'"
                         :value.sync="value.property.start"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
 
@@ -45,5 +49,9 @@
         }
     })
     export default class ReadWorksheetPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Read the content of a worksheet into a list of dictionaries."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
