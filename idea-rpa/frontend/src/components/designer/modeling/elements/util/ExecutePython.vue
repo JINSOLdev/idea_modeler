@@ -30,27 +30,27 @@
     import {decode} from "iconv-lite";
     import { Robot, Task } from "../../../../../types/Task";
 
-    @Component
+    @Component // @Component 데코레이터 : Vue 컴포넌트로서 동작하기 위해 해당 클래스가 Vue 컴포넌트임을 지정한다. 
     export default class ExecutePython extends Vue {
 
-        @Prop() public task!: any
+        @Prop() public task!: any  // @Prop 데코레이터: task라는 프로퍼티를 Vue 컴포넌트에 전달하기 위한 데코레이터입니다.
 
-        public isRecording: boolean = false
+        public isRecording: boolean = false  // 불리언 값과 문자열을 저장하기 위한 변수입니다.
         public executeText: string = ""
 
         // mounted(){
         //     this.executePython()
         // }
 
-        async recordPython () {
+        async recordPython () {  // Python 스크립트를 녹화하는 함수입니다. 
             // execFile()
             // const cmd = cp.spawn('cmd');
             // const result = await ipcRenderer.invoke("python-record");
             let me = this;
             me.isRecording = true;
-            const pythonChild = execFile(
-                './public/static/main.exe', 
-                [ "--mode", "record" ], 
+            const pythonChild = execFile(      
+                './public/static/main.exe',   
+                [ "--mode", "record" ],       
                 { encoding: "euc-kr" }
             );
             // const pythonChild = execFile('./public/static/main.exe', ['from RPA.Browser.Selenium import Selenium\r\n\r\nbrowser_lib = Selenium()\r\n\r\n\r\ndef open_the_website(url):\r\n    browser_lib.open_available_browser(url)\r\n\r\n\r\ndef search_for(term):\r\n    input_field = \"css:input\"\r\n    browser_lib.input_text(input_field, term)\r\n    browser_lib.press_keys(input_field, \"ENTER\")\r\n\r\n\r\ndef store_screenshot(filename):\r\n    browser_lib.screenshot(filename=filename)\r\n\r\n\r\n# Define a main() function that calls the other functions in order:\r\ndef main():\r\n    try:\r\n        open_the_website(\"https:\/\/robocorp.com\/docs\/\")\r\n        search_for(\"python\")\r\n        store_screenshot(\"output\/screenshot.png\")\r\n    finally:\r\n        browser_lib.close_all_browsers()\r\n\r\n\r\n# Call the main() function, checking that we are running as a stand-alone script:\r\nif __name__ == \"__main__\":\r\n    main()'])
