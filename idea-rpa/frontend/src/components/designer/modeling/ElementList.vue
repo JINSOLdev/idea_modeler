@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-navigation-drawer
-                absolute
+                fixed
                 permanent
+                style="top: 63px;"
         >
             <v-list-item>
                 <v-list-item-content>

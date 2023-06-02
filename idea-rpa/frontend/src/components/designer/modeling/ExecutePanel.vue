@@ -32,7 +32,7 @@
 
             <v-card-actions v-if="!isExecuting">
                 <v-list v-if="artifacts.length > 0" dense style="width: 100%">
-                    <v-list-item link color="primary" @click="openArtifacts('')">
+                    <v-list-item link color="primary" @click="openArtifacts(null)">
                         <v-list-item-icon>
                             <v-icon>mdi-folder-outline</v-icon>
                         </v-list-item-icon>
@@ -107,8 +107,13 @@
             this.$emit('close')
         }
 
-        openArtifacts(path: string) {
-            const FOLDER_PATH = path ? path : ''
+        openArtifacts(path: any) {
+            var dir = ""
+            if (this.artifacts.length > 0) {
+                var obj = this.artifacts.find((item: any) => item.name == "output.xml")
+                dir = obj.path.replace("output.xml", "")
+            }
+            const FOLDER_PATH = path ? path : dir
             shell.openPath(FOLDER_PATH)
         }
 
@@ -116,7 +121,7 @@
 </script>
 
 <style scoped>
-    .script-text {
+    .scirpt-text {
         font-family: Roboto,sans-serif;
     }
 </style>

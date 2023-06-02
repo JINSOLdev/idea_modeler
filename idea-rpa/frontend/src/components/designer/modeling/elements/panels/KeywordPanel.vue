@@ -41,8 +41,19 @@
             this.description = ""
             if (this.value.type == "DefinitionKeyword") {
                 return ""
+
             } else {
-                return this.kebabCase(this.value.name) + "-panel"
+                if (this.value.library) {
+                    var group = this.value.library.replace("RPA.", "")
+                        .replace("Robocorp.", "")
+                        .replace(".Selenium", "")
+                    group = group.replace(".", "_")
+                    var path = group + "/" + this.value.name.replaceAll(" ", "") + "Panel"
+                    return () => import(`@/components/designer/modeling/elements/keyword/${path}`)
+
+                } else {
+                    return this.kebabCase(this.value.name) + "-panel"
+                }
             }
         }
 

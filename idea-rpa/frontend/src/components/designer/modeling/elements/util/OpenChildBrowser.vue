@@ -39,9 +39,10 @@
                 this.$emit('update:records',this.records)
                 this.$emit('closeLocator')
             } else {
-                console.log(msg,arg);
                 if (arg.id || arg.class) {
-                    this.records.push(arg)
+                    if (!this.records.find((item: any) => item.id == arg.id || item.class == arg.class)) {
+                        this.records.push(arg)
+                    }
                 }
             }   
         }
