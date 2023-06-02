@@ -12,6 +12,8 @@
             this.value.property.returnVal = [{
                 value: 'result'
             }]
+
+            this.value.property.count = "-1"
         }
     }
 </script>

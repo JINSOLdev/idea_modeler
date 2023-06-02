@@ -12,6 +12,9 @@
             this.value.property.returnVal = [{
                 value: 'result'
             }]
+
+            this.value.property.start = "0"
+            this.value.property.end = "None"
         }
     }
 </script>

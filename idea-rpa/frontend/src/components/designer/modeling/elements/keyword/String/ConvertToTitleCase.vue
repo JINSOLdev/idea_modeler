@@ -13,7 +13,7 @@
                 value: 'result'
             }]
 
-            this.value.property.object = 'None'
+            this.value.property.exclude = 'None'
         }
     }
 </script>
