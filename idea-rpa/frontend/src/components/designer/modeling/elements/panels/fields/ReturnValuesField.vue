@@ -65,7 +65,11 @@
         @Prop() public isVars!: boolean
         
         varItems: any[] = []
-        newValue: any[] = []
+        newValue: any[] = [{
+            name: "",
+            valueType: "Scalar",
+            defaultValue: ""
+        }]
         
         rules: any = {
             required: (value: any) => !!value || 'Required.'
@@ -94,7 +98,11 @@
         addValue() {
             var lastIdx = this.newValue.length - 1
             if (lastIdx == -1 || (lastIdx >= 0 && this.newValue[lastIdx] != "")) {
-                this.newValue.push({ value: "" })
+                this.newValue.push({
+                    name: "",
+                    valueType: "Scalar",
+                    defaultValue: ""
+                })
             }
         }
 

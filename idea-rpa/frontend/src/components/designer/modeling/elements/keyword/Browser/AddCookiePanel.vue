@@ -30,11 +30,11 @@
                         :value.sync="value.property.domain"
                 ></variables-field>
                 
-                <variables-field
+                <switch-field
                         :label="'Secure'"
                         :hint="'Only send over HTTPS'"
                         :value.sync="value.property.secure"
-                ></variables-field>
+                ></switch-field>
 
                 <variables-field
                         :label="'Expiry'"
