@@ -22,33 +22,27 @@
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
-                        v-model="value.property.append"
-                        label="Append"
-                        hint="Append value instead of overriding"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                    <switch-field
+                        :label="'Append'"
+                        :hint="'Append value instead of overriding'"
+                        :value.sync="value.property.append"
+                ></switch-field>
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
-                        v-model="value.property.enter"
-                        label="Enter"
-                        hint="Send Enter key after setting the value"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                    <switch-field
+                            :label="'Enter'"
+                            :hint="'Send Enter key after setting the value'"
+                            :value.sync="value.property.enter"
+                ></switch-field>
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
-                        v-model="value.property.newline"
-                        label="Newline"
-                        hint="Add newline to the end of the value"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                    <switch-field
+                            :label="'Newline'"
+                            :hint="'Add newline to the end of the value'"
+                            :value.sync="value.property.newline"
+                ></switch-field>
             </v-card-text>
         </v-card>
         

@@ -134,7 +134,6 @@
                 v-if="isOpenScript"
                 :robot.sync="robot"
                 v-click-outside="closeScriptPanel"
-                @addElement="addElement"
         ></robot-script-panel>
 
         <!-- Execute Panel-->
@@ -186,7 +185,7 @@
 
     import Draggable from 'vuedraggable';
     import { Watch, Component, Vue } from 'vue-property-decorator';
-    import { Robot, Task, Keyword } from '../../types/Task';
+    import { Robot, Task, Keyword, Variable } from '../../types/Task';
 
     import ElementList from './modeling/ElementList.vue';
     import RobotScriptPanel from './modeling/RobotScriptPanel.vue';
@@ -252,14 +251,14 @@
         @Watch('robot', { immediate: true, deep: true })
         updateRobot(val: any) {
             if (val) {
-            val.name = this.taskName;
+                val.name = this.taskName;
             }
         }
 
         @Watch('isOpenMenu', { immediate: true, deep: true })
         menu(value: boolean) {
             if (!value) {
-            this.selectedValue = null;
+                this.selectedValue = null;
             }
         }
 
@@ -268,15 +267,23 @@
             const text = `${direactoryPath}/${this.$route.params.taskName}.json`;
             let me = this
             fs.exists(text, (exists) => {
-            fs.readFile(text, (err, data) => {
-                if (err) console.error(err);
-                if (!data || !data.toString()) {return }
-                let loadData = JSON.parse(data.toString());
-                loadData.child = me.cloneChild(loadData.child)
-                const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
-                me.robot = tmpRobot
-            });
-            
+                fs.readFile(text, (err, data) => {
+                    if (err) console.error(err);
+                    if (!data || !data.toString()) {return }
+                    
+                    let loadData = JSON.parse(data.toString());
+                    loadData.child = me.cloneChild(loadData.child)
+                    
+                    const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
+                    tmpRobot.setProperty({
+                        "keywords": me.robot.getKeywords()
+                    })
+                    tmpRobot.setProperty({
+                        "variables": me.setVariables(loadData.variables)
+                    })
+                    
+                    me.robot = tmpRobot
+                });
             });
         }
 
@@ -288,43 +295,12 @@
             fs.writeFileSync(text, JSON.stringify(this.robot));
         }
 
-        addElement(value: any, type: string, settings: any): any {
-            if (value.length > 0) {
-                if (type == "taskName") {
-                    this.taskName = value
-
-                } else {
-                    var controlList = this.$refs.elementList.controlList
-                    var keywordList = this.$refs.elementList.keywordList
-
-                    controlList.forEach((ctrl: any) => {
-                        if(value.includes(ctrl.name.toUpperCase())) {
-                        }
-                    })
-
-                    keywordList.forEach((item: any) => {
-                        item.list.forEach((keyword: string) => {
-                            if(value.includes(keyword)) {
-                                var keyInfo = {
-                                    name: keyword,
-                                    type: "Keyowrd"
-                                }
-                                var element = this.$refs.elementList.cloneElement(keyInfo)
-                                this.robot.child.push(element)
-                            }
-                        })
-                    })
-
-                }
-            }
-        }
-
         deleteElement(value: any) {
             var newChild = this.robot.delChild(value, this.robot.child);
             this.robot.child = newChild;
 
             if (value.type == "DefinitionKeyword") {
-            this.robot.delKeyword(value);
+                this.robot.delKeyword(value);
             }
         }
 
@@ -422,19 +398,19 @@
 
         getComponentName(task: any): string {
             if (task.type == 'DefinitionKeyword') {
-            return 'keyword-element';
+                return 'keyword-element';
             } else if (task.type == 'Keyword') {
-            return this.kebabCase(task.name);
+                return this.kebabCase(task.name);
             } else {
-            return task.type;
+                return task.type;
             }
         }
 
         kebabCase(str: string) {
             const result = str
-            .replace(/([a-z])([A-Z])/g, '$1-$2')
-            .replace(/[\s_]+/g, '-')
-            .toLowerCase();
+                .replace(/([a-z])([A-Z])/g, '$1-$2')
+                .replace(/[\s_]+/g, '-')
+                .toLowerCase();
             return result;
         }
 
@@ -448,8 +424,8 @@
             return result;
         }
 
-        updateKeywords(keywords: any) {
-            this.robot.setProperty({ keywords: keywords });
+        updateKeywords(keyword: any) {
+            this.robot.setProperty({ "keywords": keyword })
         }
 
         openScriptPanel() {
@@ -528,7 +504,7 @@
 
             if (child.length > 0) {
                 child.forEach((childEl: any) => {
-                
+                    
                     var clone = this.$refs.elementList.cloneElement(childEl)
                     clone.property = childEl.property
 
@@ -539,6 +515,17 @@
                 })
             }
             return newChild
+        }
+
+        setVariables(variables: any) {
+            var newVars: any[] = []
+            if (variables && variables.length > 0) {
+                variables.forEach((varItem: any) => {
+                    var newVar = new Variable(varItem.name, varItem.valueType, varItem.defaultValue)
+                    newVars.push(newVar)
+                })
+            }
+            return newVars
         }
     }
 </script>

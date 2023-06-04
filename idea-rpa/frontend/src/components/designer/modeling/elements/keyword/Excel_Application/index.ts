@@ -1,4 +1,4 @@
-const Excel_Applications = {
+const Excel_Application = {
     install (Vue: any, opts = {}) {
         const requireComponent = require.context('./', false, /\.vue$/);
         const excelApplication: string[] = [];
@@ -14,4 +14,4 @@ const Excel_Applications = {
         });
 }}
 
-export default Excel_Applications
+export default Excel_Application

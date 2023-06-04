@@ -12,24 +12,18 @@
                         :value.sync="value.property.pattern"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Include Dirs"
-                        hint="Include directories in result"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.formattingAsEmpty"
+                        :label="'Include Dirs'"
+                        :hint="'Include directories in result'"
+                ></switch-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Include Files"
-                        hint="Include files in result"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.formattingAsEmpty"
+                        :label="'Include Files'"
+                        :hint="'Include files in result'"
+                ></switch-field>               
 
-                
-               
             </v-card-text>
         </v-card>
 
@@ -37,7 +31,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
         
-
     </div>    
 </template>
 
