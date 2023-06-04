@@ -16,8 +16,8 @@ import Desktop from '@/components/designer/modeling/elements/keyword/Desktop'
 import JSON from '@/components/designer/modeling/elements/keyword/JSON'
 import Browser from '@/components/designer/modeling/elements/keyword/Browser'
 import HTTP from '@/components/designer/modeling/elements/keyword/HTTP'
-import Excel from '@/components/designer/modeling/elements/keyword/Excel_Files'
-import ExcelApplication from '@/components/designer/modeling/elements/keyword/Excel_Applications'
+import ExcelFiles from '@/components/designer/modeling/elements/keyword/Excel_Files'
+import ExcelApplication from '@/components/designer/modeling/elements/keyword/Excel_Application'
 import Tables from '@/components/designer/modeling/elements/keyword/Tables'
 import Windows from '@/components/designer/modeling/elements/keyword/Windows'
 import WorkItems from '@/components/designer/modeling/elements/keyword/WorkItems_ControlRoom'
@@ -42,7 +42,7 @@ Vue.use(Desktop)
 Vue.use(JSON)
 Vue.use(Browser)
 Vue.use(HTTP)
-Vue.use(Excel)
+Vue.use(ExcelFiles)
 Vue.use(ExcelApplication)
 Vue.use(Tables)
 Vue.use(Windows)

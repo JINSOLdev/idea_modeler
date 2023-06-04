@@ -15,6 +15,15 @@
     
     @Component
     export default class App extends Vue {
+        mounted() {
+            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId=jinsolkim');///websocket
+            connection.onmessage = (event) => {
+                console.log(event);
+            }
+            connection.onopen = () => {
+                console.log('Info: WebSocket connection opened.');
+            };
+        }
     }
 </script>
 

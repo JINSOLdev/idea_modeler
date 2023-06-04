@@ -12,6 +12,9 @@
             this.value.property.returnVal = [{
                 value: 'result'
             }]
+
+            this.value.property.mode = "both"
+            this.value.property.characters = "None"
         }
     }
 </script>
