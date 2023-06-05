@@ -6,33 +6,34 @@
             </v-card-title>
 
             <v-card-text>
-                <path-field
-                        :label="'File name'"
-                        :hint="'Where to save file'"
-                        :value.sync="value.property.file_name"
-                        :required="true"
-                ></path-field>
-            </v-card-text>
+                <variables-field
+                        :label="'Filename'"
+                        :hint="'Path to save'"
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
 
-            <v-card-text>
                 <v-switch
                         v-model="value.property.autofit"
                         label="Autofit"
-                        hint="autofit cell widths if True, defaults to False"
+                        hint="Autofit cell widths if True, defaults to False"
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
-            </v-card-text>
 
-            <v-card-text>
-                <variables-field 
-                        :label="'File format'"
+
+                <variables-field
+                        :label="'File fornat'"
                         :hint="'Format of file'"
                         :value.sync="value.property.file_format"
-                ></variables-field> 
+                ></variables-field>
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -47,9 +48,5 @@
         }
     })
     export default class SaveExcelAsPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Save Excel with name if workbook is open."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

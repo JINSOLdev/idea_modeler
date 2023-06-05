@@ -6,30 +6,25 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Worksheet'"
-                        :hint="'worksheet to handle'"
+                        :hint="'Worksheet to handle, defaults to active worksheet if None'"
                         :value.sync="value.property.worksheet"
-                        :required="true"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Row'"
-                        :hint="'target row'"
+                        :hint="'Target row, defaults to none'"
                         :value.sync="value.property.row"
-                        :required="true"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Column'"
-                        :hint="'target column'"
+                        :hint="'Target column, defaults to none'"
                         :value.sync="value.property.column"
-                        :required="true"
-                ></variables-field> 
+                ></variables-field>
+
+             
             </v-card-text>
         </v-card>
 
@@ -50,9 +45,5 @@
         }
     })
     export default class ReadFromCellsPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Read value from cell."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

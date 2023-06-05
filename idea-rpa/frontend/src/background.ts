@@ -11,6 +11,18 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+let tray : any
+function initTrayIconMenu() {
+  tray = new Tray ('E:/icon.png') 
+  const myMenu = Menu.buildFromTemplate([
+    {label: '1번', type: 'normal', checked: true, click: ()=>{console.log('1번 클릭!')}},
+    {label: '2번', type: 'normal', click: ()=>{console.log('2번 클릭!')}},
+    {label: '3번', type: 'normal', click: ()=>{console.log('3번 클릭!')}},
+  ])
+  tray.setToolTip('트레이 아이콘!')
+  tray.setContextMenu(myMenu)
+}
+
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({

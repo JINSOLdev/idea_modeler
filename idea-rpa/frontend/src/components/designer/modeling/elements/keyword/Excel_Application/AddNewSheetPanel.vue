@@ -6,15 +6,33 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
-                        :label="'Sheet name'"
-                        :hint="'Name for sheet'"
-                        :value.sync="value.property.sheet_name"
-                        :required="true"
-                ></variables-field> 
+                <variables-field
+                        :label="'Sheetname'"
+                        :hint="'Name of sheet'"
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Tabname'"
+                        :hint="'Name of tab'"
+                        :value.sync="value.property.tabname"
+                ></variables-field>
+
+                <v-switch
+                        v-model="value.property.create_workbook"
+                        label="Create workbook"
+                        hint="Create workbook if does not exist"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -29,9 +47,5 @@
         }
     })
     export default class AddNewSheetPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Add new worksheet to workbook. Workbook is created by default if it does not exist."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

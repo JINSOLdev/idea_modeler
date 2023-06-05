@@ -6,24 +6,21 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Macro name'"
                         :hint="'Macro to run'"
-                        :value.sync="value.property.macro_name"
-                        :required="true"
-                ></variables-field> 
-            </v-card-text>
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
 
-            <v-card-text>
-                <variables-field 
-                        :label="'args'"
-                        :hint="'arguments to pass to macro'"
-                        :value.sync="value.property.args"
-                        :isMultiple="true"
-                ></variables-field> 
+               <!-- Path -->
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -38,9 +35,5 @@
         }
     })
     export default class RunMacroPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Run Excel macro with given name."
-            this.$emit("setDescription", description)
-        }
     }
 </script>
