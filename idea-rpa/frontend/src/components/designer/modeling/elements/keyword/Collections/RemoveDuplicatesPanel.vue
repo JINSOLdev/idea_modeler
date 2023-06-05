@@ -7,20 +7,12 @@
             
             <v-card-text>
                 <variables-field
-                        :label="'Dictionary'"
-                        :hint="'Dictionary to get items from'"
-                        :value.sync="value.property.dictionary"
+                        :label="'List'"
+                        :value.sync="value.property.list"
+                        :hint="'List to filter'"
+                        :required="true"
                 ></variables-field>
-
-                <v-switch
-                        v-model="value.property.sortKeys"
-                        label="Sort Keys"
-                        hint="Sort output by keys"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <v-divider></v-divider>
+              
             </v-card-text>
         </v-card>
 
@@ -39,6 +31,6 @@
             KeywordPanel,
         }
     })
-    export default class GetDictionaryItemsPanel extends Mixins(KeywordPanel) {
+    export default class RemoveDuplicatesPanel extends Mixins(KeywordPanel) {
     }
 </script>

@@ -8,19 +8,17 @@
             <v-card-text>
                 <variables-field
                         :label="'Dictionary'"
-                        :hint="'Dictionary to get items from'"
                         :value.sync="value.property.dictionary"
+                        :hint="'Dictionary to modify'"
+                        :required="true"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.sortKeys"
-                        label="Sort Keys"
-                        hint="Sort output by keys"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <v-divider></v-divider>
+                <variables-field
+                        :label="'Keys'"
+                        :value.sync="value.property.keys"
+                        :hint="'Keys to remove'"
+                ></variables-field>
+              
             </v-card-text>
         </v-card>
 
@@ -39,6 +37,6 @@
             KeywordPanel,
         }
     })
-    export default class GetDictionaryItemsPanel extends Mixins(KeywordPanel) {
+    export default class RemoveFromDictionaryPanel extends Mixins(KeywordPanel) {
     }
 </script>
