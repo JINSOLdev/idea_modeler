@@ -18,7 +18,7 @@ app.whenReady().then(() => {
     require('path').resolve(__static, 'icon3.png')
   )
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'normal', checked: true, click: ()=>{console.log(`1번 클릭!`)}},
+    {label: 'Close', type: 'normal', checked: true, click: function(){ console.log('close clicked')}},
     {label: 'Item2', type: 'normal', click: ()=>{console.log(`2번 클릭!`)}},
     {label: 'Item3', type: 'normal', click: ()=>{console.log(`3번 클릭!`)}},
     {label: 'Item4', type: 'normal', click: ()=>{console.log(`4번 클릭!`)}},
