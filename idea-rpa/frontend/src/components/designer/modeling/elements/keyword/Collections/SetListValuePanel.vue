@@ -8,18 +8,26 @@
             <v-card-text>
                 <variables-field
                         :label="'List'"
-                        :hint="'List to append to'"
                         :value.sync="value.property.list"
+                        :hint="'List to modify'"
+                        :required="true"
                 ></variables-field>
-
                 <variables-field
-                        :label="'Values'"
-                        :hint="'Values to append'"
-                        :value.sync="value.property.values"
-                        :isMultiple="true"
+                        :label="'Index'"
+                        :value.sync="value.property.index"
+                        :hint="'Index for value'"
+                        :required="true"
                 ></variables-field>
+                <variables-field
+                        :label="'Value'"
+                        :value.sync="value.property.value"
+                        :hint="'New value'"
+                        :required="true"
+                ></variables-field>
+                
             </v-card-text>
         </v-card>
+
     </div>
 </template>
 
@@ -32,6 +40,6 @@
             KeywordPanel,
         }
     })
-    export default class AppendToListPanel extends Mixins(KeywordPanel) {
+    export default class SetListValuePanel extends Mixins(KeywordPanel) {
     }
 </script>

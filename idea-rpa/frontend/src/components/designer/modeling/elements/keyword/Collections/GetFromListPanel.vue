@@ -10,14 +10,12 @@
                         :label="'List'"
                         :hint="'List to get value from'"
                         :value.sync="value.property.list"
-                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Index'"
                         :hint="'Index for value'"
                         :value.sync="value.property.index"
-                        :required="true"
                 ></variables-field>
             </v-card-text>
         </v-card>

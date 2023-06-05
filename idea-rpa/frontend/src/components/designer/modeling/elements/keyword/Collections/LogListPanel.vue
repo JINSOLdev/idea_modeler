@@ -8,25 +8,21 @@
             <v-card-text>
                 <variables-field
                         :label="'List'"
-                        :hint="'List to copy'"
                         :value.sync="value.property.list"
+                        :hint="'List to log'"
+                        :required="true"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.deepCopy"
-                        label="Deepcopy"
-                        hint="Copy nested values"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <variables-field
+                        :label="'Level'"
+                        :hint="'Logging level, e/g `INFO`'"
+                        :value.sync="value.property.level"
+                ></variables-field>
 
-                <v-divider></v-divider>
+                
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -39,6 +35,6 @@
             KeywordPanel,
         }
     })
-    export default class CopyListPanel extends Mixins(KeywordPanel) {
+    export default class LogListPanel extends Mixins(KeywordPanel) {
     }
 </script>

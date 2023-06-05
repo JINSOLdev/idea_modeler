@@ -10,7 +10,6 @@
                         :label="'Item'"
                         :hint="'Item to convert'"
                         :value.sync="value.property.item"
-                        :required="true"
                 ></variables-field>
             </v-card-text>
         </v-card>
