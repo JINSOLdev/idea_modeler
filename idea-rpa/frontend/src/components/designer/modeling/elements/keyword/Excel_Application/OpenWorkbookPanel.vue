@@ -6,15 +6,33 @@
             </v-card-title>
 
             <v-card-text>
-                <path-field
-                        :label="'File name'"
-                        :hint="'Path to file name'"
-                        :value.sync="value.property.file_name"
-                        :required="true"
-                ></path-field>
+                <variables-field
+                        :label="'Filename'"
+                        :hint="'Path to filename'"
+                        :value.sync="value.property.filename"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Tabname'"
+                        :hint="'Name of tab'"
+                        :value.sync="value.property.tabname"
+                ></variables-field>
+
+                <v-switch
+                        v-model="value.property.create_workbook"
+                        label="Create workbook"
+                        hint="Create workbook if does not exist"
+                        persistent-hint
+                        class="py-0 mb-6"
+                ></v-switch>
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -29,9 +47,5 @@
         }
     })
     export default class OpenWorkbookPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Open Excel by filename."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

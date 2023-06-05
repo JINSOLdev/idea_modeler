@@ -6,22 +6,28 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
-                        :label="'Sheet name'"
-                        :hint="'name of Excel sheet'"
-                        :value.sync="value.property.sheet_name"
-                ></variables-field> 
-            </v-card-text>
+                
 
-            <v-card-text>
-                <variables-field 
-                        :label="'Sheet number'"
-                        :hint="'index of Excel sheet'"
-                        :value.sync="value.property.sheet_number"
-                ></variables-field> 
+                <variables-field
+                        :label="'Sheetname'"
+                        :hint="'Name of Excel sheet, defaults to None'"
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Sheetnumber'"
+                        :hint="'Index of Excel sheet, defaults to None'"
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
+
+                
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -36,9 +42,5 @@
         }
     })
     export default class SetActiveWorksheetPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Set active worksheet by either its sheet number or name."
-            this.$emit("setDescription", description)
-        }
     }
 </script>
