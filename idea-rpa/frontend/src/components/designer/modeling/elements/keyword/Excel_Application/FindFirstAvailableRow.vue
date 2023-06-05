@@ -7,11 +7,8 @@
             KeywordElement,
         }
     })
-    export default class ReadFromCells extends Mixins(KeywordElement) {
+    export default class FindFirstAvailableRow extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'Value'
-            }]
         }
     }
 </script>

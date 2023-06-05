@@ -3,12 +3,25 @@
 import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { Menu, Tray } from 'electron'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
+
+let tray : any
+function initTrayIconMenu() {
+  tray = new Tray ('E:/icon.png') 
+  const myMenu = Menu.buildFromTemplate([
+    {label: '1번', type: 'normal', checked: true, click: ()=>{console.log('1번 클릭!')}},
+    {label: '2번', type: 'normal', click: ()=>{console.log('2번 클릭!')}},
+    {label: '3번', type: 'normal', click: ()=>{console.log('3번 클릭!')}},
+  ])
+  tray.setToolTip('트레이 아이콘!')
+  tray.setContextMenu(myMenu)
+}
 
 async function createWindow() {
   // Create the browser window.

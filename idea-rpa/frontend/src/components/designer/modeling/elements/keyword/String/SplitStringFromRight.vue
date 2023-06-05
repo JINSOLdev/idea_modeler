@@ -12,6 +12,10 @@
             this.value.property.returnVal = [{
                 value: 'result'
             }]
+
+            this.value.property.string = "None"
+            this.value.property.max_split = "-1"
+
         }
     }
 </script>

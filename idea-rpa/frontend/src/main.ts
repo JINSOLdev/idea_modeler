@@ -8,7 +8,7 @@ import Keyword from '@/components/designer/modeling/elements/keyword/KeywordElem
 
 import Control from '@/components/designer/modeling/elements/control'
 import BuiltIn from '@/components/designer/modeling/elements/keyword/Built-in'
-import Collection from '@/components/designer/modeling/elements/keyword/Collection'
+import Collections from '@/components/designer/modeling/elements/keyword/Collections'
 import FileSystem from '@/components/designer/modeling/elements/keyword/FileSystem'
 import String from '@/components/designer/modeling/elements/keyword/String'
 import DateTime from '@/components/designer/modeling/elements/keyword/DateTime'
@@ -16,8 +16,8 @@ import Desktop from '@/components/designer/modeling/elements/keyword/Desktop'
 import JSON from '@/components/designer/modeling/elements/keyword/JSON'
 import Browser from '@/components/designer/modeling/elements/keyword/Browser'
 import HTTP from '@/components/designer/modeling/elements/keyword/HTTP'
-import Excel_Files from '@/components/designer/modeling/elements/keyword/Excel_Files'
-import Excel_Applications from '@/components/designer/modeling/elements/keyword/Excel_Applications'
+import ExcelFiles from '@/components/designer/modeling/elements/keyword/Excel_Files'
+import ExcelApplication from '@/components/designer/modeling/elements/keyword/Excel_Application'
 import Tables from '@/components/designer/modeling/elements/keyword/Tables'
 import Windows from '@/components/designer/modeling/elements/keyword/Windows'
 import WorkItems from '@/components/designer/modeling/elements/keyword/WorkItems_ControlRoom'
@@ -34,7 +34,7 @@ Vue.component('keyword-element', Keyword)
 
 Vue.use(Control)
 Vue.use(BuiltIn)
-Vue.use(Collection)
+Vue.use(Collections)
 Vue.use(FileSystem)
 Vue.use(String)
 Vue.use(DateTime)
@@ -42,8 +42,8 @@ Vue.use(Desktop)
 Vue.use(JSON)
 Vue.use(Browser)
 Vue.use(HTTP)
-Vue.use(Excel_Files)
-Vue.use(Excel_Applications)
+Vue.use(ExcelFiles)
+Vue.use(ExcelApplication)
 Vue.use(Tables)
 Vue.use(Windows)
 Vue.use(WorkItems)

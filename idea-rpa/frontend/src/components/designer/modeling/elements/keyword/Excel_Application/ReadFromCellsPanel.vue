@@ -6,29 +6,26 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Worksheet'"
-                        :hint="'Worksheet to handle'"
+                        :hint="'Worksheet to handle, defaults to active worksheet if None'"
                         :value.sync="value.property.worksheet"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Row'"
-                        :hint="'Starting row for search'"
+                        :hint="'Target row, defaults to none'"
                         :value.sync="value.property.row"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
-                <variables-field 
+                <variables-field
                         :label="'Column'"
-                        :hint="'Starting column for search'"
+                        :hint="'Target column, defaults to none'"
                         :value.sync="value.property.column"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
+             
+            </v-card-text>
         </v-card>
 
         <return-values-field
@@ -47,10 +44,6 @@
             KeywordPanel,
         }
     })
-    export default class FindFirstAvailableCellPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Find first available free cell."
-            this.$emit("setDescription", description)
-        }
+    export default class ReadFromCellsPanel extends Mixins(KeywordPanel) {
     }
 </script>

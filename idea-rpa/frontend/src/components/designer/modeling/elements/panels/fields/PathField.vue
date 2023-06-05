@@ -5,7 +5,7 @@
             <div v-if="required" class="mr-1"> required </div>
         </div>
         <v-text-field
-                v-model="newValue"
+                v-model="newValue.defaultValue"
                 :hint="hint"
                 persistent-hint
                 outlined
@@ -34,13 +34,20 @@
         @Prop() public isDir!: boolean
         @Prop() public required!: boolean
 
-        public newValue: any = null
+        public newValue: any = {
+            name: "",
+            valueType: "Path",
+            defaultValue: null,
+            required: this.required ? this.required : false,
+        }
         public rules: any = {
             required: (value: any) => !!value || 'Required.',
         }
 
         mounted() {
-            this.newValue = this.value
+            if (this.value && this.value != null && this.value != undefined) {
+                this.newValue = this.value
+            }
         }
 
         destroyed() {
@@ -65,8 +72,7 @@
             dialog.showOpenDialog({
                 properties
             }).then(result => {
-                
-                me.newValue = result.filePaths.shift()
+                me.newValue.defaultValue = result.filePaths.shift()
             
             }).catch(err => {
                 console.log(err)

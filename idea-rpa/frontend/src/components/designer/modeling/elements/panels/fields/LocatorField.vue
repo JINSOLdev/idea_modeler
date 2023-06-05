@@ -116,15 +116,12 @@
             id: "",
             class: "",
             ref: "",
+            valueType: "Locator"
         }
         editMode: Boolean = false
         openSelectLocator: Boolean = false
         selLocator: any = null
         
-        @Watch('locator')
-        locatorWatch(val: any[]) {
-            console.log(val)
-        }
 
         @Watch('selLocator')
         selectedLocator(val: number) {

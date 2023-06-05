@@ -1,4 +1,3 @@
-import { Variables } from "./Variables";
 
 class Construct{
     protected static tabs = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
@@ -50,7 +49,13 @@ class Task extends Construct{
     public setProperty(value: any) {
     }
 
+    public getKeywords() {
+    }
+
     public delKeyword(value: any) {
+    }
+
+    public getVariables() {
     }
 
 
@@ -128,15 +133,15 @@ class ForTask extends SeqTask{
     public toRobot(tab: number): string{
         const name = this.name.toUpperCase()
 
-        let robot = Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab+1) 
+        let robot = Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab) 
         
         this.property.itemVarName.forEach((item: any) => {
-            robot += `\$\{${item.value}\}` + Construct.tabs.substr(0, tab+1)
+            robot += `\$\{${item.value}\}` + Construct.tabs.substr(0, tab)
         })
-        robot += `IN` + Construct.tabs.substr(0, tab+1) + `\@\{${this.property.iterationVarName}\}`
+        robot += `IN` + Construct.tabs.substr(0, tab) + `\@\{${this.property.iterationVarName}\}`
         
         this.child?.forEach((child: any) => {
-            robot += "\n"+ child.toRobot(tab+1)
+            robot += "\n"+ child.toRobot(tab + 1)
         });
 
         robot += "\n"+Construct.tabs.substr(0, tab)+"END";
@@ -270,7 +275,7 @@ class ReturnTask extends SeqTask{
             keys.forEach((key: string) => {
                 this.property[key].forEach((val: any) => {
                     if (val != "" && val != undefined) {
-                        robot += Construct.tabs.substr(0, tab+1) + `\$\{${val.value}\}`
+                        robot += Construct.tabs.substr(0, tab) + `\$\{${val.value}\}`
                     }
                 })
             })
@@ -327,21 +332,44 @@ class Robot extends SeqTask{
     public variables: Variable[] = [];
     public keywords: Keyword[] = [];
 
+    public getVariables() {
+        return this.variables;
+    }
+
     public setProperty(value: any) {
         if (value.variables) {
             this.variables = value.variables
-
         }
 
         if (value.keywords) {
-            let newKeywords = this.keywords
-            newKeywords = newKeywords.concat(value.keywords)
-            this.keywords = newKeywords
+            this.keywords = this.keywords.concat(value.keywords)
         }
     }
 
+    public getKeywords() {
+        return this.keywords;
+    }
+    
     public delKeyword(value: any) {
         this.keywords = this.keywords.filter((obj: any) => obj.id != value.id)
+    }
+
+    public setLibrary(child: any, tab: number): string {
+        let text = "";
+        
+        child.forEach((item: any) => {
+            if (item.library && item.library != "" && item.library != "User Keyword") {
+                if (!text.includes(item.library)) {
+                    text += "Library" + Construct.tabs.substr(0, tab + 1) + `${item.library}\n`;
+                }
+            }
+
+            if (item.child && item.child.length > 0) {
+                text += this.setLibrary(item.child, tab)
+            }
+        })
+
+        return text
     }
 
 
@@ -349,22 +377,14 @@ class Robot extends SeqTask{
         let robot = "";
 
         if (this.child.length > 0) {
-            robot += "*** Settings ***\n";
-            this.child.forEach((keyword: any) => {
-                if (keyword.library && keyword.library != "") {
-                    if (!robot.includes(keyword.library)) {
-                        robot += "Library" + Construct.tabs.substr(0, tab+1) + `${keyword.library}\n`;
-                    }
-                }
-            });
-            robot+= "\n";
+            robot += "*** Settings ***\n" + this.setLibrary(this.child, tab) + "\n"
         }
         
         if (this.variables.length > 0) {
             robot+= "\n*** Variables ***\n";
         
             this.variables.forEach(
-                variable => robot += variable.toRobot(tab+1)
+                variable => robot += variable.toRobot(tab + 1)
             );
             robot+= "\n";
         }
@@ -380,7 +400,7 @@ class Robot extends SeqTask{
                 robot += keyword.toRobot(tab) + "\n";
 
                 if (keyword.child.length > 0) {
-                    keyword.child.forEach(child => robot += child.toRobot(tab+1) + "\n")
+                    keyword.child.forEach(child => robot += child.toRobot(tab + 1) + "\n")
                 }
             });
         }
@@ -394,14 +414,41 @@ class Robot extends SeqTask{
 
 class Variable extends Construct{
 
-    public constructor(public name: string, public defaultValue: string){
+    public constructor(public name: string, public valueType: string, public defaultValue: any){
         super(name);
+        this.valueType = valueType;
         this.defaultValue = defaultValue;
     }
 
     public toRobot(tab: number): string{
 
-        let robot = "${" + `${this.name}` + "}" + Construct.tabs.substr(0, tab) + `${this.defaultValue}\n`
+        let robot = ""
+
+        if (this.valueType.includes("Scalar")) {
+            robot += `\$\{${this.name}\}` + Construct.tabs.substr(0, tab) + `${this.defaultValue}\n`
+
+        } else if (this.valueType == "List") {
+            robot += `\@\{${this.name}\}`
+            
+            this.defaultValue.forEach((item: any) => {
+                robot += Construct.tabs.substr(0, tab) + `${item.value}`
+            })
+            
+            robot += "\n"
+
+        } else if (this.valueType == "Dictionary") {
+            robot += `\&\{${this.name}\}`
+
+            this.defaultValue.forEach((item: any) => {
+                robot += Construct.tabs.substr(0, tab) + `${item.key}=${item.value}`
+            })
+            
+            robot += "\n"
+        
+        } else if (this.valueType == "Environment") {
+            robot += `\$\{${this.name}\}` + Construct.tabs.substr(0, tab) + `\%\{${this.defaultValue}\}\n`
+        
+        }
 
         return robot; 
     }
@@ -409,7 +456,7 @@ class Variable extends Construct{
 
 class Keyword extends SeqTask {
 
-    public property: any = {}
+    public property: any = new Map()
     public library: string = ""
 
     public setProperty(value: any) {
@@ -418,30 +465,84 @@ class Keyword extends SeqTask {
         }
     }
 
-    public setKeyValue(): boolean {
+    public setKeyValue(key: string, index: number): string {
+        var me = this
+        let text = ""
         let keys = Object.keys(this.property)
-        keys = keys.filter((key: string) => key != 'returnVal')
+        
+        if (index > 0) {
+            var res = false
+            keys.forEach((str: string, idx: number) => {
+                if (idx < index && str != "returnVal") {
+                    if ((!me.property[str] ||
+                            me.property[str] == "" ||
+                            me.property[str] == null || 
+                            me.property[str] == undefined
+                    ) || (
+                        me.property[str] && 
+                        typeof me.property[str] == "object" && (
+                            !me.property[str].defaultValue || 
+                            me.property[str].defaultValue == "" ||
+                            me.property[str].defaultValue == null || 
+                            me.property[str].defaultValue == undefined
+                        )
+                    )) {
+                        res = true
+                    }
+                }
+            })
 
-        let values: any[] = []
-        keys.forEach((key: string) => {
-            values.push(this.property[key])
-        })
+            if (res && this.property[key]) {
 
-        if (values.includes(undefined)) {
-            return true
-        } else {
-            return false
+                if (typeof this.property[key] == "object" && (this.property[key].length > 0 ||
+                    (this.property[key].defaultValue && 
+                    this.property[key].defaultValue != null &&
+                    this.property[key].defaultValue != undefined))
+                ) {
+                    text += `${key}=`
+
+                } else if (typeof this.property[key] == "boolean" || typeof this.property[key] == "string") {
+                    text += `${key}=`
+                }
+            }
         }
+
+        return text
     }
 
-    public checkglobalVar(value: string): string {
-        let vars = new Variables();
-        let globalVars: any[] = vars.getGlobalVariables();
+    public checkType(item: any): string {
+        let text = ""
 
-        if(globalVars.includes(value)) {
-            return `\$\{${value}\}`
+        if (typeof item == "object" && item.valueType) {
+            if (item.valueType == "Scalar") {
+                text = `\$\{${item.name}\}`
+    
+            } else if (item.valueType == "List") {
+                text = `\@\{${item.name}\}`
+                
+            } else if (item.valueType == "Dictionary") {
+                text = `&\{${item.name}\}`
+                
+            } else if (item.valueType == "Environment") {
+                text = `\%\{${item.name}\}`
+                
+            } else {
+                text = `${item.defaultValue}`
+    
+            }
+        } else if (typeof item == "string" || typeof item == "number") {
+            text = `${item}`
+
+        } else if (typeof item == "boolean") {
+            item = String(item).toUpperCase()
+            text = `\$\{${item}\}`
+
+        } else {
+            text = `${item}`
+            
         }
-        return `${value}`
+
+        return text
     }
 
     public toRobot(tab: number): string{
@@ -457,49 +558,49 @@ class Keyword extends SeqTask {
                 robot = ""
 
                 this.property.returnVal.forEach((item: any) => 
-                    robot += Construct.tabs.substr(0, tab+1) + `\$\{${item.value}\}=`
+                    robot += Construct.tabs.substr(0, tab) + `\$\{${item.value}\}=`
                 )
 
-                robot += Construct.tabs.substr(0, tab+1) + `${this.name}`
+                robot += Construct.tabs.substr(0, 1) + `${this.name}`
 
             }
 
             keys.forEach((key: string, index: number) => {
                 if (key != 'returnVal') {
-                    if (key == 'url') {
-                        robot += Construct.tabs.substr(0, tab+1) + `${this.property[key]}`
-                        return
-                    }
-                    if (key == 'locator') {
-                        if (this.property[key].id && this.property[key].id != null) {
-                            robot += Construct.tabs.substr(0, tab+1) + `id:${this.property[key].id}`
-                        } else if (this.property[key].class && this.property[key].class != null) {
-                            robot += Construct.tabs.substr(0, tab+1) + `class:${this.property[key].class}`
-                        } else {
-                            robot += Construct.tabs.substr(0, tab+1) + `${this.property[key].ref}`
-                        }
-                        return
-                    }
-                    if (typeof this.property[key] == 'object' && this.property[key].length > 0) {
+                    if (this.property[key] == null || this.property[key] == undefined) {
+                        return false
                         
+                    } else if (key == 'locator') {
+                        if (this.property[key].defaultValue && this.property[key].defaultValue != "") {
+                            if (this.property[key].valueType != "ref") {
+                                robot += Construct.tabs.substr(0, 1) + 
+                                    `${this.property[key].valueType}:${this.property[key].defaultValue}`
+                            } else {
+                                robot += Construct.tabs.substr(0, 1) + `${this.property[key].defaultValue}`
+                            }
+                        }
+
+                    } else if (typeof this.property[key] == "object" &&
+                            !this.property[key].defaultValue &&
+                            this.property[key].length > 0
+                    ) {
+
                         this.property[key].forEach((val: any) => {
                             if (val != "" && val != undefined) {
                                 if (val.key) {
-                                    robot += Construct.tabs.substr(0, tab+1) + `${val.key}=` + this.checkglobalVar(val.value)
+                                    robot += Construct.tabs.substr(0, 1) + `${val.key}=` + this.checkType(val.value)
                                 } else {
-                                    robot += Construct.tabs.substr(0, tab+1) + this.checkglobalVar(val)
+                                    robot += Construct.tabs.substr(0, 1) + this.checkType(val)
                                 }
                             }
                         })
 
                     } else {
-                        if (this.setKeyValue()) {
-                            if (this.property[key] != ""  && this.property[key] != undefined) {
-                                robot += Construct.tabs.substr(0, tab+1) + `${key}=` + this.checkglobalVar(this.property[key])
-                            }
-                        } else {
-                            robot += Construct.tabs.substr(0, tab+1) + this.checkglobalVar(this.property[key])
+                        var text = this.setKeyValue(key, index) + this.checkType(this.property[key])
+                        if (text && text.length > 0) {
+                            robot += Construct.tabs.substr(0, 1) + text
                         }
+
                     }
                 }
             })
@@ -509,6 +610,7 @@ class Keyword extends SeqTask {
     }
 
 }
+
 
 export {
     Robot, 

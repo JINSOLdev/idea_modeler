@@ -18,7 +18,9 @@
                     <v-combobox
                             v-model="newValue[idx]"
                             :items="varItems"
+                            item-text="name"
                             item-disabled="disabled"
+                            item-value="defaultValue"
                             persistent-hint
                             outlined
                             dense
@@ -42,7 +44,9 @@
             <v-combobox
                     v-model="newValue"
                     :items="varItems"
+                    item-text="name"
                     item-disabled="disabled"
+                    item-value="defaultValue"
                     :hint="hint"
                     persistent-hint
                     outlined
@@ -65,19 +69,49 @@
         @Prop() public hint!: string
         @Prop() public isMultiple!: boolean
         @Prop() public required!: boolean
-
         
         varItems: any[] = []
-        newValue: any = null
+        newValue: any = {
+            name: "",
+            valueType: "Scalar",
+            defaultValue: null
+        }
 
         mounted() {
-            var variables = new Variables()
-            this.varItems = variables.getVarList()
+            var modelCanvas = this.getComponent('ModelCanvas')
+
+            var suiteVariables = modelCanvas.robot.getVariables()
+            if (suiteVariables.length > 0) {
+                this.varItems = [
+                    ...[{ name: 'Suite Variables', disabled: true }],
+                    ...suiteVariables
+                ]
+            }
             
-            if (this.isMultiple && (!this.value || this.value.length < 1)) {
-                this.newValue = [ "" ]
-            } else {
+            var variables = new Variables()
+
+            var taskVariables = variables.getTaskVariables()
+            if (taskVariables.length > 0) {
+                this.varItems = [
+                    ...this.varItems,
+                    ...[{ name: 'Task Variables', disabled: true }],
+                    ...suiteVariables
+                ]
+            }
+
+            var globalVariables = variables.getGlobalVariables()
+            this.varItems = [
+                ...this.varItems,
+                ...[{ name: 'Global Variables', disabled: true }],
+                ...globalVariables
+            ]
+
+            if(this.value) {
                 this.newValue = this.value
+            } else if (this.isMultiple && (!this.value || this.value.length < 1)) {
+                this.newValue = []
+            } else if (!this.isMultiple && !this.value) {
+                this.newValue = null
             }
         }
 
@@ -86,17 +120,43 @@
         }
 
         // Methods
-        updateValue() {
-            if(typeof this.newValue == "object") {
-                this.newValue = this.newValue.value
+        getComponent(componentName: string): any {
+            let component = null
+            let parent = this.$parent
+            while (parent && !component) {
+                if (parent.$options.name === componentName) {
+                    component = parent
+                }
+                parent = parent.$parent
             }
+            return component
+        }
+
+        updateValue() {
+            if (!this.isMultiple) {
+                if (typeof this.newValue == 'string') {
+                    this.newValue =  {
+                        name: this.newValue,
+                        valueType: "String",
+                        defaultValue: this.newValue
+                    }
+                }
+                if (this.required) {
+                    this.newValue.required = true
+                }
+            }
+            
             this.$emit('update:value', this.newValue)
         }
 
         addValue() {
             var lastIdx = this.newValue.length - 1
             if (lastIdx == -1 || (lastIdx >= 0 && this.newValue[lastIdx] != "")) {
-                this.newValue.push("")
+                this.newValue.push({
+                    name: "",
+                    valueType: "Scalar",
+                    defaultValue: null
+                })
             }
         }
 

@@ -6,16 +6,23 @@
             </v-card-title>
 
             <v-card-text>
-                    <v-switch
-                        v-model="value.property.visible"
-                        label="Visible"
-                        hint="Show window after opening"
+                
+
+                <v-switch
+                        v-model="value.property.save_changes"
+                        label="Save changes"
+                        hint="Save changes if exist"
                         persistent-hint
                         class="py-0 mb-6"
                 ></v-switch>
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -29,10 +36,6 @@
             KeywordPanel,
         }
     })
-    export default class OpenApplicationPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Open the Excel application."
-            this.$emit("setDescription", description)
-        }
+    export default class CloseDocumentPanel extends Mixins(KeywordPanel) {
     }
 </script>

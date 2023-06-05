@@ -7,11 +7,8 @@
             KeywordElement,
         }
     })
-    export default class FindFirstAvailableCell extends Mixins(KeywordElement) {
+    export default class AddNewSheet extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'Cell'
-            }]
         }
     }
 </script>

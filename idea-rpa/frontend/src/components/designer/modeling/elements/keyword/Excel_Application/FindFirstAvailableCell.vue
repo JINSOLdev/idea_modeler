@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ExportAsPdf extends Mixins(KeywordElement) {
+    export default class FindFirstAvailableCell extends Mixins(KeywordElement) {
         mounted() {
         }
     }

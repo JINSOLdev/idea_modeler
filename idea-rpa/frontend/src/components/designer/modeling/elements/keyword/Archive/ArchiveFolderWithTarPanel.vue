@@ -23,7 +23,7 @@
                 <switch-field
                         v-model="value.property.recursive"
                         label="Recursive"
-                        hint="'Should subdirectories be included into the archive'"
+                        hint="Should subdirectories be included into the archive"
                         persistent-hint
                         class="py-0"
                 ></switch-field>

@@ -6,15 +6,21 @@
             </v-card-title>
 
             <v-card-text>
-                <path-field
-                        :label="'File name'"
-                        :hint="'Path to file name'"
-                        :value.sync="value.property.file_name"
-                        :required="true"
-                ></path-field>
+                <variables-field
+                        :label="'Macro name'"
+                        :hint="'Macro to run'"
+                        :value.sync="value.property.sheetname"
+                ></variables-field>
+
+               <!-- Path -->
+
+             
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -28,10 +34,6 @@
             KeywordPanel,
         }
     })
-    export default class OpenWorkbookPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Open Excel by filename."
-            this.$emit("setDescription", description)
-        }
+    export default class RunMacroPanel extends Mixins(KeywordPanel) {
     }
 </script>

@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-navigation-drawer
-                absolute
+                fixed
                 permanent
+                style="top: 63px;"
         >
             <v-list-item>
                 <v-list-item-content>
@@ -379,7 +380,8 @@
                 item = { type: Keyword }
                 const keyword = new (item.type)(this.idGlobal++, value.name, value.type)
                 keyword.library = "User Keyword"
-                this.updateKeywords(keyword)
+                this.$emit("updateKeywords", keyword)
+
                 return keyword
             } else {
                 item = this.elementTypes.find((obj: any) => obj.name == value.type)
@@ -391,10 +393,6 @@
                     return newEl
                 }
             }
-        }
-
-        updateKeywords(value: any) {
-            this.$emit('updateKeywords', value)
         }
 
     }
