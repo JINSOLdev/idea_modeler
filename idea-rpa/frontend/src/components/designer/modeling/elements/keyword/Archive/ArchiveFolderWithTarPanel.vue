@@ -20,13 +20,13 @@
                         :required ="true"
                 ></variables-field>
 
-                <v-switch
+                <switch-field
                         v-model="value.property.recursive"
                         label="Recursive"
                         hint="'Should subdirectories be included into the archive'"
                         persistent-hint
                         class="py-0"
-                ></v-switch>
+                ></switch-field>
             </v-card-text>
 
             <v-card-text>
