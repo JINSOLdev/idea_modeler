@@ -7,9 +7,11 @@
             KeywordElement,
         }
     })
-    export default class AddToJSON extends Mixins(KeywordElement) {
+    export default class GetValuesFromJSON extends Mixins(KeywordElement) {
         mounted() {
-            
+            this.value.property.returnVal = [{
+                value: 'values'
+            }]
         }
     }
 </script>
