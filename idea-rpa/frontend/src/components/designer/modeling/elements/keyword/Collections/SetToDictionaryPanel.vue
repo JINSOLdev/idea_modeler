@@ -8,25 +8,25 @@
             <v-card-text>
                 <variables-field
                         :label="'Dictionary'"
-                        :hint="'Dictionary to get items from'"
                         :value.sync="value.property.dictionary"
+                        :hint="'Dictionary to modify'"
+                        :required="true"
                 ></variables-field>
-
-                <v-switch
-                        v-model="value.property.sortKeys"
-                        label="Sort Keys"
-                        hint="Sort output by keys"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <v-divider></v-divider>
+                <variables-field
+                        :label="'Items'"
+                        :value.sync="value.property.items"
+                        :hint="'Name'"
+                ></variables-field>
+                <variables-field
+                        :label="'Value'"
+                        :value.sync="value.property.value"
+                        :hint="'New value'"
+                        :required="true"
+                ></variables-field>
+                
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
 </template>
 
@@ -39,6 +39,6 @@
             KeywordPanel,
         }
     })
-    export default class GetDictionaryItemsPanel extends Mixins(KeywordPanel) {
+    export default class SetToDictionaryPanel extends Mixins(KeywordPanel) {
     }
 </script>

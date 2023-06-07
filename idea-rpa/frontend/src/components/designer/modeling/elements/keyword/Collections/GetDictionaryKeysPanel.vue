@@ -10,7 +10,6 @@
                         :label="'Dictionary'"
                         :hint="'Dictionary to get items from'"
                         :value.sync="value.property.dictionary"
-                        :required="true"
                 ></variables-field>
 
                 <v-switch

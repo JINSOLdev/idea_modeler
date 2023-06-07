@@ -5,23 +5,27 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { Menu, Tray } from 'electron'
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const path = require('path')
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-let tray : any
-function initTrayIconMenu() {
-  tray = new Tray ('E:/icon.png') 
-  const myMenu = Menu.buildFromTemplate([
-    {label: '1번', type: 'normal', checked: true, click: ()=>{console.log('1번 클릭!')}},
-    {label: '2번', type: 'normal', click: ()=>{console.log('2번 클릭!')}},
-    {label: '3번', type: 'normal', click: ()=>{console.log('3번 클릭!')}},
+let tray : any = null
+app.whenReady().then(() => {
+  tray = new Tray(
+    require('path').resolve(__static, 'icon3.png')
+  )
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Close', type: 'normal', checked: true, click: function(){ console.log('close clicked')}},
+    {label: 'Item2', type: 'normal', click: ()=>{console.log(`2번 클릭!`)}},
+    {label: 'Item3', type: 'normal', click: ()=>{console.log(`3번 클릭!`)}},
+    {label: 'Item4', type: 'normal', click: ()=>{console.log(`4번 클릭!`)}},
   ])
-  tray.setToolTip('트레이 아이콘!')
-  tray.setContextMenu(myMenu)
-}
+  tray.setToolTip('idea-rpa')
+  tray.setContextMenu(contextMenu)
+})
 
 async function createWindow() {
   // Create the browser window.

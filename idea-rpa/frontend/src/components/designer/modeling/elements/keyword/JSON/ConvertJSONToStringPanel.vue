@@ -4,20 +4,26 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            
+
             <v-card-text>
-                <variables-field
-                        :label="'Item'"
-                        :hint="'Item to convert'"
-                        :value.sync="value.property.item"
-                ></variables-field>
-            </v-card-text>
-        </v-card>
+                    <variables-field
+                            :label="'Doc'"
+                            :hint="'JSON-compatible object'"
+                            :value.sync="value.property.doc"
+                            :required="true"
+                    ></variables-field>
+                      
+                </v-card-text>
+         </v-card>
+
 
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
+
+      
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -29,6 +35,6 @@
             KeywordPanel,
         }
     })
-    export default class ConvertToDictionaryPanel extends Mixins(KeywordPanel) {
+    export default class ConvertJSONToStringPanel extends Mixins(KeywordPanel) {
     }
 </script>

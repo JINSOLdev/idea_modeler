@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class AddToJSON extends Mixins(KeywordElement) {
+    export default class GetSliceFromList extends Mixins(KeywordElement) {
         mounted() {
             
         }

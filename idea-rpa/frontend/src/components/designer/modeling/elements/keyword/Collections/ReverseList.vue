@@ -7,9 +7,10 @@
             KeywordElement,
         }
     })
-    export default class AddToJSON extends Mixins(KeywordElement) {
+    export default class ReverseList extends Mixins(KeywordElement) {
         mounted() {
             
         }
     }
+    
 </script>

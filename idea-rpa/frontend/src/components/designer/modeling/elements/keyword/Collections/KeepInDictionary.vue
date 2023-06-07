@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class AddToJSON extends Mixins(KeywordElement) {
+    export default class KeepInDictionary extends Mixins(KeywordElement) {
         mounted() {
             
         }

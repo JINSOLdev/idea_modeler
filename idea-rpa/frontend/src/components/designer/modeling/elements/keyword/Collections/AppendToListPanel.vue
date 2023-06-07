@@ -10,7 +10,6 @@
                         :label="'List'"
                         :hint="'List to append to'"
                         :value.sync="value.property.list"
-                        :required="true"
                 ></variables-field>
 
                 <variables-field

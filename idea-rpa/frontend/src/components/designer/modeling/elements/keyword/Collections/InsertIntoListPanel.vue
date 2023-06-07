@@ -4,36 +4,34 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-
+            
             <v-card-text>
                 <variables-field
-                        :label="'Doc'"
-                        :hint="'JSON-compatible object'"
-                        :value.sync="value.property.doc"
+                        :label="'List'"
+                        :value.sync="value.property.list"
+                        :hint="'List to insert into'"
                         :required="true"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Expr'"
-                        :hint="'JSONPath expression'"
-                        :value.sync="value.property.expr"
+                        :label="'Index'"
+                        :hint="'Index for insert position'"
+                        :value.sync="value.property.index"
                         :required="true"
+
                 ></variables-field>
 
                 <variables-field
                         :label="'Value'"
-                        :hint="'Value to add or update'"
+                        :hint="'Value to insert'"
                         :value.sync="value.property.value"
                         :required="true"
+
                 ></variables-field>
-
             </v-card-text>
-
         </v-card>
 
-       
     </div>
-    
 </template>
 
 <script lang="ts">
@@ -45,6 +43,6 @@
             KeywordPanel,
         }
     })
-    export default class AddToJSONPanel extends Mixins(KeywordPanel) {
+    export default class InsertIntoListPanel extends Mixins(KeywordPanel) {
     }
 </script>
