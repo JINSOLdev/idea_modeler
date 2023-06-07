@@ -6,27 +6,23 @@
             </v-card-title>
 
             <v-card-text>
-<!--locator-->
                 <variables-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                     ></variables-field> 
 
-                <Variables-field
+                <variables-field
                         :label="'Expected'"
                         :hint="'Expected value'"
                         :value.sync="value.property.expected"
-                ></Variables-field>
+                ></variables-field>
 
-                <v-switch
-                        v-model="value.property.ignore"
-                        label="Ignore"
-                        hint="Do case-insensitive comparison"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
+                <switch-field
+                        :label="'Ignore'"
+                        :hint="'Do case-insensitive comparison'"
+                        :value.sync="value.property.ignore_case"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

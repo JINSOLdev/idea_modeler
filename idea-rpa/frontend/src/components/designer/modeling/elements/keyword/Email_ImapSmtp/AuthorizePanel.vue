@@ -21,41 +21,37 @@
                 <variables-field
                         :label="'Smtp Server'"
                         :hint="'SMTP sercer address'"
-                        :value.sync="value.property.smtpserver"
+                        :value.sync="value.property.smtpServer"
                 ></variables-field>
 
                 <variables-field
                         :label="'Imap Server'"
                         :hint="'IMAP sercer address'"
-                        :value.sync="value.property.imapserver"
+                        :value.sync="value.property.imapServer"
                 ></variables-field>
 
                 <variables-field
                         :label="'Smtp Port'"
                         :hint="'SMTP server port, defaults to 587'"
-                        :value.sync="value.property.smtpport"
+                        :value.sync="value.property.smtpPort"
                 ></variables-field>
 
                 <variables-field
                         :label="'Imap Port'"
                         :hint="'IMAP server port, defaults to 993'"
-                        :value.sync="value.property.imapport"
+                        :value.sync="value.property.imapPort"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.isoauth"
-                        label="is Oauth"
-                        hint="use XOAUTH2 protocol with a base64 encoded OAuth2 string as password"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
+                <switch-field
+                        :label="'is Oauth'"
+                        :hint="'use XOAUTH2 protocol with a base64 encoded OAuth2 string as password'"
+                        :value.sync="value.property.isOauth"
+                ></switch-field>
             </v-card-text>
             
-        <return-values-field
-                :value.sync="value.property.token"
-        ></return-values-field>
-
+            <return-values-field
+                    :value.sync="value.property.token"
+            ></return-values-field>
         </v-card>
     </div>
 </template>

@@ -12,27 +12,20 @@
                         :value.sync="value.property.width"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Height'"
                         :hint="'Height of browser window'"
                         :value.sync="value.property.height"
                         :required="true"
                 ></variables-field>
+                
+                <switch-field
+                        :label="'Inner'"
+                        :hint="'Resize browsers inner width/height'"
+                        :value.sync="value.property.inner"
+                ></switch-field>
             </v-card-text>
-
-            <v-card-text>
-                <v-switch
-                        v-model="value.property.inner"
-                        label="Inne'"
-                        hint="'Resize browsers inner width/height'"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
-            </v-card-text>
-
         </v-card>
     </div>
 </template>

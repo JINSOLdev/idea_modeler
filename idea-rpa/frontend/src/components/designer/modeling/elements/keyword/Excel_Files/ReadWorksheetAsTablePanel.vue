@@ -11,29 +11,19 @@
                         :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.header"
-                        label="Header"
-                        hint="Use first row as header"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
+                <switch-field
+                        :label="'Header'"
+                        :hint="'Use first row as header'"
+                        :value.sync="value.property.header"
+                ></switch-field>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.trim"
-                        label="Trim"
-                        hint="Remove empty rows from end"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
+                <switch-field
+                        :value.sync="value.property.trim"
+                        :label="'Trim'"
+                        :hint="'Remove empty rows from end'"
+                ></switch-field>
+                
                 <variables-field
                         :label="'Start'"
                         :hint="'Start row index'"
@@ -45,8 +35,7 @@
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

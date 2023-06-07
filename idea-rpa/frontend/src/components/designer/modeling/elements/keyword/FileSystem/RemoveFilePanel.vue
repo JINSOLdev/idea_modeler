@@ -12,20 +12,13 @@
                         :value.sync="value.property.path"
                 ></path-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Missing Ok"
-                        hint="Ignore non-existent file"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
-
-
+                <switch-field
+                        :value.sync="value.property.missing_ok"
+                        :label="'Missing Ok'"
+                        :hint="'Ignore non-existent file'"
+                ></switch-field>
             </v-card-text>
         </v-card>
-
-  
-
     </div>    
 </template>
 

@@ -4,34 +4,27 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>     
-                <!--locator-->
                 <locator-field 
-                        :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :required="true"
-                    ></locator-field> 
+                ></locator-field> 
 
                 <variables-field 
                         :label="'Password'"
                         :hint="'Password value'"
                         :value.sync="value.property.password"
                         :required="true"
-                    ></variables-field> 
+                ></variables-field> 
 
-                    <v-switch
-                        v-model="value.property.clear"
-                        label="Clear"
-                        hint="Cleaar input before text is typed"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-
+                <switch-field
+                        :label="'Clear'"
+                        :hint="'Cleaar input before text is typed'"
+                        :value.sync="value.property.clear"
+                ></switch-field>
             </v-card-text>
         </v-card> 
-
     </div>
 </template>
 

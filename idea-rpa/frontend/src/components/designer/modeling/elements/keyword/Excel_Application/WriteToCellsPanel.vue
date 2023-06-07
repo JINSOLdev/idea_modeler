@@ -6,7 +6,6 @@
             </v-card-title>
 
             <v-card-text>
-               
                 <variables-field
                         :label="'Worksheet'"
                         :hint="'Worksheet to handle, defaults to active worksheet if None'"
@@ -18,11 +17,13 @@
                         :hint="'Target row, defaults to none'"
                         :value.sync="value.property.row"
                 ></variables-field>
+                
                 <variables-field
                         :label="'Column'"
                         :hint="'Target column, defaults to none'"
                         :value.sync="value.property.column"
                 ></variables-field>
+
                 <variables-field
                         :label="'Value'"
                         :hint="'Possible value to set, defaults to None'"
@@ -41,17 +42,11 @@
                         :value.sync="value.property.formula"
                 ></variables-field>
 
-
-
-                <v-switch
-                        v-model="value.property.create_workbook"
-                        label="Create workbook"
-                        hint="Create workbook if does not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                <switch-field
+                        :value.sync="value.property.create_workbook"
+                        :label="'Create workbook'"
+                        :hint="'Create workbook if does not exist'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

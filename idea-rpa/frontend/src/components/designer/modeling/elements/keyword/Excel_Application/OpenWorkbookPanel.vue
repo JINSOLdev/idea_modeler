@@ -18,15 +18,11 @@
                         :value.sync="value.property.tabname"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.create_workbook"
-                        label="Create workbook"
-                        hint="Create workbook if does not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                <switch-field
+                        :value.sync="value.property.create_workbook"
+                        :label="'Create workbook'"
+                        :hint="'Create workbook if does not exist'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

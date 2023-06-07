@@ -12,30 +12,22 @@
                         :value.sync="value.property.start_cell"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Values'"
                         :hint="'List of lists or a table'"
                         :value.sync="value.property.values"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
-    
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.table_heading"
-                        label="Table Heading"
-                        hint="If values are given as a table, this parameter defines if Table headings should be inserted as a row"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+
+                <switch-field
+                        :value.sync="value.property.table_heading"
+                        :label="'Table Heading'"
+                        :hint="'If values are given as a table, this parameter defines if Table headings should be inserted as a row'"
+                ></switch-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

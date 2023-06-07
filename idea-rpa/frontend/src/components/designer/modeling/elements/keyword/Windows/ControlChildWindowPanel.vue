@@ -1,6 +1,3 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
@@ -10,24 +7,16 @@
 
             <v-card-text>
                 <locator-field
-                    :label="'Locator'"                
                     :value.sync="value.property.locator"
                     :hint="'Locator for window to control'"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
-                <v-switch
-                        v-model="value.property.secure"
-                        label="Secure"
-                        color="success"
-                        hint="Bring window to foreground"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
+                <switch-field
+                        :label="'Secure'"
+                        :hint="'Bring window to foreground'"
+                        :value.sync="value.property.secure"
+                ></switch-field>
+                
                 <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
@@ -52,9 +41,5 @@
         }
     })
     export default class ContorlChildWindowPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Get control of child window of the active window by locator."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

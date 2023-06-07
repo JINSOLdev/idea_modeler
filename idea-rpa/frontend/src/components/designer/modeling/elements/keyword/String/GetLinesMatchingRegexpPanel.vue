@@ -20,13 +20,11 @@
                         :required="true"
                 ></variables-field>
 
-                <v-switch
+                <switch-field
                         v-model="value.property.partial_match"
-                        label="Partial Match"
-                        hint="Allow partial match"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                        :label="'Partial Match'"
+                        :hint="'Allow partial match'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

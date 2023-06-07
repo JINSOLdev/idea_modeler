@@ -6,22 +6,18 @@
             </v-card-title>
 
             <v-card-text>
-                <Path-field
+                <path-field
                         :label="'Path'"
                         :hint="'Path to Excel file'"
                         :value.sync="value.property.path"
                         :required="true"
-                ></Path-field>
-            </v-card-text>
+                ></path-field>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.data_only"
-                        label="Data Only"
-                        hint="Return calculated values instead of formulas (.xlsx only)"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.data_only"
+                        label="'Data Only'"
+                        hint="'Return calculated values instead of formulas (.xlsx only)'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

@@ -3,7 +3,7 @@
         <v-navigation-drawer
                 fixed
                 permanent
-                style="top: 63px;"
+                style="top: 63px; bottom: 0px; padding-bottom: 63px;"
         >
             <v-list-item>
                 <v-list-item-content>

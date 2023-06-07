@@ -4,25 +4,21 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>  
-                    
                 <variables-field 
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
-                    ></variables-field> 
+                ></variables-field> 
 
                 <variables-field 
                         :label="'Action'"
                         :hint="'How to handle alert, i.e. ACCEPT,DISMISS, or LEAVE'"
                         :value.sync="value.property.action"
                 ></variables-field> 
-
-
-
             </v-card-text>
         </v-card> 
-
     </div>
 </template>
 

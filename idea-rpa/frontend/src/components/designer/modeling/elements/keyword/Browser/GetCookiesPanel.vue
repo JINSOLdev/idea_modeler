@@ -6,17 +6,14 @@
             </v-card-title>
 
             <v-card-text>
-
-                <v-switch
-                        v-model="value.property.as_dict"
-                        label="As Dict"
-                        hint="Return cookies as dictionary instead of string"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'As Dict'"
+                        :hint="'Return cookies as dictionary instead of string'"
+                        :value.sync="value.property.as_dict"
+                ></switch-field>
             </v-card-text>
-
         </v-card>
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>

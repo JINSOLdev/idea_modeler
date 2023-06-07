@@ -24,20 +24,13 @@
                         :value.sync="value.property.encoding"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Overwrite"
-                        hint="Replace existing file"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
-                
-
-
-               
+                <switch-field
+                        :valur.sync="value.property.overwrite"
+                        :label="'Overwrite'"
+                        :hint="'Replace existing file'"
+                ></switch-field>
             </v-card-text>
         </v-card>
-
     </div>    
 </template>
 

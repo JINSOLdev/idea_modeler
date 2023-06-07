@@ -4,33 +4,27 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            <v-card-text>                      
-<!--locator-->
-                    <locator-field 
-                        :label="'Locator'"
+
+            <v-card-text>
+                <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :required="true"
-                    ></locator-field>
+                ></locator-field>
 
-                    <variables-field
+                <variables-field
                         :label="'Expected'"
                         :hint="'Expected value'"
                         :value.sync="value.property.expected"
                         :required="true"
-                    ></variables-field>
+                ></variables-field>
 
-                    <v-switch
-                        v-model="value.property.ignore_case"
-                        label="Ignore Case"
-                        hint="Do case-insensitive comparison"
-                        persistent-hint
-                        class="py-0 mb-6"
-                    ></v-switch>
-
+                <switch-field
+                        :label="'Ignore Case'"
+                        :hint="'Do case-insensitive comparison'"
+                        :value.sync="value.property.ignore_case"
+                ></switch-field>
             </v-card-text>
-        </v-card> 
-
+        </v-card>
     </div>
 </template>
 

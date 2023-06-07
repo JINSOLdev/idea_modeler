@@ -10,14 +10,9 @@
             
             <v-card-text>
                 <locator-field
-                        :label="'Locator'"
-                        :hint="'Locator for element to click'"
-                        :value.sync="value.property.locator"
-                        :required="true"
+                    :value.sync="value.property.locator"
                 ></locator-field>
-            </v-card-text>
-
-            <v-card-text>    
+                
                 <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
@@ -42,9 +37,5 @@
         }
     })
     export default class DoubleClickPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Double mouse click on element matching given locator."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

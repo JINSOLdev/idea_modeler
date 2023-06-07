@@ -7,11 +7,8 @@
             KeywordElement,
         }
     })
-    export default class ReplaceString extends Mixins(KeywordElement) {
+    export default class Select extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'result'
-            }]
         }
     }
 </script>

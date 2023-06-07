@@ -6,37 +6,28 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
-                        :label="'Locator'"
+                <locator-field
                         :hint="'Locator'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
-            </v-card-text>
-
-            <v-card-text>
+                ></locator-field>
+                
                 <variables-field 
                         :label="'Keys'"
                         :hint="'Keys to send'"
                         :value.sync="value.property.keys"
                 ></variables-field> 
-            </v-card-text>
-
-            <v-card-text>
+                
                 <variables-field 
                         :label="'Interval'"
                         :hint="'Time to wait between keys (in seconds)'"
                         :value.sync="value.property.interval"
                 ></variables-field> 
-            </v-card-text>
-
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.send_enter"
-                        label="Send Enter"
-                        hint="Send Enter key after given keys"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                
+                <switch-field
+                        :value.sync="value.property.send_enter"
+                        :label="'Send Enter'"
+                        :hint="'Send Enter key after given keys'"
+                ></switch-field>
             </v-card-text>
         </v-card>
         

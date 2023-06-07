@@ -9,37 +9,29 @@
             </v-card-title>
             
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for elements'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
-            </v-card-text>
-
-            <v-card-text>
-                <Locator-field
+                ></locator-field>
+                
+                <locator-field
                         :label="'Root Element'"
                         :hint="'Locator will be used as search root element object if provided'"
                         :value.sync="value.property.root_element"
-                ></Locator-field>
-            </v-card-text>
-
-            <v-card-text>
+                ></locator-field>
+                
                 <variables-field 
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"
                         :value.sync="value.property.timeout"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.sibling_only"  
-                        label="Siblings Only"
-                        hint="Filter for elements on the same level as the initially found one"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.sibling_only"  
+                        :label="'Siblings Only'"
+                        :hint="'Filter for elements on the same level as the initially found one'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

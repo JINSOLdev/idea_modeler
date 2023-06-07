@@ -4,25 +4,20 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            <v-card-text>                      
-<!--locator-->
-                    <locator-field 
-                        :label="'Locator'"
+
+            <v-card-text>
+                <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></locator-field>
+                ></locator-field>
 
-                    <v-switch
-                        v-model="value.property.missing_ok"
-                        label="Missing Ok"
-                        hint="Allow element to not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                    ></v-switch>
-
+                <switch-field
+                        :label="'Missing Ok'"
+                        :hint="'Allow element to not exist'"
+                        :value.sync="value.property.missing_ok"
+                ></switch-field>
             </v-card-text>
         </v-card> 
-
     </div>
 </template>
 

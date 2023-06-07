@@ -6,12 +6,11 @@
             </v-card-title>
             
             <v-card-text>
-                <v-switch
-                    v-model="value.property.NoDecoration"
-                    label="No Decoration"
-                    messages="Hide Robot Framework variable syntax"
-                    class="py-0"
-                ></v-switch>
+                <switch-field
+                        :label="'No Decoration'"
+                        :hint="'Hide Robot Framework variable syntax'"
+                        :value.sync="value.property.noDecoration"
+                ></switch-field>
             </v-card-text>                   
         </v-card>
         
