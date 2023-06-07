@@ -15,29 +15,25 @@
                 <path-field
                         :label="'Target Folder'"
                         :hint="'Folder for saving attachment to (needs to exist), defaults to users home directory if None'"
-                        :value.sync="path.property.targetfolder"
+                        :value.sync="value.property.targetFolder"
                 ></path-field>
 
-                <v-switch
-                        v-model="value.property.Overwrite"
-                        label="Overwrite"
-                        hint="Overwrite existing file if True, defaults to False"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Overwrite'"
+                        :hint="'Overwrite existing file if True, defaults to False'"
+                        :value.sync="value.property.overwrite"
+                ></switch-field>
 
                 <variables-field
                         :label="'Prefix'"
                         :hint="'Optional filename prefix added to the attachments, empty by default'"
-                        :value.sync="value.property.Token"
+                        :value.sync="value.property.token"
                 ></variables-field>
-
             </v-card-text>
             
-        <return-values-field
-                :value.sync="value.property.attachments"
-        ></return-values-field>
-
+            <return-values-field
+                    :value.sync="value.property.attachments"
+            ></return-values-field>
         </v-card>
     </div>
 </template>

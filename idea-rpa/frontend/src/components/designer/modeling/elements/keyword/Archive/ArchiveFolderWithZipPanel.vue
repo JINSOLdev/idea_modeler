@@ -21,11 +21,9 @@
                 ></variables-field>
 
                 <switch-field
-                        v-model="value.property.recursive"
-                        label="Recursive"
-                        hint="Should subdirectories be included into the archive"
-                        persistent-hint
-                        class="py-0"
+                        :label="'Recursive'"
+                        :hint="'Should subdirectories be included into the archive'"
+                        :value.sync="value.property.recursive"
                 ></switch-field>
             </v-card-text>
 
@@ -33,13 +31,13 @@
                 <variables-field
                         :label="'Include'"
                         :hint="'The file pattern to include in the archive, uses Unix shell style. Default is to include all files'"
-                        :value.sync="value.property.archive_name"
+                        :value.sync="value.property.include"
                 ></variables-field>
 
                 <variables-field
                         :label="'Exclude'"
                         :hint="'The file pattern to exclude in the archive, uses Unix shell style. Default is to exclude all files'"
-                        :value.sync="value.property.archive_name"
+                        :value.sync="value.property.exclude"
                 ></variables-field>
 
                 <variables-field

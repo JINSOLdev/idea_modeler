@@ -11,12 +11,12 @@
                         :hint="'Name of library'"
                         :value.sync="value.property.name"
                 ></variables-field>
-                <v-switch
-                    v-model="value.property.All"
-                    label="All"
-                    messages="Return all library names and instances"
-                    class="py-0"
-                ></v-switch>
+
+                <switch-field
+                        :label="'All'"
+                        :hint="'Return all library names and instances'"
+                        :value.sync="value.property.all"
+                ></switch-field>
             </v-card-text>                   
         </v-card>
         

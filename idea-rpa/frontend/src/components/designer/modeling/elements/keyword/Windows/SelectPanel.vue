@@ -4,25 +4,25 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>
-<!--locator-->
-                    <locator-field 
+                <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element'"
+                        :hint="'Locator for element to control'"
                         :value.sync="value.property.locator"
                         :required="true"
-                    ></locator-field> 
-
-                    <variables-field
-                        :label="'Expected'"
-                        :hint="'Expected value'"
-                        :value.sync="value.property.expected"
-                        :required="true"
-                ></variables-field>
-
-
+                ></Locator-field>
             </v-card-text>
-        </v-card> 
+
+            <v-card-text>
+                <variables-field 
+                        :label="'Value'"
+                        :hint="'Value to select'"
+                        :value.sync="value.property.value"
+                        :required="true"
+                ></variables-field> 
+            </v-card-text>
+        </v-card>
 
     </div>
 </template>
@@ -36,9 +36,9 @@
             KeywordPanel,
         }
     })
-    export default class IsTextfieldValuePanel extends Mixins(KeywordPanel) {
+    export default class SelectPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Is textarea matching expected value"
+            var description = "Select value on Control element if action is supported."
             this.$emit("setDescription", description)
         }
     }

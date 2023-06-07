@@ -12,22 +12,17 @@
                         :value.sync="value.property.url"
                 ></variables-field>
                 
-                <v-switch
-                v-model="value.property.headless"
-                label="Headless"
-                hint="'Do not open a visible window'"
-                persistent-hint
-                class="py-0"
-                ></v-switch>
+                <switch-field
+                        :label="'Headless'"
+                        :hint="'Do not open a visible window'"
+                        :value.sync="value.property.headless"
+                ></switch-field>
 
-                <v-switch
-                v-model="value.property.maximized"
-                label="Maximized"
-                hint="'Maximize the browser window'"
-                persistent-hint
-                class="py-0"
-                ></v-switch>
-                
+                <switch-field
+                        :label="'Maximized'"
+                        :hint="'Maximize the browser window'"
+                        :value.sync="value.property.maximized"
+                ></switch-field>
             </v-card-text>
         </v-card>
         

@@ -4,7 +4,7 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            <v-card-text>                      
+            <v-card-text>
                     <variables-field 
                         :label="'Group Name'"
                         :hint="'radio button group name'"

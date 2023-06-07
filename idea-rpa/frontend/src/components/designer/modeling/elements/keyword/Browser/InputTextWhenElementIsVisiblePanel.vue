@@ -4,27 +4,23 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text> 
-                
-                <!--locator-->
                 <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                    ></locator-field> 
+                ></locator-field> 
                     
                 <variables-field 
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
                         :required="true"
-                    ></variables-field> 
-
-
+                ></variables-field> 
             </v-card-text>
         </v-card> 
-
     </div>
 </template>
 

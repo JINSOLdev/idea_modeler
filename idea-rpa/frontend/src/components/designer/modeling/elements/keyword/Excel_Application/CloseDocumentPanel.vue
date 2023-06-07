@@ -6,17 +6,11 @@
             </v-card-title>
 
             <v-card-text>
-                
-
-                <v-switch
-                        v-model="value.property.save_changes"
-                        label="Save changes"
-                        hint="Save changes if exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                <switch-field
+                        :value.sync="value.property.save_changes"
+                        :label="'Save changes'"
+                        :hint="'Save changes if exist'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

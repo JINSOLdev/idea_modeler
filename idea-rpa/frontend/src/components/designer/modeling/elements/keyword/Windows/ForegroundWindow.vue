@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ForegroundWindow extends Mixins(KeywordElement) {
+    export default class DoubleClick extends Mixins(KeywordElement) {
         mounted() {
         }
     }

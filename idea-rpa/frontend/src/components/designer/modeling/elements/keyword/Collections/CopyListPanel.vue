@@ -12,15 +12,11 @@
                         :value.sync="value.property.list"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.deepCopy"
-                        label="Deepcopy"
-                        hint="Copy nested values"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <v-divider></v-divider>
+                <switch-field
+                        :label="'Deepcopy'"
+                        :hint="'Copy nested values'"
+                        :value.sync="value.property.deepCopy"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

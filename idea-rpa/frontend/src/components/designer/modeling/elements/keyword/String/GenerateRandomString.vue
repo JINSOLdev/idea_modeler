@@ -12,9 +12,6 @@
             this.value.property.returnVal = [{
                 value: 'result'
             }]
-
-            this.value.property.length = '8'
-            this.value.property.chars = '[LETTERS][NUMBERS]'
         }
     }
 </script>

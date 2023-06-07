@@ -6,19 +6,16 @@
             </v-card-title>
 
             <v-card-text>
-                <v-switch
-                        v-model="value.property.inner"
-                        label="Inner"
-                        hint="Return browser's inner width/height"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
+                <switch-field
+                        :label="'Inner'"
+                        :hint="'Return browser\'\s inner width/height'"
+                        :value.sync="value.property.inner"
+                ></switch-field>
             </v-card-text>
-
         </v-card>
+
         <return-values-field
-                :value.sync="value.property.size"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
 </template>

@@ -20,13 +20,11 @@
                         :required="true"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.case_insensitive"
-                        label="Case Insensitive"
-                        hint="Ignores case when searching"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Case Insensitive'"
+                        :hint="'Ignore case when searching'"
+                        :value.sync="value.property.case_insensitive"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

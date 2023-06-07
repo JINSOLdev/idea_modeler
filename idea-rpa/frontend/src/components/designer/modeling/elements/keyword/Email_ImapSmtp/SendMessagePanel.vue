@@ -8,14 +8,16 @@
             <v-card-text>
                 <variables-field
                         :label="'Sender'"
-                        :hint="'Who is sending, i.e. "from"'"
+                        :hint="'Who is sending, i.e. \'from\''"
                         :value.sync="value.property.sender"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Recipents'"
                         :hint="'Who is receiving, ie. \'to\' (either as comma-separated or as list object) '"
                         :value.sync="value.property.recipients"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
@@ -36,13 +38,11 @@
                         :value.sync="value.property.attachments"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.html"
-                        label="Html"
-                        hint="if the message\'s content is in HTML format'"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Html'"
+                        :hint="'if the message\'s content is in HTML format'"
+                        :value.sync="value.property.html"
+                ></switch-field>
 
                 <variables-field
                         :label="'Images'"
@@ -51,13 +51,13 @@
                 ></variables-field>
 
                 <variables-field
-                        :label="'CC'"
+                        :label="'Cc'"
                         :hint="'List of email addresses for the email\'s \'CC\' field (either as comma-separated or as list object)'"
                         :value.sync="value.property.cc"
                 ></variables-field>
 
                 <variables-field
-                        :label="'BCC'"
+                        :label="'Bcc'"
                         :hint="'List of email addresses for the email\'s \'BCC\' field (either as comma-separated or as list object)'"
                         :value.sync="value.property.bcc"
                 ></variables-field>
@@ -65,11 +65,9 @@
                 <variables-field
                         :label="'Attachment Position'"
                         :hint="'Content position for attachment, default is Top'"
-                        :value.sync="value.property.attachmentposition"
+                        :value.sync="value.property.attachmentPosition"
                 ></variables-field>
-
             </v-card-text>
-
         </v-card>
     </div>
 </template>

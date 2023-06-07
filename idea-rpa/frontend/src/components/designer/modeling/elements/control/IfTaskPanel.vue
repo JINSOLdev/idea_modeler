@@ -125,13 +125,13 @@
                 this.value.property.conditions.push({
                     type: 'Else If',
                     variable: '',
-                    keywords: []
+                    child: []
                 })
             } else if (type == 'Else') {
                 if (!this.hasElse) {
                     this.value.property.conditions.push({
                         type: 'Else',
-                        keywords: []
+                        child: []
                     })
                 } else {
                     this.value.property.conditions = this.value.property.conditions.filter((item: any) => item.type != 'Else')

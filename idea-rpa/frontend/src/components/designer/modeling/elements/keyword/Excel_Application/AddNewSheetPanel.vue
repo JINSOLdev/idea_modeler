@@ -7,34 +7,29 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Sheetname'"
+                        :label="'Sheet'"
                         :hint="'Name of sheet'"
                         :value.sync="value.property.sheetname"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Tabname'"
+                        :label="'Tab'"
                         :hint="'Name of tab'"
                         :value.sync="value.property.tabname"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.create_workbook"
-                        label="Create workbook"
-                        hint="Create workbook if does not exist"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-             
+                <switch-field
+                        :value.sync="value.property.create_workbook"
+                        :label="'Create workbook'"
+                        :hint="'Create workbook if does not exist'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

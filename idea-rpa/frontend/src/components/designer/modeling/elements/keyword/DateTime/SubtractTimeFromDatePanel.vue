@@ -24,13 +24,11 @@
                         :value.sync="value.property.resultFormat"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.excludeMillis"
-                        label="Exclude Millis"
-                        hint="Round and hide milliseconds"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Exclude Millis'"
+                        :hint="'Round and hide milliseconds'"
+                        :value.sync="value.property.excludeMillis"
+                ></switch-field>
 
                 <variables-field
                         :label="'Date Format'"
