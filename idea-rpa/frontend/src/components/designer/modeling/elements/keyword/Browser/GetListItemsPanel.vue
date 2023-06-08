@@ -6,25 +6,19 @@
             </v-card-title>
 
             <v-card-text>
-
-                    <!--locator-->
-                    <locator-field 
-                        :label="'Locator'"
+                <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                        :required="true"
-                    ></locator-field> 
+                ></locator-field> 
                     
-                    <v-switch
-                        v-model="value.property.values"
-                        label="Values"
-                        hint="Return values instead of labels"
-                        persistent-hint
-                        class="py-0 mb-6"
-                    ></v-switch>
+                <switch-field
+                        :label="'Values'"
+                        :hint="'Return values instead of labels'"
+                        :value.sync="value.property.values"
+                ></switch-field>
             </v-card-text>
-
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>

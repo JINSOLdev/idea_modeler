@@ -30,13 +30,11 @@
                         :value.sync="value.property.length"
                 ></variables-field>
 
-                <v-switch
-                    v-model="value.property.Lowercase"
-                    label="Lowercase"
-                    messages="Lowercase outputs"
-                    class="py-0"
-                ></v-switch>
-           
+                <switch-field
+                        :label="'Lowercase'"
+                        :hint="'Lowercase outputs'"
+                        :value.sync="value.property.lowercase"
+                ></switch-field>           
             </v-card-text>
         </v-card>
         

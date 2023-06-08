@@ -20,21 +20,17 @@
                         :required="true"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.case"
-                        label="Case Insensitive"
-                        hint="Ignore case when matching"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Case Insensitive'"
+                        :hint="'Ignore case when matching'"
+                        :value.sync="value.property.case_insensitive"
+                ></switch-field>
 
-                <v-switch
-                        v-model="value.property.whitespace"
-                        label="Whitespace Insensitive"
-                        hint="Ignore whitespace when matching"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :label="'Whitespace Insensitive'"
+                        :hint="'Ignore whitespace when matching'"
+                        :value.sync="value.property.whitespace_insensitive"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

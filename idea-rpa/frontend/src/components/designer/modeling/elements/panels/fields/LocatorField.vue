@@ -1,8 +1,4 @@
 <template>
-    <!--
-        TODO: 1. 변수 할당 필요함. UI만 작업 하였음.
-        TODO: 2. Locator를 Task단위로 등록하여 사용 할 수 있도록.
-    -->
     <div class="mb-2">
         <div class="ml-2">
             Locator
@@ -113,10 +109,9 @@
         locator: any[] = []
         varItems: any[] = []
         newValue: any = {
-            id: "",
-            class: "",
-            ref: "",
-            valueType: "Locator"
+            name: "",
+            valueType: "",
+            defaultValue: "",
         }
         editMode: Boolean = false
         openSelectLocator: Boolean = false
@@ -126,26 +121,43 @@
         @Watch('selLocator')
         selectedLocator(val: number) {
             if(val > -1) {
-                this.newValue = this.locator[val]
+                if (this.locator[val].id != "" && this.locator[val].id != null && this.locator[val].id != undefined) {
+                    this.newValue = {
+                        name: "id",
+                        valueType: "id",
+                        defaultValue: this.locator[val].id,
+                    }
+                } else if (this.locator[val].class != "" && this.locator[val].class != null && this.locator[val].class != undefined) {
+                    this.newValue = {
+                        name: "class",
+                        valueType: "class",
+                        defaultValue: this.locator[val].class,
+                    }
+                } else {
+                    this.newValue = {
+                        name: "ref",
+                        valueType: "ref",
+                        defaultValue: this.locator[val].ref,
+                    }
+                }
             }
         }
         
         get valueText() {
             var text = ""
-            if (this.newValue) {
-                if (this.newValue.id) {
-                    text =  "id:" + this.newValue.id
-                } else if (this.newValue.class) {
-                    text = "class:" + this.newValue.class
+            if (this.newValue && this.newValue.valueType) {
+                if (this.newValue.valueType != "ref") {
+                    text = this.newValue.valueType + ":" + this.newValue.defaultValue
                 } else {
-                    text = this.newValue.ref
+                    text = this.newValue.defaultValue
                 }
             }
             return text
         }
         set valueText(newVal: string) {
             if (newVal && newVal.length > 0) {
-                this.newValue.ref = newVal
+                this.newValue.valueType = "ref"
+                this.newValue.defaultValue = newVal
             } else {
                 this.newValue = null
             }

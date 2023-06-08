@@ -11,40 +11,28 @@
                         :hint="'Name of new worksheet'"
                         :value.sync="value.property.name"
                         :required="true"
-                ></variables-field> 
-            </v-card-text>
+                ></variables-field>
 
-            <v-card-text>
                 <variables-field
                         :label="'Content'"
                         :hint="'Content for new worksheet'"
                         :value.sync="value.property.content"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.exist_ok"
-                        label="Exist Ok"
-                        hint="Raise an error if name exists"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.header"
-                        label="Header"
-                        hint="Write headers to worksheet"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.exist_ok"
+                        :label="'Exist Ok'"
+                        :hint="'Raise an error if name exists'"
+                ></switch-field>
+    
+                <switch-field
+                        :label="'Header'"
+                        :hint="'Use first row as header'"
+                        :value.sync="value.property.header"
+                ></switch-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -24,10 +24,10 @@
                         <draggable 
                                 tag="ul" 
                                 class="dragArea" 
-                                :list="item.keywords" 
+                                :list="item.child" 
                                 group="task"
                         >
-                            <li v-for="task in item.keywords" 
+                            <li v-for="task in item.child" 
                                     :key="task.id"
                                     class="child-task mx-auto px-2"
                                     @dblclick="openPanel($event, task)"

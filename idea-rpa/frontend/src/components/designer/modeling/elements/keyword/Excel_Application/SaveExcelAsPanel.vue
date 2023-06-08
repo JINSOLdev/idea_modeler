@@ -12,22 +12,17 @@
                         :value.sync="value.property.sheetname"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.autofit"
-                        label="Autofit"
-                        hint="Autofit cell widths if True, defaults to False"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
+                <switch-field
+                        :value.sync="value.property.autofit"
+                        :label="'Autofit'"
+                        :hint="'Autofit cell widths if True, defaults to False'"
+                ></switch-field>
 
                 <variables-field
                         :label="'File fornat'"
                         :hint="'Format of file'"
                         :value.sync="value.property.file_format"
-                ></variables-field>
-
-             
+                ></variables-field>             
             </v-card-text>
         </v-card>
 

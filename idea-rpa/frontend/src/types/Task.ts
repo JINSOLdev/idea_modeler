@@ -34,13 +34,36 @@ class Task extends Construct{
     }
 
     public delChild(value: any, child: any) {
-        let delTask
-        delTask = child.find((obj: any) => obj.id == value.id)
+        let delTask = child.find((obj: any) => obj.id == value.id)
+
         if (delTask != null) {
             child = child.filter((obj: any) => obj.id != value.id)
+            
         } else {
             child.forEach((obj: any) => {
-                obj.child = this.delChild(value, obj.child)
+                if (obj.type == "IfTask") {
+                    obj.property.conditions.forEach((condition: any) => {
+                        condition.child = this.delChild(value, condition.child)
+                    })
+
+                } else if (obj.type == "TryExceptTask") {
+                    if (obj.child.length > 0) {
+                        obj.child = this.delChild(value, obj.child)
+                    }
+                    if (obj.property.except && obj.property.exceptChild.length > 0) {
+                        obj.property.exceptChild = this.delChild(value, obj.property.exceptChild)
+                    }
+                    if (obj.property.elseBranch && obj.property.elseChild.length > 0) {
+                        obj.property.elseChild = this.delChild(value, obj.property.elseChild)
+                    }
+                    if (obj.property.finallyBranch && obj.property.finallyChild.length > 0) {
+                        obj.property.finallyChild = this.delChild(value, obj.property.finallyChild)
+                    }
+
+                } else {
+                    obj.child = this.delChild(value, obj.child)
+
+                }
             })
         }
         return child
@@ -60,42 +83,15 @@ class Task extends Construct{
 
 
     public clone():any {
-
         let cloneObj = Object.create(this);
-       // var cloneObj = new (this.constructor() as any)(this.id, this.name);
-        // cloneObj.id = id;
-        // cloneObj.name = name;
-        // for (var attribut in this) {
-        // if (typeof this[attribut] === "object") {
-        //     cloneObj[attribut] = this[attribut].clone();
-        // } else {
-        //     cloneObj[attribut] = this[attribut];
-        // }
-    
-       return cloneObj;
+        return cloneObj;
     }   
 }
 
 class CallKeyword extends Construct{
-    public inputVariableNames: string[] = ["a","b", "c"];
-    public outputVariableName: string = "invitations";
 
-   
     public toRobot(tab: number): string{
         let robot = Construct.tabs.substr(0, tab);
-        
-        if(this.outputVariableName)
-            robot += "${" + this.outputVariableName + "} = ";
-        
-        robot 
-            += `${this.name} `;
-
-        if(this.inputVariableNames){
-            this.inputVariableNames.forEach(inputVarName => {
-                robot += "${" + inputVarName + "} ";
-            })
-        }
-
         return robot;
     }
      
@@ -158,7 +154,7 @@ class IfTask extends SeqTask{
             {
                 type: 'If',
                 variable: '',
-                keywords: []
+                child: []
             }
         ]
     }
@@ -176,15 +172,19 @@ class IfTask extends SeqTask{
                 const name = item.type.toUpperCase()
 
                 if (item.operator) {
-                    robot += Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab) + `"${item.variable}" `
-                        + `${item.operator} "${item.compareVariable}"`;
+                    robot += Construct.tabs.substr(0, tab) + `${name}` 
+                            + Construct.tabs.substr(0, tab) + `"${item.variable}" `
+                            + `${item.operator} "${item.compareVariable}"`;
                     
                 } else if (item.type != "Else" && item.variable) {
-                    robot += Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab) + `$${item.variable}`;
+                    robot += Construct.tabs.substr(0, tab) + `${name}` 
+                            + Construct.tabs.substr(0, tab) + `$${item.variable}`;
                 } else {
                     robot += Construct.tabs.substr(0, tab) + `${name}`
                 }
-                item.keywords.forEach((child: any) => robot += "\n" + child.toRobot(tab + 1))
+
+                item.child.forEach((keyword: any) => robot += "\n" + keyword.toRobot(tab + 1))
+                
                 robot += "\n" 
             })
         }
@@ -201,8 +201,7 @@ class WhileTask extends SeqTask{
     public property: any = {
         condition: {
             type: '',
-            variable: '',
-            keywords: [ '' ]
+            variable: ''
         },
         limit: ""
     }
@@ -220,12 +219,15 @@ class WhileTask extends SeqTask{
         if (this.property.condition != null) {
             robot += this.property.condition.variable
             if (this.property.condition.operator) {
-                robot += ' ' + this.property.condition.operator + ' ' + this.property.condition.compareVariable
+                robot += Construct.tabs.substr(0, tab) + this.property.condition.operator 
+                        + Construct.tabs.substr(0, tab) + this.property.condition.compareVariable
             }
         }
+
         if (this.property.limit != '') {
             robot += ' limit=' + this.property.limit + '\n'
         }
+
         this.child?.forEach(child=> robot += "\n"+child.toRobot(tab + 1));
 
         robot += '\n' + Construct.tabs.substr(0, tab) + "END";

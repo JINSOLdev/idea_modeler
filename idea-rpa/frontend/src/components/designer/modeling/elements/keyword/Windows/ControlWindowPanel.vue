@@ -7,26 +7,19 @@
 
             <v-card-text>
                 <locator-field
-                        :label="'Locator'"
                         :value.sync="value.property.locator"
                         :hint="'Locator for window to control'"
                 ></locator-field>
-            </v-card-text>
-
-            <v-card-text>
-                <v-switch
-                        v-model="value.property.secure"
-                        label="Secure"
-                        color="success"
-                        hint="Bring window to foreground"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
+                
+                <switch-field
+                        :value.sync="value.property.foreground"
+                        :label="'Foreground'"
+                        :hint="'Bring window to foreground'"
+                ></switch-field>
+                
                 <variables-field
                         :label="'Timeout'"
+                        :placeholder="'None'"
                         :hint="'Time to wait for locator match (in seconds)'"
                         :value.sync="value.property.timeout"
                 ></variables-field>
@@ -49,9 +42,5 @@
         }
     })
     export default class ContorlWindowPanel extends Mixins(KeywordPanel) {
-        mounted(){
-            var description = "Controls the window defined by the locator."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

@@ -18,13 +18,11 @@
                         :value.sync="value.property.targetFile"
                 ></path-field>
 
-                <v-switch
-                        v-model="value.property.overwrite"
-                        label="Overwrite"
-                        hint="Overwrite destination file if it exists"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                <switch-field
+                        :valur.sync="value.property.overwrite"
+                        :label="'Overwrite'"
+                        :hint="'Overwrite destination file if it exists'"
+                ></switch-field>
             </v-card-text>
         </v-card>
 
@@ -32,7 +30,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -25,7 +25,7 @@
                   <variables-field
                         :label="'Sheet Name'"
                         :hint="'Name of initial worksheet'"
-                        :value.sync="value.property.Name"
+                        :value.sync="value.property.sheet_name"
                 ></variables-field>
             </v-card-text>
         </v-card>

@@ -12,25 +12,19 @@
                         :value.sync="value.property.path"
                 ></path-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Parents"
-                        hint="Create missing parent directories"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                <switch-field
+                        :label="'Parents'"
+                        :hint="'Create missing parent directories'"
+                        :value.sync="value.property.parents"
+                ></switch-field>
 
-                <v-switch
-                        v-model="value.property.formattingAsEmpty"
-                        label="Exist Ok"
-                        hint="Continue without errors if directory exists"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
-               
+                <switch-field
+                        :label="'Exist Ok'"
+                        :hint="'Continue without errors if directory exists'"
+                        :value.sync="value.property.exist_ok"
+                ></switch-field>
             </v-card-text>
         </v-card>
-
     </div>    
 </template>
 

@@ -12,15 +12,11 @@
                         :value.sync="value.property.dictionary"
                 ></variables-field>
 
-                <v-switch
-                        v-model="value.property.sortKeys"
-                        label="Sort Keys"
-                        hint="Sort output by keys"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-
-                <v-divider></v-divider>
+                <switch-field
+                        :label="'Sort Keys'"
+                        :hint="'Sort output by keys'"
+                        :value.sync="value.property.sortKeys"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

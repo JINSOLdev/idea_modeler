@@ -4,7 +4,7 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-            <v-card-text>                      
+            <v-card-text>
 <!--locator-->
                     <locator-field 
                         :label="'Locator'"

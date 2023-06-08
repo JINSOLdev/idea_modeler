@@ -11,19 +11,13 @@
                         :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
-            </v-card-text>
+                
+                <switch-field
+                        :label="'Header'"
+                        :hint="'Use first row as header'"
+                        :value.sync="value.property.header"
+                ></switch-field>
 
-            <v-card-text>
-                    <v-switch
-                        v-model="value.property.header"
-                        label="Header"
-                        hint="Use first row as header"
-                        persistent-hint
-                        class="py-0 mb-6"
-                ></v-switch>
-            </v-card-text>
-
-            <v-card-text>
                 <variables-field
                         :label="'Start'"
                         :hint="'Start row index'"
