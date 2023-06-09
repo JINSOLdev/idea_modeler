@@ -26,6 +26,7 @@ import Archive from '@/components/designer/modeling/elements/keyword/Archive'
 import EmailExchange from '@/components/designer/modeling/elements/keyword/Email_Exchange'
 import EmailImapSmtp from '@/components/designer/modeling/elements/keyword/Email_ImapSmtp'
 import PDF from '@/components/designer/modeling/elements/keyword/PDF'
+import Word_Application  from './components/designer/modeling/elements/keyword/Word_Application'
 
 import Panels from '@/components/designer/modeling/elements/panels'
 import Fields from '@/components/designer/modeling/elements/panels/fields'
@@ -52,6 +53,7 @@ Vue.use(Archive)
 Vue.use(EmailExchange)
 Vue.use(EmailImapSmtp)
 Vue.use(PDF)
+Vue.use(Word_Application)
 
 Vue.use(Panels)
 Vue.use(Fields)

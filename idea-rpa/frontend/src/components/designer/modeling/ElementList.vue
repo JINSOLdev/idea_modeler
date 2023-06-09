@@ -286,6 +286,13 @@
             }
             this.keywordList.push(pdfList)
 
+            const wordList = {
+                keywordType: 'Word.Application',
+                library: 'RPA.Word.Application',
+                list: Vue.prototype.$wordList
+            }
+            this.keywordList.push(wordList)
+
             const control = Vue.prototype.$controlList
             control.forEach((ctrl: string) => {
                 if(!ctrl.includes('Relation')) {

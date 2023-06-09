@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ClearArchor extends Mixins(KeywordElement) {
+    export default class ReplaceText extends Mixins(KeywordElement) {
         mounted() {
         }
     }
