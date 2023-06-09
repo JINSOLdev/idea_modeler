@@ -12,14 +12,22 @@
                         :value.sync="value.property.path"
                         :required="true"
                 ></path-field>
-               
+                <path-field
+                        :label="'Content'"
+                        :hint="'Content to append'"
+                        :value.sync="value.property.content"
+                        :required="true"
+                ></path-field>
+
+                <variables-field
+                        :label="'Encoding'"
+                        :hint="'Character encoding of written content'"
+                        :value.sync="value.property.encoding"
+                ></variables-field>
+
+
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
-        
 
     </div>    
 </template>
@@ -33,9 +41,9 @@
             KeywordPanel,
         }
     })
-    export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+    export default class AppendToBinaryFilePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the name of the file without its extension."
+            var description = "Appends binary content to the given file."
             this.$emit("setDescription", description)
         }
     }

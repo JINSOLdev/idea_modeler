@@ -10,11 +10,13 @@
                         :label="'Source'"
                         :hint="'Path to source directory'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
             </v-card-text>
         </v-card>
@@ -32,5 +34,9 @@
         }
     })
     export default class CopyDirectory extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Copy directory from source path to destination path."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -9,17 +9,18 @@
                 <path-field
                         :label="'Path'"
                         :hint="'Path to file'"
-                        :value.sync="value.property.path"
-                        :required="true"
+                        :value.sync="value.property.source"
+                        :isMultiple="true"
                 ></path-field>
-               
+
+                <switch-field
+                        :value.sync="value.property.missing_ok"
+                        :label="'Missing Ok'"
+                        :hint="'Ignore non-existent file'"
+                ></switch-field>
+
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
-        
 
     </div>    
 </template>
@@ -33,9 +34,9 @@
             KeywordPanel,
         }
     })
-    export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+    export default class RemoveFilesPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the name of the file without its extension."
+            var description = "Removes multiple files."
             this.$emit("setDescription", description)
         }
     }

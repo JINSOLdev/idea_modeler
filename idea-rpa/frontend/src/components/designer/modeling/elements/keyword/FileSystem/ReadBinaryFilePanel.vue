@@ -33,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+    export default class ReadBinaryFilePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the name of the file without its extension."
+            var description = "Reads a file in binary mode and returns the content."
             this.$emit("setDescription", description)
         }
     }

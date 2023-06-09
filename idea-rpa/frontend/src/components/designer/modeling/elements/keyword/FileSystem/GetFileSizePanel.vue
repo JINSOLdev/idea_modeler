@@ -33,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+    export default class GetFileSizePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the name of the file without its extension."
+            var description = "Returns the file size in bytes."
             this.$emit("setDescription", description)
         }
     }

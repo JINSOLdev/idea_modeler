@@ -10,11 +10,13 @@
                         :label="'Source'"
                         :hint="'File to copy'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
                
                 
@@ -34,5 +36,9 @@
         }
     })
     export default class CopyFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Copy a file from source path to destination path."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

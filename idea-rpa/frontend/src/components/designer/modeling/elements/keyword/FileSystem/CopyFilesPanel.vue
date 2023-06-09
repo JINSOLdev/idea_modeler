@@ -10,11 +10,13 @@
                         :label="'Source'"
                         :hint="'File(s) to copy'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination directory'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
             </v-card-text>
         </v-card>
@@ -32,5 +34,9 @@
         }
     })
     export default class CopyFilesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Copy multiple files to destination folder."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

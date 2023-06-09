@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                
             </v-card-text>
@@ -33,5 +34,9 @@
         }
     })
     export default class IsFileNotEmptyPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns True if the given file has content, i.e. larger than zero size."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

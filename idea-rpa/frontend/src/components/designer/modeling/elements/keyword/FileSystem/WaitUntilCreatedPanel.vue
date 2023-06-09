@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
                 <variables-field
@@ -37,5 +38,9 @@
         }
     })
     export default class WaitUntilCreatedPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Poll path until it exists, or raise exception if timeout is reached."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

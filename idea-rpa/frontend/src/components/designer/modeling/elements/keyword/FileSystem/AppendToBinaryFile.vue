@@ -1,3 +1,4 @@
+
 <script lang="ts">
     import { Component, Mixins } from "vue-property-decorator"
     import KeywordElement from '../KeywordElement.vue'
@@ -7,11 +8,8 @@
             KeywordElement,
         }
     })
-    export default class IsDirectoryEmpty extends Mixins(KeywordElement) {
+    export default class AppendToBinaryFile extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'empty'
-            }]
             
         }
     }

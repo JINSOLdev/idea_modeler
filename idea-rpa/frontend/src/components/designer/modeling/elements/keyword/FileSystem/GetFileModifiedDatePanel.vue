@@ -33,9 +33,9 @@
             KeywordPanel,
         }
     })
-    export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+    export default class GetFileModifiedDatePanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the name of the file without its extension."
+            var description = "Returns the modified time in seconds."
             this.$emit("setDescription", description)
         }
     }

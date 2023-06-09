@@ -7,10 +7,10 @@
             KeywordElement,
         }
     })
-    export default class IsDirectoryEmpty extends Mixins(KeywordElement) {
+    export default class GetFileSize extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'empty'
+                value: 'string'
             }]
             
         }

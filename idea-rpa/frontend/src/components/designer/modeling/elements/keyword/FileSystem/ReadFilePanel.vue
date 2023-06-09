@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
 
                 <variables-field
@@ -40,5 +41,9 @@
         }
     })
     export default class ReadFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Reads a file as text, with given encoding, and returns the content."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
