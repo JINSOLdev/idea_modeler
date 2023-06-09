@@ -17,7 +17,7 @@
 
         </v-card>
         <return-values-field
-                :value.sync="value.property.elements"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
 </template>

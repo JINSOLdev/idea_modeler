@@ -6,30 +6,30 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                ></Locator-field>
+                ></locator-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Xoffset'"
                         :hint="'X-axis offset in pixels'"
                         :value.sync="value.property.xoffset"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Yoffset'"
                         :hint="'Y-axis offset in pixels'"
                         :value.sync="value.property.yoffset"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
         </v-card>
     </div>

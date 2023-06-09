@@ -6,28 +6,28 @@
             </v-card-title>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Condition'"
                         :hint="'JavaScript expression that should return a true value'"
                         :value.sync="value.property.condition"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1min'"
                         :value.sync="value.property.timeout"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Error'"
                         :hint="'Custom error message'"
                         :value.sync="value.property.error"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
         </v-card>

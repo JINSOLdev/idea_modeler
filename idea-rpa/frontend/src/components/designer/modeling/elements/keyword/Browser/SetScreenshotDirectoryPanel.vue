@@ -6,12 +6,12 @@
             </v-card-title>
 
             <v-card-text>
-                <Path-field
+                <path-field
                         :label="'Path'"
                         :hint="'Path to screenshot directory, or the special value EMBED'"
                         :value.sync="value.property.path"
                         :required="true"
-                ></Path-field>
+                ></path-field>
             </v-card-text>
 
         </v-card>
