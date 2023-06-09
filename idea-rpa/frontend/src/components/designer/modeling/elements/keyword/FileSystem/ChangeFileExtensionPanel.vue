@@ -10,12 +10,14 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                 
                 <variables-field
                         :label="'Extension'"
                         :hint="'New file extension'"
                         :value.sync="value.property.extension"
+                        :required="true"
                 ></variables-field>
 
             </v-card-text>
@@ -38,5 +40,9 @@
         }
     })
     export default class ChangeFileExtensionPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Replaces file extension for file at given path. the file extension can be removed by passing an empty string."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

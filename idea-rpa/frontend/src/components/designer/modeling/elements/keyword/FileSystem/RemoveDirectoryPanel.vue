@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to directory'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -32,5 +33,9 @@
         }
     })
     export default class RemoveDirectoryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Removes the given directory, and optionally everything it contains."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -10,6 +10,7 @@
                         :label="'Parts'"
                         :hint="'Components of path'"
                         :value.sync="value.property.parts"
+                        :isMultiple="true"
                 ></variables-field>
                
             </v-card-text>
@@ -33,5 +34,9 @@
         }
     })
     export default class JoinPathPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Joins multiple parts of a path together."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

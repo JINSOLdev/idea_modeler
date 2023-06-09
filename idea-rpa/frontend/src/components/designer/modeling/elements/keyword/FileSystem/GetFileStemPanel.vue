@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                
             </v-card-text>
@@ -33,5 +34,9 @@
         }
     })
     export default class GetFileStemPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the name of the file without its extension."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

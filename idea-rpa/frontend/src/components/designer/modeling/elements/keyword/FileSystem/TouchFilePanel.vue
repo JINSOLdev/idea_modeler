@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
 
@@ -31,5 +32,9 @@
         }
     })
     export default class TouchFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Creates a file with no content, or if file already exists, updates the modification and access times."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

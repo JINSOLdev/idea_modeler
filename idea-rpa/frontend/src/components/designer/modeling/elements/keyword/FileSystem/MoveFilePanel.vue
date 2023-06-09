@@ -10,12 +10,14 @@
                         :label="'Source'"
                         :hint="'Source path'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
 
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -38,5 +40,9 @@
         }
     })
     export default class MoveFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Move a file from source path to destination path, optionally overwriting the destination."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

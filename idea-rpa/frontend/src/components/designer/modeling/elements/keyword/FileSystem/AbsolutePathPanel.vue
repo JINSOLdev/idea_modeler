@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
             </v-card-text>
         </v-card>
@@ -30,5 +31,9 @@
         }
     })
     export default class AbsolutePathPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the absolute path to a file, and resolves symlinks."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                
             </v-card-text>
@@ -32,5 +33,9 @@
         }
     })
     export default class DoesFileNotExistPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns True if the file does not exist, False if it does."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

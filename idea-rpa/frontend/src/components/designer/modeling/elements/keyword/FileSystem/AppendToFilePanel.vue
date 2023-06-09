@@ -10,11 +10,13 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                 <path-field
                         :label="'Content'"
                         :hint="'Content to append'"
                         :value.sync="value.property.content"
+                        :required="true"
                 ></path-field>
 
                 <variables-field
@@ -27,9 +29,6 @@
             </v-card-text>
         </v-card>
 
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>    
 </template>
 
@@ -43,5 +42,9 @@
         }
     })
     export default class AppendToFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Appends text to the given file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

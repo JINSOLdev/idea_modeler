@@ -10,12 +10,14 @@
                         :label="'Source'"
                         :hint="'File(s) to move'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
 
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination path'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -38,5 +40,9 @@
         }
     })
     export default class MoveFilesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Move multiple files to the destination folder."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

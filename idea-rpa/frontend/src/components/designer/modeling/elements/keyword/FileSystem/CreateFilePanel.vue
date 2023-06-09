@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to output file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
                 <variables-field
@@ -44,5 +45,9 @@
         }
     })
     export default class CreateFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Creates a new text file, and writes content if any is given."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

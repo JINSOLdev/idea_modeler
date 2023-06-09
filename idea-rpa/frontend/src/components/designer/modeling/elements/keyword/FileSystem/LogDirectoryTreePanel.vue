@@ -30,5 +30,9 @@
         }
     })
     export default class LogDirectoryTreePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs all the files in the directory recursively."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

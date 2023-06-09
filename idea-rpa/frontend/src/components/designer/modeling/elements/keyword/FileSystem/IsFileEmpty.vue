@@ -10,7 +10,7 @@
     export default class IsDirectoryEmpty extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'EMPTY'
+                value: 'empty'
             }]
             
         }

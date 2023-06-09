@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to directory'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                
             </v-card-text>
@@ -32,5 +33,9 @@
         }
     })
     export default class DoesDirectoryNotExistPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns True if the directory does not exist, False if it does."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -10,6 +10,7 @@
                         :label="'Pattern'"
                         :hint="'Search pattern in glob format, e.g. *.xlsx'"
                         :value.sync="value.property.pattern"
+                        :required="true"
                 ></variables-field>
 
                 <switch-field
@@ -44,5 +45,9 @@
         }
     })
     export default class FindFilesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Find files recursively according to a pattern."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
