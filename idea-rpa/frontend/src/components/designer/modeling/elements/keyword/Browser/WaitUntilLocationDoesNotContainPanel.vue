@@ -6,28 +6,28 @@
             </v-card-title>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Location'"
                         :hint="'Text location should not contain'"
                         :value.sync="value.property.location"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1 min'"
                         :value.sync="value.property.timeout"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Message'"
                         :hint="'Custom error message'"
                         :value.sync="value.property.message"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
 
         </v-card>

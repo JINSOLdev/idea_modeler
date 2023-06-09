@@ -6,20 +6,20 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for button to click'"
                         :value.sync="value.property.locator"
                         :required="true"
-                ></Locator-field>
+                ></locator-field>
             </v-card-text>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Modifier'"
                         :hint="'Click with modifier key'"
                         :value.sync="value.property.modifier"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
         </v-card>
 

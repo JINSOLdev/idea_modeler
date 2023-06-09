@@ -1,13 +1,7 @@
 <template>
     <div>
-        <v-card flat>
-            <v-card-title class="subtitle-1">
-                Input Arguments
-            </v-card-title>
-
-        </v-card>
         <return-values-field
-                :value.sync="value.property.titles"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
 </template>

@@ -7,11 +7,11 @@
 
             <v-card-text>
 
-                <Variables-field
+                <variables-field
                 :label="'Expected'"
                 :hint="'Expected value'"
                 :value.sync="value.property.expected"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
         </v-card>
 
