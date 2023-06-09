@@ -5,15 +5,18 @@
                 Input Arguments
             </v-card-title>
 
-            <!-- <v-card-text>
+            <v-card-text>
+                <variables-field
+                        :label="'Text'"
+                        :hint="'Header text to set'"
+                        :value.sync="value.property.text"
+                ></variables-field>
 
-            </v-card-text> -->
-
+             
+            </v-card-text>
         </v-card>
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -25,9 +28,9 @@
             KeywordPanel,
         }
     })
-    export default class GetSourcePanel extends Mixins(KeywordPanel) {
+    export default class SetHeaderPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the entire HTML source of the current page or frame."
+            var description = "Set header for the active document"
             this.$emit("setDescription", description)
         }
     }

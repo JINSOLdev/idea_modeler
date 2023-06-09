@@ -5,15 +5,18 @@
                 Input Arguments
             </v-card-title>
 
-            <!-- <v-card-text>
+            <v-card-text>
+                <switch-field
+                    :label="'Save changes'"
+                    :hint="'Close the active document (if open).'"
+                    :value.sync="value.property.save_changes"
+                ></switch-field>
 
-            </v-card-text> -->
-
+             
+            </v-card-text>
         </v-card>
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -25,9 +28,9 @@
             KeywordPanel,
         }
     })
-    export default class GetSourcePanel extends Mixins(KeywordPanel) {
+    export default class CloseDocumentPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the entire HTML source of the current page or frame."
+            var description = "Close the active document (if open)."
             this.$emit("setDescription", description)
         }
     }

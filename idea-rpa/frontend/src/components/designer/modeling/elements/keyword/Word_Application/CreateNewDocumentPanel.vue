@@ -5,15 +5,11 @@
                 Input Arguments
             </v-card-title>
 
-            <!-- <v-card-text>
-
-            </v-card-text> -->
-
+            <v-card-text>
+            </v-card-text>
         </v-card>
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -25,9 +21,9 @@
             KeywordPanel,
         }
     })
-    export default class GetSourcePanel extends Mixins(KeywordPanel) {
+    export default class CreateNewDocumentPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Returns the entire HTML source of the current page or frame."
+            var description = "Create new document for Word application"
             this.$emit("setDescription", description)
         }
     }
