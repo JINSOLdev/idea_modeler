@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                 
                 <variables-field
@@ -38,5 +39,9 @@
         }
     })
     export default class CreateBinaryFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Creates a new binary file, and writes content if any is given."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

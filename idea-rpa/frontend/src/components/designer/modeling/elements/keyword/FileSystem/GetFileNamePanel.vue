@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
                
             </v-card-text>
@@ -33,5 +34,9 @@
         }
     })
     export default class GetFileNamePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns only the full file name portion of a path."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

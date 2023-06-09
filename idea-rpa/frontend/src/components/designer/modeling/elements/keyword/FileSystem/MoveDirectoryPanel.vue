@@ -10,12 +10,14 @@
                         :label="'Source'"
                         :hint="'Path to source directory'"
                         :value.sync="value.property.source"
+                        :required="true"
                 ></path-field>
 
                 <path-field
                         :label="'Destination'"
                         :hint="'Path to move to'"
                         :value.sync="value.property.destination"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -38,5 +40,9 @@
         }
     })
     export default class MoveDirectoryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Move a directory from source path to destination path."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

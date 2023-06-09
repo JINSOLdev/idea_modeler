@@ -33,5 +33,9 @@
         }
     })
     export default class ListFilesInDirectoryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Lists all the files in the given directory, relative to it."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

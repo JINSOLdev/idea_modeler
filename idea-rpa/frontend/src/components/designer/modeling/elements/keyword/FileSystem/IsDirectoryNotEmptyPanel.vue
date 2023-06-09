@@ -33,5 +33,9 @@
         }
     })
     export default class IsDirectoryNotEmptyPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns True if the given directory has any files or subdirectories."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to file'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -32,5 +33,9 @@
         }
     })
     export default class RemoveFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Removes the given file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

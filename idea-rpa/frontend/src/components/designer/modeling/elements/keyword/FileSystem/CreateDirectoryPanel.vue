@@ -10,6 +10,7 @@
                         :label="'Path'"
                         :hint="'Path to directory'"
                         :value.sync="value.property.path"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
@@ -38,5 +39,9 @@
         }
     })
     export default class CreateDirectoryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Creates a directory and (optionally) non-existing parent directories."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
