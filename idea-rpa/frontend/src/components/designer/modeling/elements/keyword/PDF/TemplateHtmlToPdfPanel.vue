@@ -10,17 +10,20 @@
                         :label="'Template'"
                         :hint="'Path to the HTML template'"
                         :value.sync="value.property.template"
+                        :required="true"
                 ></path-field>
                 
 
                 <path-field
                         :label="'Output Path'"
                         :hint="'Path where to save PDF document'"
-                        :value.sync="value.property.outputpath"
+                        :value.sync="value.property.output_path"
+                        :required="true"
                 ></path-field>
+
                 <variables-field
                         :label="'Variables'"
-                        :hint="'Dictionary of variaables to fill into template, defaults to empty dictionary'"
+                        :hint="'Dictionary of variables to fill into template, defaults to empty dictionary'"
                         :value.sync="value.property.variables"
                 ></variables-field>
 
@@ -47,6 +50,6 @@
             KeywordPanel,
         }
     })
-    export default class TempleteHtmlToPdfPanel extends Mixins(KeywordPanel) {
+    export default class TemplateHtmlToPdfPanel extends Mixins(KeywordPanel) {
     }
 </script>

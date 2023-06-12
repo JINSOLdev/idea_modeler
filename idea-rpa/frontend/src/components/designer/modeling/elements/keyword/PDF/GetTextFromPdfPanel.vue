@@ -9,31 +9,29 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
 
                 <variables-field 
                         :label="'Pages'"
                         :hint="'Page numbers to extract from PDF.(comma separated list, numbers start from 1) Defaults to all pages.'"
                         :value.sync="value.property.pages"
-                    ></variables-field>
-                <v-switch
-                        v-model="value.property.details"
-                        label="Details"
-                        hint="Return detailed textboxes information"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
-                <v-switch
-                        v-model="value.property.trim"
-                        label="Trim"
-                        hint="Whitespace is trimed from the returned text"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                ></variables-field>
 
+                <switch-field
+                        :value.sync="value.property.details"
+                        :label="'Details'"
+                        :hint="'Return detailed textboxes information'"
+                ></switch-field>
+
+                <switch-field
+                        :value.sync="value.property.trim"
+                        :label="'Trim'"
+                        :hint="'Whitespace is trimmed from the returned text'"
+                ></switch-field>
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -51,5 +49,10 @@
         }
     })
     export default class GetTextFromPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get text from set of pages in source PDF document."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

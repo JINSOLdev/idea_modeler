@@ -9,10 +9,11 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -30,5 +31,10 @@
         }
     })
     export default class GetAllFiguresPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return all figures in the PDF document."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

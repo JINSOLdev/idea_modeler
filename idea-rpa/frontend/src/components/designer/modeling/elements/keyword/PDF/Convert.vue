@@ -9,6 +9,8 @@
     })
     export default class Convert extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.source_path="None"
+            this.value.property.pagenum="None"
         }
     }
 </script>

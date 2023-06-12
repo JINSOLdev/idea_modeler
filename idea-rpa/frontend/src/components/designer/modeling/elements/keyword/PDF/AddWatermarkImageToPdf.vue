@@ -9,6 +9,7 @@
     })
     export default class AddWatermarkImageToPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.source_path="NONE"
         }
     }
 </script>

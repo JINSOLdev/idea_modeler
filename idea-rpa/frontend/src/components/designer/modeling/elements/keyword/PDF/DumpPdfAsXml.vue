@@ -9,6 +9,12 @@
     })
     export default class DumpPdfAsXml extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'xml_content'
+            }]
+
+            this.value.property.source_path="None"
         }
+
     }
 </script>

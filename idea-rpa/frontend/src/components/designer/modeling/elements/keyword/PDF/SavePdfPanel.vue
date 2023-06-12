@@ -9,13 +9,16 @@
 
                 <path-field
                         :label="'Output Path'"
-                        :hint="'Path where to save the PDf document'"
-                        :value.sync="value.property.outputpath"
+                        :hint="'Path where to save the PDf'"
+                        :value.sync="value.property.output_path"
+                        :required="true"
                 ></path-field>
+
                 <variables-field
                         :label="'Reader'"
-                        :hint="'a pypdf reader'"
+                        :hint="'A pypdf reader'"
                         :value.sync="value.property.reader"
+                        :required="true"
                 ></variables-field>
 
             </v-card-text>
@@ -35,5 +38,10 @@
         }
     })
     export default class SavePdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Save the contents of a pypdf reader to a new file."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

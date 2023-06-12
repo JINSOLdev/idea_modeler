@@ -10,13 +10,16 @@
                         :label="'Content'"
                         :hint="'HTML content'"
                         :value.sync="value.property.content"
+                        :required="true"
                 ></variables-field>
 
                 <path-field
                         :label="'Output Path'"
                         :hint="'Path where to save the PDF document'"
-                        :value.sync="value.property.outputpath"
+                        :value.sync="value.property.output_path"
+                        :required="true"
                 ></path-field>
+                
                 <variables-field
                         :label="'Encoding'"
                         :hint="'Codec used for text I/O'"
@@ -39,5 +42,11 @@
         }
     })
     export default class HtmlToPdfPanel extends Mixins(KeywordPanel) {
+        
+ mounted() {
+            var description = "Generate a PDF file from HTML content."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

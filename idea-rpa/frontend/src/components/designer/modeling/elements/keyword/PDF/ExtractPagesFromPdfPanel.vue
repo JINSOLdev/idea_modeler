@@ -9,19 +9,20 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
+
                 <path-field
                         :label="'Output Path'"
                         :hint="'Path to the target PDf'"
-                        :value.sync="value.property.outputpath"
+                        :value.sync="value.property.output_path"
                 ></path-field>
+
                 <variables-field 
                         :label="'Pages'"
                         :hint="'Page numbers to extract from PDF.(comma separated list, numbers start from 1) Defaults to all pages.'"
                         :value.sync="value.property.pages"
                     ></variables-field>
-
             </v-card-text>
         </v-card>
 
@@ -39,5 +40,10 @@
         }
     })
     export default class ExtractPagesFromPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Extract pages from source PDF and save to a new PDF document."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

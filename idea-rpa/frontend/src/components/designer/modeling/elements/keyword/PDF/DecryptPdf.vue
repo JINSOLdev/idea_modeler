@@ -9,6 +9,10 @@
     })
     export default class DecryptPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'success'
+            }]
         }
+
     }
 </script>

@@ -9,6 +9,11 @@
     })
     export default class SetAnchorToElement extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'success'
+            }]
+
+            this.value.property.pagenum="1"
         }
     }
 </script>

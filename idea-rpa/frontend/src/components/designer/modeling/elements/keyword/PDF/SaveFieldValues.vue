@@ -7,8 +7,12 @@
             KeywordElement,
         }
     })
-    export default class SetFieldValues extends Mixins(KeywordElement) {
+    export default class SaveFieldValues extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.source_path="None"
+            this.value.property.output_path="None"
+            this.value.property.newvals="None"
+            
         }
     }
 </script>

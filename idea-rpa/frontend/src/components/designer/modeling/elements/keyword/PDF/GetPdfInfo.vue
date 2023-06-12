@@ -9,6 +9,12 @@
     })
     export default class GetPdfInfo extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'metadata'
+            }]
+
+            this.value.property.source_path="None"
         }
+
     }
 </script>

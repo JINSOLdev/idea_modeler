@@ -8,34 +8,39 @@
             <v-card-text>
                 <variables-field
                         :label="'Locator'"
-                        :hint="'Element to set anchor to. this can be prefixed with either "text", "subtext", "regex", "coords" to find the anchor by text or coordinates. the "text" strategy is assumed'"
+                        :hint="`Element to set anchor to. this can be prefixed with either 'text', 'subtext', 'regex', 'coords' to find the anchor by text or coordinates. The 'text' strategy is assumed`"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></variables-field>
-                <v-switch
-                        v-model="value.property.trim"
-                        label="Trim"
-                        hint="Automatically trim leading/trailing whitespace from the text elements"
+
+                <switch-field
+                        :value.sync="value.property.trim"
+                        :label="'Trim'"
+                        :hint="'Automatically trim leading/trailing whitespace from the text elements'"
                         persistent-hint
                         class="py-0"
-                ></v-switch>
+                ></switch-field>
 
                 <variables-field 
                         :label="'Pagenum'"
                         :hint="'Page number where search is performed on'"
                         :value.sync="value.property.pagenum"
-                    ></variables-field>
+                ></variables-field>
 
-                    <v-switch
-                        v-model="value.property.ignorecase"
-                        label="Ignore case"
-                        hint="Do a case-insensitive search (affects the passed locator and regexp filtering)"
+                <switch-field
+                        :value.sync="value.property.ignore_case"
+                        :label="'Ignore case'"
+                        :hint="'Do a case-insensitive search (affects the passed locator and regexp filtering)'"
                         persistent-hint
                         class="py-0"
-                ></v-switch>
+                ></switch-field>
 
             </v-card-text>
         </v-card>
 
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
     
 </template>
@@ -50,5 +55,10 @@
         }
     })
     export default class SetAnchorToElementPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets main anchor point in the document for further searches."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

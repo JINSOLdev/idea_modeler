@@ -7,8 +7,10 @@
             KeywordElement,
         }
     })
-    export default class TempleteHtmlToPdf extends Mixins(KeywordElement) {
+    export default class TemplateHtmlToPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.variables="None"
+            this.value.property.encoding="utf-8"
         }
     }
 </script>

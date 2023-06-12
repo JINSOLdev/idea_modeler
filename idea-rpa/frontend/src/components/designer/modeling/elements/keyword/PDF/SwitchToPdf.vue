@@ -9,6 +9,7 @@
     })
     export default class SwitchToPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.source_path="None"
         }
     }
 </script>

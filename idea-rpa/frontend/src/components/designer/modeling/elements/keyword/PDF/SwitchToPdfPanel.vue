@@ -9,7 +9,7 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
                 
 
@@ -30,5 +30,10 @@
         }
     })
     export default class SwitchToPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Switch library's current fileobject to already opened file or open a new file if not opened."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

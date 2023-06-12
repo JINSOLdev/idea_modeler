@@ -15,15 +15,14 @@
                 <path-field
                         :label="'Target Document'"
                         :hint="'Path of target PDF'"
-                        :value.sync="value.property.targetdocument"
+                        :value.sync="value.property.target_document"
                 ></path-field>
-                <v-switch
-                        v-model="value.property.append"
-                        label="Append"
-                        hint="Aooends files to existing document"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+
+                <switch-field
+                        :label="'Append'"
+                        :hint="'Appends files to existing document'"
+                        :value.sync="value.property.append"
+                ></switch-field>
                 
 
             </v-card-text>
@@ -43,5 +42,9 @@
         }
     })
     export default class AddFilesToPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Add images and/or pdfs to new PDF document"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

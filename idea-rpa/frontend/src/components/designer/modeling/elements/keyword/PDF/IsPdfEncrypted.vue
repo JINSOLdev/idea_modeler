@@ -9,6 +9,10 @@
     })
     export default class IsPdfEncrypted extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'is_encrypted'
+            }]
         }
+
     }
 </script>

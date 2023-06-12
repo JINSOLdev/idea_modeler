@@ -9,21 +9,20 @@
                 <path-field
                         :label="'Image Path'"
                         :hint="'Path to image file to add into PDf'"
-                        :value.sync="value.property.imagepath"
+                        :value.sync="value.property.image_path"
                 ></path-field>
 
                 <path-field
                         :label="'Output Path'"
                         :hint="'Path of target PDf'"
-                        :value.sync="value.property.outputpath"
+                        :value.sync="value.property.output_path"
                 ></path-field>
+
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF, if not given add image to currently active PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
 
@@ -41,5 +40,9 @@
         }
     })
     export default class AddWatermarkImageToPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Add an image into an existing or new PDF."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

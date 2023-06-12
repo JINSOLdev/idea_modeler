@@ -7,7 +7,7 @@
 
             </v-card-text> -->
 
-        </v-card>
+        <!-- </v-card> -->
 
         <return-values-field
                 :value.sync="value.property.returnVal"

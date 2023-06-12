@@ -9,6 +9,12 @@
     })
     export default class SaveFiguresAsImage extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'image_file_path'
+            }]
+
+            this.value.property.images_folder="."
         }
+
     }
 </script>
