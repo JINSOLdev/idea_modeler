@@ -52,5 +52,10 @@
         }
     })
     export default class SaveJSONToFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Save a JSON serializable object or a string containing a JSON value into a file."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

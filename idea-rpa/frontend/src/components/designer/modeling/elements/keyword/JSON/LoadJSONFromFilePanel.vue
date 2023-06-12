@@ -42,5 +42,10 @@
         }
     })
     export default class LoadJSONFromFilePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Load JSON data from a file, and return it as JSON serializable object. Depending on the input file the object can be either a dictionary, a list, or a scalar value."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

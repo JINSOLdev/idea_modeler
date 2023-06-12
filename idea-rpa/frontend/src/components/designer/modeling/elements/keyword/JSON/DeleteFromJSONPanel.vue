@@ -43,5 +43,10 @@
         }
     })
     export default class DeleteFromJSONPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Delete values from a JSON serializable object and return the result. Will delete all values that match the expression."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

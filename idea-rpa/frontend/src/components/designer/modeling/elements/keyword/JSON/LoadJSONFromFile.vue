@@ -12,6 +12,8 @@
             this.value.property.returnVal = [{
                 value: 'values'
             }]
+
+            this.value.property.encoding = "utf-8"
         }
     }
 </script>

@@ -46,5 +46,10 @@
         }
     })
     export default class AddToJSONPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Add items into a JSON serializable object and return the result."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>
