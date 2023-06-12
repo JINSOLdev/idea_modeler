@@ -12,11 +12,11 @@
                     :value.sync ="value.property.visible"
                 ></switch-field>
                 
-                <v-switch
+                <switch-field
                     :value.sync="value.property.display_alerts"
                     :label="'Display alerts'"
                     :hint="'show alert popups'"
-                ></v-switch>
+                ></switch-field>
 
              
             </v-card-text>

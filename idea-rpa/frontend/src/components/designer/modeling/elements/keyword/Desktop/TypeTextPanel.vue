@@ -24,13 +24,13 @@
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
+                    <switch-field
                         v-model="value.property.enter"
                         label="Enter"
                         hint="Press Enter / Return key after typing text"
                         persistent-hint
                         class="py-0 mb-6"
-                ></v-switch>
+                ></switch-field>
             </v-card-text>
         </v-card>
 

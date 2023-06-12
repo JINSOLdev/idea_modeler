@@ -15,13 +15,13 @@
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
+                    <switch-field
                         v-model="value.property.invert"
                         label="Invert"
                         hint="Invert image colors, useful for reading white text on dark background"
                         persistent-hint
                         class="py-0 mb-6"
-                ></v-switch>
+                ></switch-field>
             </v-card-text>
         </v-card>
         <return-values-field

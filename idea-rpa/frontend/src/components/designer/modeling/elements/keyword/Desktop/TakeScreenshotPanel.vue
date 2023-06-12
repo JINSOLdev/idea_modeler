@@ -24,13 +24,13 @@
             </v-card-text>
 
             <v-card-text>
-                    <v-switch
+                    <switch-field
                         v-model="value.property.embed"
                         label="Embed"
                         hint="Embed screenshot into system log"
                         persistent-hint
                         class="py-0 mb-6"
-                ></v-switch>
+                ></switch-field>
             </v-card-text>
         </v-card>
 
