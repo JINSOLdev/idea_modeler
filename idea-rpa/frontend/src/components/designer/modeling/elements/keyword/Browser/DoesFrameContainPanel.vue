@@ -13,11 +13,11 @@
                         :value.sync="value.property.locator"
                     ></variables-field> 
 
-                <variables-field
+                <Variables-field
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
         </v-card>
 

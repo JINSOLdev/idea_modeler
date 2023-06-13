@@ -32,7 +32,7 @@
 
         </v-card>
         <return-values-field
-                :value.sync="value.property.returnVal"
+                :value.sync="value.property.content"
         ></return-values-field>
     </div>
 </template>

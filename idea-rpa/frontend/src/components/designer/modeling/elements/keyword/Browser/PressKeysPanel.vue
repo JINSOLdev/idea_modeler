@@ -15,12 +15,12 @@
             </v-card-text>
 
             <v-card-text>
-                <variables-field
+                <Variables-field
                         :label="'Keys'"
                         :hint="'Keys to press, e.g.AAA, CTRL+C, RETURN'"
                         :value.sync="value.property.keys"
                         :isMultiple="true"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
         </v-card>
     </div>

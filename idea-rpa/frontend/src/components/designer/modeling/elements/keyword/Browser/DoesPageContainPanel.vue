@@ -7,12 +7,12 @@
 
             <v-card-text>
 
-                <variables-field
+                <Variables-field
                 :label="'Text'"
                 :hint="'Text to search for'"
                 :value.sync="value.property.text"
                 :required="true"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
         </v-card>
 

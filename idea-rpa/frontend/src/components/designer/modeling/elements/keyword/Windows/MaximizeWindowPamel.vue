@@ -1,28 +1,25 @@
+<!--
+    TODO: 변수 할당 필요함. UI만 작업하였음
+-->
 <template>
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
-
+            
             <v-card-text>
                 <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element'"
+                        :hint="'Locator for window to maximize'"
                         :value.sync="value.property.locator"
-                        :required="true"
                 ></Locator-field>
             </v-card-text>
-
-            <v-card-text>
-                <Variables-field
-                        :label="'Modifier'"
-                        :hint="'Click with modifier key'"
-                        :value.sync="value.property.modifier"
-                ></Variables-field>
-            </v-card-text>
-
         </v-card>
+
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>        
     </div>
 </template>
 
@@ -35,9 +32,9 @@
             KeywordPanel,
         }
     })
-    export default class ClickElementWhenVisiblePanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Click element identified by locator, once it becomes visible."
+    export default class MaximizeWindowPanel extends Mixins(KeywordPanel) {
+        mounted(){
+            var description = "Maximize the current active window or the window defined by the locator."
             this.$emit("setDescription", description)
         }
     }

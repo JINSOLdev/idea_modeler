@@ -6,17 +6,17 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field
+                <Variables-field
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
-                ></variables-field>
+                ></Variables-field>
                 
-                <variables-field
+                <Variables-field
                         :label="'Timeout'"
                         :hint="'Time out wait, e.g. 5 seconds or 1 min'"
                         :value.sync="value.property.timeout"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
         </v-card>
 
