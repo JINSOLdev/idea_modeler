@@ -6,8 +6,6 @@
             </v-card-title>
 
             <v-card-text>
-                
-
                 <variables-field
                         :label="'Sheetname'"
                         :hint="'Name of Excel sheet, defaults to None'"
@@ -17,17 +15,10 @@
                 <variables-field
                         :label="'Sheetnumber'"
                         :hint="'Index of Excel sheet, defaults to None'"
-                        :value.sync="value.property.sheetname"
+                        :value.sync="value.property.sheetnumber"
                 ></variables-field>
-
-                
-             
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
     
 </template>

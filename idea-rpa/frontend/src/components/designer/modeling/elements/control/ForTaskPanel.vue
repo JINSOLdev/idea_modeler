@@ -5,17 +5,21 @@
                 :value.sync="value.property.itemVarName"
         ></return-values-field>
 
-        <v-card flat>
-            <v-card-title class="subtitle-1">
-                Loop Values
-            </v-card-title>
-            
+        <v-card flat>            
             <v-card-text>
-                <v-text-field
-                        v-model="value.property.iterationVarName"
+                <v-select
+                        v-model="value.property.type"
+                        :items="typeList"
                         outlined
                         dense
-                ></v-text-field>
+                        :label="value.property.type"
+                ></v-select>
+
+                <variables-field
+                        :label="'Loop Values'"
+                        :value.sync="value.property.iterationVarName"
+                        :isMultiple="true"
+                ></variables-field>
             </v-card-text>
         </v-card>
     </div>
@@ -32,7 +36,15 @@
     })
 
     export default class ForTaskPanel extends Mixins(ControlPanel) {
+        public typeList: any[] = [
+            "in",
+            "in enumerate",
+            "in range",
+            "in zip",
+        ]
         mounted() {
+            var description = "Allows execution a set of keywords multiple times"
+            this.$emit("setDescription", description)
         }
     }
 </script>

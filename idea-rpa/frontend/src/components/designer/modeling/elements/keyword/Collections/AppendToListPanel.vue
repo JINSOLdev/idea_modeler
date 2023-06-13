@@ -9,7 +9,7 @@
                 <variables-field
                         :label="'List'"
                         :hint="'List to append to'"
-                        :value.sync="value.property.list"
+                        :value.sync="value.property.list_"
                 ></variables-field>
 
                 <variables-field

@@ -25,7 +25,7 @@ async function createWindow() {
   })
 
   win.once('ready-to-show', () => win.show())
-  win.on('closed', () => (win = null))
+  win.on('closed', () => (win))
 
   let tray : any = null
   app.whenReady().then(() => {

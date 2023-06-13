@@ -12,20 +12,14 @@
 
 <script lang="ts">
     import { Vue, Component } from "vue-property-decorator";
-    
+
     @Component
     export default class App extends Vue {
-        mounted() {
-            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId=jinsolkim');///websocket
-            connection.onmessage = (event) => {
-                console.log(event);
-            }
-            connection.onopen = () => {
-                console.log('Info: WebSocket connection opened.');
-            };
-        }
     }
 </script>
 
 <style>
+    .v-application--wrap {
+        min-height: 95vh !important;
+    }
 </style>
