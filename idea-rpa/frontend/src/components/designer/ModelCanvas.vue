@@ -263,36 +263,67 @@
         }
 
         mounted() {
-            const direactoryPath = `./tasks`;
-            const text = `${direactoryPath}/${this.$route.params.taskName}.json`;
             let me = this
-            fs.exists(text, (exists) => {
-                fs.readFile(text, (err, data) => {
-                    if (err) console.error(err);
-                    if (!data || !data.toString()) {return }
-                    
-                    let loadData = JSON.parse(data.toString());
-                    loadData.child = me.cloneChild(loadData.child)
-                    
-                    const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
-                    tmpRobot.setProperty({
-                        "keywords": me.robot.getKeywords()
-                    })
-                    tmpRobot.setProperty({
-                        "variables": me.setVariables(loadData.variables)
-                    })
-                    
-                    me.robot = tmpRobot
+            
+            if (me.$route.params.filePath) {
+                const path: any = me.$route.params.filePath
+                fs.exists(path, (exists) => {
+                    fs.readFile(path, (err, data) => {
+                        if (err) console.error(err);
+                        if (!data || !data.toString()) {return }
+                        
+                        let loadData = JSON.parse(data.toString());
+                        loadData.child = me.cloneChild(loadData.child)
+                        
+                        const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
+                        tmpRobot.setProperty({
+                            "keywords": me.robot.getKeywords()
+                        })
+                        tmpRobot.setProperty({
+                            "variables": me.setVariables(loadData.variables)
+                        })
+                        
+                        me.robot = tmpRobot
+                    });
                 });
-            });
+            } else {
+                const direactoryPath = `./tasks`;
+                const filePath = `${direactoryPath}/${this.$route.params.taskName}.json`;
+                fs.exists(filePath, (exists) => {
+                    fs.readFile(filePath, (err, data) => {
+                        if (err) console.error(err);
+                        if (!data || !data.toString()) {return }
+                        
+                        let loadData = JSON.parse(data.toString());
+                        loadData.child = me.cloneChild(loadData.child)
+                        
+                        const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
+                        tmpRobot.setProperty({
+                            "keywords": me.robot.getKeywords()
+                        })
+                        tmpRobot.setProperty({
+                            "variables": me.setVariables(loadData.variables)
+                        })
+                        
+                        me.robot = tmpRobot
+                    });
+                });
+            }
         }
 
         // Methods
         saveModel() {
-            const direactoryPath = `./tasks`;
-            const text = `${direactoryPath}/${this.taskName}.json`;
-            !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
-            fs.writeFileSync(text, JSON.stringify(this.robot));
+            if (this.$route.params.filePath) {
+                const direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
+                const filePath = this.$route.params.filePath;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+            } else {
+                const direactoryPath = `./tasks`;
+                const filePath = `${direactoryPath}/${this.taskName}.json`;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+            }
         }
 
         deleteElement(value: any) {
@@ -311,16 +342,18 @@
                 if (str) {
                     if (str.includes("Click") || str.includes("Control Window")) {
                         keywordList.forEach((item: any) => {
-                        item.list.forEach((keyword: string) => {
-                            if(str.includes(keyword)) {
-                                const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
-                                element.library = item.library
-                                const locator = this.setLocator(str.replace(keyword, "").trim())
-                                element.property = { locator : locator }
-                                this.robot.child.push(element)
-                            }
+                            item.list.forEach((keyword: string) => {
+                                if (str.includes(keyword)) {
+                                    const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
+                                    element.library = item.library
+                                    const locator = this.setLocator(str.replace(keyword, "").trim())
+                                    element.property = new Map()
+                                    element.property.set("locator", null)
+                                    element.property.locator = locator
+                                    this.robot.child.push(element)
+                                }
+                            })
                         })
-                    })
                     }
                 }
             })
@@ -328,30 +361,34 @@
 
         setLocator(str: string): any {
             var obj: any = {
-                id: "",
-                class: "",
-                ref: str
+                name: "ref",
+                valueType: "locator",
+                defaultValue: str,
             }
-
+            
             if(str.includes("id:")) {
+                obj.name = "id"
                 var idArr: any = str.split("id:")
                 var idVal: any = idArr.pop()
+
                 if(idVal?.includes(" and ")) {
                     idArr = idVal?.split(" and ")
-                    obj.id = idArr.shift()
+                    obj.defaultValue = idArr.shift()
                 } else {
-                    obj.id = idArr.pop()
+                    obj.defaultValue = idVal
                 }
             }
 
             if (str.includes("class:")) {
+                obj.name = "class"
                 var classArr: any = str.split("class:")
                 var classVal: any = classArr.pop()
+
                 if(classVal?.includes(" and ")) {
                     classArr = classVal?.split(" and ")
-                    obj.class = classArr.shift()
+                    obj.defaultValue = classArr.shift()
                 } else {
-                    obj.class = classArr.pop()
+                    obj.defaultValue = classVal
                 }
             }
 
@@ -400,6 +437,10 @@
             if (task.type == 'DefinitionKeyword') {
                 return 'keyword-element';
             } else if (task.type == 'Keyword') {
+                if(task.name.includes('JSON')) {
+                    var name = task.name.replace('JSON', 'J S O N')
+                    return this.kebabCase(name);
+                }
                 return this.kebabCase(task.name);
             } else {
                 return task.type;

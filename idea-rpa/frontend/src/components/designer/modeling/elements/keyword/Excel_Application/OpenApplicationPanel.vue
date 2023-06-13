@@ -6,8 +6,6 @@
             </v-card-title>
 
             <v-card-text>
-                
-
                 <switch-field
                         :label="'Visible'"
                         :hint="'Show window after opening'"
@@ -17,17 +15,11 @@
                 <switch-field
                         :label="'Display alerts'"
                         :hint="'Show alert popups'"
-                        :value.sync="value.property.displayAlerts"
+                        :value.sync="value.property.display_alerts"
                 ></switch-field>
-             
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">
@@ -40,5 +32,6 @@
         }
     })
     export default class OpenApplicationPanel extends Mixins(KeywordPanel) {
+        
     }
 </script>

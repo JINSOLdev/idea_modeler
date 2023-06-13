@@ -6,8 +6,7 @@
             </v-card-title>
 
             <v-card-text>
-                <locator-field
-                        :label="'Locator'" 
+                <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                 ></locator-field>

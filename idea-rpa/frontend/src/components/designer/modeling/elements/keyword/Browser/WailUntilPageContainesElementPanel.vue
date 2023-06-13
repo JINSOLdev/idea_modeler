@@ -15,19 +15,19 @@
             </v-card-text>
 
             <v-card-text>
-                <variables-field
+                <Variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1 min'"
                         :value.sync="value.property.timeout"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
 
             <v-card-text>
-                <variables-field
+                <Variables-field
                         :label="'Error'"
                         :hint="'Custom error message'"
                         :value.sync="value.property.error"
-                ></variables-field>
+                ></Variables-field>
             </v-card-text>
 
         </v-card>

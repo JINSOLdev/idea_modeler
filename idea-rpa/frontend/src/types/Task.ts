@@ -81,6 +81,44 @@ class Task extends Construct{
     public getVariables() {
     }
 
+    public checkType(item: any): string {
+        let text = ""
+        if ((!item || item == null) ) {
+            return text
+        }
+        
+        if (typeof item == "object" && item.valueType) {
+            if (item.valueType == "Scalar") {
+                text = `\$\{${item.name}\}`
+    
+            } else if (item.valueType == "List") {
+                text = `\@\{${item.name}\}`
+                
+            } else if (item.valueType == "Dictionary") {
+                text = `&\{${item.name}\}`
+                
+            } else if (item.valueType == "Environment") {
+                text = `\%\{${item.name}\}`
+                
+            } else {
+                if (item.defaultValue && item.defaultValue != null) {
+                    text = `${item.defaultValue}`
+                }
+            }
+        } else if (typeof item == "string" || typeof item == "number") {
+            text = `${item}`
+
+        } else if (typeof item == "boolean") {
+            item = String(item).toUpperCase()
+            text = `\$\{${item}\}`
+
+        } else {
+            text = `${item}`
+            
+        }
+
+        return text
+    }
 
     public clone():any {
         let cloneObj = Object.create(this);
@@ -116,8 +154,17 @@ class SeqTask extends Task {
 class ForTask extends SeqTask{
 
     public property: any = {
-        itemVarName: [ { value: "item" } ],
-        iterationVarName: "items"
+        itemVarName: [{
+            name: "item",
+            valueType: "Scalar",
+            defaultValue: "item"
+        }],
+        iterationVarName: [{
+            name: "items",
+            valueType: "List",
+            defaultValue: "items"
+        }],
+        type: "in"
     }
 
     public setProperty(value: any) {
@@ -132,15 +179,20 @@ class ForTask extends SeqTask{
         let robot = Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab) 
         
         this.property.itemVarName.forEach((item: any) => {
-            robot += `\$\{${item.value}\}` + Construct.tabs.substr(0, tab)
+            robot += this.checkType(item) + Construct.tabs.substr(0, tab)
         })
-        robot += `IN` + Construct.tabs.substr(0, tab) + `\@\{${this.property.iterationVarName}\}`
+        
+        robot += this.property.type.toUpperCase() + Construct.tabs.substr(0, tab)
+
+        this.property.iterationVarName.forEach((item: any) => {
+            robot += this.checkType(item) + Construct.tabs.substr(0, tab)
+        })
         
         this.child?.forEach((child: any) => {
             robot += "\n"+ child.toRobot(tab + 1)
         });
 
-        robot += "\n"+Construct.tabs.substr(0, tab)+"END";
+        robot += "\n" + Construct.tabs.substr(0, tab) + "END";
 
         return robot; 
     }
@@ -153,14 +205,76 @@ class IfTask extends SeqTask{
         conditions: [
             {
                 type: 'If',
-                variable: '',
-                child: []
+                isAll: 0,
+                child: [],
+                terms: [{
+                    variable: "",
+                    terms: null,
+                }]
             }
         ]
     }
 
     public setProperty(value: any) {
-        this.property.conditions = value.conditions
+        this.property.terms = value.terms
+    }
+
+    public getConditions(condition: any): string {
+        let text = ""
+        if (condition.hasOwnProperty("isGroup")) {
+            text += "("
+        } else if (condition.hasOwnProperty("type") || condition.hasOwnProperty("variable")) {
+            text += Construct.tabs.substr(0, 1)
+        }
+
+        if (condition.terms && condition.terms.length > 0) {
+            const lastIndex = condition.terms.length - 1
+            condition.terms.forEach((item: any, index: number) => {
+                if (item.terms && item.terms.length > 0) {
+                    text += this.getConditions(item)
+
+                } else {
+                    if (item.variable) {
+                        if (item.isNot) {
+                            text += "(not "
+                            if (item.operator) {
+                                text += this.checkType(item.variable) + `${item.operator}` + this.checkType(item.compareVariable)
+                            } else {
+                                text += this.checkType(item.variable)
+                            }
+                            text += ")"
+                        } else {
+                            if (item.operator) {
+                                text += this.checkType(item.variable) + `${item.operator}` + this.checkType(item.compareVariable) + Construct.tabs.substr(0, 1)
+                            } else {
+                                text += this.checkType(item.variable) + Construct.tabs.substr(0, 1)
+                            }
+                        }
+                    }
+                }
+                if (condition.isAll == 0 && index < lastIndex 
+                        && text.length > 0
+                        && text.replaceAll("\t", "").length > 0
+                ) {
+                    text += "and" + Construct.tabs.substr(0, 1)
+                } else if (condition.isAll == 1 && index < lastIndex
+                        && text.length > 0
+                        && text.replaceAll("\t", "").length > 0
+                ) {
+                    text += "or" + Construct.tabs.substr(0, 1)
+                }
+            })
+        }
+
+        if (condition.hasOwnProperty("isGroup")) {
+            text += ")"
+        }
+
+        if (text.length == 0 || text.replaceAll("\t", "").length == 0 || text.includes("()")) {
+            text = ""
+        }
+
+        return text
     }
     
     public toRobot(tab: number): string{
@@ -168,20 +282,22 @@ class IfTask extends SeqTask{
         let robot = "";
 
         if (this.property.conditions.length > 0) {
-            this.property.conditions.forEach((item: any, idx: number) => {
+                this.property.conditions.forEach((item: any, idx: number) => {
                 const name = item.type.toUpperCase()
+                robot += Construct.tabs.substr(0, tab) + `${name}`
 
-                if (item.operator) {
-                    robot += Construct.tabs.substr(0, tab) + `${name}` 
-                            + Construct.tabs.substr(0, tab) + `"${item.variable}" `
-                            + `${item.operator} "${item.compareVariable}"`;
+                robot += this.getConditions(item)
+                // if (item.operator) {
+                //     robot += Construct.tabs.substr(0, tab) + `${name}` 
+                //             + Construct.tabs.substr(0, tab) + `"${item.variable}" `
+                //             + `${item.operator} "${item.compareVariable}"`;
                     
-                } else if (item.type != "Else" && item.variable) {
-                    robot += Construct.tabs.substr(0, tab) + `${name}` 
-                            + Construct.tabs.substr(0, tab) + `$${item.variable}`;
-                } else {
-                    robot += Construct.tabs.substr(0, tab) + `${name}`
-                }
+                // } else if (item.type != "Else" && item.variable) {
+                //     robot += Construct.tabs.substr(0, tab) + `${name}` 
+                //             + Construct.tabs.substr(0, tab) + `$${item.variable}`;
+                // } else {
+                //     robot += Construct.tabs.substr(0, tab) + `${name}`
+                // }
 
                 item.child.forEach((keyword: any) => robot += "\n" + keyword.toRobot(tab + 1))
                 
@@ -472,7 +588,7 @@ class Keyword extends SeqTask {
         let text = ""
         let keys = Object.keys(this.property)
         
-        if (index > 0) {
+        if (index > 0 && key != "locator") {
             var res = false
             keys.forEach((str: string, idx: number) => {
                 if (idx < index && str != "returnVal") {
@@ -512,41 +628,6 @@ class Keyword extends SeqTask {
         return text
     }
 
-    public checkType(item: any): string {
-        let text = ""
-
-        if (typeof item == "object" && item.valueType) {
-            if (item.valueType == "Scalar") {
-                text = `\$\{${item.name}\}`
-    
-            } else if (item.valueType == "List") {
-                text = `\@\{${item.name}\}`
-                
-            } else if (item.valueType == "Dictionary") {
-                text = `&\{${item.name}\}`
-                
-            } else if (item.valueType == "Environment") {
-                text = `\%\{${item.name}\}`
-                
-            } else {
-                text = `${item.defaultValue}`
-    
-            }
-        } else if (typeof item == "string" || typeof item == "number") {
-            text = `${item}`
-
-        } else if (typeof item == "boolean") {
-            item = String(item).toUpperCase()
-            text = `\$\{${item}\}`
-
-        } else {
-            text = `${item}`
-            
-        }
-
-        return text
-    }
-
     public toRobot(tab: number): string{
 
         let robot = Construct.tabs.substr(0, tab) + `${this.name}`
@@ -574,9 +655,9 @@ class Keyword extends SeqTask {
                         
                     } else if (key == 'locator') {
                         if (this.property[key].defaultValue && this.property[key].defaultValue != "") {
-                            if (this.property[key].valueType != "ref") {
+                            if (this.property[key].name != "ref") {
                                 robot += Construct.tabs.substr(0, 1) + 
-                                    `${this.property[key].valueType}:${this.property[key].defaultValue}`
+                                    `${this.property[key].name}:${this.property[key].defaultValue}`
                             } else {
                                 robot += Construct.tabs.substr(0, 1) + `${this.property[key].defaultValue}`
                             }

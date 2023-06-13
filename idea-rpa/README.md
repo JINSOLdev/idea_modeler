@@ -1,6 +1,7 @@
 
-###### 아래의 Ark Automate 는 초기 개발환경구성 입니다. 
+##### Ark Automate 의 초기 개발 환경구성 입니다. 
 </br>
+
 
 # Ark Automate
 

@@ -12,9 +12,9 @@
             KeywordPanel,
         }
     })
-    export default class AddNewWorkbookPanel extends Mixins(KeywordPanel) {
+    export default class ClareArchorPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Adds new workbook for Excel application"
+            var description = "Clears control anchor set by Set Anchor."
             this.$emit("setDescription", description)
         }
     }

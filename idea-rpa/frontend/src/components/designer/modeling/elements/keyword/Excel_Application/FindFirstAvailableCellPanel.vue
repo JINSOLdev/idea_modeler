@@ -22,9 +22,7 @@
                         :label="'Column'"
                         :hint="'Starting column for search, defaults to 1'"
                         :value.sync="value.property.column"
-                ></variables-field>
-
-             
+                ></variables-field>             
             </v-card-text>
         </v-card>
 
