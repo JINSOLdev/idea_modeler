@@ -15,7 +15,7 @@
                 <switch-field
                         :label="'Deepcopy'"
                         :hint="'Copy nested values'"
-                        :value.sync="value.property.deepCopy"
+                        :value.sync="value.property.deepcopy"
                 ></switch-field>
             </v-card-text>
         </v-card>

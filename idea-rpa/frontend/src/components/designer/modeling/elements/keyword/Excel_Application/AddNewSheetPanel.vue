@@ -25,11 +25,7 @@
                 ></switch-field>
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
-    </div>    
+    </div>
 </template>
 
 <script lang="ts">
@@ -42,5 +38,9 @@
         }
     })
     export default class AddNewSheetPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Add new worksheet to workbook. Workbook is created by default if it does not exist."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

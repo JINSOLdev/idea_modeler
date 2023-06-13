@@ -9,7 +9,7 @@
                 <variables-field
                         :label="'List'"
                         :hint="'List to search'"
-                        :value.sync="value.property.list"
+                        :value.sync="value.property.list_"
                 ></variables-field>
 
                 <variables-field
@@ -48,5 +48,7 @@
         }
     })
     export default class CountValuesInListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+        }
     }
 </script>

@@ -9,13 +9,13 @@
                 <variables-field
                         :label="'List'"
                         :hint="'List to copy'"
-                        :value.sync="value.property.list"
+                        :value.sync="value.property.list_"
                 ></variables-field>
 
                 <switch-field
                         :label="'Deepcopy'"
                         :hint="'Copy nested values'"
-                        :value.sync="value.property.deepCopy"
+                        :value.sync="value.property.deepcopy"
                 ></switch-field>
             </v-card-text>
         </v-card>

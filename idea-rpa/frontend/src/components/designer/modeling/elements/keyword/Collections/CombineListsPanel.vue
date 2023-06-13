@@ -7,9 +7,9 @@
             
             <v-card-text>
                 <variables-field
-                        :label="'List'"
-                        :hint="'List to combine'"
-                        :value.sync="value.property.list"
+                        :label="'Lists'"
+                        :hint="'Lists to combine'"
+                        :value.sync="value.property.lists"
                         :isMultiple="true"
                 ></variables-field>
             </v-card-text>

@@ -21,7 +21,7 @@
                     <v-col>
                         <v-combobox
                                 v-if="isVars"
-                                v-model="newValue[idx].value"
+                                v-model="newValue[idx].defaultValue"
                                 :items="varItems"
                                 item-disabled="disabled"
                                 outlined
@@ -29,8 +29,7 @@
                         ></v-combobox>
                         <v-text-field
                                 v-else
-                                v-model="newValue[idx].value"
-                                :rules="[rules.required]"
+                                v-model="newValue[idx].defaultValue"
                                 outlined
                                 dense
                         ></v-text-field>
@@ -71,10 +70,6 @@
             defaultValue: ""
         }]
         
-        rules: any = {
-            required: (value: any) => !!value || 'Required.'
-        }
-
         mounted() {
             var variables = new Variables()
             this.varItems = variables.getVarList()

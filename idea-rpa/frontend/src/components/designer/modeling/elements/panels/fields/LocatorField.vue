@@ -110,7 +110,7 @@
         varItems: any[] = []
         newValue: any = {
             name: "",
-            valueType: "",
+            valueType: "locator",
             defaultValue: "",
         }
         editMode: Boolean = false
@@ -124,19 +124,19 @@
                 if (this.locator[val].id != "" && this.locator[val].id != null && this.locator[val].id != undefined) {
                     this.newValue = {
                         name: "id",
-                        valueType: "id",
+                        valueType: "locator",
                         defaultValue: this.locator[val].id,
                     }
                 } else if (this.locator[val].class != "" && this.locator[val].class != null && this.locator[val].class != undefined) {
                     this.newValue = {
                         name: "class",
-                        valueType: "class",
+                        valueType: "locator",
                         defaultValue: this.locator[val].class,
                     }
                 } else {
                     this.newValue = {
                         name: "ref",
-                        valueType: "ref",
+                        valueType: "locator",
                         defaultValue: this.locator[val].ref,
                     }
                 }
@@ -145,9 +145,9 @@
         
         get valueText() {
             var text = ""
-            if (this.newValue && this.newValue.valueType) {
-                if (this.newValue.valueType != "ref") {
-                    text = this.newValue.valueType + ":" + this.newValue.defaultValue
+            if (this.newValue && this.newValue.name) {
+                if (this.newValue.name != "ref") {
+                    text = this.newValue.name + ":" + this.newValue.defaultValue
                 } else {
                     text = this.newValue.defaultValue
                 }
@@ -156,7 +156,7 @@
         }
         set valueText(newVal: string) {
             if (newVal && newVal.length > 0) {
-                this.newValue.valueType = "ref"
+                this.newValue.name = "ref"
                 this.newValue.defaultValue = newVal
             } else {
                 this.newValue = null

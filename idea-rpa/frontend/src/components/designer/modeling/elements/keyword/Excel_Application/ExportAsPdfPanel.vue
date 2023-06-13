@@ -9,28 +9,17 @@
                 <variables-field
                         :label="'Pdf filename'"
                         :hint="'PDF filename to save'"
-                        :value.sync="value.property.pdfFilename"
+                        :value.sync="value.property.pdf_filename"
                 ></variables-field>
 
                 <variables-field
                         :label="'Excel filename'"
                         :hint="'Excel filename to open. If not given, the current workbook will open.'"
-                        :value.sync="value.property.excelFilename"
+                        :value.sync="value.property.excel_filename"
                 ></variables-field>
-
-                <switch-field
-                        :value.sync="value.property.createWorkbook"
-                        :label="'Create workbook'"
-                        :hint="'Create workbook if does not exist'"
-                ></switch-field>
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">
