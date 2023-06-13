@@ -6,7 +6,7 @@
             absolute
             permanent
             right
-            style="width: 600px;"
+            style="width: 800px;"
     >
         <v-card outlined>
             <v-card-title class="d-flex">
