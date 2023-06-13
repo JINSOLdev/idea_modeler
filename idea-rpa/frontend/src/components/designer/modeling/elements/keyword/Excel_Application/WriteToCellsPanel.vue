@@ -41,20 +41,9 @@
                         :hint="'Possible format to set, defaults to None'"
                         :value.sync="value.property.formula"
                 ></variables-field>
-
-                <switch-field
-                        :value.sync="value.property.create_workbook"
-                        :label="'Create workbook'"
-                        :hint="'Create workbook if does not exist'"
-                ></switch-field>
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

@@ -36,5 +36,10 @@
         }
     })
     export default class ConvertStringToJSONPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Convert a string to a JSON serializable object and return it."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

@@ -9,6 +9,13 @@
     })
     export default class GetTextFromPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'text'
+            }]
+
+            this.value.property.source_path="None"
+            this.value.property.pages="None"
         }
+
     }
 </script>

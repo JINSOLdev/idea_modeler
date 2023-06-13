@@ -9,6 +9,7 @@
     })
     export default class HtmlToPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.encoding="utf-8"
         }
     }
 </script>

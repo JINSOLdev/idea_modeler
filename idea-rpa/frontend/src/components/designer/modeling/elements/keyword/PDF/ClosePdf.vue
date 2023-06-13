@@ -9,6 +9,7 @@
     })
     export default class ClosePdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.source_pdf="None"
         }
     }
 </script>

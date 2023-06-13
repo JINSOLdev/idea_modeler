@@ -2,7 +2,7 @@
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
-                Input Arguments
+                <!-- Input Arguments -->
             </v-card-title>
 
             <v-card-text>
@@ -24,5 +24,9 @@
         }
     })
     export default class CloseAllPdfsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Close all opened PDF file descriptors."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

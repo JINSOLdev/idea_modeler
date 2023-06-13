@@ -11,26 +11,9 @@
                         :hint="'Path to filename'"
                         :value.sync="value.property.filename"
                 ></variables-field>
-
-                <variables-field
-                        :label="'Tabname'"
-                        :hint="'Name of tab'"
-                        :value.sync="value.property.tabname"
-                ></variables-field>
-
-                <switch-field
-                        :value.sync="value.property.create_workbook"
-                        :label="'Create workbook'"
-                        :hint="'Create workbook if does not exist'"
-                ></switch-field>
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

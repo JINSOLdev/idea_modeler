@@ -9,20 +9,12 @@
                 <variables-field
                         :label="'Macro name'"
                         :hint="'Macro to run'"
-                        :value.sync="value.property.sheetname"
+                        :value.sync="value.property.macro_name"
                 ></variables-field>
-
-               <!-- Path -->
-
              
             </v-card-text>
         </v-card>
-
-        <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

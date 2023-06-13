@@ -48,7 +48,9 @@
                     item-disabled="disabled"
                     item-value="defaultValue"
                     :hint="hint"
+                    :placeholder="placeholder"
                     persistent-hint
+                    persistent-placeholder
                     outlined
                     dense
                     clearable
@@ -67,15 +69,12 @@
         @Prop() public value!: any
         @Prop() public label!: string
         @Prop() public hint!: string
+        @Prop() public placeholder!: string
         @Prop() public isMultiple!: boolean
         @Prop() public required!: boolean
         
         varItems: any[] = []
-        newValue: any = {
-            name: "",
-            valueType: "Scalar",
-            defaultValue: null
-        }
+        newValue: any = null
 
         mounted() {
             var modelCanvas = this.getComponent('ModelCanvas')
@@ -106,12 +105,22 @@
                 ...globalVariables
             ]
 
-            if(this.value) {
-                this.newValue = this.value
-            } else if (this.isMultiple && (!this.value || this.value.length < 1)) {
-                this.newValue = []
-            } else if (!this.isMultiple && !this.value) {
-                this.newValue = null
+            if (this.isMultiple) {
+                if (this.value && this.value.length > 0) {
+                    this.newValue = this.value
+                } else {
+                    this.newValue = [{
+                        name: "",
+                        valueType: "Scalar",
+                        defaultValue: null
+                    }]
+                }
+            } else {
+                if (this.value && this.value.defaultValue) {
+                    this.newValue = this.value
+                } else {
+                    this.newValue = null
+                }
             }
         }
 
@@ -141,7 +150,7 @@
                         defaultValue: this.newValue
                     }
                 }
-                if (this.required) {
+                if (this.required && this.newValue != null) {
                     this.newValue.required = true
                 }
             }

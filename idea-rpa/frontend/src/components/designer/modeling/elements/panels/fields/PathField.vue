@@ -37,7 +37,7 @@
         public newValue: any = {
             name: "",
             valueType: "Path",
-            defaultValue: null,
+            defaultValue: "",
             required: this.required ? this.required : false,
         }
         public rules: any = {
@@ -61,18 +61,20 @@
 
         openFileDialog() {
             let me = this
-            var properties: any[] = []
+            var properties: any = []
             
             if (this.isDir) {
-                properties = ['openDirectory']
+                properties = ["openDirectory"]
             } else {
-                properties = ['openFile']
+                properties = ["openFile", "promptToCreate"]
             }
             
             dialog.showOpenDialog({
+                defaultPath: me.newValue.defaultValue,
                 properties
             }).then(result => {
-                me.newValue.defaultValue = result.filePaths.shift()
+                var path: any = result.filePaths.shift()
+                me.newValue.defaultValue = path?.replace(/\\/g, "//")
             
             }).catch(err => {
                 console.log(err)

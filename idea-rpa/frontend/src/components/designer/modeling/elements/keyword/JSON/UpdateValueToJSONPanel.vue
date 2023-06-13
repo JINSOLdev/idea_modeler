@@ -51,5 +51,10 @@
         }
     })
     export default class UpdateValueToJSONPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Update existing values in a JSON serializable object and return the result. Will change all values that match the expression."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

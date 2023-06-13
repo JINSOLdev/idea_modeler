@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class LoadJSONFromFile extends Mixins(KeywordElement) {
+    export default class UpdateValueToJSON extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
                 value: 'result'

@@ -4,16 +4,16 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -31,5 +31,10 @@
         }
     })
     export default class GetNumberOfPagesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get metadata from a PDF document."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

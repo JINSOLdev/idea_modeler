@@ -43,5 +43,10 @@
         }
     })
     export default class GetValuesFromJSONPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get all values from a JSON serializable object that match the given expression."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

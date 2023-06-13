@@ -9,23 +9,20 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
 
-                <v-switch
-                        v-model="value.property.replacenonevalue"
-                        label="Replace None Value"
-                        hint="Replace none values with the fields name"
-                        persistent-hint
-                        class="py-0"
-                ></v-switch>
+                <switch-field
+                        :value.sync="value.property.replace_none_value"
+                        :label="'Replace None Value'"
+                        :hint="'Replace none values with the fields name'"
+                ></switch-field>
 
                 <variables-field
                         :label="'Encoding'"
-                        :hint="'Encoding used for field name/value parsing. positive values are "iso-8859-1, utf-8 or utf -16"'"
-                        :value.sync="value.property.files"
+                        :hint="`Encoding used for field name/value parsing. positive values are 'iso-8859-1, utf-8 or utf -16'`"
+                        :value.sync="value.property.encoding"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
         <return-values-field
@@ -45,5 +42,10 @@
         }
     })
     export default class GetInputFieldPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get input fields in the PDF."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

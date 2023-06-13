@@ -9,6 +9,9 @@
     })
     export default class LoadJSONFromFile extends Mixins(KeywordElement) {
         mounted() {
+
+            this.value.property.indent = "None"
+            this.value.property.encoding = "utf-8"
             
         }
     }

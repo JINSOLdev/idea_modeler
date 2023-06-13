@@ -12,6 +12,8 @@
             this.value.property.returnVal = [{
                 value: 'value'
             }]
+
+            this.value.property.default="None"
         }
     }
 </script>

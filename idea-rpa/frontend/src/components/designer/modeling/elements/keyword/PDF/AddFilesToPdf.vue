@@ -9,6 +9,8 @@
     })
     export default class AddFilesToPdf extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.files="None"
+            this.value.property.target_document="None"
         }
     }
 </script>

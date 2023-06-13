@@ -9,10 +9,9 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
+                        :required="true"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
     </div>
@@ -29,5 +28,10 @@
         }
     })
     export default class OpenPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Open a PDF document for reading."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

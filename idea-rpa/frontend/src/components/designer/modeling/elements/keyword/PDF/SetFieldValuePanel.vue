@@ -10,19 +10,21 @@
                 <variables-field 
                         :label="'Field Name'"
                         :hint="'Field to update'"
-                        :value.sync="value.property.fieldname"
+                        :value.sync="value.property.field_name"
+                        :required="true"
                     ></variables-field>
 
                     <variables-field 
                         :label="'Value'"
                         :hint="'New value for the field'"
                         :value.sync="value.property.value"
+                        :required="true"
                     ></variables-field>
 
                     <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
 
             </v-card-text>
@@ -42,5 +44,10 @@
         }
     })
     export default class SetFieldValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set value for field with given name on the active document."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

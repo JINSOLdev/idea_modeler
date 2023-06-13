@@ -30,6 +30,10 @@
             if (task.type == "DefinitionKeyword") {
                 return "keyword-element"
             } else if (task.type == "Keyword") {
+                if(task.name.includes('JSON')) {
+                    var name = task.name.replace('JSON', 'J S O N')
+                    return this.kebabCase(name);
+                }
                 return this.kebabCase(task.name)
             } else {
                 return task.type

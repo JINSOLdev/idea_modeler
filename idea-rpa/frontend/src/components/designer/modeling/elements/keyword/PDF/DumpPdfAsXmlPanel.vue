@@ -9,9 +9,8 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
-                
 
             </v-card-text>
         </v-card>
@@ -32,5 +31,9 @@
         }
     })
     export default class DumpPdfAsXmlPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get PDF Miner format XML dump of the PDF."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

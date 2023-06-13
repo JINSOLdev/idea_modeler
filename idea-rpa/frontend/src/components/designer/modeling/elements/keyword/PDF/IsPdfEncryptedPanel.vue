@@ -9,12 +9,11 @@
                 <path-field
                         :label="'Source Path'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :value.sync="value.property.source_path"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -33,5 +32,10 @@
         }
     })
     export default class IsPdfEncryptedPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Check if PDF is encrypted."
+            this.$emit("setDescription", description)
+        }
+
     }
 </script>

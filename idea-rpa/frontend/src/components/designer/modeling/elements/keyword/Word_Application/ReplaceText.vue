@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class SetFieldValues extends Mixins(KeywordElement) {
+    export default class ReplaceText extends Mixins(KeywordElement) {
         mounted() {
         }
     }

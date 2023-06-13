@@ -7,23 +7,29 @@
 
             <v-card-text>
                 <path-field
-                        :label="'Output Path'"
-                        :hint="'Path to the decrypted PDf'"
-                        :value.sync="value.property.outputpath"
-                ></path-field>
-                <path-field
                         :label="'Source Path'"
-                        :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepath"
+                        :hint="'Path to the source PDF'"
+                        :value.sync="value.property.source_path"
+                        :required="true"
                 ></path-field>
+
+                <path-field
+                        :label="'Output Path'"
+                        :hint="'Path to decrypted PDF'"
+                        :value.sync="value.property.output_path"
+                        :required="true"
+                ></path-field>
+
                 <variables-field 
                         :label="'Password'"
                         :hint="'password for decryption'"
                         :value.sync="value.property.password"
+                        :required="true"
                     ></variables-field>
                 
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -41,5 +47,9 @@
         }
     })
     export default class DecryptPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Decrypt PDF with password."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

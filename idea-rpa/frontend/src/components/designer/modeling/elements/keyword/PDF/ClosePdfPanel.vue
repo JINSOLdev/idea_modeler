@@ -9,10 +9,8 @@
                 <path-field
                         :label="'Source PDF'"
                         :hint="'Path to source PDF'"
-                        :value.sync="value.property.sourcepdf"
+                        :value.sync="value.property.source_pdf"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
 
@@ -30,5 +28,9 @@
         }
     })
     export default class ClosePdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Close PDF file descriptor for a certain file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

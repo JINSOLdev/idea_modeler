@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class TempleteHtmlToPdf extends Mixins(KeywordElement) {
+    export default class ClearAnchor extends Mixins(KeywordElement) {
         mounted() {
         }
     }

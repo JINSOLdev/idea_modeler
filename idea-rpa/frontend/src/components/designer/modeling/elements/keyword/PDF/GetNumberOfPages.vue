@@ -9,6 +9,10 @@
     })
     export default class GetNumberOfPages extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'page_count'
+            }]
         }
+
     }
 </script>

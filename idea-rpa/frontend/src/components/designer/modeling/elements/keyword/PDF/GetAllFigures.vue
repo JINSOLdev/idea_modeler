@@ -9,6 +9,11 @@
     })
     export default class GetAllFigures extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.returnVal = [{
+                value: 'figures'
+            }]
+
+            this.value.property.source_path="None"
         }
     }
 </script>
