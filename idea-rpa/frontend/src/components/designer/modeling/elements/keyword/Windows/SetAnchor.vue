@@ -9,6 +9,7 @@
     })
     export default class SetAnchor extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.timeout="None"
         }
     }
 </script>

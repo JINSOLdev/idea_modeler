@@ -1,18 +1,20 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const path = require('path')
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+
 async function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  let win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -22,8 +24,6 @@ async function createWindow() {
     }
   })
 
-<<<<<<< HEAD
-=======
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
@@ -86,7 +86,6 @@ async function createWindow() {
   })
 })
 
->>>>>>> 816a52ba852dbb850e5689a071832d610a9cf7a7
   ipcMain.on("toMain", (event, data) => {
     console.log(`Received [${data}] from renderer browser`);
     win.webContents.send("fromMain", data);
@@ -102,6 +101,7 @@ async function createWindow() {
     win.loadURL('app://./index.html')
   }
 }
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -131,6 +131,7 @@ app.on('ready', async () => {
   }
   createWindow()
 })
+
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {

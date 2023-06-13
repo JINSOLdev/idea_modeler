@@ -9,6 +9,7 @@
     })
     export default class PrintTree extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.max_depth="8"
         }
     }
 </script>

@@ -42,7 +42,7 @@
     })
     export default class GetElementPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get attribute value of the element defined by the locator."
+            var description = "Get a Control Windows element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

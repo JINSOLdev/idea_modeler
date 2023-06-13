@@ -7,7 +7,10 @@
 
             <v-card-text>
                 <locator-field
-                        :value.sync="value.property.locator"
+                :label="'Locator'"
+                :hint="'Mouse click on element matching given locator.'"
+                :value.sync="value.property.locator"
+                :required="true"
                 ></locator-field>
             </v-card-text>
         </v-card>
@@ -28,5 +31,9 @@
         }
     })
     export default class ClickPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Mouse click on element matching given locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

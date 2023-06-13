@@ -9,21 +9,17 @@
             </v-card-title>
             
             <v-card-text>
-                <locator-field
+                <Locator-field
                         :label="'Locator'"
-                        :hint="'Locator for element'"
+                        :hint="'Locator for element to click'"
                         :value.sync="value.property.locator"
-                        :required="true"
-                ></locator-field>
-            </v-card-text>
+                ></Locator-field>
 
-            <v-card-text>
                 <variables-field 
-                        :label="'Attribute'"
-                        :hint="'Name of the attribute to get'"
-                        :value.sync="value.property.attribute"
-                        :required="true"
-                ></variables-field> 
+                        :label="'Timeout'"
+                        :hint="'Time to wait for locator match (in seconds)'"
+                        :value.sync="value.property.timeout"
+                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -42,9 +38,9 @@
             KeywordPanel,
         }
     })
-    export default class GetAttributePanel extends Mixins(KeywordPanel) {
+    export default class MiddleClickPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Get attribute value of the element defined by the locator."
+            var description = "Right mouse click on element matching given locator."
             this.$emit("setDescription", description)
         }
     }

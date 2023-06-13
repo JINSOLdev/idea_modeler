@@ -6,9 +6,11 @@
             </v-card-title>
 
             <v-card-text>
-                <locator-field
+                <Locator-field
+                        :label="'Locator'"
+                        :hint="'Closes identified windows or logs the problems.'"
                         :value.sync="value.property.locator"
-                ></locator-field>
+                ></Locator-field>
 
                 <variables-field
                         :label="'Timeout'"
@@ -35,5 +37,9 @@
         }
     })
     export default class CloseWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Closes identified windows or logs the problems."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
