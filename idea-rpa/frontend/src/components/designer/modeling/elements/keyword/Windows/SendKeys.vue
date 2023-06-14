@@ -9,6 +9,8 @@
     })
     export default class SendKeys extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.keys="None"
+            this.value.property.interval="0.01"
         }
     }
 </script>

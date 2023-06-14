@@ -9,11 +9,21 @@
             </v-card-title>
             
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
-                        :hint="'Locator for window to maximize'"
+                        :hint="'Get attribute value of the element defined by the locator.'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
+                        :required="true"
+                ></locator-field>
+            </v-card-text>
+
+            <v-card-text>
+                <variables-field 
+                        :label="'Attribute'"
+                        :hint="'Being window to foreground'"
+                        :value.sync="value.property.attribute"
+                        :required="true"
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
@@ -32,9 +42,9 @@
             KeywordPanel,
         }
     })
-    export default class MaximizeWindowPanel extends Mixins(KeywordPanel) {
+    export default class GetAttributePanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Maximize the current active window or the window defined by the locator."
+            var description = "Get attribute value of the element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

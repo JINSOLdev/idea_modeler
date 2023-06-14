@@ -10,7 +10,7 @@
     export default class GetValue extends Mixins(KeywordElement) {
         mounted() {
             this.value.property.returnVal = [{
-                value: 'Value'
+                value: 'value'
             }]
         }
     }
