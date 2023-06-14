@@ -2,16 +2,11 @@
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1">
-                <!-- Input Arguments -->
             </v-card-title>
-
             <v-card-text>
-
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

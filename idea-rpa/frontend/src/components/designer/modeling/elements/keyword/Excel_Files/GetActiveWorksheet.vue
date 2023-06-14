@@ -9,9 +9,15 @@
     })
     export default class GetActiveWorksheet extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'name'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "name"
+                }])
+            }
         }
     }
 </script>

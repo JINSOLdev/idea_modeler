@@ -9,9 +9,15 @@
     })
     export default class ExecuteJavascript extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'return_value'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "return_value"
+                }])
+            }
         }
     }
 </script>

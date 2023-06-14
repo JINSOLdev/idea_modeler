@@ -9,9 +9,15 @@
     })
     export default class GetArchiveInfo extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'archive_info'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "value"
+                }])
+            }
         }
     }
 </script>

@@ -9,26 +9,33 @@
     })
     export default class CountValuesInList extends Mixins(KeywordElement) {
         mounted() {
-            this.value.proprety = new Map()
-            this.value.proprety.set("list_", null)
-            this.value.proprety.set("value", null)
-            this.value.proprety.set("start", null)
-            this.value.proprety.set("end", null)
-            this.value.proprety.set("returnVal", null)
-            
-            this.value.property.start = {
-                name: "0",
-                valueType: "String",
-                defaultValue: "0"
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "list_", null)
+                this.$set(this.value.property, "value", null)
+                this.$set(this.value.property, "start", 0)
+                this.$set(this.value.property, "end", "None")
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "count"
+                }])
             }
-            this.value.property.end = {
-                name: "None",
-                valueType: "String",
-                defaultValue: "None"
+
+            if (!this.value.property.hasOwnProperty("start")) {
+                this.$set(this.value.property, "start", 0)
             }
-            this.value.property.returnVal = [{
-                value: 'count'
-            }]
+            if (!this.value.property.hasOwnProperty("end")) {
+                this.$set(this.value.property, "end", "None")
+            }
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "count"
+                }])
+            }
         }
     }
 </script>

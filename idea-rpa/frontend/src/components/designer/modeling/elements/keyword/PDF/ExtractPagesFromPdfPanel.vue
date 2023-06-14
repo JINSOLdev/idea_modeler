@@ -22,12 +22,10 @@
                         :label="'Pages'"
                         :hint="'Page numbers to extract from PDF.(comma separated list, numbers start from 1) Defaults to all pages.'"
                         :value.sync="value.property.pages"
-                    ></variables-field>
+                ></variables-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

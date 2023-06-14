@@ -29,14 +29,13 @@
                         :hint="'Image filename prefix'"
                         :value.sync="value.property.file_prefix"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

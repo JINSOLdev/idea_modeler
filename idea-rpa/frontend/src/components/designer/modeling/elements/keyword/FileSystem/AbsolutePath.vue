@@ -9,9 +9,15 @@
     })
     export default class AbsolutePath extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'absolute'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "absolute"
+                }])
+            }
         }
     }
 </script>

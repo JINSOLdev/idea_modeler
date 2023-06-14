@@ -25,8 +25,7 @@
                         :hint="'password for decryption'"
                         :value.sync="value.property.password"
                         :required="true"
-                    ></variables-field>
-                
+                ></variables-field>
             </v-card-text>
         </v-card>
 
@@ -34,7 +33,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -9,11 +9,15 @@
     })
     export default class GetTableColumn extends Mixins(KeywordElement) {
         mounted() {
-            
-this.value.property.returnVal = [{
-                value: 'values'
-            }]
+            this.init();
+        }
 
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "values"
+                }])
+            }
         }
     }
 </script>

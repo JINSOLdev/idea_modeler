@@ -9,7 +9,19 @@
     })
     export default class ClosePdf extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.source_pdf="None"
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "source_path", "None")
+            }
+
+            if (!this.value.property.hasOwnProperty("source_path")) {
+                this.$set(this.value.property, "source_path", "None")
+            }
         }
     }
 </script>

@@ -9,11 +9,15 @@
     })
     export default class GetTableDimensions extends Mixins(KeywordElement) {
         mounted() {
-            
-this.value.property.returnVal = [{
-                value: 'dimensions'
-            }]
+            this.init();
+        }
 
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "dimensions"
+                }])
+            }
         }
     }
 </script>

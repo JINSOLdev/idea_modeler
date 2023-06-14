@@ -9,9 +9,15 @@
     })
     export default class GetSelectedListLabels extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'labels'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "labels"
+                }])
+            }
         }
     }
 </script>

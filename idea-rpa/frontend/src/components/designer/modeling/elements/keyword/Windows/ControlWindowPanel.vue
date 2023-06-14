@@ -7,7 +7,6 @@
 
             <v-card-text>
                 <locator-field
-                        :label="'Locator'"
                         :value.sync="value.property.locator"
                         :hint="'Locator for window to control'"
                 ></locator-field>
@@ -42,10 +41,6 @@
             KeywordPanel,
         }
     })
-    export default class ControlWindowPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Controls the window defined by the locator."
-            this.$emit("setDescription", description)
-        }
+    export default class ContorlWindowPanel extends Mixins(KeywordPanel) {
     }
 </script>

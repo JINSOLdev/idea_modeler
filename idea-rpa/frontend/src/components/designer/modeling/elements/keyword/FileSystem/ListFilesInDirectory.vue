@@ -9,10 +9,15 @@
     })
     export default class ListFilesInDirectory extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'files'
-            }]
-            
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "files"
+                }])
+            }
         }
     }
 </script>

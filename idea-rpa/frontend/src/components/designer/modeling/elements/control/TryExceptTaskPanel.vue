@@ -85,7 +85,7 @@
             var variables = new Variables()
             this.varItems = variables.getVarList()
 
-            if (this.value.property.except) {
+            if (this.value.property.hasOwnProperty('except')) {
                 this.getExcept = this.value.property.except
             }
         }

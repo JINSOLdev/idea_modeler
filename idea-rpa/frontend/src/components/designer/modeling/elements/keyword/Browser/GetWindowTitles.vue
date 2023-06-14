@@ -9,9 +9,15 @@
     })
     export default class GetWindowTitles extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'titles'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "titles"
+                }])
+            }
         }
     }
 </script>

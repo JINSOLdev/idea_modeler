@@ -9,10 +9,15 @@
     })
     export default class TableHead extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'head'
-            }]
+            this.init();
+        }
 
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "head"
+                }])
+            }
         }
     }
 </script>

@@ -25,9 +25,7 @@
                 ></path-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

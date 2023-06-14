@@ -9,10 +9,15 @@
     })
     export default class GetNumberOfPages extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'page_count'
-            }]
+            this.init();
         }
 
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "page_count"
+                }])
+            }
+        }
     }
 </script>

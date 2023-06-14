@@ -9,9 +9,15 @@
     })
     export default class GetVerticalPosition extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'position'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "position"
+                }])
+            }
         }
     }
 </script>

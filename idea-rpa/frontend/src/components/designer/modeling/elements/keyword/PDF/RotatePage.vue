@@ -9,9 +9,29 @@
     })
     export default class RotatePage extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.source_path="None"
-            this.value.property.output_path="None"
-            this.value.property.angle="90"
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "pages", null)
+                this.$set(this.value.property, "source_path", "None")
+                this.$set(this.value.property, "output_path", "None")
+                this.$set(this.value.property, "clockwise", null)
+                this.$set(this.value.property, "angle", "90")
+            }
+
+            if (!this.value.property.hasOwnProperty("source_path")) {
+                this.$set(this.value.property, "source_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("output_path")) {
+                this.$set(this.value.property, "output_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("angle")) {
+                this.$set(this.value.property, "angle", "90")
+            }
         }
     }
 </script>

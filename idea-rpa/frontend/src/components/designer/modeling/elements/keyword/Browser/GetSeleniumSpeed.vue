@@ -9,9 +9,15 @@
     })
     export default class GetSeleniumSpeed extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'speed'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "speed"
+                }])
+            }
         }
     }
 </script>

@@ -9,10 +9,15 @@
     })
     export default class GetFileSize extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'string'
-            }]
-            
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "string"
+                }])
+            }
         }
     }
 </script>

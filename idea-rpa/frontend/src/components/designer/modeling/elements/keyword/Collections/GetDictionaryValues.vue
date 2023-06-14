@@ -9,10 +9,28 @@
     })
     export default class GetDictionaryValues extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.sortKeys = true
-            this.value.property.returnVal = [{
-                value: 'values'
-            }]
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "dictionary", null)
+                this.$set(this.value.property, "sortKeys", true)
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "values"
+                }])
+            }
+
+            if (!this.value.property.hasOwnProperty("sortKeys")) {
+                this.$set(this.value.property, "sortKeys", true)
+            }
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "values"
+                }])
+            }
         }
     }
 </script>

@@ -6,7 +6,6 @@
             </v-card-title>
 
             <v-card-text>
-
                 <path-field
                         :label="'Output Path'"
                         :hint="'Path where to save the PDf'"
@@ -20,12 +19,9 @@
                         :value.sync="value.property.reader"
                         :required="true"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

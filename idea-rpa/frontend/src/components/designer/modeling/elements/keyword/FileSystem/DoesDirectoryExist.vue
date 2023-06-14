@@ -9,9 +9,15 @@
     })
     export default class DoesDirectoryExist extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'exists'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "exists"
+                }])
+            }
         }
     }
 </script>

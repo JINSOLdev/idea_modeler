@@ -9,9 +9,15 @@
     })
     export default class DoesPageContain extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'contains'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "contains"
+                }])
+            }
         }
     }
 </script>

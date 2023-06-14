@@ -9,10 +9,15 @@
     })
     export default class GetFileModifiedDate extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'Timestamp'
-            }]
-            
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "Timestamp"
+                }])
+            }
         }
     }
 </script>

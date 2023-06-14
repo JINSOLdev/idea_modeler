@@ -9,7 +9,21 @@
     })
     export default class HtmlToPdf extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.encoding="utf-8"
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "content", null)
+                this.$set(this.value.property, "output_path", null)
+                this.$set(this.value.property, "encoding", "utf-8")
+            }
+
+            if (!this.value.property.hasOwnProperty("encoding")) {
+                this.$set(this.value.property, "encoding", "utf-8")
+            }
         }
     }
 </script>

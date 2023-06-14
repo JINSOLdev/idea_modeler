@@ -9,7 +9,6 @@
     })
     export default class SetValue extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.value="None"
         }
     }
 </script>

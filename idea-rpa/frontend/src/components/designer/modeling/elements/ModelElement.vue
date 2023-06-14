@@ -26,6 +26,10 @@
         ]
 
         // Methods
+        init() {
+            //
+        }
+        
         getComponentName(task: any) {
             if (task.type == "DefinitionKeyword") {
                 return "keyword-element"
