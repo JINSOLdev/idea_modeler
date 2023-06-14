@@ -1,6 +1,6 @@
 <template>
     <v-navigation-drawer
-            absolute
+            fixed
             permanent
             right
             style="width: 500px;"
