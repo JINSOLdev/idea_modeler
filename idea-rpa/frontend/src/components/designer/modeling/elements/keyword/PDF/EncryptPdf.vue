@@ -9,9 +9,29 @@
     })
     export default class EncryptPdf extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.source_path="None"
-            this.value.property.output_path="None"
-            this.value.property.owner_pwd="None"
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "source_path", "None")
+                this.$set(this.value.property, "output_path", "None")
+                this.$set(this.value.property, "user_pwd", null)
+                this.$set(this.value.property, "owner_pwd", "None")
+                this.$set(this.value.property, "use128bit", null)
+            }
+
+            if (!this.value.property.hasOwnProperty("source_path")) {
+                this.$set(this.value.property, "source_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("output_path")) {
+                this.$set(this.value.property, "output_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("owner_pwd")) {
+                this.$set(this.value.property, "owner_pwd", "None")
+            }
         }
     }
 </script>

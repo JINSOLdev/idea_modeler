@@ -17,8 +17,6 @@
                         :value.sync="value.property.trim"
                         :label="'Trim'"
                         :hint="'Automatically trim leading/trailing whitespace from the text elements'"
-                        persistent-hint
-                        class="py-0"
                 ></switch-field>
 
                 <variables-field 
@@ -31,10 +29,7 @@
                         :value.sync="value.property.ignore_case"
                         :label="'Ignore case'"
                         :hint="'Do a case-insensitive search (affects the passed locator and regexp filtering)'"
-                        persistent-hint
-                        class="py-0"
                 ></switch-field>
-
             </v-card-text>
         </v-card>
 
@@ -42,7 +37,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

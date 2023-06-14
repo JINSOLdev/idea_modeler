@@ -9,10 +9,15 @@
     })
     export default class ReadBinaryFile extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'content'
-            }]
-            
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "content"
+                }])
+            }
         }
     }
 </script>

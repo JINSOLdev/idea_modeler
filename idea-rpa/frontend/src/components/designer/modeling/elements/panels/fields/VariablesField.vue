@@ -116,7 +116,7 @@
                     }]
                 }
             } else {
-                if (this.value && this.value.defaultValue) {
+                if (this.value && this.value != null) {
                     this.newValue = this.value
                 } else {
                     this.newValue = null

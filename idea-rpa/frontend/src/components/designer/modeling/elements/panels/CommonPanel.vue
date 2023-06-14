@@ -1,6 +1,6 @@
 <template>
     <v-navigation-drawer
-            fixed
+            absolute
             permanent
             right
             style="width: 500px;"
@@ -66,8 +66,9 @@
             if (this.value.property && Object.keys(this.value.property).length > 0) {
                 var map = new Map()
                 Object.keys(this.value.property).forEach((key: any) => {
-                    map.set(key, this.value.property[key])
+                    this.$set(map, key, this.value.property[key])
                 })
+                this.value.property = map
             }
         }
         

@@ -11,13 +11,9 @@
                         :hint="'Path to source PDF'"
                         :value.sync="value.property.source_path"
                 ></path-field>
-                
-
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

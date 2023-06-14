@@ -3,10 +3,10 @@
         TODO: scriptText 를 모델로 전환하는 parse 기능 필요.
     -->
     <v-navigation-drawer
-            fixed
+            absolute
             permanent
             right
-            style="width: 800px;"
+            style="width: 600px;"
     >
         <v-card outlined>
             <v-card-title class="d-flex">

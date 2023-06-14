@@ -9,9 +9,15 @@
     })
     export default class GetCookie extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'cookie'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "cookie"
+                }])
+            }
         }
     }
 </script>

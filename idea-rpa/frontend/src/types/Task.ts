@@ -641,7 +641,7 @@ class Keyword extends SeqTask {
                 robot = ""
 
                 this.property.returnVal.forEach((item: any) => 
-                    robot += Construct.tabs.substr(0, tab) + `\$\{${item.value}\}=`
+                    robot += Construct.tabs.substr(0, tab) + `\$\{${item.defaultValue}\}=`
                 )
 
                 robot += Construct.tabs.substr(0, 1) + `${this.name}`

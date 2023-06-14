@@ -9,10 +9,15 @@
     })
     export default class IsDirectoryEmpty extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'not_empty'
-            }]
-            
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "not_empty"
+                }])
+            }
         }
     }
 </script>

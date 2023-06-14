@@ -60,9 +60,7 @@
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
-
     </div>
-    
 </template>
 
 <script lang="ts">

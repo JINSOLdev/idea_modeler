@@ -9,9 +9,15 @@
     })
     export default class DoesFileNotExist extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'not_exists'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "not_exists"
+                }])
+            }
         }
     }
 </script>

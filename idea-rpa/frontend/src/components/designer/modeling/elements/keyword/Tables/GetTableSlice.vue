@@ -9,10 +9,15 @@
     })
     export default class GetTableSlice extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'slice'
-            }]
+            this.init();
+        }
 
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "slice"
+                }])
+            }
         }
     }
 </script>

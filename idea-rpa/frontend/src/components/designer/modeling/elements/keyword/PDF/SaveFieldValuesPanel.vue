@@ -29,13 +29,9 @@
                         :label="'Use Appearances Writer'"
                         :hint="`For some PDF documents the updated fields won't be visible, try to set this on if you encounter problems (viewing the output PDF in browser might display the field values then)`"
                 ></switch-field>
-                
-
             </v-card-text>
-        </v-card>
-       
+        </v-card>       
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -23,13 +23,9 @@
                         :hint="'Appends files to existing document'"
                         :value.sync="value.property.append"
                 ></switch-field>
-                
-
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

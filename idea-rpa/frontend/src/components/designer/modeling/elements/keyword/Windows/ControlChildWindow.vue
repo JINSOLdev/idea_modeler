@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ControlChildWindow extends Mixins(KeywordElement) {
+    export default class ContorlChildWindow extends Mixins(KeywordElement) {
         mounted() {
         }
     }

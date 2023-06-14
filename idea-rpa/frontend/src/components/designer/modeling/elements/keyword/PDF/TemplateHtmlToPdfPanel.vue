@@ -32,13 +32,9 @@
                         :hint="'Codec used for text I/O'"
                         :value.sync="value.property.encoding"
                 ></variables-field>
-                
-
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

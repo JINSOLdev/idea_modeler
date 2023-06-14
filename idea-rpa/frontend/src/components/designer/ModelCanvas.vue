@@ -270,7 +270,7 @@
                 fs.exists(path, (exists) => {
                     fs.readFile(path, (err, data) => {
                         if (err) console.error(err);
-                        if (!data || !data.toString()) {return }
+                        if (!data || !data.toString()) { return }
                         
                         let loadData = JSON.parse(data.toString());
                         loadData.child = me.cloneChild(loadData.child)
@@ -348,8 +348,7 @@
                                     element.library = item.library
                                     const locator = this.setLocator(str.replace(keyword, "").trim())
                                     element.property = new Map()
-                                    element.property.set("locator", null)
-                                    element.property.locator = locator
+                                    this.$set(element.property, "locator", locator)
                                     this.robot.child.push(element)
                                 }
                             })
@@ -547,7 +546,7 @@
                 child.forEach((childEl: any) => {
                     
                     var clone = this.$refs.elementList.cloneElement(childEl)
-                    clone.property = childEl.property
+                    this.$set(clone, "property", childEl.property)
 
                     if (this.cloneChild(childEl.child).length > 0) {
                         clone.child = this.cloneChild(childEl.child)

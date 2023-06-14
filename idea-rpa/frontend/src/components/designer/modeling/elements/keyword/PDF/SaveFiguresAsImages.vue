@@ -9,13 +9,36 @@
     })
     export default class SaveFiguresAsImages extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'images_filenames'
-            }]
+            this.init();
+        }
 
-            this.value.property.source_path="None"
-            this.value.property.images_folder="."
-            this.value.property.pages="None"
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "source_path", "None")
+                this.$set(this.value.property, "images_folder", ".")
+                this.$set(this.value.property, "pages", "None")
+                this.$set(this.value.property, "file_prefix", null)
+                this.$set(this.value.property, "returnVal",  [{
+                    defaultValue: "images_filenames"
+                }])
+            }
+
+            if (!this.value.property.hasOwnProperty("source_path")) {
+                this.$set(this.value.property, "source_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("images_folder")) {
+                this.$set(this.value.property, "images_folder", ".")
+            }
+            if (!this.value.property.hasOwnProperty("pages")) {
+                this.$set(this.value.property, "pages", "None")
+            }
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal",  [{
+                    defaultValue: "images_filenames"
+                }])
+            }
         }
 
     }

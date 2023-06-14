@@ -9,9 +9,15 @@
     })
     export default class ListAttributes extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'attributes'
-            }]
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "attributes"
+                }])
+            }
         }
     }
 </script>

@@ -9,12 +9,27 @@
     })
     export default class GetPdfInfo extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.returnVal = [{
-                value: 'metadata'
-            }]
-
-            this.value.property.source_path="None"
+            this.init();
         }
 
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "source_path", "None")
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "metadata"
+                }])
+            }
+
+            if (!this.value.property.hasOwnProperty("source_path")) {
+                this.$set(this.value.property, "source_path", "None")
+            }
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "metadata"
+                }])
+            }
+        }
     }
 </script>
