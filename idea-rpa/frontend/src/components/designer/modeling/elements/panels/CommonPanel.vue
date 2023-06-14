@@ -3,7 +3,7 @@
             fixed
             permanent
             right
-            style="width: 800px;"
+            style="width: 500px;"
     >
         <template v-slot:prepend>
             <v-list-item two-line>
