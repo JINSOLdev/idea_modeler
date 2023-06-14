@@ -3,7 +3,7 @@
         TODO: scriptText 를 모델로 전환하는 parse 기능 필요.
     -->
     <v-navigation-drawer
-            absolute
+            fixed
             permanent
             right
             style="width: 800px;"
