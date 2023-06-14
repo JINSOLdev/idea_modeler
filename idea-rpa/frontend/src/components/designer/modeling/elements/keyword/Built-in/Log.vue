@@ -9,6 +9,8 @@
     })
     export default class Log extends Mixins(KeywordElement) {
         mounted() {
+            this.value.property.level = "INFO"
+            this.value.property.formatter = "str"
         }
     }
 </script>
