@@ -9,7 +9,7 @@
     })
     export default class Sleep extends Mixins(KeywordElement) {
         mounted() {
-            
+            this.value.property.reason = "None"
         }
     }
 </script>
