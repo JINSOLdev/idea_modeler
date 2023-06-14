@@ -1,9 +1,9 @@
 <template>
     <v-navigation-drawer
-            absolute
+            fixed
             permanent
             right
-            style="width: 500px;"
+            style="width: 800px;"
     >
         <template v-slot:prepend>
             <v-list-item two-line>
