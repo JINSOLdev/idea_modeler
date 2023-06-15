@@ -9,6 +9,25 @@
     })
     export default class SendKeys extends Mixins(KeywordElement) {
         mounted() {
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "keys", "None")
+                this.$set(this.value.property, "interval", 0.01)
+                this.$set(this.value.property, "send_enter", null)
+            }
+
+
+            if (!this.value.property.hasOwnProperty("keys")) {
+                this.$set(this.value.property, "keys", "None")
+            }
+            if (!this.value.property.hasOwnProperty("interval")) {
+                this.$set(this.value.property, "interval", 0.01)
+            }
         }
     }
 </script>

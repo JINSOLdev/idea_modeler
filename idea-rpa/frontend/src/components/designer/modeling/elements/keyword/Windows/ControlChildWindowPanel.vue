@@ -40,6 +40,6 @@
             KeywordPanel,
         }
     })
-    export default class ContorlChildWindowPanel extends Mixins(KeywordPanel) {
+    export default class ControlChildWindowPanel extends Mixins(KeywordPanel) {
     }
 </script>
