@@ -36,5 +36,9 @@
         }
     })
     export default class GetFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the value specified with an index from list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

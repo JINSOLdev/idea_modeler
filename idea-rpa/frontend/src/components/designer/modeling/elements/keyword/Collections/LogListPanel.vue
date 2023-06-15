@@ -36,5 +36,9 @@
         }
     })
     export default class LogListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs the length and contents of the list using given level."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

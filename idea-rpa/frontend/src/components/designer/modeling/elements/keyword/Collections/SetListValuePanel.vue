@@ -41,5 +41,9 @@
         }
     })
     export default class SetListValuePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sets the value of list specified by index to the given value."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -44,5 +44,9 @@
         }
     })
     export default class PopFromDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Pops the given key from the dictionary and return its value."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

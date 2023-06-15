@@ -49,6 +49,8 @@
     })
     export default class CountValuesInListPanel extends Mixins(KeywordPanel) {
         mounted() {
+            var description = "Returns the number of occurrences of the given value in list."
+            this.$emit("setDescription", description)
         }
     }
 </script>
