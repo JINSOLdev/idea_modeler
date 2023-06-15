@@ -39,7 +39,7 @@
 
                 <variables-field 
                         :label="'Regexp'"
-                        :hint="'Expected format of the searched text value. by default all the candidates in range are considered vaild neighbours'"
+                        :hint="'Expected format of the searched text value. by default all the candidates in range are considered valid neighbours'"
                         :value.sync="value.property.regexp"
                 ></variables-field>
 

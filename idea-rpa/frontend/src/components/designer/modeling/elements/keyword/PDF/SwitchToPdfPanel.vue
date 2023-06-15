@@ -27,7 +27,7 @@
     })
     export default class SwitchToPdfPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Switch library's current fileobject to already opened file or open a new file if not opened."
+            var description = "Switch library's current file object to already opened file or open a new file if not opened."
             this.$emit("setDescription", description)
         }
 
