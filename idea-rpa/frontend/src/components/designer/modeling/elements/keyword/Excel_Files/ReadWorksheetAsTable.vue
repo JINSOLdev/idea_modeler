@@ -16,12 +16,21 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "name", "None")
+                this.$set(this.value.property, "header", null)
+                this.$set(this.value.property, "trim", null)
                 this.$set(this.value.property, "start", "None")
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "table"
                 }])
             }
 
+            if (!this.value.property.hasOwnProperty("name")) {
+                this.$set(this.value.property, "name", "None")
+            }
+            if (!this.value.property.hasOwnProperty("start")) {
+                this.$set(this.value.property, "start", "None")
+            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "table"

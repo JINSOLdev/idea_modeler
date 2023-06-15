@@ -16,8 +16,11 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "content", null)
                 this.$set(this.value.property, "name", "None")
+                this.$set(this.value.property, "header", null)
                 this.$set(this.value.property, "start", "None")
+                this.$set(this.value.property, "formatting_as_empty", null)
             }
 
             if (!this.value.property.hasOwnProperty("name")) {

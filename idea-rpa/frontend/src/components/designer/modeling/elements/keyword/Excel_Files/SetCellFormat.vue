@@ -16,6 +16,9 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "row", null)
+                this.$set(this.value.property, "column", null)
+                this.$set(this.value.property, "fmt", null)
                 this.$set(this.value.property, "name", "None")
             }
 
