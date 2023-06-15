@@ -9,8 +9,19 @@
     })
     export default class WaitUntilModified extends Mixins(KeywordElement) {
         mounted() {
-            
-            
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "timeout", 5.0)
+            }
+
+            if (!this.value.property.hasOwnProperty("timeout")) {
+                this.$set(this.value.property, "timeout", 5.0)
+            }
         }
     }
 </script>
