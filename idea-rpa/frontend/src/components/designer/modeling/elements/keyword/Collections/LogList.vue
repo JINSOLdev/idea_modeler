@@ -12,6 +12,7 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map ()
+                this.$set(this.value.property, "list", null)
                 this.$set(this.value.property, "level", "INFO")
             }
 
