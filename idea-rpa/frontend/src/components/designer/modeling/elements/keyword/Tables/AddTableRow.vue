@@ -9,6 +9,20 @@
     })
     export default class AddTableRow extends Mixins(KeywordElement) {
         mounted() {
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "table", null)
+                this.$set(this.value.property, "values", "None")
+            }
+
+            if (!this.value.property.hasOwnProperty("values")) {
+                this.$set(this.value.property, "values", "None")
+            }
         }
     }
 </script>
