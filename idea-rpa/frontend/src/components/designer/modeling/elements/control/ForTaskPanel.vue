@@ -21,6 +21,10 @@
                         :isMultiple="true"
                 ></variables-field>
             </v-card-text>
+
+            <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
         </v-card>
     </div>
 </template>
