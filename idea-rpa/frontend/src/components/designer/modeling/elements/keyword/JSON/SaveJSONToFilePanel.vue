@@ -6,34 +6,33 @@
             </v-card-title>
 
             <v-card-text>
-                    <variables-field
-                            :label="'Doc'"
-                            :hint="'JSON-compatible object'"
-                            :value.sync="value.property.doc"
-                            :required="true"
-                    ></variables-field>
+                <variables-field
+                        :label="'Doc'"
+                        :hint="'JSON-compatible object'"
+                        :value.sync="value.property.doc"
+                        :required="true"
+                ></variables-field>
 
-                    <variables-field
-                            :label="'Filename'"
-                            :hint="'Path to output file'"
-                            :value.sync="value.property.filename"
-                    ></variables-field>
+                <variables-field
+                        :label="'Filename'"
+                        :hint="'Path to output file'"
+                        :value.sync="value.property.filename"
+                ></variables-field>
 
 
-                    <variables-field
-                            :label="'Indent'"
-                            :hint="'Indentation for JSON'"
-                            :value.sync="value.property.indent"
-                    ></variables-field>
+                <variables-field
+                        :label="'Indent'"
+                        :hint="'Indentation for JSON'"
+                        :value.sync="value.property.indent"
+                ></variables-field>
 
-                    <variables-field
-                            :label="'Encoding'"
-                            :hint="'Output character encoding'"
-                            :value.sync="value.property.encoding"
-                    ></variables-field>
-                    
-                </v-card-text>
-         </v-card>
+                <variables-field
+                        :label="'Encoding'"
+                        :hint="'Output character endcoding'"
+                        :value.sync="value.property.encoding"
+                ></variables-field>
+            </v-card-text>
+        </v-card>
     </div>
 </template>
 

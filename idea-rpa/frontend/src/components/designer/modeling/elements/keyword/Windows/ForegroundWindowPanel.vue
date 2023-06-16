@@ -1,6 +1,3 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
@@ -10,8 +7,8 @@
             
             <v-card-text>
                 <locator-field
-                    :value.sync="value.property.locator"
-                    :hint="'Optional locator for window'"
+                        :value.sync="value.property.locator"
+                        :hint="'Optional locator for window'"
                 ></locator-field>
             </v-card-text>
         </v-card>

@@ -18,11 +18,9 @@
                         :hint="'Value(s) for new column'"
                         :value.sync="value.property.values"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -1,8 +1,11 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
+        <v-card flat>
+            <v-card-title class="subtitle-1">
+                Input Arguments
+            </v-card-title>
+        </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>        

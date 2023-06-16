@@ -12,35 +12,27 @@
                         :value.sync="value.property.row"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Column'"
                         :hint="'Name or index of column'"
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <path-field
                         :label="'Path'"
                         :hint="'Path to image file'"
                         :value.sync="value.property.path"
                         :required="true"
                 ></path-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Scale'"
                         :hint="'Scale of image'"
                         :value.sync="value.property.scale"
                 ></variables-field>
-            </v-card-text>
-
-            <v-card-text>
+                
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of worksheet'"
@@ -48,9 +40,7 @@
                 ></variables-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

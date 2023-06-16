@@ -9,6 +9,21 @@
     })
     export default class SortTableByColumn extends Mixins(KeywordElement) {
         mounted() {
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "table", null)
+                this.$set(this.value.property, "Row", null)
+                this.$set(this.value.property, "ascending", true)
+            }
+
+            if (!this.value.property.hasOwnProperty("ascending")) {
+                this.$set(this.value.property, "ascending", true)
+            }
         }
     }
 </script>

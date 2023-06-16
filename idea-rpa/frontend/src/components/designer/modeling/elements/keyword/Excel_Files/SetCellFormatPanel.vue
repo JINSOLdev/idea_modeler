@@ -12,27 +12,21 @@
                         :value.sync=value.property.row
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Column'"
                         :hint="'Name or index of column'"
                         :value.sync=value.property.column
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Fmt'"
                         :hint="'Format code for cell'"
                         :value.sync=value.property.fmt
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of worksheet'"

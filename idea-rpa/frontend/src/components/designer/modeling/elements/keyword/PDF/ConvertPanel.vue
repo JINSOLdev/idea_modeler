@@ -20,7 +20,7 @@
 
                 <variables-field 
                         :label="'Pagenum'"
-                        :hint="'Page number to convert. Defaults to all pages getting converted. Numbers start from 1'"
+                        :hint="'Page number to convert. Defaults to all pages getting converted. Numvers start from 1'"
                         :value.sync="value.property.pagenum"
                 ></variables-field>
             </v-card-text>

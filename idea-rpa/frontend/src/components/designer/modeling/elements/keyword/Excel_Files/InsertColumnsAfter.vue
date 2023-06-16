@@ -9,20 +9,6 @@
     })
     export default class InsertColumnsAfter extends Mixins(KeywordElement) {
         mounted() {
-            this.init()
-        }
-
-        init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.value.property = new Map()
-                this.$set(this.value.property, "column", null)
-                this.$set(this.value.property, "amount", 1)
-            }
-
-            if (!this.value.property.hasOwnProperty("amount")) {
-                this.$set(this.value.property, "amount", 1)
-            }
         }
     }
 </script>

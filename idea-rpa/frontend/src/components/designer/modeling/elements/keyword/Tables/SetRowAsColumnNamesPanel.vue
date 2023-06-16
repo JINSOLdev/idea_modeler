@@ -10,17 +10,18 @@
                         :label="'Table'"
                         :hint="'Table to modify'"
                         :value.sync="value.property.table"
+                        :required="true"
                 ></variables-field>
+
                 <variables-field
                         :label="'Row'"
                         :hint="'Row to use for names'"
                         :value.sync="value.property.row"
+                        :required="true"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

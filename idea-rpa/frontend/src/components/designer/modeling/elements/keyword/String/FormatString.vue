@@ -13,16 +13,6 @@
         }
 
         init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.$set(this.value.property, "template", null)
-                this.$set(this.value.property, "positional", null)
-                this.$set(this.value.property, "named", "name")
-            }
-
-            if (!this.value.property.hasOwnProperty("named")) {
-                this.$set(this.value.property, "named", "name")
-            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "result"

@@ -9,19 +9,6 @@
     })
     export default class PrintTree extends Mixins(KeywordElement) {
         mounted() {
-            this.init();
-        }
-
-        init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.value.property = new Map()
-                this.$set(this.value.property, "max_depth", 8)
-            }
-
-            if (!this.value.property.hasOwnProperty("max_depth")) {
-                this.$set(this.value.property, "max_depth", 8)
-            }
         }
     }
 </script>

@@ -11,11 +11,9 @@
                         :hint="'PDF to export WORD into'"
                         :value.sync="value.property.filename"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

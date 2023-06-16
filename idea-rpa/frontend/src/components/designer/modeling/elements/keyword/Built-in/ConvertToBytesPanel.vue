@@ -15,7 +15,7 @@
                 <variables-field
                         :label="'Input Type'"
                         :hint="'Type of input, i.e. `text`, `int`, `hex`, or `bin`'"
-                        :value.sync="value.property.input_type"
+                        :value.sync="value.property.input_text"
                 ></variables-field>     
             </v-card-text>
         </v-card>

@@ -10,6 +10,7 @@
                         :records.sync="locator"
                         @closeLocator="closeLocator"
                 ></open-child-browser>
+
                 <v-text-field
                         v-else
                         v-model="valueText"
@@ -52,7 +53,7 @@
             </v-col>
         </v-row>
 
-        <v-dialog v-model="openSelectLocator">
+        <v-dialog v-model="openSelectLocator" max-width="600">
             <v-card>
                 <v-card-title>
                     Select a Locator
@@ -79,10 +80,16 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn @click="openSelectLocator = false"
-                            outlined
+                            text
                             color="red"
                     >
-                        close
+                        Cancel
+                    </v-btn>
+                    <v-btn @click="openSelectLocator = false"
+                            text
+                            color="success"
+                    >
+                        Ok
                     </v-btn>
                 </v-card-actions>
             </v-card>

@@ -23,7 +23,6 @@
                         :hint="'Names of columns'"
                         :value.sync="value.property.columns"
                 ></variables-field>
-               
             </v-card-text>
         </v-card>
 
@@ -31,7 +30,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

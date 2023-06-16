@@ -13,11 +13,11 @@
                         :required="true"
                 ></Path-field>
 
-                <Variables-field
+                <switch-field
                         :label="'Header'"
                         :hint="'File includes header'"
                         :value.sync="value.property.header"
-                ></Variables-field>
+                ></switch-field>
 
                 <variables-field
                         :label="'Columns'"
@@ -42,14 +42,13 @@
                         :hint="'Source file encoding'"
                         :value.sync="value.property.encoding"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

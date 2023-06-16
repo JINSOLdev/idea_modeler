@@ -18,12 +18,15 @@
                 this.value.property = new Map()
                 this.$set(this.value.property, "table", null)
                 this.$set(this.value.property, "path", null)
-                this.$set(this.value.property, "header", null)
+                this.$set(this.value.property, "header", true)
                 this.$set(this.value.property, "dialect", "Excel")
                 this.$set(this.value.property, "encoding", "None")
-                this.$set(this.value.property, "delimiter", ".")
+                this.$set(this.value.property, "delimiter", ",")
             }
 
+            if (!this.value.property.hasOwnProperty("header")) {
+                this.$set(this.value.property, "header", true)
+            }
             if (!this.value.property.hasOwnProperty("dialect")) {
                 this.$set(this.value.property, "dialect", "Excel")
             }
@@ -31,9 +34,8 @@
                 this.$set(this.value.property, "encoding", "None")
             }
             if (!this.value.property.hasOwnProperty("delimiter")) {
-                this.$set(this.value.property, "delimiter", ".")
+                this.$set(this.value.property, "delimiter", ",")
             }
-            
         }
     }
 </script>

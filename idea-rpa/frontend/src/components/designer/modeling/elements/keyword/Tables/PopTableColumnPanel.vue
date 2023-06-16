@@ -18,7 +18,6 @@
                         :hint="'Column  to pop'"
                         :value.sync="value.property.column"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
 
@@ -26,7 +25,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

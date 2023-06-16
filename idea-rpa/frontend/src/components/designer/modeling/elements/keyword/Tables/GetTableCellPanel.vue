@@ -6,7 +6,6 @@
             </v-card-title>
 
             <v-card-text>
-                
                 <variables-field
                         :label="'Table'"
                         :hint="'Table to read from'"
@@ -27,8 +26,6 @@
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
-
-               
             </v-card-text>
         </v-card>
 
@@ -36,7 +33,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

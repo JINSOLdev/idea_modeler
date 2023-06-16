@@ -13,23 +13,6 @@
         }
 
         init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.value.property = new Map()
-                this.$set(this.value.property, "table", null)
-                this.$set(this.value.property, "start", "None")
-                this.$set(this.value.property, "end", "None")
-                this.$set(this.value.property, "returnVal", [{
-                    defaultValue: "slice"
-                }])
-            }
-
-            if (!this.value.property.hasOwnProperty("start")) {
-                this.$set(this.value.property, "start", "None")
-            }
-            if (!this.value.property.hasOwnProperty("end")) {
-                this.$set(this.value.property, "end", "None")
-            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "slice"

@@ -7,22 +7,19 @@
 
             <v-card-text>
                 <switch-field
-                    :label="'Visible'"
-                    :hint="'show window after opening'"
-                    :value.sync ="value.property.visible"
+                        :label="'Visible'"
+                        :hint="'show window after opening'"
+                        :value.sync ="value.property.visible"
                 ></switch-field>
                 
                 <v-switch
-                    :value.sync="value.property.display_alerts"
-                    :label="'Display alerts'"
-                    :hint="'show alert popups'"
-                ></v-switch>
-
-             
+                        :value.sync="value.property.display_alerts"
+                        :label="'Display alerts'"
+                        :hint="'show alert popups'"
+                ></v-switch>             
             </v-card-text>
         </v-card>
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

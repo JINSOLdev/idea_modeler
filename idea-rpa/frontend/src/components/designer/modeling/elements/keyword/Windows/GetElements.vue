@@ -13,18 +13,6 @@
         }
 
         init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.value.property = new Map()
-                this.$set(this.value.property, "timeout", "None")
-                this.$set(this.value.property, "returnVal",  [{
-                    defaultValue: "result"
-                }])
-            }
-
-            if (!this.value.property.hasOwnProperty("timeout")) {
-                this.$set(this.value.property, "timeout", "None")
-            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "elements"

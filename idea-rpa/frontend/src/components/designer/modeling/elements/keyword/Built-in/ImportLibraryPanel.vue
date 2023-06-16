@@ -16,6 +16,7 @@
                         :label="'Args'"
                         :hint="'Arguments for library'"
                         :value.sync="value.property.args"
+                        :isMultiple="true"
                 ></variables-field>
             </v-card-text>                   
         </v-card>

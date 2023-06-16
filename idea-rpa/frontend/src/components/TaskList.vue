@@ -35,15 +35,130 @@
                     </v-card>
                 </v-col>
             </v-row>
-            <v-btn @click="createNewTask"
+
+            <v-speed-dial
+                    v-model="locationBtn"
                     absolute
                     bottom
                     right
-                    fab
-                    color="primary"
             >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
+                <template v-slot:activator>
+                    <v-btn v-model="locationBtn"
+                            fab dark
+                            color="primary"
+                    >
+                        <v-icon v-if="locationBtn">
+                            mdi-close
+                        </v-icon>
+                        <v-icon v-else>
+                            mdi-menu
+                        </v-icon>
+                    </v-btn>
+                </template>
+
+                <v-tooltip left>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn @click="openTaskDialog"
+                                v-bind="attrs"
+                                v-on="on"
+                                fab 
+                                dark 
+                                color="green"
+                        >
+                            <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Add New Task</span>
+                </v-tooltip>
+
+                <v-tooltip left>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn @click="openLocationDialog"
+                                v-bind="attrs"
+                                v-on="on"
+                                fab 
+                                dark 
+                                color="indigo"
+                        >
+                            <v-icon>mdi-folder-outline</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Select Task Folder</span>
+                </v-tooltip>
+            </v-speed-dial>
+
+            <!-- Location Dialog -->
+            <v-dialog v-model="locationDialog" max-width="600">
+                <v-card>
+                    <v-card-title>
+                        Select Task Folder
+                    </v-card-title>
+                    <v-card-text class="pb-0">
+                        <v-text-field
+                                v-model="taskLocation"
+                                persistent-placeholder
+                                placeholder="/tasks"
+                                outlined
+                                dense
+                                @click="setTaskLocation"
+                        >
+                            <template v-slot:append>
+                                <v-icon @click="setTaskLocation">
+                                    mdi-folder-outline
+                                </v-icon>
+                            </template>
+                        </v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn @click="locationDialog = false"
+                                text
+                                color="red"
+                        >
+                            Cancel
+                        </v-btn>
+                        <v-btn @click="setTaskList"
+                                text
+                                color="success"
+                        >
+                            Open
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+
+            <!-- Task Dialog -->
+            <v-dialog v-model="taskDialog" max-width="600">
+                <v-card>
+                    <v-card-title>
+                        New Task Name
+                    </v-card-title>
+                    <v-card-text class="pb-0">
+                        <v-text-field
+                                v-model="taskName"
+                                persistent-placeholder
+                                placeholder="New Task"
+                                outlined
+                                dense
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn @click="taskDialog = false"
+                                text
+                                color="red"
+                        >
+                            Cancel
+                        </v-btn>
+                        <v-btn @click="createNewTask"
+                                text
+                                color="success"
+                        >
+                            Add
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-container>
     </div>
 </template>
@@ -57,23 +172,25 @@
     @Component({})
     export default class TaskList extends Vue {
         public lists: any[] = [];
+        public taskLocation: string = "";
+        public locationDialog: boolean = false;
+        public locationBtn: boolean = false;
+        public taskDialog: boolean = false;
+        public taskName: string = "";
 
         mounted() {
-            var list: any = window.localStorage.getItem("list")
-            if (list) {
-                list = JSON.parse(list)
-                if (list.tasks) {
-                    this.lists = list.tasks
-                }
+            window.localStorage.removeItem("list")
+
+            var location: any = window.localStorage.getItem("location")
+            if (location && location != null && location != "null"
+                    && location != undefined && location != "undefined"
+            ) {
+                this.taskLocation = location;
             } else {
-                fs.readdirSync('./tasks').forEach((file) => {
-                    this.lists.push({
-                        name: file.replace('.json', ''),
-                        path: './tasks/' + file
-                    });
-                });
-                window.localStorage.setItem("list", JSON.stringify({ 'tasks': this.lists }))
+                this.taskLocation = "./tasks";
             }
+
+            this.setTaskList();
         }
 
         removeFile(task: any) {
@@ -85,37 +202,86 @@
             fs.rmSync(`${task.path}`, {
                 force: true
             })
+
+            window.localStorage.setItem("list", JSON.stringify({ 'tasks': this.lists }))
         }
 
-        createNewTask() {
+        openLocationDialog() {
+            this.locationDialog = true;
+        }
+
+        openTaskDialog() {
+            this.taskName = "";
+            this.taskDialog = true;
+        }
+
+        setTaskLocation() {
             let me = this
-            dialog.showSaveDialog({
+
+            dialog.showOpenDialog({
                 defaultPath: "",
-                filters: [
-                    { name: 'JSON', extensions: ['json'] }
-                ]
+                properties: ["openDirectory"]
             }).then(result => {
-
-                if (!result.canceled) {
-                    const filePath: any = result.filePath;
-                    const tmpArr = filePath.split("\\");
-                    const taskName = tmpArr.pop().replace(".json", "");
-                    const newTask = new Robot(1, taskName, "Task", []);
-
-                    fs.writeFileSync(filePath, JSON.stringify(newTask));
-                    
-                    me.lists.push({
-                        name: taskName,
-                        path: filePath
-                    });
-
-                    window.localStorage.setItem("list", JSON.stringify({ 'tasks': me.lists }))
+                if (result && !result.canceled) {
+                    var path: any = result.filePaths.shift()
+                    me.taskLocation = path?.replace(/\\/g, "/")
+                    window.localStorage.setItem("location", me.taskLocation)
                 }
 
             }).catch(err => {
                 console.log(err)
 
             });
+        }
+
+        setTaskList() {
+            let me = this
+            try {
+                me.lists = [];
+                fs.readdirSync(me.taskLocation).forEach((file) => {
+                    if (file.includes(".json")) {
+                        me.lists.push({
+                            name: file.replace(".json", ""),
+                            path: `${me.taskLocation}/`+ file
+                        });
+                    }
+                });
+                me.locationDialog = false;
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        createNewTask() {
+            let me = this;
+            const filePath = `${me.taskLocation}/${me.taskName}.json`;
+
+            const hasTask = me.lists.some((item) => 
+                me.taskName == "" || (item.name == me.taskName && item.path == filePath)
+            )
+
+            if (hasTask) {
+                return;
+
+            } else {
+                try {
+                    const newTask = new Robot(1, me.taskName, "Task", []);
+                    const data = {
+                        path: filePath,
+                        robot: newTask
+                    }
+                    fs.writeFileSync(filePath, JSON.stringify(data));
+                    me.lists.push({
+                        name: me.taskName,
+                        path: filePath
+                    });
+                    me.taskDialog = false;
+
+                } catch (e) {
+                    console.log(e)
+                }
+            }
         }
     }
 </script>

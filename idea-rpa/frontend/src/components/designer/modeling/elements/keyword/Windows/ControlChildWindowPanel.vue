@@ -7,8 +7,8 @@
 
             <v-card-text>
                 <locator-field
-                    :value.sync="value.property.locator"
-                    :hint="'Locator for window to control'"
+                        :value.sync="value.property.locator"
+                        :hint="'Locator for window to control'"
                 ></locator-field>
 
                 <switch-field
@@ -40,6 +40,6 @@
             KeywordPanel,
         }
     })
-    export default class ControlChildWindowPanel extends Mixins(KeywordPanel) {
+    export default class ContorlChildWindowPanel extends Mixins(KeywordPanel) {
     }
 </script>

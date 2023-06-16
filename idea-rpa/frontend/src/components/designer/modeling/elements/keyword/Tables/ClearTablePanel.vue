@@ -12,12 +12,9 @@
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
-
-               
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">
