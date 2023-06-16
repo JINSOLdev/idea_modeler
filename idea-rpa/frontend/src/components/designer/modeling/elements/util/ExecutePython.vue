@@ -1,6 +1,9 @@
 <template>
     <div>
-        <v-btn text color="success" @click="executePython()">
+        <v-btn @click="executePython()"
+                text
+                color="success"
+        >
             <v-icon>mdi-cog-play-outline</v-icon>
             execute
         </v-btn>
@@ -85,7 +88,7 @@
                 var obj = {
                     status: true,
                     type: "warning",
-                    msg: "Must have at least one Keyword to execute Robot."
+                    msg: "Must have at least one keyword to execute Robot."
                 }
                 this.$emit("openAlert", obj)
                 return

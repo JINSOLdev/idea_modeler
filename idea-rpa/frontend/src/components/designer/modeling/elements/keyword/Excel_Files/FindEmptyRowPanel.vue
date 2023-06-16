@@ -11,7 +11,6 @@
                         :hint="'Name of worksheet'"
                         :value.sync="value.property.name"
                 ></variables-field>
-
             </v-card-text>
         </v-card>
 
@@ -19,7 +18,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

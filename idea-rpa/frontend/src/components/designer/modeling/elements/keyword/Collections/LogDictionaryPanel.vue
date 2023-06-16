@@ -36,5 +36,9 @@
         }
     })
     export default class LogDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Logs the size and contents of the dictionary using given level."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

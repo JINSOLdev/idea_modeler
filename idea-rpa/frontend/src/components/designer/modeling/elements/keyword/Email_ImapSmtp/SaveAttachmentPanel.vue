@@ -15,24 +15,24 @@
                 <path-field
                         :label="'Target Folder'"
                         :hint="'Folder for saving attachment to (needs to exist), defaults to users home directory if None'"
-                        :value.sync="value.property.targetFolder"
+                        :value.sync="value.property.target_folder"
                 ></path-field>
 
                 <switch-field
                         :label="'Overwrite'"
                         :hint="'Overwrite existing file if True, defaults to False'"
-                        :value.sync="value.property.overwrite"
+                        :value.sync="value.property.over_write"
                 ></switch-field>
 
                 <variables-field
                         :label="'Prefix'"
                         :hint="'Optional filename prefix added to the attachments, empty by default'"
-                        :value.sync="value.property.token"
+                        :value.sync="value.property.prefix"
                 ></variables-field>
             </v-card-text>
             
             <return-values-field
-                    :value.sync="value.property.attachments"
+                    :value.sync="value.property.returnVal"
             ></return-values-field>
         </v-card>
     </div>
@@ -49,5 +49,9 @@
     })
     
     export default class SaveAttachmentPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Save mail attachment of a single given email on the local disk."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

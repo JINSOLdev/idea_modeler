@@ -12,9 +12,7 @@
                         :value.sync="value.property.source_range"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Target'"
                         :hint="'Copy to this cell (e.g. G10)'"
@@ -23,9 +21,7 @@
                 ></variables-field>
             </v-card-text>
         </v-card>
-
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

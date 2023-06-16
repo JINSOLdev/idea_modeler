@@ -1,6 +1,3 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
@@ -14,9 +11,7 @@
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field 
                         :label="'Timeout'"
                         :hint="'Time to wait for locator match (in seconds)'"

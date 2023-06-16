@@ -12,12 +12,9 @@
                         :value.sync="value.property.range_string"
                         :required="true"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

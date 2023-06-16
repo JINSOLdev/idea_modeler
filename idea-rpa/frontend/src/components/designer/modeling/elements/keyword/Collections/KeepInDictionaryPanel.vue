@@ -36,5 +36,9 @@
         }
     })
     export default class KeepInDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Keeps the given keys in the dictionary and removes all other."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

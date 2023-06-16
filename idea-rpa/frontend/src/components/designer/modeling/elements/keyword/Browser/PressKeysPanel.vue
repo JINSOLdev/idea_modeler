@@ -12,9 +12,7 @@
                         :value.sync="value.property.locator"
                         :required="true"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Keys'"
                         :hint="'Keys to press, e.g.AAA, CTRL+C, RETURN'"

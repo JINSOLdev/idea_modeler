@@ -12,22 +12,22 @@
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
+
                 <variables-field
                         :label="'Row'"
                         :hint="'Row to modify'"
                         :value.sync="value.property.row"
                         :required="true"
                 ></variables-field>
-                <variables-field
+                
+                <switch-field
                         :label="'Ascending'"
                         :hint="'Sort order'"
                         :value.sync="value.property.ascending"
-                ></variables-field>
-                
+                ></switch-field>
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

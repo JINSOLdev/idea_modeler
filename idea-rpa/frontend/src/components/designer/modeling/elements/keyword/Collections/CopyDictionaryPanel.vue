@@ -36,5 +36,9 @@
         }
     })
     export default class CopyDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns a copy of the given dictionary."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -24,8 +24,6 @@
                         :hint="'End line index.'"
                         :value.sync="value.property.end"
                 ></variables-field>
-
-                
             </v-card-text>
         </v-card>
 

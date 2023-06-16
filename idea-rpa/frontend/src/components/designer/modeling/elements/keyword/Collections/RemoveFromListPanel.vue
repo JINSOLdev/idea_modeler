@@ -39,5 +39,9 @@
         }
     })
     export default class RemoveFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Removes and returns the value specified with an index from list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

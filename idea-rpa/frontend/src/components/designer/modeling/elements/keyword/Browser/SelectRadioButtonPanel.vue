@@ -12,9 +12,7 @@
                         :value.sync="value.property.group_name"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Value'"
                         :hint="'The id or value attribute of the radio button'"

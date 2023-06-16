@@ -46,7 +46,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" outlined
+                <v-btn color="primary" text
                         @click="openVariableForm"
                 >
                     Add Variable
@@ -132,13 +132,15 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="error" outlined
-                            @click="closeVariableForm"
+                    <v-btn @click="closeVariableForm"
+                            text
+                            color="red"
                     >
                         Cancel
                     </v-btn>
-                    <v-btn color="primary" outlined
-                            @click="updateVariable(editVarIndex)"
+                    <v-btn @click="updateVariable(editVarIndex)"
+                            text
+                            color="success"
                     >
                         {{ isNewVar ? 'Add' : 'Edit' }}
                     </v-btn>

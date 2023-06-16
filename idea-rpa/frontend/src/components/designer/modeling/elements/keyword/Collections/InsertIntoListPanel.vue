@@ -44,5 +44,9 @@
         }
     })
     export default class InsertIntoListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Inserts value into list to the position specified with index."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

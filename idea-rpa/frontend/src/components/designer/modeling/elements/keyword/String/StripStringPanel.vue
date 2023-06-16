@@ -24,8 +24,6 @@
                         :hint="'Characters to strip'"
                         :value.sync="value.property.characters"
                 ></variables-field>
-
-                
             </v-card-text>
         </v-card>
 

@@ -1,6 +1,3 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
@@ -15,9 +12,7 @@
                         :value.sync="value.property.locator"
                         :required="true"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field 
                         :label="'Attribute'"
                         :hint="'Name of the attribute to get'"

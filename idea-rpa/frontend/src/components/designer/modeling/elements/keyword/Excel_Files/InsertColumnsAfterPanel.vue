@@ -12,9 +12,7 @@
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Amount'"
                         :hint="'Number of columns to insert, default 1'"
@@ -22,9 +20,7 @@
                 ></variables-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

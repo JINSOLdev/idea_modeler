@@ -17,7 +17,6 @@
                         :hint="'Column name or index to use for merge'"
                         :value.sync="value.property.index"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
 

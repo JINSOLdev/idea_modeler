@@ -38,5 +38,9 @@
         }
     })
     export default class RemoveValuesFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Removes all occurrences of given values from list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -25,14 +25,13 @@
                         :hint="'Return list instead of dictionary'"
                         :value.sync="value.property.as_list"
                 ></variables-field>
-               
             </v-card-text>
         </v-card>
+
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

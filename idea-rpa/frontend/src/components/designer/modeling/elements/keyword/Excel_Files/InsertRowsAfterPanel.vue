@@ -12,9 +12,7 @@
                         :value.sync="value.property.row"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Amount'"
                         :hint="'Number of rows to insert, default 1'"

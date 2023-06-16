@@ -13,6 +13,25 @@
         }
 
         init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "date", null)
+                this.$set(this.value.property, "time", null)
+                this.$set(this.value.property, "result_format", "timestamp")
+                this.$set(this.value.property, "exclude_millis", null)
+                this.$set(this.value.property, "date_format", "None")
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "result"
+                }])
+            }
+
+            if (!this.value.property.hasOwnProperty("result_format")) {
+                this.$set(this.value.property, "result_format", "timestamp")
+            }
+            if (!this.value.property.hasOwnProperty("date_format")) {
+                this.$set(this.value.property, "date_format", "None")
+            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "result"

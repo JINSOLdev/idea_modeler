@@ -43,5 +43,9 @@
         }
     })
     export default class FindFirstAvailableCellPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Find first available free cell"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

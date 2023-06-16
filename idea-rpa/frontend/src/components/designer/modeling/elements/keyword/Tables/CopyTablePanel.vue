@@ -12,7 +12,6 @@
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
-               
             </v-card-text>
         </v-card>
 
@@ -20,7 +19,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

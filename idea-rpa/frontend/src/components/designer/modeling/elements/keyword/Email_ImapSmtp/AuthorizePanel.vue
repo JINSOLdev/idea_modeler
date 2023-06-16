@@ -14,19 +14,19 @@
                 
                 <variables-field
                         :label="'Password'"
-                        :hint="'User passwod as string'"
+                        :hint="'User password as string'"
                         :value.sync="value.property.password"
                 ></variables-field>
                 
                 <variables-field
                         :label="'Smtp Server'"
-                        :hint="'SMTP sercer address'"
+                        :hint="'SMTP server address'"
                         :value.sync="value.property.smtpServer"
                 ></variables-field>
 
                 <variables-field
                         :label="'Imap Server'"
-                        :hint="'IMAP sercer address'"
+                        :hint="'IMAP server address'"
                         :value.sync="value.property.imapServer"
                 ></variables-field>
 
@@ -44,13 +44,13 @@
 
                 <switch-field
                         :label="'is Oauth'"
-                        :hint="'use XOAUTH2 protocol with a base64 encoded OAuth2 string as password'"
-                        :value.sync="value.property.isOauth"
+                        :hint="'Use XOAUTH2 protocol with a base64 encoded OAuth2 string as password'"
+                        :value.sync="value.property.is_oauth"
                 ></switch-field>
             </v-card-text>
             
             <return-values-field
-                    :value.sync="value.property.token"
+                    :value.sync="value.property.returnVal"
             ></return-values-field>
         </v-card>
     </div>
@@ -67,5 +67,9 @@
     })
     
     export default class AuthorizePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Authorize user to SMTP and IMAP servers."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -17,13 +17,9 @@
                         :hint="'see @FILEFORMATS dictionary for possible format, defaults to None'"
                         :value.sync="value.property.fileformat"
                 ></variables-field>
-
-
-             
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

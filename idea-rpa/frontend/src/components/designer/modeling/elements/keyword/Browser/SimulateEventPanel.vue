@@ -12,9 +12,7 @@
                         :value.sync="value.property.locator"
                         :required="true"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Event'"
                         :hint="'Event attribute to trigger'"

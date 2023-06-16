@@ -30,5 +30,9 @@
         }
     })
     export default class ConvertToDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a Python dict type."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

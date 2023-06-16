@@ -12,9 +12,7 @@
                         :value.sync="value.property.x"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Y'"
                         :hint="'Position along the Y-axis'"

@@ -15,18 +15,13 @@
                 <variables-field
                         :label="'Items'"
                         :value.sync="value.property.items"
-                        :hint="'Name'"
                 ></variables-field>
-                <variables-field
-                        :label="'Value'"
-                        :value.sync="value.property.value"
-                        :hint="'New value'"
-                        :required="true"
-                ></variables-field>
-                
             </v-card-text>
         </v-card>
-
+        
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 
@@ -40,5 +35,9 @@
         }
     })
     export default class SetToDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Adds the given key_value_pairs and items to the dictionary."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -35,8 +35,13 @@
         }
     })
     export default class WhileTask extends Mixins(ControlElement) {
+        mounted() {
+            this.value.property.limit = "Not set"
+        }
         
     }
+
+    
 </script>
 
 <style scoped>

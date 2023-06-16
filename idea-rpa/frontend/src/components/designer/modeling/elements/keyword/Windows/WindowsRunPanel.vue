@@ -14,7 +14,6 @@
                 ></variables-field> 
             </v-card-text>
         </v-card>
-
     </div>
 </template>
 

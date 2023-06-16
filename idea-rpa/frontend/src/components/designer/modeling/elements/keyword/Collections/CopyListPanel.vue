@@ -36,5 +36,9 @@
         }
     })
     export default class CopyListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns a copy of the given list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
