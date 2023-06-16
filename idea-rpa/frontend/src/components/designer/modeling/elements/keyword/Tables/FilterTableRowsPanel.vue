@@ -11,22 +11,24 @@
                         :hint="'Table to search'"
                         :value.sync="value.property.table"
                 ></variables-field>
+
                 <variables-field
                         :label="'Column'"
                         :hint="'Column to compare with'"
                         :value.sync="value.property.column"
                 ></variables-field>
+
                 <variables-field
                         :label="'Operator'"
                         :hint="'Comparison operator'"
                         :value.sync="value.property.operator"
                 ></variables-field>
+
                 <variables-field
                         :label="'Value'"
                         :hint="'Value to compare column to'"
                         :value.sync="value.property.value"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
 
@@ -34,7 +36,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

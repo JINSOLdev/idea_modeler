@@ -39,5 +39,9 @@
         }
     })
     export default class SaveExcelAsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Save Excel with name if workbook is open"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

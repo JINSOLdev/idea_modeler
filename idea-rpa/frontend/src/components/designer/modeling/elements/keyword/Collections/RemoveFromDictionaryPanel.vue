@@ -38,5 +38,9 @@
         }
     })
     export default class RemoveFromDictionaryPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Removes the given keys from the dictionary."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

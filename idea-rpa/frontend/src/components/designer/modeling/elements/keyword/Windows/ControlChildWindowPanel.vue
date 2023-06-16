@@ -7,8 +7,8 @@
 
             <v-card-text>
                 <locator-field
-                    :value.sync="value.property.locator"
-                    :hint="'Locator for window to control'"
+                        :value.sync="value.property.locator"
+                        :hint="'Locator for window to control'"
                 ></locator-field>
 
                 <switch-field

@@ -13,12 +13,17 @@
                         :required="true"
                 ></variables-field>
                 
-                <variables-field
+                <switch-field
+                        :label="'With Index'"
+                        :hint="'Include index in values'"
+                        :value.sync="value.property.with_index"
+                ></switch-field>
+
+                <switch-field
                         :label="'As List'"
                         :hint="'Return list instead of dictionary'"
                         :value.sync="value.property.as_list"
-                ></variables-field>
-               
+                ></switch-field>
             </v-card-text>
         </v-card>
 
@@ -26,7 +31,6 @@
                 :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
-    
 </template>
 
 <script lang="ts">

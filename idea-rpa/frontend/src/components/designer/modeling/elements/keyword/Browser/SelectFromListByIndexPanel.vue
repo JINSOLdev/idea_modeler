@@ -12,9 +12,7 @@
                         :value.sync="value.property.locator"
                         :required="true"
                 ></locator-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Indexes'"
                         :hint="'Indexes to select'"

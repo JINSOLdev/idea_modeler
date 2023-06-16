@@ -32,5 +32,9 @@
         }
     })
     export default class AddNewSheetPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Export Excel as PDF file. If Excel filename is not given, the currently open workbook will be exported as PDF."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

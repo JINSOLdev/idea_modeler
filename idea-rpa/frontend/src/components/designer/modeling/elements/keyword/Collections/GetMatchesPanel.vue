@@ -50,5 +50,9 @@
         }
     })
     export default class GetMatchesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns a list of matches to pattern in list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

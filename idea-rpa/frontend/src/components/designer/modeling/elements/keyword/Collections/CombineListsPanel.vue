@@ -31,5 +31,9 @@
         }
     })
     export default class CombineListsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Combines the given lists together and returns the result."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

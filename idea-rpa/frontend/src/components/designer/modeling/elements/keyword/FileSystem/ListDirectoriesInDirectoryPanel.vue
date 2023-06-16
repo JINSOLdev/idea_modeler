@@ -34,7 +34,7 @@
     })
     export default class ListDirectoriesInDirectoryPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "ists all the directories in the given directory, relative to it."
+            var description = "Lists all the directories in the given directory, relative to it."
             this.$emit("setDescription", description)
         }
     }

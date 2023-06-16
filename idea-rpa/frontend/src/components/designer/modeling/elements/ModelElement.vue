@@ -37,6 +37,8 @@
                 if(task.name.includes('JSON')) {
                     var name = task.name.replace('JSON', 'J S O N')
                     return this.kebabCase(name);
+                } else if (task.name == 'Select') {
+                    return task.name
                 }
                 return this.kebabCase(task.name)
             } else {

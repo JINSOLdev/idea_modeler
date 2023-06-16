@@ -25,9 +25,7 @@
                         :hint="'Should subdirectories be included into the archive'"
                         :value.sync="value.property.recursive"
                 ></switch-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Include'"
                         :hint="'The file pattern to include in the archive, uses Unix shell style. Default is to include all files'"

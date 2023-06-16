@@ -21,7 +21,7 @@
             </v-card-text>
             
         <return-values-field
-                :value.sync="value.property.password"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
 
         </v-card>
@@ -39,5 +39,9 @@
     })
     
     export default class GenerateOauthStringPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Generate and return an Oauth2 string compatible with the IMAP/POP/SMTP XOAUTH2 protocol."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

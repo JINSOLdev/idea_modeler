@@ -11,12 +11,9 @@
                         :hint="'footer text to set'"
                         :value.sync="value.property.text"
                 ></variables-field>
-
-             
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

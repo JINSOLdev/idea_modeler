@@ -6,32 +6,26 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                ></Locator-field>
-            </v-card-text>
+                ></locator-field>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
                         :required="true"
                 ></Variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1 min'"
                         :value.sync="value.property.timeout"
                 ></Variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Error'"
                         :hint="'Custom error message'"

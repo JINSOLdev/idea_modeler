@@ -36,5 +36,9 @@
         }
     })
     export default class GetDictionaryItemsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns items of the given dictionary as a list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

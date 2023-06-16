@@ -32,5 +32,9 @@
         }
     })
     export default class RemoveDuplicatesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns a list without duplicates based on the given list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

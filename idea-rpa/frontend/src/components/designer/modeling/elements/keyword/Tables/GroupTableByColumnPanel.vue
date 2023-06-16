@@ -19,11 +19,9 @@
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

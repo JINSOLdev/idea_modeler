@@ -22,7 +22,7 @@
                 this.$set(this.value.property, "closest_neighbours", 1)
                 this.$set(this.value.property, "strict", null)
                 this.$set(this.value.property, "regexp", "None")
-                this.$set(this.value.property, "trim", null)
+                this.$set(this.value.property, "trim", true)
                 this.$set(this.value.property, "ignorecase", null)
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "matches"
@@ -41,7 +41,9 @@
             if (!this.value.property.hasOwnProperty("regexp")) {
                 this.$set(this.value.property, "regexp", "None")
             }
-
+            if (!this.value.property.hasOwnProperty("trim")) {
+                this.$set(this.value.property, "trim", true)
+            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "matches"

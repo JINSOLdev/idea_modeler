@@ -12,9 +12,7 @@
                         :value.sync="value.property.start"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'End'"
                         :hint="'Optional column number or name for last column to delete'"
@@ -22,9 +20,7 @@
                 ></variables-field>
             </v-card-text>
         </v-card>
-
     </div>
-    
 </template>
 
 <script lang="ts">

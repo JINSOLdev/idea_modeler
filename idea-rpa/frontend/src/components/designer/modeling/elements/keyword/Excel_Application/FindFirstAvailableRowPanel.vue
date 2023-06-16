@@ -45,5 +45,9 @@
         }
     })
     export default class FindFirstAvailableRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Find first available free row"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

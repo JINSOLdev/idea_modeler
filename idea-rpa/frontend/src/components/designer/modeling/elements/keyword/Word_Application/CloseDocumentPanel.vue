@@ -7,16 +7,13 @@
 
             <v-card-text>
                 <switch-field
-                    :label="'Save changes'"
-                    :hint="'Close the active document (if open).'"
-                    :value.sync="value.property.save_changes"
+                        :label="'Save changes'"
+                        :hint="'Close the active document (if open).'"
+                        :value.sync="value.property.save_changes"
                 ></switch-field>
-
-             
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

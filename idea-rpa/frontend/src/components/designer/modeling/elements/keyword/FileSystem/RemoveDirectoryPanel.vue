@@ -14,7 +14,7 @@
                 ></path-field>
 
                 <switch-field
-                        :valur.sync="value.property.recursive"
+                        :value.sync="value.property.recursive"
                         :label="'Recursive'"
                         :hint="'Remove all subdirectories and files'"
                 ></switch-field>

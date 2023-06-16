@@ -12,22 +12,22 @@
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
+                
                 <variables-field
                         :label="'Names'"
                         :hint="'New column names'"
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
-                <variables-field
+
+                <switch-field
                         :label="'Strict'"
                         :hint="`Raise error if column lengths don't match`"
                         :value.sync="value.property.table"
-                ></variables-field>
-                
+                ></switch-field>
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -12,17 +12,13 @@
                         :value.sync="value.property.condition"
                         :required="true"
                 ></Variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1min'"
                         :value.sync="value.property.timeout"
                 ></Variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Error'"
                         :hint="'Custom error message'"

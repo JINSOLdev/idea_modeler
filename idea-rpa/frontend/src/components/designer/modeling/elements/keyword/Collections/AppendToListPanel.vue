@@ -33,5 +33,9 @@
         }
     })
     export default class AppendToListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Adds values to the end of list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
