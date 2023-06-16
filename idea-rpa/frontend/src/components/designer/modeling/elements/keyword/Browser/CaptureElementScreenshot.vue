@@ -8,5 +8,20 @@
         }
     })
     export default class CaptureElementScreenshot extends Mixins(KeywordElement) {
+        mounted() {
+            this.init()
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property) 
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                    this.$set(this.value.property, "filename", "selenium-element-screenshot-{index}.png")
+            }
+
+            if (!this.value.property.hasOwnProperty("filename")) {
+                this.$set(this.value.property, "selenium-element-screenshot-{index}.png", "None")
+            }
+        }
     }
 </script>
