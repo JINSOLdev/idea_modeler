@@ -9,8 +9,27 @@
     })
     export default class Log extends Mixins(KeywordElement) {
         mounted() {
-            this.value.property.level = "INFO"
-            this.value.property.formatter = "str"
+            this.init()
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property) 
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                    this.$set(this.value.property, "message", null)
+                    this.$set(this.value.property, "level", "INFO")
+                    this.$set(this.value.property, "html", null)
+                    this.$set(this.value.property, "console", null)
+                    this.$set(this.value.property, "repr", null)
+                    this.$set(this.value.property, "formatter", "str")
+            }
+
+            if (!this.value.property.hasOwnProperty("level")) {
+                this.$set(this.value.property, "level", "INFO")
+            }
+            if (!this.value.property.hasOwnProperty("formatter")) {
+                this.$set(this.value.property, "formatter", "str")
+            }
         }
     }
 </script>
