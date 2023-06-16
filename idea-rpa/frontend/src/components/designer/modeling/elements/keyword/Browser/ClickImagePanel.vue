@@ -6,15 +6,13 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                ></Locator-field>
-            </v-card-text>
+                ></locator-field>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Modifier'"
                         :hint="'Click with modifier key'"

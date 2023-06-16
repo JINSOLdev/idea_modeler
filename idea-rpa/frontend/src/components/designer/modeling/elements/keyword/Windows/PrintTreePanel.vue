@@ -1,6 +1,3 @@
-<!--
-    TODO: 변수 할당 필요함. UI만 작업하였음
--->
 <template>
     <div>
         <v-card flat>
@@ -9,22 +6,19 @@
             </v-card-title>
             
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for root element'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
-            </v-card-text>
+                ></locator-field>
 
-            <v-card-text>
                 <variables-field 
                         :label="'Max Depth'"
                         :hint="'Maximum search depth'"
                         :value.sync="value.property.max_depth"
                 ></variables-field> 
             </v-card-text>
-        </v-card>
-     
+        </v-card>     
     </div>
 </template>
 

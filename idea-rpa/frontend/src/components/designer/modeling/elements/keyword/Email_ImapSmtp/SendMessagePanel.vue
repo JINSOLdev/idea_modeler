@@ -8,27 +8,27 @@
             <v-card-text>
                 <variables-field
                         :label="'Sender'"
-                        :hint="'Who is sending, i.e. \'from\''"
+                        :hint="`Who is sending, i.e. 'from'`"
                         :value.sync="value.property.sender"
                         :required="true"
                 ></variables-field>
 
                 <variables-field
-                        :label="'Recipents'"
-                        :hint="'Who is receiving, ie. \'to\' (either as comma-separated or as list object) '"
+                        :label="'Recipients'"
+                        :hint="`Who is receiving, ie. 'to' (either as comma-separated or as list object)`"
                         :value.sync="value.property.recipients"
                         :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Subject'"
-                        :hint="'Email\'s subject field'"
+                        :hint="`Email's subject field`"
                         :value.sync="value.property.subject"
                 ></variables-field>
 
                 <variables-field
                         :label="'Body'"
-                        :hint="'Email\'s body content'"
+                        :hint="`Email's body content`"
                         :value.sync="value.property.body"
                 ></variables-field>
 
@@ -40,7 +40,7 @@
 
                 <switch-field
                         :label="'Html'"
-                        :hint="'if the message\'s content is in HTML format'"
+                        :hint="`if the message's content is in HTML format`"
                         :value.sync="value.property.html"
                 ></switch-field>
 
@@ -52,13 +52,13 @@
 
                 <variables-field
                         :label="'Cc'"
-                        :hint="'List of email addresses for the email\'s \'CC\' field (either as comma-separated or as list object)'"
+                        :hint="`List of email addresses for the email's 'CC' field (either as comma-separated or as list object)`"
                         :value.sync="value.property.cc"
                 ></variables-field>
 
                 <variables-field
                         :label="'Bcc'"
-                        :hint="'List of email addresses for the email\'s \'BCC\' field (either as comma-separated or as list object)'"
+                        :hint="`List of email addresses for the email's 'BCC' field (either as comma-separated or as list object)`"
                         :value.sync="value.property.bcc"
                 ></variables-field>
 
@@ -83,5 +83,9 @@
     })
     
     export default class SendMessagePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Send SMTP email"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

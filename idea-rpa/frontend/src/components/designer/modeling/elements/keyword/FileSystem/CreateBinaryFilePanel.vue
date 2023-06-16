@@ -20,8 +20,8 @@
                 ></variables-field>
 
                 <switch-field
-                        :valur.sync="value.property.overwrite"
                         :label="'Overwrite'"
+                        :value.sync="value.property.overwrite"
                         :hint="'Replace existing file'"
                 ></switch-field>
             </v-card-text>

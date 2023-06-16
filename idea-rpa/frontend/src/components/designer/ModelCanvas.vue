@@ -21,26 +21,36 @@
                     style="max-width: 300px; margin-top: 25px;"
             ></v-text-field>
 
-            <v-btn text color="orange" @click="openVariableDialog">
+            <v-btn @click="openVariableDialog"
+                    text
+                    color="orange"
+            >
                 <v-icon>mdi-variable-box</v-icon>
                 Variables
             </v-btn>
 
-            <v-btn text color="primary" @click="openScriptPanel">
+            <v-btn @click="openScriptPanel"
+                    text
+                    color="primary"
+        >
                 <v-icon>mdi-script-text</v-icon>
                 Robot
             </v-btn>
             
-            <execute-python :task="robot"
-                            @record="getRecordResult"
-                            @showOverlay="showOverlay"
-                            @openExecute="openExecutePanel"
-                            @executeResult="getExecuteResult"
-                            @endExecution="endExecution"
-                            @openAlert="openAlert"
+            <execute-python 
+                    :task="robot"
+                    @record="getRecordResult"
+                    @showOverlay="showOverlay"
+                    @openExecute="openExecutePanel"
+                    @executeResult="getExecuteResult"
+                    @endExecution="endExecution"
+                    @openAlert="openAlert"
             ></execute-python>
 
-            <v-btn text color="green" @click="saveModel">
+            <v-btn @click="saveModel"
+                    text
+                    color="purple" 
+            >
                 <v-icon>mdi-content-save</v-icon>
                 Save
             </v-btn>
@@ -178,7 +188,7 @@
                 :value="selectedValue"
                 @close="closePanel"
         ></model-panel>
-  </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -264,66 +274,68 @@
 
         mounted() {
             let me = this
-            
-            if (me.$route.params.filePath) {
-                const path: any = me.$route.params.filePath
-                fs.exists(path, (exists) => {
-                    fs.readFile(path, (err, data) => {
-                        if (err) console.error(err);
-                        if (!data || !data.toString()) { return }
-                        
-                        let loadData = JSON.parse(data.toString());
-                        loadData.child = me.cloneChild(loadData.child)
-                        
-                        const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
-                        tmpRobot.setProperty({
-                            "keywords": me.robot.getKeywords()
-                        })
-                        tmpRobot.setProperty({
-                            "variables": me.setVariables(loadData.variables)
-                        })
-                        
-                        me.robot = tmpRobot
+
+            try {
+                if (me.$route.params.filePath) {
+                    const path: any = me.$route.params.filePath
+                    fs.access(path, (e) => {
+                        fs.readFile(path, async (err, data) => {
+                            if (err) console.error(err);
+                            if (!data || !data.toString()) { return }
+                            
+                            let loadData = JSON.parse(data.toString());
+                            if (!loadData.robot) {
+                                var obj = {
+                                    status: true,
+                                    type: "warning",
+                                    msg: "This file is not a robot task. Create a new robot task."
+                                }
+                                me.openAlert(obj)
+                                return 
+                            } else {
+                                let data
+                                if (loadData.child) {
+                                    data = loadData
+                                } else {
+                                    data = loadData.robot
+                                }
+                                data.child = await me.cloneChild(data.child)
+
+                                const tmpRobot = new Robot(data.id, data.name, data.type, data.child)
+                                tmpRobot.setProperty({
+                                    "keywords": me.robot.getKeywords()
+                                })
+                                tmpRobot.setProperty({
+                                    "variables": me.setVariables(data.variables)
+                                })
+                                
+                                me.robot = tmpRobot
+                            }
+                        });
                     });
-                });
-            } else {
-                const direactoryPath = `./tasks`;
-                const filePath = `${direactoryPath}/${this.$route.params.taskName}.json`;
-                fs.exists(filePath, (exists) => {
-                    fs.readFile(filePath, (err, data) => {
-                        if (err) console.error(err);
-                        if (!data || !data.toString()) {return }
-                        
-                        let loadData = JSON.parse(data.toString());
-                        loadData.child = me.cloneChild(loadData.child)
-                        
-                        const tmpRobot = new Robot(loadData.id, loadData.name, loadData.type, loadData.child)
-                        tmpRobot.setProperty({
-                            "keywords": me.robot.getKeywords()
-                        })
-                        tmpRobot.setProperty({
-                            "variables": me.setVariables(loadData.variables)
-                        })
-                        
-                        me.robot = tmpRobot
-                    });
-                });
+                }
+            } catch (e) {
+                console.log(e)
             }
         }
 
         // Methods
         saveModel() {
+            let direactoryPath, filePath;
             if (this.$route.params.filePath) {
-                const direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
-                const filePath = this.$route.params.filePath;
-                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
-                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+                direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
+                filePath = this.$route.params.filePath;
             } else {
-                const direactoryPath = `./tasks`;
-                const filePath = `${direactoryPath}/${this.taskName}.json`;
-                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
-                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+                direactoryPath = `./tasks`;
+                filePath = `${direactoryPath}/${this.taskName}.json`;
             }
+
+            const data = {
+                path: filePath,
+                robot: this.robot
+            }
+            !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+            fs.writeFileSync(filePath, JSON.stringify(data));
         }
 
         deleteElement(value: any) {
@@ -439,6 +451,8 @@
                 if(task.name.includes('JSON')) {
                     var name = task.name.replace('JSON', 'J S O N')
                     return this.kebabCase(name);
+                } else if (task.name == 'Select') {
+                    return task.name
                 }
                 return this.kebabCase(task.name);
             } else {

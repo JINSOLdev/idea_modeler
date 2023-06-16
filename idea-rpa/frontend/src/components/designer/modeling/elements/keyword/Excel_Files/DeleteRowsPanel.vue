@@ -20,9 +20,7 @@
                 ></variables-field>             
             </v-card-text>
         </v-card>
-
-    </div>
-    
+    </div>    
 </template>
 
 <script lang="ts">

@@ -6,38 +6,30 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
-            </v-card-text>
+                ></locator-field>
 
-            <v-card-text>
                 <variables-field 
                         :label="'Value'"
                         :hint="'Value to set'"
                         :value.sync="value.property.value"
                 ></variables-field> 
-            </v-card-text>
 
-            <v-card-text>
                     <switch-field
                         :label="'Append'"
                         :hint="'Append value instead of overriding'"
                         :value.sync="value.property.append"
                 ></switch-field>
-            </v-card-text>
 
-            <v-card-text>
                     <switch-field
                             :label="'Enter'"
                             :hint="'Send Enter key after setting the value'"
                             :value.sync="value.property.enter"
                 ></switch-field>
-            </v-card-text>
 
-            <v-card-text>
                     <switch-field
                             :label="'Newline'"
                             :hint="'Add newline to the end of the value'"

@@ -26,14 +26,9 @@
                         :value.sync="value.property.value"
                         :required="true"
                 ></variables-field>
-
             </v-card-text>
-
         </v-card>
-
-       
     </div>
-    
 </template>
 
 <script lang="ts">

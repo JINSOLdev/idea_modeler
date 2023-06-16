@@ -6,14 +6,12 @@
             </v-card-title>
 
             <v-card-text>
-                <Locator-field
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                ></Locator-field>
-            </v-card-text>
+                ></locator-field>
 
-            <v-card-text>
                 <Variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1min'"

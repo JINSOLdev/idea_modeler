@@ -7,16 +7,9 @@
 
             <v-card-text>
                 <variables-field
-                        :label="'Doc'"
-                        :hint="'JSON-compatible object'"
-                        :value.sync="value.property.doc"
-                        :required="true"
-                ></variables-field>
-
-                <variables-field
-                        :label="'Expr'"
-                        :hint="'JSONPath expression'"
-                        :value.sync="value.property.expr"
+                        :label="'Secret Name'"
+                        :hint="'Read a secret from the configured source, e.g. Robocorp Vault, and return it as a Secret object.'"
+                        :value.sync="value.property.secret_name"
                         :required="true"
                 ></variables-field>
             </v-card-text>
@@ -37,11 +30,10 @@
             KeywordPanel,
         }
     })
-    export default class GetValuesFromJSONPanel extends Mixins(KeywordPanel) {
+    export default class GetSecretPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Get all values from a JSON serializable object that match the given expression."
+            var description = "Read a secret from the configured source, e.g. Robocorp Vault, and return it as a Secret object."
             this.$emit("setDescription", description)
         }
-
     }
 </script>

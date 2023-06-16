@@ -17,11 +17,9 @@
                     :hint="'write text to newline if True, default to True'"
                     :value.sync="value.property.newline"
                 ></switch-field>
-
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

@@ -16,12 +16,9 @@
                         :value.sync="value.property.read_only"
                         :label="'Read Only'"
                 ></switch-field>
-
-             
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

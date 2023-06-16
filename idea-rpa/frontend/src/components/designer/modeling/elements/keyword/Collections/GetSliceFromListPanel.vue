@@ -40,5 +40,9 @@
         }
     })
     export default class GetIndexFromListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the index of the first occurrence of the value on the list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -12,9 +12,7 @@
                         :value.sync="value.property.src_name"
                         :required="true"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Dst Name'"
                         :hint="'Future name of worksheet'"

@@ -50,5 +50,9 @@
         }
     })
     export default class GetMatchCountPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Returns the count of matches to pattern in list."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

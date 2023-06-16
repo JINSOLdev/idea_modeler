@@ -40,5 +40,9 @@
         }
     })
     export default class ReadFromCellsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Read value from cell."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

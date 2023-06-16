@@ -12,23 +12,23 @@
                         :value.sync="value.property.table"
                         :required="true"
                 ></variables-field>
+                
                 <variables-field
                         :label="'Column'"
                         :hint="'Column to sort with'"
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
+
                 <variables-field
                         :label="'Values'"
                         :hint="'Values for row'"
                         :value.sync="value.property.values"
                         :required="true"
                 ></variables-field>
-                
             </v-card-text>
         </v-card>
     </div>
-    
 </template>
 
 <script lang="ts">

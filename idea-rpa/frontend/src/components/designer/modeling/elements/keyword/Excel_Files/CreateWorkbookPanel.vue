@@ -11,18 +11,14 @@
                         :hint="'Default save path for workbook'"
                         :value.sync="value.property.path"
                 ></Path-field>
-            </v-card-text>
 
-            <v-card-text>
                 <variables-field
                         :label="'Fmt'"
                         :hint="'Format of workbook, i.e. xlsx ro xls'"
                         :value.sync="value.property.fmt"
                 ></variables-field>
-            </v-card-text>
 
-            <v-card-text>
-                  <variables-field
+                <variables-field
                         :label="'Sheet Name'"
                         :hint="'Name of initial worksheet'"
                         :value.sync="value.property.Name"

@@ -30,5 +30,9 @@
         }
     })
     export default class ConvertToListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Converts the given item to a Python list type."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

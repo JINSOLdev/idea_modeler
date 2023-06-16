@@ -32,5 +32,9 @@
         }
     })
     export default class ReverseListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Reverses the given list in place."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

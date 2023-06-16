@@ -30,5 +30,9 @@
         }
     })
     export default class SortListPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sorts the given list in place."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

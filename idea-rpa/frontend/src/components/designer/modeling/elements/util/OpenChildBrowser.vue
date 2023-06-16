@@ -1,20 +1,44 @@
 <template>
     <div>
         <v-btn 
-                @click="getXpath"
+                @click="openURLDialog"
                 outlined
                 block
         >
             Locator Button
         </v-btn>
-        <!-- <v-autocomplete
-                :items="records"
-                item-disabled="disabled"
-                persistent-hint
-                outlined
-                dense
-                required
-        ></v-autocomplete> -->
+
+        <v-dialog v-model="urlDialog" max-width="600">
+            <v-card>
+                <v-card-title>
+                    Locator URL
+                </v-card-title>
+                <v-card-text class="pb-0">
+                    <v-text-field
+                            v-model="urlText"
+                            persistent-placeholder
+                            placeholder="https://google.com"
+                            outlined
+                            dense
+                    ></v-text-field>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="urlDialog = false"
+                            text
+                            color="red"
+                    >
+                        Cancel
+                    </v-btn>
+                    <v-btn @click="getXpath"
+                            text
+                            color="success"
+                    >
+                        Ok
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -25,9 +49,16 @@
 
     @Component
     export default class OpenChildBrowser extends Vue {
-
         @Prop() public records!: any[]
+        
         public listener: any
+        public urlDialog: boolean = false
+        public urlText: string = ""
+
+        openURLDialog() {
+            this.urlDialog = true
+            this.urlText = ""
+        }
 
         messageProcessing(msg: any, arg: any, domPickerWindow: any) {
             const me = this
@@ -49,6 +80,8 @@
 
         getXpath() {
             let me = this
+            me.urlText = me.urlText ? me.urlText : "https://google.com"
+            me.urlDialog = false
             let domPickerWindow = new remote.BrowserWindow({
                 width: 800,
                 height: 600,
@@ -60,7 +93,8 @@
             })
     
             domPickerWindow.setIgnoreMouseEvents(true)
-            domPickerWindow.loadURL("https://google.com")
+            domPickerWindow.loadURL(me.urlText)
+            // domPickerWindow.loadURL("https://google.com")
             domPickerWindow.webContents.openDevTools()
             // const webFrame = require('electron').webFrame
             domPickerWindow.webContents.on('did-frame-finish-load', () => {
@@ -90,8 +124,9 @@
                                         type: 'msg',
                                         class: target.getAttribute('class'),
                                         ref: target.getAttribute('ref'),
-                                        id: target.getAttribute('id')
+                                        id: target.getAttribute('id'),
                                     }
+                                    console.log(target)
                                     require('electron').ipcRenderer.send('toMain', obj);
                                 })
                             }
