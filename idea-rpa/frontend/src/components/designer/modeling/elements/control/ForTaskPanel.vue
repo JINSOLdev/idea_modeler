@@ -2,7 +2,7 @@
     <div>
         <return-values-field
                 :label="'Assign Variables'"
-                :value.sync="value.property.itemVarName"
+                :value.sync="value.property.assign_variables"
         ></return-values-field>
 
         <v-card flat>            
@@ -17,14 +17,14 @@
 
                 <variables-field
                         :label="'Loop Values'"
-                        :value.sync="value.property.iterationVarName"
+                        :value.sync="value.property.loop_values"
                         :isMultiple="true"
                 ></variables-field>
             </v-card-text>
 
-            <return-values-field
+            <!-- <return-values-field
                 :value.sync="value.property.returnVal"
-        ></return-values-field>
+        ></return-values-field> -->
         </v-card>
     </div>
 </template>
