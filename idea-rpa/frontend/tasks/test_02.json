@@ -1,0 +1,1 @@
+{"path":"./tasks/test_02.json","robot":{"name":"test_02","id":1,"type":"Task","child":[],"variables":[{"name":"var_01","valueType":"Single Value (Scalar)","defaultValue":"5"},{"name":"var_02","valueType":"Single Value (Scalar)","defaultValue":"10"}],"keywords":[]}}
