@@ -9,6 +9,7 @@
                 <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field>
 
                 <variables-field

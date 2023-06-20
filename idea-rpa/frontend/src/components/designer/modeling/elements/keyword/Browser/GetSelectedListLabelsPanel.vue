@@ -6,19 +6,17 @@
             </v-card-title>
 
             <v-card-text>
-                <!--locator-->
-                    <variables-field 
+                <locator-field
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                    ></variables-field> 
-
+                ></locator-field> 
             </v-card-text>
-
         </v-card>
+
         <return-values-field
-                :value.sync="value.property.label"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
 </template>

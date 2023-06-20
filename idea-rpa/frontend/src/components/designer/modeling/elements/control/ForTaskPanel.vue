@@ -1,12 +1,13 @@
 <template>
     <div>
-        <return-values-field
-                :label="'Assign Variables'"
-                :value.sync="value.property.assign_variables"
-        ></return-values-field>
-
-        <v-card flat>            
+        <v-card flat>
             <v-card-text>
+                <variables-field
+                        :label="'Assign Variables'"
+                        :value.sync="value.property.itemVarName"
+                        :isMultiple="true"
+                ></variables-field>
+
                 <v-select
                         v-model="value.property.type"
                         :items="typeList"
@@ -17,14 +18,10 @@
 
                 <variables-field
                         :label="'Loop Values'"
-                        :value.sync="value.property.loop_values"
+                        :value.sync="value.property.iterationVarName"
                         :isMultiple="true"
                 ></variables-field>
             </v-card-text>
-
-            <!-- <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field> -->
         </v-card>
     </div>
 </template>

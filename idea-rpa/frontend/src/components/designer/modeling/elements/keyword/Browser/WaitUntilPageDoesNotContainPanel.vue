@@ -6,26 +6,25 @@
             </v-card-title>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Text'"
                         :hint="'Text to search for'"
                         :value.sync="value.property.text"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
 
-                <Variables-field
+                <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1 min'"
                         :value.sync="value.property.timeout"
-                ></Variables-field>
+                ></variables-field>
 
-                <Variables-field
+                <variables-field
                         :label="'Error'"
                         :hint="'Custom error message'"
                         :value.sync="value.property.error"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
-
         </v-card>
     </div>
 </template>

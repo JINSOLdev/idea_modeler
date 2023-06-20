@@ -23,6 +23,12 @@
                 }])
             }
 
+            if (!this.value.property.hasOwnProperty("text")) {
+                this.$set(this.value.property, "text", "None")
+            }
+            if (!this.value.property.hasOwnProperty("timeout")) {
+                this.$set(this.value.property, "timeout", "None")
+            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "contains"

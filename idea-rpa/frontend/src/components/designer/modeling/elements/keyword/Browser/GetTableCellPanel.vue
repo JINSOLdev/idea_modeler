@@ -6,15 +6,14 @@
             </v-card-title>
 
             <v-card-text>
-<!--locator-->
-                    <locator-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
                         :required="true"
-                    ></locator-field> 
+                ></locator-field> 
 
-                    <variables-field
+                <variables-field
                         :label="'Row'"
                         :hint="'Table row index'"
                         :value.sync="value.property.row"
@@ -27,12 +26,11 @@
                         :value.sync="value.property.column"
                         :required="true"
                 ></variables-field>
-
             </v-card-text>
-
         </v-card>
+
         <return-values-field
-                :value.sync="value.property.content"
+                :value.sync="value.property.returnVal"
         ></return-values-field>
     </div>
 </template>

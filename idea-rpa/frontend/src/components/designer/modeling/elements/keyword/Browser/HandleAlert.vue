@@ -19,6 +19,13 @@
                 this.$set(this.value.property, "action", "ACCEPT")
                 this.$set(this.value.property, "timeout", "None")
             }
+
+            if (!this.value.property.hasOwnProperty("action")) {
+                this.$set(this.value.property, "action", "ACCEPT")
+            }
+            if (!this.value.property.hasOwnProperty("timeout")) {
+                this.$set(this.value.property, "timeout", "None")
+            }
         }
     }
 </script>

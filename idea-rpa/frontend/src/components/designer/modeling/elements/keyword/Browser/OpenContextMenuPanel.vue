@@ -12,7 +12,6 @@
                         :value.sync="value.property.locator"
                         :required="true"
                 ></locator-field>
-               
             </v-card-text>
         </v-card>
     </div>

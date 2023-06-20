@@ -1,7 +1,8 @@
 <template>
     <div class="mb-2">
-        <div class="ml-2">
-            Locator
+        <div class="d-flex">
+            <div class="ml-2 mr-auto">Locator</div>
+            <div v-if="required" class="mr-2">required</div>
         </div>
         <v-row class="my-1">
             <v-col cols="10" class="pr-0">
@@ -58,34 +59,31 @@
                 <v-card-title>
                     Select a Locator
                 </v-card-title>
-                <v-card-text>
-                    <v-list>
-                        <v-list-item-group
-                                v-model="selLocator"
+
+                <v-card-text class="pb-0">
+                    <v-radio-group v-model="selected">
+                        <div v-for="(item, index) in locator"
+                                :key="item.xpath"
+                                class="d-flex"
                         >
-                            <v-list-item
-                                    v-for="item in locator"
-                                    :key="item.id"
-                            >
-                                <v-list-item-title v-if="item.id">
-                                        id: {{ item.id }}
-                                </v-list-item-title>
-                                <v-list-item-title v-else-if="item.class">
-                                        css: {{ item.class }}
-                                </v-list-item-title>
-                            </v-list-item>
-                        </v-list-item-group>
-                    </v-list>
+                            <v-radio
+                                    :value="index"
+                                    class="mb-5"
+                            ></v-radio>
+                            <v-select
+                                    v-model="valueText"
+                                    :items="getList(item)"
+                                    :disabled="selected != index"
+                                    dense
+                                    outlined
+                            ></v-select>
+                        </div>
+                    </v-radio-group>
                 </v-card-text>
+                
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="openSelectLocator = false"
-                            text
-                            color="red"
-                    >
-                        Cancel
-                    </v-btn>
-                    <v-btn @click="openSelectLocator = false"
+                    <v-btn @click="openSelectLocator=false; selected=-1;"
                             text
                             color="success"
                     >
@@ -111,68 +109,46 @@
         @Prop() public rules!: any[]
         @Prop() public label!: string
         @Prop() public hint!: string
+        @Prop() public required!: boolean
         
         
         locator: any[] = []
         varItems: any[] = []
         newValue: any = {
-            name: "",
+            name: "locator",
             valueType: "locator",
-            defaultValue: "",
+            defaultValue: null,
         }
-        editMode: Boolean = false
-        openSelectLocator: Boolean = false
-        selLocator: any = null
-        
-
-        @Watch('selLocator')
-        selectedLocator(val: number) {
-            if(val > -1) {
-                if (this.locator[val].id != "" && this.locator[val].id != null && this.locator[val].id != undefined) {
-                    this.newValue = {
-                        name: "id",
-                        valueType: "locator",
-                        defaultValue: this.locator[val].id,
-                    }
-                } else if (this.locator[val].class != "" && this.locator[val].class != null && this.locator[val].class != undefined) {
-                    this.newValue = {
-                        name: "class",
-                        valueType: "locator",
-                        defaultValue: this.locator[val].class,
-                    }
-                } else {
-                    this.newValue = {
-                        name: "ref",
-                        valueType: "locator",
-                        defaultValue: this.locator[val].ref,
-                    }
-                }
-            }
-        }
+        editMode: boolean = false
+        openSelectLocator: boolean = false
+        selected: number = -1
         
         get valueText() {
             var text = ""
-            if (this.newValue && this.newValue.name) {
-                if (this.newValue.name != "ref") {
-                    text = this.newValue.name + ":" + this.newValue.defaultValue
-                } else {
-                    text = this.newValue.defaultValue
-                }
+            if (this.newValue && this.newValue.defaultValue) {
+                text = this.newValue.defaultValue
             }
             return text
         }
         set valueText(newVal: string) {
             if (newVal && newVal.length > 0) {
-                this.newValue.name = "ref"
-                this.newValue.defaultValue = newVal
+                this.$set(this.newValue, "defaultValue", newVal)
             } else {
-                this.newValue = null
+                this.$set(this.newValue, "defaultValue", null)
+            }
+        }
+
+        @Watch("selected")
+        updateLocator(val: any) {
+            if (val > -1) {
+                var list = this.getList(this.locator[val])
+                this.$set(this.newValue, "defaultValue", list.shift())
             }
         }
 
         mounted() {
             if (this.value) {
-                this.newValue = this.value
+                this.$set(this, "newValue", this.value)
             }
         }
 
@@ -186,11 +162,17 @@
         }
 
         closeLocator() {
-            this.openSelectLocator = true
+            this.$set(this, "openSelectLocator", true)
         }
 
-        capitalize(word: string) {
-            return word.charAt(0).toUpperCase() + word.slice(1)
+        getList(item: any): any {
+            let list: any[] = []
+            Object.keys(item).forEach((key: string) => {
+                if (key != "type" && item[key] != null) {
+                    list.push(`${key}:${item[key]}`)
+                }
+            })
+            return list
         }
     }
 </script>
