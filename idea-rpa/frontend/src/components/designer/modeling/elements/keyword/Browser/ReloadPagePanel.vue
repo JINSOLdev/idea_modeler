@@ -20,5 +20,9 @@
     })
     
     export default class ReloadPagePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Simulates user reloading page."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -56,7 +56,7 @@
             </v-btn>
         </v-app-bar>
 
-        <v-overlay v-model="isOverlay">
+        <v-overlay v-model="isOverlay" style="z-index: 10;">
             <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
 
@@ -135,6 +135,7 @@
         <v-dialog v-model="variableDialog" max-width="800">
             <variables-dialog
                     :value.sync="robot"
+                    @closeVariableDialog="closeVariableDialog"
                     @updateVariables="updateVariables"
             ></variables-dialog>
         </v-dialog>
@@ -558,12 +559,17 @@
 
             if (child.length > 0) {
                 child.forEach((childEl: any) => {
-                    
                     var clone = this.$refs.elementList.cloneElement(childEl)
                     this.$set(clone, "property", childEl.property)
 
                     if (this.cloneChild(childEl.child).length > 0) {
                         clone.child = this.cloneChild(childEl.child)
+                    }
+
+                    if (clone.type == "IfTask") {
+                        clone.property.conditions.forEach((condition: any) => {
+                            condition.child = this.cloneChild(condition.child)
+                        })
                     }
                     newChild.push(clone)
                 })

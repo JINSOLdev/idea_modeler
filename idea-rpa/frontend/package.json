@@ -25,6 +25,7 @@
     "fs": "0.0.1-security",
     "html-element-picker": "^1.1.2",
     "iconv-lite": "^0.6.3",
+    "node-machine-id": "^1.1.12",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "path-browserify": "^1.0.1",
     "ts-loader": "^5.2.0",

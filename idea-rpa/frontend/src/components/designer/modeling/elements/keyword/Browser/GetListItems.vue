@@ -13,6 +13,19 @@
         }
 
         init() {
+            var keys = Object.keys(this.value.property) 
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "locator", null)
+                this.$set(this.value.property, "values", false)
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "items"
+                }])
+            }
+
+            if (!this.value.property.hasOwnProperty("values")) {
+                this.$set(this.value.property, "values", false)
+            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "items"

@@ -87,6 +87,19 @@
 
         // Methods
         updateValue() {
+            this.newValue.forEach((val: any, idx: number) => {
+                if (typeof val == "string") {
+                    this.newValue[idx] = {
+                        name: val,
+                        valueType: "Scalar",
+                        defaultValue: val
+                    }
+                }
+                if (val.defaultValue && (val.name == null || val.name == "")) {
+                    val.name = val.defaultValue
+                }
+            })
+
             this.$emit('update:value', this.newValue)
         }
 

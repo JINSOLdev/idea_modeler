@@ -4,6 +4,7 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>
                 <variables-field
                         :label="'Title'"
@@ -13,7 +14,6 @@
                 ></variables-field>
             </v-card-text>
         </v-card> 
-
     </div>
 </template>
 

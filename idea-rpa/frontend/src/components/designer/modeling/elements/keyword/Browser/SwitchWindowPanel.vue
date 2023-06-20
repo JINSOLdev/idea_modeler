@@ -12,13 +12,12 @@
                         :value.sync="value.property.locator"
                 ></locator-field>
 
-                <Variables-field
+                <variables-field
                         :label="'Timeout'"
                         :hint="'Time to wait, e.g. 5 seconds or 1min'"
                         :value.sync="value.property.timeout"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
-
         </v-card>
     </div>
 </template>

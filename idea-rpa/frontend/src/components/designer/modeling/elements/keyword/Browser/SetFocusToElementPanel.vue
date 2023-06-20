@@ -13,7 +13,6 @@
                         :required="true"
                 ></locator-field>
             </v-card-text>
-
         </v-card>
     </div>
 </template>

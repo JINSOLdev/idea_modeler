@@ -7,6 +7,22 @@
             KeywordElement,
         }
     })
-    export default class IsElementFocused extends Mixins(KeywordElement) { 
+    export default class IsElementFocused extends Mixins(KeywordElement) {
+        mounted() {
+            this.init();
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "locator", null)
+                this.$set(this.value.property, "missing_ok", true)
+            }
+
+            if (!this.value.property.hasOwnProperty("missing_ok")) {
+                this.$set(this.value.property, "missing_ok", true)
+            }
+        }
     }
 </script>

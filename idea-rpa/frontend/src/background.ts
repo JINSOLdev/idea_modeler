@@ -3,6 +3,9 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { machineId, machineIdSync } from 'node-machine-id'
+import { machine } from 'os'
+import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const path = require('path')
 
@@ -11,6 +14,9 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+async function getMachineId() {
+  let id = await machineId()
+}
 
 async function createWindow() {
   // Create the browser window.
@@ -45,15 +51,7 @@ async function createWindow() {
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Settings',
-      submenu: [
-        {role: 'undo'},
-        {role: 'redo'},
-        {type: 'separator'},
-        {role: 'cut'},
-        {role: 'copy'},
-        {role: 'paste'},
-      ],
-      click() {console.log('Clicked on settings')}
+      click() {console.log(machineIdSync()), console.error(error)}
     },
     {
       label: 'Help',
