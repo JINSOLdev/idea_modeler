@@ -16,6 +16,7 @@
                 <v-card-text class="pb-0">
                     <v-text-field
                             v-model="urlText"
+                            @keydown.enter="getXpath"
                             persistent-placeholder
                             placeholder="https://google.com"
                             outlined
@@ -44,7 +45,7 @@
 
 
 <script lang="ts">
-    import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
+    import { Vue, Component, Prop } from "vue-property-decorator";
     import { remote, ipcRenderer } from "electron";
 
     @Component
@@ -70,8 +71,10 @@
                 this.$emit('update:records',this.records)
                 this.$emit('closeLocator')
             } else {
-                if (arg.id || arg.class) {
-                    if (!this.records.find((item: any) => item.id == arg.id || item.class == arg.class)) {
+                if (arg.id || arg.class || arg.xpath) {
+                    if (!this.records.find((item: any) => 
+                        item.id == arg.id || item.class == arg.class || item.xpath == arg.xpath
+                    )) {
                         this.records.push(arg)
                     }
                 }
@@ -81,6 +84,9 @@
         getXpath() {
             let me = this
             me.urlText = me.urlText ? me.urlText : "https://google.com"
+            if (!me.urlText.includes("https://")) {
+                me.urlText = "https://" + me.urlText
+            }
             me.urlDialog = false
             let domPickerWindow = new remote.BrowserWindow({
                 width: 800,
@@ -120,13 +126,32 @@
                             action: {
                                 trigger: "click",
                                 callback: (function (target) {
+                                    function getXPathByElement (element) {
+                                        if (!element) return null
+
+                                        if (element.id) {
+                                            return "//*[@id="+element.id+"]"
+                                        } else if (element.tagName === 'BODY') {
+                                            return "/html/body"
+                                        } else {
+                                            const sameTagSiblings = Array.from(element.parentNode.childNodes)
+                                            .filter(e => e.nodeName === element.nodeName)
+                                            const idx = sameTagSiblings.indexOf(element)
+
+                                            return getXPathByElement(element.parentNode) + '/' +
+                                            element.tagName.toLowerCase() +
+                                            (sameTagSiblings.length > 1 ? "["+ (idx + 1)+"]" : "")
+                                        }
+                                    }
                                     const obj = {
                                         type: 'msg',
                                         class: target.getAttribute('class'),
                                         ref: target.getAttribute('ref'),
+                                        name: target.getAttribute('name'),
+                                        link: target.getAttribute('href'),
                                         id: target.getAttribute('id'),
+                                        xpath: getXPathByElement(target)
                                     }
-                                    console.log(target)
                                     require('electron').ipcRenderer.send('toMain', obj);
                                 })
                             }

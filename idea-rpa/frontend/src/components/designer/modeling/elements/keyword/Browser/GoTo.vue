@@ -7,6 +7,6 @@
             KeywordElement,
         }
     })
-    export default class GoToP extends Mixins(KeywordElement) {
+    export default class GoTo extends Mixins(KeywordElement) {
     }
 </script>

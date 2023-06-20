@@ -6,14 +6,13 @@
             </v-card-title>
 
             <v-card-text>
-                <Variables-field
+                <variables-field
                         :label="'Value'"
                         :hint="'Time in human-readable format, e.g. 1 second'"
                         :value.sync="value.property.value"
                         :required="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
-
         </v-card>
     </div>
 </template>

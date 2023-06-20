@@ -43,13 +43,13 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
-                this.$set(this.value.property, "returnVal", [{
+                this.$set(this.value.property, "assign_variables", [{
                     defaultValue: "Variable name"
                 }])
             }
 
-            if (!this.value.property.hasOwnProperty("returnVal")) {
-                this.$set(this.value.property, "returnVal", [{
+            if (!this.value.property.hasOwnProperty("assign_variables")) {
+                this.$set(this.value.property, "assign_variables", [{
                     defaultValue: "Variable name"
                 }])
             }

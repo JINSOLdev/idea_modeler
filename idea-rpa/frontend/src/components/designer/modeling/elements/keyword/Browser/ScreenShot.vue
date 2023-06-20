@@ -7,6 +7,6 @@
             KeywordElement,
         }
     })
-    export default class ScreenShot extends Mixins(KeywordElement) {
+    export default class Screenshot extends Mixins(KeywordElement) {
     }
 </script>

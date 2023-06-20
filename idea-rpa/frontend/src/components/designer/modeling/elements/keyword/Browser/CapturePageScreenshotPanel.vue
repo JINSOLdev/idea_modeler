@@ -7,9 +7,9 @@
 
             <v-card-text>
                 <path-field
-                        :label="'FileName'"
+                        :label="'Filename'"
                         :hint="'Path to created screenshot'"
-                        :value.sync="value.property.fileName"
+                        :value.sync="value.property.filename"
                 ></path-field>
             </v-card-text>
         </v-card>

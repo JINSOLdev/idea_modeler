@@ -1,12 +1,13 @@
 <template>
     <div>
-        <return-values-field
-                :label="'Assign Variables'"
-                :value.sync="value.property.itemVarName"
-        ></return-values-field>
-
-        <v-card flat>            
+        <v-card flat>
             <v-card-text>
+                <variables-field
+                        :label="'Assign Variables'"
+                        :value.sync="value.property.itemVarName"
+                        :isMultiple="true"
+                ></variables-field>
+
                 <v-select
                         v-model="value.property.type"
                         :items="typeList"
@@ -21,10 +22,6 @@
                         :isMultiple="true"
                 ></variables-field>
             </v-card-text>
-
-            <return-values-field
-                :value.sync="value.property.returnVal"
-        ></return-values-field>
         </v-card>
     </div>
 </template>

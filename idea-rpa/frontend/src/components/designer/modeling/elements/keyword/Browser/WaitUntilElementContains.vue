@@ -16,6 +16,7 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "locator", null)
                 this.$set(this.value.property, "text", null)
                 this.$set(this.value.property, "timeout", "None")
                 this.$set(this.value.property, "error", "None")
