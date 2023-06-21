@@ -322,20 +322,20 @@
 
         // Methods
         saveModel() {
-            let direactoryPath, filePath;
+            let directoryPath, filePath;
             if (this.$route.params.filePath) {
-                direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
+                directoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
                 filePath = this.$route.params.filePath;
             } else {
-                direactoryPath = `./tasks`;
-                filePath = `${direactoryPath}/${this.taskName}.json`;
+                directoryPath = `./tasks`;
+                filePath = `${directoryPath}/${this.taskName}.json`;
             }
 
             const data = {
                 path: filePath,
                 robot: this.robot
             }
-            !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+            !fs.existsSync(directoryPath) && fs.mkdirSync(directoryPath);
             fs.writeFileSync(filePath, JSON.stringify(data));
         }
 
