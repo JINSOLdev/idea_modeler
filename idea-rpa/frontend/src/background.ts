@@ -23,7 +23,7 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    autoHideMenuBar: true,
+    // autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -34,13 +34,15 @@ async function createWindow() {
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
-
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
 const contextMenu = Menu.buildFromTemplate([
   {
     label: 'Settings',
     submenu: [
-      { label: (machineIdSync())}
+      { 
+        label: (machineIdSync()),
+        click() {win.show()}
+      }
     ]
     // click() {console.log(machineIdSync())}
   },
@@ -53,6 +55,11 @@ const contextMenu = Menu.buildFromTemplate([
     label: 'Close', 
     type: 'normal',
     click() {app.quit()}
+  },
+  {
+    label: 'Quit',
+    type: 'normal',
+    click() {app.exit()}
   }
 ])
 
