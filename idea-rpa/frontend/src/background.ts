@@ -3,7 +3,7 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { machineId, machineIdSync } from 'node-machine-id'
+//import { machineId, machineIdSync } from 'node-machine-id'
 import { machine } from 'os'
 import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -14,9 +14,9 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function getMachineId() {
-  let id = await machineId()
-}
+// async function getMachineId() {
+//   let id = await machineId()
+// }
 
 async function createWindow() {
   // Create the browser window.
@@ -49,10 +49,10 @@ async function createWindow() {
   
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
   const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Settings',
-      click() {console.log(machineIdSync()), console.error(error)}
-    },
+    // {
+    //   label: 'Settings',
+    //   click() {console.log(machineIdSync()), console.error(error)}
+    // },
     {
       label: 'Help',
       click() {console.log('Clicked on Help')}
