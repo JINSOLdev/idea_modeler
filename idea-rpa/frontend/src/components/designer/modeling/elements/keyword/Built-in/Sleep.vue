@@ -9,7 +9,6 @@
     })
     export default class Sleep extends Mixins(KeywordElement) {
         mounted() {
-
             this.init()
         }
 

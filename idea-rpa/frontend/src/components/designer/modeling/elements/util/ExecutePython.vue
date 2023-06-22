@@ -98,7 +98,12 @@
             me.$emit("openExecute");
             const pythonChild = execFile(
                 './public/static/main.exe', 
-                [ "--mode", "execute", "--script", this.task.toRobot(0) ], 
+                [
+                    "--mode",
+                    "execute",
+                    "--script",
+                    this.task.toRobot(0).replace(/\t/g, "    ")
+                ],
                 { encoding: "utf-8" }
             );
             pythonChild.stdout?.on("data", function (data: any) {

@@ -18,7 +18,7 @@
                 this.value.property = new Map()
                 this.$set(this.value.property, "path", "None")
                 this.$set(this.value.property, "returnVal", [{
-                    defaultValue: "not_empty"
+                    defaultValue: "dirs"
                 }])
             }
 
@@ -27,7 +27,7 @@
             }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
-                    defaultValue: "not_empty"
+                    defaultValue: "dirs"
                 }])
             }
         }

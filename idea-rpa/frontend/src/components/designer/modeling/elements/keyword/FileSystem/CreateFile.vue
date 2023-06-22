@@ -19,7 +19,7 @@
                 this.$set(this.value.property, "path", null)
                 this.$set(this.value.property, "content", "None")
                 this.$set(this.value.property, "encoding", "utf-8")
-                this.$set(this.value.property, "overwrite", null)
+                this.$set(this.value.property, "overwrite", false)
             }
 
             if (!this.value.property.hasOwnProperty("content")) {
@@ -28,7 +28,9 @@
             if (!this.value.property.hasOwnProperty("encoding")) {
                 this.$set(this.value.property, "encoding", "utf-8")
             }
-            
+            if (!this.value.property.hasOwnProperty("overwrite")) {
+                this.$set(this.value.property, "overwrite", false)
+            }
         }
     }
 </script>

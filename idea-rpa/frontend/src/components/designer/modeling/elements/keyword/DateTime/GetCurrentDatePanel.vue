@@ -9,7 +9,7 @@
                 <variables-field
                         :label="'Time Zone'"
                         :hint="'Timezone to use (`local` or `UTC`)'"
-                        :value.sync="value.property.timeZone"
+                        :value.sync="value.property.time_zone"
                 ></variables-field>
 
                 <variables-field
@@ -21,8 +21,14 @@
                 <variables-field
                         :label="'Result Format'"
                         :hint="'Format of returned date'"
-                        :value.sync="value.property.resultFormat"
+                        :value.sync="value.property.result_format"
                 ></variables-field>
+                
+                <switch-field
+                        :label="'Exclude Millis'"
+                        :hint="'Round and hide milliseconds'"
+                        :value.sync="value.property.exclude_mills"
+                ></switch-field>
             </v-card-text>
         </v-card>
 

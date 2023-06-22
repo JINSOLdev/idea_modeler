@@ -7,7 +7,7 @@
             KeywordElement,
         }
     })
-    export default class ReadFile extends Mixins(KeywordElement) {
+    export default class IsLocation extends Mixins(KeywordElement) {
         mounted() {
             this.init();
         }
@@ -15,7 +15,7 @@
         init() {
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
-                    defaultValue: "content"
+                    defaultValue: "res"
                 }])
             }
         }

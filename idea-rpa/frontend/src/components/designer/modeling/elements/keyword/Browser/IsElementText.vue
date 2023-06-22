@@ -24,6 +24,12 @@
             if (!this.value.property.hasOwnProperty("ignore_case")) {
                 this.$set(this.value.property, "ignore_case", false)
             }
+
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "res"
+                }])
+            }
         }
     }
 </script>

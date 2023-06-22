@@ -7,11 +7,12 @@
 
             <v-card-text>
                 <path-field
-                        :label="'Source'"
+                        :label="'Sources'"
                         :hint="'File(s) to copy'"
-                        :value.sync="value.property.source"
+                        :value.sync="value.property.sources"
                         :required="true"
                 ></path-field>
+
                 <path-field
                         :label="'Destination'"
                         :hint="'Destination directory'"
@@ -20,7 +21,6 @@
                 ></path-field>
             </v-card-text>
         </v-card>
-
     </div>    
 </template>
 

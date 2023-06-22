@@ -382,7 +382,9 @@
 
         // Methods
         cloneElement(value: any): any {
-            let item
+            this.$emit("closeMenu")
+            
+            let item: any
             if(value.type == "DefinitionKeyword") {
                 item = { type: Keyword }
                 const keyword = new (item.type)(this.idGlobal++, value.name, value.type)

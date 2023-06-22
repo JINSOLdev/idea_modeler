@@ -3,16 +3,15 @@
         <p>{{ value.name }}</p>
         <draggable
                 v-if="value.type != 'DefinitionKeyword'"
-                class="dragKeyword" 
+                class="drag-keyword pa-0" 
                 tag="ul" 
                 :list="child" 
                 :group="{ name: 'task', put: false }"
-                style="padding: 0px !important;"
         ></draggable>
 
         <draggable
                 v-else
-                class="dragArea" 
+                class="drag-area" 
                 tag="ul" 
                 :list="child" 
                 group="task"
@@ -21,12 +20,15 @@
                     :key="task.id"
                     class="child-task"
                     @dblclick="openPanel($event, task)"
-                    @contextmenu="openContextMenu($event, task)"
+                    @contextmenu.prevent="openContextMenu($event, task)"
+                    :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
             >
                 <component
                         :is="getComponentName(task)"
-                        :child="task.child"
-                        :value="task"
+                        :child.sync="task.child"
+                        :value.sync="task"
+                        :isOpenMenu.sync="isOpenMenu"
+                        :isOpenPanel.sync="isOpenPanel"
                         @openPanel="openPanel"
                         @openContextMenu="openContextMenu"
                 ></component>
@@ -49,21 +51,26 @@
 </script>
 
 <style scoped>
-    .dragKeyword {
+    .drag-keyword {
         list-style: none;
         padding: 10px 0px;
     }
 
-    .dragArea {
+    .drag-area {
         list-style: none;
         min-height: 40px;
-        padding: 10px 0px;
+        padding: 4px;
     }
 
     .child-task {
-        margin: auto 10px;
+        margin: 12px;
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
+    }
+
+    .selected {
+        border: 1px solid #2196F3;
+        margin-bottom: 10px;
     }
 </style>

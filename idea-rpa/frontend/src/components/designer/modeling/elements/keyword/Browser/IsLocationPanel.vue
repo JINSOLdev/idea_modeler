@@ -5,21 +5,16 @@
                 Input Arguments
             </v-card-title>
 
-            <v-card-text>
-                <locator-field 
-                        :hint="'Locator for element'"
-                        :value.sync="value.property.locator"
+            <v-card-text>  
+                <text-field 
+                        :label="'Url'"
+                        :hint="'Expected location'"
+                        :value.sync="value.property.url"
                         :required="true"
-                ></locator-field>
-
-                <switch-field
-                        :label="'Missing Ok'"
-                        :hint="'Allow element to not exist'"
-                        :value.sync="value.property.missing_ok"
-                ></switch-field>
+                ></text-field> 
             </v-card-text>
-        </v-card>
-
+        </v-card> 
+        
         <return-values-field
                 :value.sync="value.property.returnVal"
         ></return-values-field>
@@ -35,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class IsElementFocusedPanel extends Mixins(KeywordPanel) {
+    export default class IsLocationPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Is element focused"
+            var description = "Is current URL expected url"
             this.$emit("setDescription", description)
         }
     }

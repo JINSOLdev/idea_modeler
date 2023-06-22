@@ -3,7 +3,7 @@
       <div class="col-3">
         <h3>Elements</h3>
         <draggable
-          class="dragArea list-group"
+          class="drag-area list-group"
           :list="elements"
           :group="{ name: 'g1', pull: 'clone', put: false }"
           :clone="cloneTask"
@@ -20,7 +20,7 @@
           <nested-task :tasks="robot.child" />
   
         <!-- <draggable
-          class="dragArea list-group"
+          class="drag-area list-group"
           :list="list2"
           group="task"
           @change="log"

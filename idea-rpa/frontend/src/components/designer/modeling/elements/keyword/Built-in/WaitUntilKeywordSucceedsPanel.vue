@@ -19,13 +19,17 @@
                         :hint="'Time between attempts, e.g. `3 seconds`'"
                         :value.sync="value.property.retry_interval"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Name'"
                         :hint="'Name of keyword to run'"
                         :value.sync="value.property.name"
                 ></variables-field>
+            </v-card-text>
 
+            <v-card-text>
                 <variables-field
                         :label="'Args'"
                         :hint="'Arguments for keyword'"

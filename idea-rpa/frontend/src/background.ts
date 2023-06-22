@@ -1,26 +1,25 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-//import { machineId, machineIdSync } from 'node-machine-id'
+import { machineId, machineIdSync } from 'node-machine-id'
 import { machine } from 'os'
 import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const path = require('path')
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-// async function getMachineId() {
-//   let id = await machineId()
-// }
+async function getMachineId() {
+  let id = await machineId()
+}
 
 async function createWindow() {
   // Create the browser window.
-  let win = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -49,10 +48,10 @@ async function createWindow() {
   
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
   const contextMenu = Menu.buildFromTemplate([
-    // {
-    //   label: 'Settings',
-    //   click() {console.log(machineIdSync()), console.error(error)}
-    // },
+    {
+      label: 'Settings',
+      click() {console.log(machineIdSync()), console.error(error)}
+    },
     {
       label: 'Help',
       click() {console.log('Clicked on Help')}
@@ -100,7 +99,6 @@ async function createWindow() {
   }
 }
 
-
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -129,7 +127,6 @@ app.on('ready', async () => {
   }
   createWindow()
 })
-
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
