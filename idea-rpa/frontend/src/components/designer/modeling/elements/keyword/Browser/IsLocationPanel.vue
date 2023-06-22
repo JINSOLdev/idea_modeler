@@ -15,6 +15,9 @@
             </v-card-text>
         </v-card> 
         
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 
@@ -27,7 +30,7 @@
             KeywordPanel,
         }
     })
-    export default class ISLocationPanel extends Mixins(KeywordPanel) {
+    export default class IsLocationPanel extends Mixins(KeywordPanel) {
         mounted() {
             var description = "Is current URL expected url"
             this.$emit("setDescription", description)

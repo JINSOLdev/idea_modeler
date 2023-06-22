@@ -23,6 +23,12 @@
             if (!this.value.property.hasOwnProperty("missing_ok")) {
                 this.$set(this.value.property, "missing_ok", true)
             }
+
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "res"
+                }])
+            }
         }
     }
 </script>

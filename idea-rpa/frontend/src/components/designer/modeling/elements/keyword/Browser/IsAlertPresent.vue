@@ -18,6 +18,9 @@
                 this.value.property = new Map()
                 this.$set(this.value.property, "text", "None")
                 this.$set(this.value.property, "action", "ACCEPT")
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "res"
+                }])
             }
 
             if (!this.value.property.hasOwnProperty("text")) {
@@ -25,6 +28,12 @@
             }
             if (!this.value.property.hasOwnProperty("action")) {
                 this.$set(this.value.property, "action", "ACCEPT")
+            }
+
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "res"
+                }])
             }
         }
     }
