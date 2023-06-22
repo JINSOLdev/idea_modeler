@@ -136,6 +136,7 @@
                     <v-card-text class="pb-0">
                         <v-text-field
                                 v-model="taskName"
+                                @keydown.enter="createNewTask"
                                 persistent-placeholder
                                 placeholder="New Task"
                                 outlined

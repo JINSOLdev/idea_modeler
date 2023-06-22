@@ -87,24 +87,31 @@ class Task extends Construct{
             return text
         }
         
-        if (typeof item == "object" && item.valueType) {
-            if (item.valueType == "Scalar") {
-                text = `\$\{${item.name}\}`
-    
-            } else if (item.valueType == "List") {
-                text = `\@\{${item.name}\}`
-                
-            } else if (item.valueType == "Dictionary") {
-                text = `&\{${item.name}\}`
-                
-            } else if (item.valueType == "Environment") {
-                text = `\%\{${item.name}\}`
-                
+        if (typeof item == "object" && (item.valueType || item.defaultValue)) {
+            if (item.valueType) {
+                if (item.valueType.includes("Scalar")) {
+                    text = `\$\{${item.name}\}`
+        
+                } else if (item.valueType == "List") {
+                    text = `\@\{${item.name}\}`
+                    
+                } else if (item.valueType == "Dictionary") {
+                    text = `&\{${item.name}\}`
+                    
+                } else if (item.valueType == "Environment") {
+                    text = `\%\{${item.name}\}`
+                    
+                } else {
+                    if (item.defaultValue && item.defaultValue != null) {
+                        text = `${item.defaultValue}`
+                    }
+                }
             } else {
-                if (item.defaultValue && item.defaultValue != null) {
+                if (item.defaultValue != null) {
                     text = `${item.defaultValue}`
                 }
             }
+
         } else if (typeof item == "string" || typeof item == "number") {
             text = `${item}`
 
@@ -115,6 +122,11 @@ class Task extends Construct{
         } else {
             text = `${item}`
             
+        }
+
+        const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+        if (text.replace(reg, '') == "") {
+            text = ""
         }
 
         return text
@@ -179,13 +191,15 @@ class ForTask extends SeqTask{
         let robot = Construct.tabs.substr(0, tab) + `${name}` + Construct.tabs.substr(0, tab) 
         
         this.property.itemVarName.forEach((item: any) => {
-            robot += this.checkType(item) + Construct.tabs.substr(0, tab)
+            robot += `\$\{${item.name}\}` + Construct.tabs.substr(0, tab)
         })
         
         robot += this.property.type.toUpperCase() + Construct.tabs.substr(0, tab)
 
         this.property.iterationVarName.forEach((item: any) => {
-            robot += this.checkType(item) + Construct.tabs.substr(0, tab)
+            if (this.checkType(item).length > 0) {
+                robot += this.checkType(item) + Construct.tabs.substr(0, tab)
+            }
         })
         
         this.child?.forEach((child: any) => {
@@ -215,10 +229,6 @@ class IfTask extends SeqTask{
         ]
     }
 
-    public setProperty(value: any) {
-        this.property.terms = value.terms
-    }
-
     public getConditions(condition: any): string {
         let text = ""
         if (condition.hasOwnProperty("isGroup")) {
@@ -236,18 +246,26 @@ class IfTask extends SeqTask{
                 } else {
                     if (item.variable) {
                         if (item.isNot) {
-                            text += "(not "
-                            if (item.operator) {
-                                text += this.checkType(item.variable) + `${item.operator}` + this.checkType(item.compareVariable)
-                            } else {
+                            text += "not ("
+                            if (item.operator 
+                                    && this.checkType(item.variable).length > 0
+                                    && this.checkType(item.compareVariable).length > 0
+                            ) {
+                                text += this.checkType(item.variable) + ` ${item.operator} ` + this.checkType(item.compareVariable)
+
+                            } else if (this.checkType(item.variable).length > 0) {
                                 text += this.checkType(item.variable)
                             }
                             text += ")"
                         } else {
-                            if (item.operator) {
-                                text += this.checkType(item.variable) + `${item.operator}` + this.checkType(item.compareVariable) + Construct.tabs.substr(0, 1)
-                            } else {
-                                text += this.checkType(item.variable) + Construct.tabs.substr(0, 1)
+                            if (item.operator
+                                    && this.checkType(item.variable).length > 0
+                                    && this.checkType(item.compareVariable).length > 0
+                            ) {
+                                text += this.checkType(item.variable) + ` ${item.operator} ` + this.checkType(item.compareVariable)
+
+                            } else if (this.checkType(item.variable).length > 0) {
+                                text += this.checkType(item.variable)
                             }
                         }
                     }
@@ -256,12 +274,12 @@ class IfTask extends SeqTask{
                         && text.length > 0
                         && text.replaceAll("\t", "").length > 0
                 ) {
-                    text += "and" + Construct.tabs.substr(0, 1)
+                    text += " and "
                 } else if (condition.isAll == 1 && index < lastIndex
                         && text.length > 0
                         && text.replaceAll("\t", "").length > 0
                 ) {
-                    text += "or" + Construct.tabs.substr(0, 1)
+                    text += " or "
                 }
             })
         }
@@ -282,23 +300,11 @@ class IfTask extends SeqTask{
         let robot = "";
 
         if (this.property.conditions.length > 0) {
-                this.property.conditions.forEach((item: any, idx: number) => {
+            this.property.conditions.forEach((item: any) => {
+
                 const name = item.type.toUpperCase()
-                robot += Construct.tabs.substr(0, tab) + `${name}`
-
-                robot += this.getConditions(item)
-                // if (item.operator) {
-                //     robot += Construct.tabs.substr(0, tab) + `${name}` 
-                //             + Construct.tabs.substr(0, tab) + `"${item.variable}" `
-                //             + `${item.operator} "${item.compareVariable}"`;
-                    
-                // } else if (item.type != "Else" && item.variable) {
-                //     robot += Construct.tabs.substr(0, tab) + `${name}` 
-                //             + Construct.tabs.substr(0, tab) + `$${item.variable}`;
-                // } else {
-                //     robot += Construct.tabs.substr(0, tab) + `${name}`
-                // }
-
+                robot += Construct.tabs.substr(0, tab) + `${name}` + this.getConditions(item)
+                
                 item.child.forEach((keyword: any) => robot += "\n" + keyword.toRobot(tab + 1))
                 
                 robot += "\n" 
@@ -315,33 +321,97 @@ class IfTask extends SeqTask{
 class WhileTask extends SeqTask{
 
     public property: any = {
-        condition: {
-            type: '',
-            variable: ''
-        },
+        conditions: [
+            {
+                type: 'While',
+                isAll: 0,
+                terms: [{
+                    variable: "",
+                    terms: null,
+                }]
+            }
+        ],
         limit: ""
     }
 
-    public setProperty(value: any) {
-        this.property.condition = value.condition
-        this.property.limit = value.limit
+    public getConditions(condition: any): string {
+        let text = ""
+        if (condition.hasOwnProperty("isGroup")) {
+            text += "("
+        } else if (condition.hasOwnProperty("type") || condition.hasOwnProperty("variable")) {
+            text += Construct.tabs.substr(0, 1)
+        }
+
+        if (condition.terms && condition.terms.length > 0) {
+            const lastIndex = condition.terms.length - 1
+            condition.terms.forEach((item: any, index: number) => {
+                if (item.terms && item.terms.length > 0) {
+                    text += this.getConditions(item)
+
+                } else {
+                    if (item.variable) {
+                        if (item.isNot) {
+                            text += "not ("
+                            if (item.operator 
+                                    && this.checkType(item.variable).length > 0
+                                    && this.checkType(item.compareVariable).length > 0
+                            ) {
+                                text += this.checkType(item.variable) + ` ${item.operator} ` + this.checkType(item.compareVariable)
+
+                            } else if (this.checkType(item.variable).length > 0) {
+                                text += this.checkType(item.variable)
+                            }
+                            text += ")"
+                        } else {
+                            if (item.operator
+                                    && this.checkType(item.variable).length > 0
+                                    && this.checkType(item.compareVariable).length > 0
+                            ) {
+                                text += this.checkType(item.variable) + ` ${item.operator} ` + this.checkType(item.compareVariable)
+
+                            } else if (this.checkType(item.variable).length > 0) {
+                                text += this.checkType(item.variable)
+                            }
+                        }
+                    }
+                }
+                if (condition.isAll == 0 && index < lastIndex 
+                        && text.length > 0
+                        && text.replaceAll("\t", "").length > 0
+                ) {
+                    text += " and "
+                } else if (condition.isAll == 1 && index < lastIndex
+                        && text.length > 0
+                        && text.replaceAll("\t", "").length > 0
+                ) {
+                    text += " or "
+                }
+            })
+        }
+
+        if (condition.hasOwnProperty("isGroup")) {
+            text += ")"
+        }
+
+        if (text.length == 0 || text.replaceAll("\t", "").length == 0 || text.includes("()")) {
+            text = ""
+        }
+
+        return text
     }
     
     public toRobot(tab: number): string{
-        const name = this.name.toUpperCase()
+        let robot = ''
 
-        let robot = Construct.tabs.substr(0, tab) + `${name}`;
-
-        if (this.property.condition != null) {
-            robot += this.property.condition.variable
-            if (this.property.condition.operator) {
-                robot += Construct.tabs.substr(0, tab) + this.property.condition.operator 
-                        + Construct.tabs.substr(0, tab) + this.property.condition.compareVariable
-            }
+        if (this.property.conditions.length > 0) {
+            this.property.conditions.forEach((item: any) => {
+                const name = item.type.toUpperCase()
+                robot += Construct.tabs.substr(0, tab) + `${name}` + this.getConditions(item)
+            })
         }
 
         if (this.property.limit != '') {
-            robot += ' limit=' + this.property.limit + '\n'
+            robot += Construct.tabs.substr(0, tab) + 'limit=' + this.property.limit
         }
 
         this.child?.forEach(child=> robot += "\n"+child.toRobot(tab + 1));
@@ -472,20 +542,32 @@ class Robot extends SeqTask{
         this.keywords = this.keywords.filter((obj: any) => obj.id != value.id)
     }
 
-    public setLibrary(child: any, tab: number): string {
-        let text = "";
-        
+    public setLibrary(child: any, tab: number, text: string): string {
+        let newText = ""
+
         child.forEach((item: any) => {
+            if (item.child && item.child.length > 0) {
+                newText += this.setLibrary(item.child, tab, text)
+            }
+
+            if (item.type == "IfTask") {
+                item.property.conditions.forEach((condition: any) => {
+                    newText += this.setLibrary(condition.child, tab, text)
+                })
+            }
+
             if (item.library && item.library != "" && item.library != "User Keyword") {
                 if (!text.includes(item.library)) {
                     text += "Library" + Construct.tabs.substr(0, tab + 1) + `${item.library}\n`;
+                } else {
+                    return text
                 }
             }
-
-            if (item.child && item.child.length > 0) {
-                text += this.setLibrary(item.child, tab)
-            }
         })
+
+        if (text == "" && newText != "") {
+            text = newText
+        }
 
         return text
     }
@@ -495,7 +577,7 @@ class Robot extends SeqTask{
         let robot = "";
 
         if (this.child.length > 0) {
-            robot += "*** Settings ***\n" + this.setLibrary(this.child, tab) + "\n"
+            robot += "*** Settings ***\n" + this.setLibrary(this.child, tab, "") + "\n"
         }
         
         if (this.variables.length > 0) {
@@ -588,7 +670,7 @@ class Keyword extends SeqTask {
         let text = ""
         let keys = Object.keys(this.property)
         
-        if (index > 0 && key != "locator") {
+        if (index > 0) {
             var res = false
             keys.forEach((str: string, idx: number) => {
                 if (idx < index && str != "returnVal") {
@@ -612,14 +694,18 @@ class Keyword extends SeqTask {
 
             if (res && this.property[key]) {
 
-                if (typeof this.property[key] == "object" && (this.property[key].length > 0 ||
-                    (this.property[key].defaultValue && 
-                    this.property[key].defaultValue != null &&
-                    this.property[key].defaultValue != undefined))
-                ) {
+                if (typeof this.property[key] == "object" && (
+                    this.property[key].length > 0 || (
+                        this.property[key].defaultValue && 
+                        this.property[key].defaultValue != null &&
+                        this.property[key].defaultValue != undefined
+                ))) {
                     text += `${key}=`
 
-                } else if (typeof this.property[key] == "boolean" || typeof this.property[key] == "string") {
+                } else if (typeof this.property[key] == "boolean" 
+                        || typeof this.property[key] == "string"
+                        || typeof this.property[key] == "number"
+                ) {
                     text += `${key}=`
                 }
             }
@@ -640,9 +726,12 @@ class Keyword extends SeqTask {
 
                 robot = ""
 
-                this.property.returnVal.forEach((item: any) => 
-                    robot += Construct.tabs.substr(0, tab) + `\$\{${item.defaultValue}\}=`
-                )
+                this.property.returnVal.forEach((item: any, index: number) => {
+                    robot += Construct.tabs.substr(0, tab) + `\${${item.defaultValue}}`
+                    if (index === (this.property.returnVal.length - 1)) {
+                        robot += "="
+                    }
+                })
 
                 robot += Construct.tabs.substr(0, 1) + `${this.name}`
 
@@ -655,12 +744,7 @@ class Keyword extends SeqTask {
                         
                     } else if (key == 'locator') {
                         if (this.property[key].defaultValue && this.property[key].defaultValue != "") {
-                            if (this.property[key].name != "ref") {
-                                robot += Construct.tabs.substr(0, 1) + 
-                                    `${this.property[key].name}:${this.property[key].defaultValue}`
-                            } else {
-                                robot += Construct.tabs.substr(0, 1) + `${this.property[key].defaultValue}`
-                            }
+                            robot += Construct.tabs.substr(0, 1) + `${this.property[key].defaultValue}`
                         }
 
                     } else if (typeof this.property[key] == "object" &&
@@ -673,7 +757,9 @@ class Keyword extends SeqTask {
                                 if (val.key) {
                                     robot += Construct.tabs.substr(0, 1) + `${val.key}=` + this.checkType(val.value)
                                 } else {
-                                    robot += Construct.tabs.substr(0, 1) + this.checkType(val)
+                                    if (this.checkType(val).length > 0) {
+                                        robot += Construct.tabs.substr(0, 1) + this.checkType(val)
+                                    }
                                 }
                             }
                         })

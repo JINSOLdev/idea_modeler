@@ -10,18 +10,38 @@
                         :label="'Date1'"
                         :hint="'Date to subtract from'"
                         :value.sync="value.property.date1"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Date2'"
                         :hint="'Date that is subtracted'"
                         :value.sync="value.property.date2"
+                        :required="true"
                 ></variables-field>
 
                 <variables-field
                         :label="'Result Format'"
                         :hint="'Format of returned date'"
-                        :value.sync="value.property.resultFormat"
+                        :value.sync="value.property.result_format"
+                ></variables-field>
+
+                <switch-field
+                        :label="'Exclude Millis'"
+                        :hint="'Round and hide milliseconds'"
+                        :value.sync="value.property.exclude_mills"
+                ></switch-field>
+
+                <variables-field
+                        :label="'Date1 Format'"
+                        :hint="'Custom timestamp format for `date1`'"
+                        :value.sync="value.property.date1_format"
+                ></variables-field>
+
+                <variables-field
+                        :label="'Date2 Format'"
+                        :hint="'Custom timestamp format for `date2`'"
+                        :value.sync="value.property.date2_format"
                 ></variables-field>
             </v-card-text>
         </v-card>

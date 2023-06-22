@@ -4,14 +4,15 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>       
-                    <variables-field 
+                <variables-field 
                         :label="'Url'"
                         :hint="'URL to navigate to'"
                         :value.sync="value.property.url"
-                    ></variables-field> 
+                        :required="true"
+                ></variables-field> 
             </v-card-text>
-
         </v-card> 
     </div>
 </template>

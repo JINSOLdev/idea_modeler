@@ -4,6 +4,7 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>
                 <variables-field
                         :label="'Title'"
@@ -12,8 +13,11 @@
                         :required=true
                 ></variables-field>
             </v-card-text>
-        </v-card> 
-
+        </v-card>
+        
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 

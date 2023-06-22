@@ -10,7 +10,7 @@
   
         <i class="fa fa-times close" @click="removeAt(idx)"></i>
   
-        <nested-task  class="dragArea" :tasks="el.child"  v-if="el.child"/>
+        <nested-task  class="drag-area" :tasks="el.child"  v-if="el.child"/>
       </li>
     </draggable>
 </template>
@@ -35,7 +35,7 @@
 </script>
 
 <style scoped>
-    .dragArea {
+    .drag-area {
         min-height: 50px;
         outline: 1px dashed;
     }

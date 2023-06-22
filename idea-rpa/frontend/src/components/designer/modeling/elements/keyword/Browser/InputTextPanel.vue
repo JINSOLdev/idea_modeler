@@ -9,12 +9,14 @@
                 <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field> 
 
                 <variables-field 
                         :label="'Text'"
                         :hint="'Text value'"
                         :value.sync="value.property.text"
+                        :required="true"
                 ></variables-field> 
 
                 <switch-field

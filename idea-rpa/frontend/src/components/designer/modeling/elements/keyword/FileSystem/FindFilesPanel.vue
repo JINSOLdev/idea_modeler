@@ -14,15 +14,15 @@
                 ></variables-field>
 
                 <switch-field
-                        :value.sync="value.property.formattingAsEmpty"
                         :label="'Include Dirs'"
                         :hint="'Include directories in result'"
+                        :value.sync="value.property.include_dirs"
                 ></switch-field>
 
                 <switch-field
-                        :value.sync="value.property.formattingAsEmpty"
                         :label="'Include Files'"
                         :hint="'Include files in result'"
+                        :value.sync="value.property.include_files"
                 ></switch-field>               
 
             </v-card-text>

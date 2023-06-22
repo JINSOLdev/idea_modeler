@@ -9,6 +9,7 @@
                 <locator-field 
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field>
 
                 <variables-field
@@ -25,6 +26,9 @@
                 ></switch-field>
             </v-card-text>
         </v-card>
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 

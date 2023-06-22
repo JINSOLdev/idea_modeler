@@ -4,15 +4,16 @@
             <v-card-title class="subtitle-1">
                 Input Arguments
             </v-card-title>
+
             <v-card-text>
-                    <variables-field 
+                <variables-field 
                         :label="'Group Name'"
                         :hint="'radio button group name'"
                         :value.sync="value.property.group_name"
                         :required="true"
-                    ></variables-field>
+                ></variables-field>
 
-                    <variables-field
+                <variables-field
                         :label="'Value'"
                         :hint="'Expected value'"
                         :value.sync="value.property.value"
@@ -20,7 +21,9 @@
                 ></variables-field>
             </v-card-text>
         </v-card> 
-
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 

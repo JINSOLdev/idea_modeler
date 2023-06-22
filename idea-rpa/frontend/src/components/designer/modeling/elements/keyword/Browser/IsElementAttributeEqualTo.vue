@@ -8,5 +8,16 @@
         }
     })
     export default class IsElementAttributeEqualTo extends Mixins(KeywordElement) {
+        mounted() {
+            this.init();
+        }
+
+        init() {
+            if (!this.value.property.hasOwnProperty("returnVal")) {
+                this.$set(this.value.property, "returnVal", [{
+                    defaultValue: "res"
+                }])
+            }
+        }
     }
 </script>

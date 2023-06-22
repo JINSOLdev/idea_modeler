@@ -13,14 +13,13 @@
                         :required="true"
                 ></locator-field>
 
-                <Variables-field
+                <variables-field
                         :label="'Indexes'"
                         :hint="'Indexes to unselect'"
                         :value.sync="value.property.indexes"
                         :isMultiple="true"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
-
         </v-card>
     </div>
 </template>

@@ -9,7 +9,6 @@
     })
     export default class Log extends Mixins(KeywordElement) {
         mounted() {
-
             this.init()
         }
 

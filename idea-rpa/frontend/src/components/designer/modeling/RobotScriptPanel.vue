@@ -3,12 +3,13 @@
         TODO: scriptText 를 모델로 전환하는 parse 기능 필요.
     -->
     <v-navigation-drawer
+            ref="drawer"
             fixed
             permanent
             right
-            style="width: 800px;"
+            :width="navigation.width"
     >
-        <v-card outlined>
+        <v-card outlined class="px-2">
             <v-card-title class="d-flex">
                 <div class="mr-auto">
                     Robot Script
@@ -45,11 +46,17 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Prop, Watch } from "vue-property-decorator"
+    import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator"
+    import SeparatePanelComponent from "./SeparatePanelComponent.vue";
     import { Robot, Task, Keyword } from "@/types/Task";
 
-    @Component
-    export default class RobotScriptPanel extends Vue {
+    // @Component
+    @Component({
+        components: {
+            SeparatePanelComponent,
+        }
+    })
+    export default class RobotScriptPanel extends Mixins(SeparatePanelComponent) {
         @Prop() public robot!: any;
 
         public scriptText: string = ""
@@ -60,15 +67,8 @@
         }
 
         mounted () {
-            this.scriptText = this.robot.toRobot(0);
+            this.scriptText = this.robot.toRobot(0).replace(/\t/g, "    ");
         }
-
-        // @Watch("scriptText", {immediate: true, deep: true})
-        // updateScriptText(newVal: string) {
-        //     if(newVal && newVal.length > 0) {
-        //         this.parseRobotText(newVal)
-        //     }
-        // }
 
         copyScriptText() {
             window.navigator.clipboard.writeText(this.scriptText)

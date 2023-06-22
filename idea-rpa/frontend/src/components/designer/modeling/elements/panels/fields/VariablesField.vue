@@ -153,6 +153,16 @@
                 if (this.required && this.newValue != null) {
                     this.newValue.required = true
                 }
+            } else {
+                this.newValue.forEach((val: any, idx: number) => {
+                    if (typeof val == "string") {
+                        this.newValue[idx] = {
+                            name: val,
+                            valueType: "String",
+                            defaultValue: val
+                        }
+                    }
+                })
             }
             
             this.$emit('update:value', this.newValue)

@@ -13,14 +13,13 @@
                         :required="true"
                 ></locator-field>
 
-                <Variables-field
+                <variables-field
                         :label="'Modifier'"
                         :hint="'Click with modifier key'"
                         :value.sync="value.property.modifier"
-                ></Variables-field>
+                ></variables-field>
             </v-card-text>
         </v-card>
-
     </div>
 </template>
 

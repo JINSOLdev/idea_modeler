@@ -245,6 +245,15 @@
                         terms: null,
                     }]
                 })
+            } else if (type == "While") {
+                list.push({
+                    type: 'While',
+                    operator: '',
+                    terms: [{
+                        variable: "",
+                        terms: null,
+                    }]
+                })
             }
         }
 
@@ -269,10 +278,12 @@
             if (!item.terms) {
                 item.terms = []
 
-                if (item.type && item.child) {
+                if (item.type) {
                     obj = JSON.parse(JSON.stringify(item))
                     delete obj.type
-                    delete obj.child
+                    if (item.child) {
+                        delete obj.child
+                    }
                     item.terms.push(obj)
                 }
             }

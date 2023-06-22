@@ -56,14 +56,14 @@
             </v-btn>
         </v-app-bar>
 
-        <v-overlay v-model="isOverlay">
+        <v-overlay v-model="isOverlay" style="z-index: 10;">
             <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
 
         <v-main>
             <v-container 
                     @click="closePanel"
-                    @contextmenu="openContextMenu($event, null)"
+                    @contextmenu.prevent="openContextMenu($event, null)"
             >
                 <v-alert 
                         outlined
@@ -88,8 +88,9 @@
                 <draggable 
                         tag="ul"
                         :list="robot.child"
+                        :move="startMoveElement"
                         group="task"
-                        class="dragArea"
+                        class="drag-area"
                 >
                     <div v-for="task in robot.child" 
                             :key="task.id"
@@ -97,15 +98,18 @@
                         <model-relation
                                 :targetTask="task"
                         ></model-relation>
-                        <li     class="task-element"
+                        
+                        <li class="task-element"
                                 @dblclick="openPanel($event, task)"
-                                @contextmenu="openContextMenu($event, task)"
+                                @contextmenu.prevent="openContextMenu($event, task)"
+                                :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                         >
                             <component
                                     :is="getComponentName(task)"
-                                    :ref="camelCase(task.name)"
-                                    :child="task.child"
-                                    :value="task"
+                                    :child.sync="task.child"
+                                    :value.sync="task"
+                                    :isOpenMenu.sync="isOpenMenu"
+                                    :isOpenPanel.sync="isOpenPanel"
                                     @openPanel="openPanel"
                                     @openContextMenu="openContextMenu"
                             ></component>
@@ -126,15 +130,17 @@
         </v-main>
 
         <!-- Element List -->
-        <element-list 
-                @updateKeywords="updateKeywords"
+        <element-list
                 ref="elementList"
+                @updateKeywords="updateKeywords"
+                @closeMenu="closeContextMenu"
         ></element-list>
 
         <!-- Variables Dialogs -->
         <v-dialog v-model="variableDialog" max-width="800">
             <variables-dialog
                     :value.sync="robot"
+                    @closeVariableDialog="closeVariableDialog"
                     @updateVariables="updateVariables"
             ></variables-dialog>
         </v-dialog>
@@ -156,26 +162,25 @@
         ></execute-panel>
 
         <!-- Context Menu -->
-        <v-menu
-                v-model="isOpenMenu"
+        <v-menu v-model="isOpenMenu"
                 :position-x="menuStyle.x"
                 :position-y="menuStyle.y"
                 absolute
                 offset-y
         >
             <v-list>
-                <v-list-item v-if="selectedValue && selectedValue != null" link>
-                    <v-list-item-title @click="deleteElement(selectedValue)">
+                <v-list-item v-if="selectedValue && selectedValue != null">
+                    <v-list-item-title @click.capture="deleteElement">
                         Delete
                     </v-list-item-title>
                 </v-list-item>
-                <v-list-item v-if="selectedValue && selectedValue != null" link>
-                    <v-list-item-title @click="copyElement(selectedValue)">
+                <v-list-item v-if="selectedValue && selectedValue != null">
+                    <v-list-item-title @click.capture="copyElement">
                         Copy
                     </v-list-item-title>
                 </v-list-item>
-                <v-list-item v-if="tmpObject" link>
-                    <v-list-item-title @click="pasteElement">
+                <v-list-item v-if="tmpObject">
+                    <v-list-item-title @click.capture="pasteElement($event)">
                         Paste
                     </v-list-item-title>
                 </v-list-item>
@@ -262,13 +267,14 @@
         updateRobot(val: any) {
             if (val) {
                 val.name = this.taskName;
+                this.$set(this, "isOpenScript", false)
             }
         }
 
         @Watch('isOpenMenu', { immediate: true, deep: true })
-        menu(value: boolean) {
-            if (!value) {
-                this.selectedValue = null;
+        menuStatus(val: any) {
+            if (!val) {
+                this.$set(this, "selectedValue", null)
             }
         }
 
@@ -276,8 +282,16 @@
             let me = this
 
             try {
+                let path: any
+                const location = window.localStorage.getItem("location")
+
                 if (me.$route.params.filePath) {
-                    const path: any = me.$route.params.filePath
+                    path = me.$route.params.filePath
+                } else if (location) {
+                    path = `${location}\\${me.$route.params.taskName}.json`
+                }
+
+                if (path) {
                     fs.access(path, (e) => {
                         fs.readFile(path, async (err, data) => {
                             if (err) console.error(err);
@@ -320,6 +334,10 @@
         }
 
         // Methods
+        startMoveElement(e: any) {
+            e.draggedRect.width = 100
+        }
+
         saveModel() {
             let direactoryPath, filePath;
             if (this.$route.params.filePath) {
@@ -338,13 +356,14 @@
             fs.writeFileSync(filePath, JSON.stringify(data));
         }
 
-        deleteElement(value: any) {
-            var newChild = this.robot.delChild(value, this.robot.child);
-            this.robot.child = newChild;
+        deleteElement() {
+            var newChild = this.robot.delChild(this.selectedValue, this.robot.child);
+            this.$set(this.robot, "child", newChild);
 
-            if (value.type == "DefinitionKeyword") {
-                this.robot.delKeyword(value);
+            if (this.selectedValue.type == "DefinitionKeyword") {
+                this.robot.delKeyword(this.selectedValue);
             }
+            this.$set(this, "isOpenMenu", false);
         }
 
         getRecordResult(result: any) {
@@ -406,15 +425,16 @@
             return obj
         }
         showOverlay(value: boolean) {
-            this.isOverlay = value;
+            this.$set(this, "isOverlay", value)
         }
 
         openAlert(obj: any) {
-            this.alertObj = {
+            var tmpObj = {
                 type: obj.type,
                 msg: obj.msg,
                 status: obj.status
             }
+            this.$set(this, "alertObj", tmpObj)
         }
 
         getExecuteResult(result: any) {
@@ -422,7 +442,7 @@
                 if (result.includes("*** Tasks ***") &&
                     result.includes("==============================================================================")
                 ) {
-                    this.executeResultText = this.robot.toRobot(0)
+                    this.executeResultText = this.robot.toRobot(0).replace(/\t/g, "    ");
                     this.executeResultText += "==============================================================================\n"
                     + "My Test Case\n"
                     + "==============================================================================\n"
@@ -433,15 +453,15 @@
             }
         }
         endExecution() {
-            this.isExecuting = false;
+            this.$set(this, "isExecuting", false)
         }
         openExecutePanel() {
-            this.executeResultText = '';
-            this.isExecuting = true;
-            this.isOpenExecute = true;
+            this.$set(this, "executeResultText", "")
+            this.$set(this, "isExecuting", true)
+            this.$set(this, "isOpenExecute", true)
         }
         closeExecutePanel() {
-            this.isOpenExecute = false;
+            this.$set(this, "isOpenExecute", false)
         }
 
         getComponentName(task: any): string {
@@ -483,39 +503,41 @@
         }
 
         openScriptPanel() {
-            this.isOpenScript = true
+            this.$set(this, "isOpenScript", true)
         }
         closeScriptPanel() {
-            this.isOpenScript = false
+            this.$set(this, "isOpenScript", false)
         }
 
         openVariableDialog() {
-            this.variableDialog = true
+            this.$set(this, "variableDialog", true)
         }
         closeVariableDialog() {
-            this.variableDialog = false
+            this.$set(this, "variableDialog", false)
         }
         updateVariables(variables: any) {
             this.robot.setProperty({ 'variables': variables });
         }
         
         openContextMenu(evt: any, value: any) {
-            this.isOpenPanel = false
             evt.preventDefault()
             evt.cancelBubble  = true
             if (evt.stopPropagation) {
                 evt.stopPropagation()
             }
             if(value) {
-                this.selectedValue = value
+                this.$set(this, "selectedValue", value)
+            } else {
+                this.$set(this, "selectedValue", null)
             }
             
-            this.$nextTick(() => {
-                this.menuStyle.x = evt.pageX
-                this.menuStyle.y = evt.pageY
-                
-                this.isOpenMenu = true
-            })
+            this.$set(this.menuStyle, "x", evt.clientX)
+            this.$set(this.menuStyle, "y", evt.clientY)
+            this.$set(this, "isOpenMenu", true)
+            this.$set(this, "isOpenPanel", false)
+        }
+        closeContextMenu() {
+            this.$set(this, "isOpenMenu", false)
         }
 
         openPanel(evt: any, value: any) {
@@ -523,31 +545,40 @@
             if (evt.stopPropagation) {
                 evt.stopPropagation()
             }
-            this.isOpenPanel = true
-            this.selectedValue = value
+            this.$set(this, "isOpenPanel", true)
+            this.$set(this, "selectedValue", value)
         }
         closePanel() {
             if (this.isOpenPanel) {
-                this.isOpenPanel = false
-                this.selectedValue = null
+                this.$set(this, "isOpenPanel", false)
+                this.$set(this, "selectedValue", null)
             }
         }
 
-        copyElement(value: any) {
-            this.isOpenMenu = false
-            this.tmpObject = JSON.parse(JSON.stringify(value))
-            delete this.tmpObject.id
+        copyElement() {
+            this.$set(this, "isOpenMenu", false)
+            this.$set(this, "tmpObject", JSON.parse(JSON.stringify(this.selectedValue)))
+            this.$delete(this.tmpObject, "id")
         }
-        pasteElement() {
-            try {
-                this.isOpenMenu = false
+        pasteElement(e: any) {
+            this.$set(this, "isOpenMenu", false)
 
+            try {
                 var newEl = this.$refs.elementList.cloneElement(this.tmpObject)
                 if (newEl.library) { newEl.library = newEl.library }
                 newEl.property = this.tmpObject.property
                 newEl.child = this.cloneChild(this.tmpObject.child)
 
-                this.robot.child.push(newEl)
+                if (this.selectedValue && this.selectedValue.type != "Keyword") {
+                    if (this.selectedValue.type == "IfTask" || this.selectedValue.type == "TryExceptTask") {
+                        // this.selectedValue.child.push(newEl)
+                    } else {
+                        this.selectedValue.child.push(newEl)
+                    }
+                } else {
+                    this.robot.child.push(newEl)
+                }
+
             } catch (e) {
                 console.error(e)
             }
@@ -558,12 +589,17 @@
 
             if (child.length > 0) {
                 child.forEach((childEl: any) => {
-                    
                     var clone = this.$refs.elementList.cloneElement(childEl)
                     this.$set(clone, "property", childEl.property)
 
                     if (this.cloneChild(childEl.child).length > 0) {
                         clone.child = this.cloneChild(childEl.child)
+                    }
+
+                    if (clone.type == "IfTask") {
+                        clone.property.conditions.forEach((condition: any) => {
+                            condition.child = this.cloneChild(condition.child)
+                        })
                     }
                     newChild.push(clone)
                 })
@@ -590,7 +626,7 @@
         max-width: 900px;
     }
 
-    .dragArea {
+    .drag-area {
         list-style: none;
         min-height: 500px;
         padding: 0px;
@@ -598,10 +634,13 @@
     }
 
     .task-element {
-        /* margin: 28px auto; */
         min-height: 30px;
         list-style: none;
         outline: 1px solid;
+    }
+
+    .selected {
+        border: 1px solid #2196F3;
     }
 
 </style>

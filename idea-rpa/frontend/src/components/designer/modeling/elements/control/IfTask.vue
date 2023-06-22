@@ -4,16 +4,13 @@
                 tag="div" 
                 :list="child"
                 :group="{ name: 'task', put: false }"
-                style="padding: 8px;"
+                :disabled="true"
+                class="pa-2"
         >
-            <draggable
-                    tag="div"
-                    class="row mx-auto my-0"
-                    :list="value.property.conditions"
-                    group="conditions"
-            >
+            <div class="row mx-auto my-0">
                 <v-col v-for="(item, idx) in value.property.conditions"
-                        :key="item.type+idx">
+                        :key="item.type+idx"
+                >
                     <v-sheet
                             rounded
                             max-width="300"
@@ -23,7 +20,7 @@
                         {{ item.type }}
                         <draggable 
                                 tag="ul" 
-                                class="dragArea" 
+                                class="drag-area" 
                                 :list="item.child" 
                                 group="task"
                         >
@@ -31,12 +28,15 @@
                                     :key="task.id"
                                     class="child-task mx-auto px-2"
                                     @dblclick="openPanel($event, task)"
-                                    @contextmenu="openContextMenu($event, task)"
+                                    @contextmenu.prevent="openContextMenu($event, task)"
+                                    :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                             >
                                 <component
                                         :is="getComponentName(task)"
-                                        :child="task.child"
-                                        :value="task"
+                                        :child.sync="task.child"
+                                        :value.sync="task"
+                                        :isOpenMenu.sync="isOpenMenu"
+                                        :isOpenPanel.sync="isOpenPanel"
                                         @openPanel="openPanel"
                                         @openContextMenu="openContextMenu"
                                 ></component>
@@ -44,7 +44,7 @@
                         </draggable>
                     </v-sheet>
                 </v-col>
-            </draggable>
+            </div>
         </draggable>
     </div>
 </template>
@@ -63,16 +63,21 @@
 </script>
 
 <style scoped>
-    .dragArea {
+    .drag-area {
         list-style: none;
         min-height: 40px;
-        padding: 10px;
+        padding: 4px;
     }
 
     .child-task {
+        margin: 12px;
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
     }
     
+    .selected {
+        border: 1px solid #2196F3;
+        margin-bottom: 10px;
+    }
 </style>

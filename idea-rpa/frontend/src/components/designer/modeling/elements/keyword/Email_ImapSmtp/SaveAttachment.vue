@@ -8,7 +8,7 @@
         }
     })
     export default class SaveAttachment extends Mixins(KeywordElement) {
-       mounted() {
+        mounted() {
             this.init();
         }
 
@@ -16,15 +16,15 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "message", null)
+                this.$set(this.value.property, "target_folder", null)
+                this.$set(this.value.property, "overwrite", null)
                 this.$set(this.value.property, "prefix", "None")
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "attachments"
                 }])
             }
 
-            if (!this.value.property.hasOwnProperty("prefix")) {
-                this.$set(this.value.property, "prefix", "None")
-            }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "attachments"

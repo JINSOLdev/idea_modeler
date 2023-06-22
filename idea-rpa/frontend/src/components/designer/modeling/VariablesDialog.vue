@@ -28,17 +28,19 @@
                             <v-icon small>mdi-variable</v-icon>
                         </div>
                     </template>
-                    <template v-slot:append="{ item, index }">
+                    <template v-slot:append="{ item }">
                         <div v-if="!item.list">
-                            <v-btn x-small icon @click="modifyVariable(item, index)">
-                                <v-icon>
-                                    {{ 'mdi-pencil-outline' }}
-                                </v-icon>
+                            <v-btn @click="modifyVariable(item)"
+                                    x-small
+                                    icon
+                            >
+                                <v-icon>mdi-pencil-outline</v-icon>
                             </v-btn>
-                            <v-btn x-small icon @click="deleteVariable(index)">
-                                <v-icon>
-                                    {{ 'mdi-delete-outline' }}
-                                </v-icon>
+                            <v-btn @click="deleteVariable(item)"
+                                    x-small 
+                                    icon
+                            >
+                                <v-icon>mdi-delete-outline</v-icon>
                             </v-btn>
                         </div>
                     </template>
@@ -46,8 +48,15 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" text
-                        @click="openVariableForm"
+                <v-btn @click="$emit('closeVariableDialog')"
+                        color="red"
+                        text
+                >
+                    Close
+                </v-btn>
+                <v-btn @click="openVariableForm"
+                        color="success" 
+                        text
                 >
                     Add Variable
                 </v-btn>
@@ -61,28 +70,31 @@
                     <v-row>
                         <v-col>
                             <v-text-field
+                                    v-model="newValue.name"
                                     label="Variable Name"
-                                    v-model="newVariable.name"
-                                    outlined dense
+                                    outlined
+                                    dense
                             ></v-text-field>
                         </v-col>
                         <v-col>
                             <v-select
+                                    v-model="newValue.valueType"
                                     label="Type"
-                                    v-model="newVariable.valueType"
                                     :items="typeList"
-                                    outlined dense
+                                    outlined
+                                    dense
                             ></v-select>
                         </v-col>
                     </v-row>
-                    <div v-if="newVariable.valueType == 'Single Value (Scalar)'">
+                    <div v-if="newValue.valueType == 'Single Value (Scalar)'">
                         <v-text-field
+                                v-model="newValue.defaultValue"
                                 label="Value"
-                                v-model="newValue"
-                                outlined dense
+                                outlined
+                                dense
                         ></v-text-field>
                     </div>
-                    <div v-if="newVariable.valueType == 'List'">
+                    <div v-if="newValue.valueType == 'List'">
                         <v-btn
                                 @click="addValue"
                                 text
@@ -91,17 +103,18 @@
                             <v-icon>mdi-plus</v-icon>
                             Add value
                         </v-btn>
-                        <div v-for="(item, index) in newValue" 
+                        <div v-for="(item, index) in newValue.defaultValue" 
                                 :key="'list_'+index"
                         >
                             <v-text-field
+                                    v-model="item.value"
                                     label="Value"
-                                    v-model="newValue[index].value"
-                                    outlined dense
+                                    outlined
+                                    dense
                             ></v-text-field>
                         </div>
                     </div>
-                    <div v-if="newVariable.valueType == 'Dictionary'">
+                    <div v-if="newValue.valueType == 'Dictionary'">
                         <v-btn
                                 @click="addValue"
                                 text
@@ -110,21 +123,23 @@
                             <v-icon>mdi-plus</v-icon>
                             Add value
                         </v-btn>
-                        <v-row v-for="(item, index) in newValue" 
+                        <v-row v-for="(item, index) in newValue.defaultValue" 
                                 :key="'dict_'+index"
                         >
                             <v-col>
                                 <v-text-field
+                                        v-model="item.key"
                                         label="Key"
-                                        v-model="newValue[index].key"
-                                        outlined dense
+                                        outlined
+                                        dense
                                 ></v-text-field>
                             </v-col>
                             <v-col>
                                 <v-text-field
+                                        v-model="item.value"
                                         label="Value"
-                                        v-model="newValue[index].value"
-                                        outlined dense
+                                        outlined
+                                        dense
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -138,7 +153,7 @@
                     >
                         Cancel
                     </v-btn>
-                    <v-btn @click="updateVariable(editVarIndex)"
+                    <v-btn @click="updateVariable"
                             text
                             color="success"
                     >
@@ -163,11 +178,11 @@
         public varList: Variables = new Variables()
         public globalVariables: any[] = []
         public variableForm: boolean = false
-        public newVariable: any = {
+        public newValue: any = {
             name: "",
             valueType: "Single Value (Scalar)",
+            defaultValue: null,
         }
-        public newValue: any = null
         public isNewVar: boolean = true
         public editVarIndex: number = -1
         public typeList: string[] = [ "Single Value (Scalar)", "List", "Dictionary" ]
@@ -190,83 +205,78 @@
             return list
         }
 
-        @Watch("newVariable.valueType", {immediate: true, deep: true})
+        @Watch("newValue.valueType", {immediate: true, deep: true})
         changeType(newVal: string, oldVal: string) {
             if (this.isNewVar && newVal != oldVal) {
                 if (newVal == "Single Value (Scalar)") {
-                    this.newValue = ""
+                    this.$set(this.newValue, "defaultValue", "")
+
                 } else if (newVal == "List") {
-                    this.newValue = [{
-                        value: ""
-                    }]
+                    this.$set(this.newValue, "defaultValue", [{ value: "" }])
+
                 } else if (newVal == "Dictionary") {
-                    this.newValue = [{
-                        key: "",
-                        value: ""
-                    }]
+                    this.$set(this.newValue, "defaultValue", [{ key: "", value: "" }])
+
                 }
             }
         }
 
         // Methods
         openVariableForm() {
-            this.isNewVar = true
-            this.newVariable.name = ""
-            this.newVariable.valueType = "Single Value (Scalar)"
-            this.newValue = null
+            this.$set(this, "isNewVar", true)
 
-            this.variableForm = true
+            this.$set(this.newValue, "name", "")
+            this.$set(this.newValue, "valueType", "Single Value (Scalar)")
+            this.$set(this.newValue, "defaultValue", null)
+
+            this.$set(this, "variableForm", true)
         }
         closeVariableForm() {
-            this.variableForm = false
+            this.$set(this, "variableForm", false)
 
             if (this.isNewVar) {
-                this.newVariable.name = ""
-                this.newVariable.valueType = "Single Value (Scalar)"
-                this.newValue = null
+                this.$set(this.newValue, "name", "")
+                this.$set(this.newValue, "valueType", "Single Value (Scalar)")
+                this.$set(this.newValue, "defaultValue", null)
             }
         }
 
-        updateVariable(index: number) {
-            if (this.isNewVar && this.newVariable.name != "" && this.newValue) {
+        updateVariable() {
+            if (this.isNewVar && this.newValue.name != "" && this.newValue.defaultValue) {
                 this.value.variables.push(
-                    new Variable(this.newVariable.name, this.newVariable.valueType, this.newValue)
+                    new Variable(this.newValue.name, this.newValue.valueType, this.newValue.defaultValue)
                 )
-            } else {
-                if(index >= 0) {
-                    this.newVariable.defaultValue = this.newValue
-                    this.value.variables[index] = this.newVariable
-                }
             }
 
-            this.newVariable = {
+            var obj = {
                 name: "",
                 valueType: "Single Value (Scalar)",
+                defaultValue: null
             }
-            this.variableForm = false
-            this.isNewVar = true
-            this.newValue = null
+            this.$set(this, "newValue", obj)
+            this.$set(this, "isNewVar", true)
+            this.$set(this, "editVarIndex", -1)
+            this.$set(this, "variableForm", false)
         }
 
-        modifyVariable(variable: any, index: number) {
-            this.isNewVar = false
-            this.editVarIndex = index
-            this.newVariable = variable
-            this.newValue = variable.defaultValue
-
-            this.variableForm = true
+        modifyVariable(item: any) {
+            this.$set(this, "newValue", item)
+            this.$set(this, "isNewVar", false)
+            this.$set(this, "variableForm", true)
         }
 
-        deleteVariable(index: number) {
-            this.value.variables.splice(index, 1)
+        deleteVariable(item: any) {
+            this.value.variables = this.value.variables.filter((variable: any) => 
+                variable.name != item.name && variable.valueType != item.valueType
+            )
         }
 
         addValue() {
-            if (this.newVariable.valueType == "List") {
-                this.newValue.push({ value: "" })
+            if (this.newValue.valueType == "List") {
+                this.newValue.defaultValue.push({ value: "" })
 
-            } else if (this.newVariable.valueType == "Dictionary") {
-                this.newValue.push({
+            } else if (this.newValue.valueType == "Dictionary") {
+                this.newValue.defaultValue.push({
                     key: "",
                     value: ""
                 })

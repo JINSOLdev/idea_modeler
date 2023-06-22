@@ -12,23 +12,21 @@
                         :value.sync="value.property.path"
                         :required="true"
                 ></path-field>
-                <path-field
+
+                <variables-field
                         :label="'Content'"
                         :hint="'Content to append'"
                         :value.sync="value.property.content"
                         :required="true"
-                ></path-field>
+                ></variables-field>
 
                 <variables-field
                         :label="'Encoding'"
                         :hint="'Character encoding of written content'"
                         :value.sync="value.property.encoding"
                 ></variables-field>
-
-
             </v-card-text>
         </v-card>
-
     </div>    
 </template>
 
