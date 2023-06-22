@@ -15,7 +15,7 @@
         init() {
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{
-                    defaultValue: "Timestamp"
+                    defaultValue: "timestamp"
                 }])
             }
         }

@@ -19,7 +19,7 @@
                 this.$set(this.value.property, "date", null)
                 this.$set(this.value.property, "time", null)
                 this.$set(this.value.property, "result_format", "timestamp")
-                this.$set(this.value.property, "exclude_millis", null)
+                this.$set(this.value.property, "exclude_millis", false)
                 this.$set(this.value.property, "date_format", "None")
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "result"
@@ -28,6 +28,9 @@
 
             if (!this.value.property.hasOwnProperty("result_format")) {
                 this.$set(this.value.property, "result_format", "timestamp")
+            }
+            if (!this.value.property.hasOwnProperty("exclude_mills")) {
+                this.$set(this.value.property, "exclude_mills", false)
             }
             if (!this.value.property.hasOwnProperty("date_format")) {
                 this.$set(this.value.property, "date_format", "None")

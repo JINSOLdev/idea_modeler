@@ -1,5 +1,5 @@
 <template>
-    <div class="TryExcpetArea">
+    <div class="try-excpet-area">
         <!-- Try -->
         <div class="try-area">
             <p class="mb-2">Try</p>
@@ -14,11 +14,14 @@
                         class="child-task"
                         @dblclick="openPanel($event, task)"
                         @contextmenu="openContextMenu($event, task)"
+                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                 >
                     <component
                             :is="getComponentName(task)"
-                            :child="task.child"
-                            :value="task"
+                            :child.sync="task.child"
+                            :value.sync="task"
+                            :isOpenMenu.sync="isOpenMenu"
+                            :isOpenPanel.sync="isOpenPanel"
                             @openPanel="openPanel"
                             @openContextMenu="openContextMenu"
                     ></component>
@@ -42,11 +45,14 @@
                         class="child-task"
                         @dblclick="openPanel($event, task)"
                         @contextmenu="openContextMenu($event, task)"
+                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                 >
                     <component
                             :is="getComponentName(task)"
-                            :child="task.child"
-                            :value="task"
+                            :child.sync="task.child"
+                            :value.sync="task"
+                            :isOpenMenu.sync="isOpenMenu"
+                            :isOpenPanel.sync="isOpenPanel"
                             @openPanel="openPanel"
                             @openContextMenu="openContextMenu"
                     ></component>
@@ -70,11 +76,14 @@
                         class="child-task"
                         @dblclick="openPanel($event, task)"
                         @contextmenu="openContextMenu($event, task)"
+                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                 >
                     <component
                             :is="getComponentName(task)"
-                            :child="task.child"
-                            :value="task"
+                            :child.sync="task.child"
+                            :value.sync="task"
+                            :isOpenMenu.sync="isOpenMenu"
+                            :isOpenPanel.sync="isOpenPanel"
                             @openPanel="openPanel"
                             @openContextMenu="openContextMenu"
                     ></component>
@@ -98,11 +107,14 @@
                         class="child-task"
                         @dblclick="openPanel($event, task)"
                         @contextmenu="openContextMenu($event, task)"
+                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
                 >
                     <component
                             :is="getComponentName(task)"
-                            :child="task.child"
-                            :value="task"
+                            :child.sync="task.child"
+                            :value.sync="task"
+                            :isOpenMenu.sync="isOpenMenu"
+                            :isOpenPanel.sync="isOpenPanel"
                             @openPanel="openPanel"
                             @openContextMenu="openContextMenu"
                     ></component>
@@ -127,7 +139,7 @@
 </script>
 
 <style scoped>
-    .TryExcpetArea {
+    .try-excpet-area {
         min-height: 40px;
         padding: 10px;
     }
@@ -158,15 +170,20 @@
     }
 
     .drag-area {
-        padding: 0;
+        padding: 4px;
         list-style: none;
         min-height: 20px;
     }
 
     .child-task {
-        margin: auto 10px;
+        margin: 12px;
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
+    }
+
+    .selected {
+        border: 1px solid #2196F3;
+        margin-bottom: 10px;
     }
 </style>

@@ -10,18 +10,20 @@
                         :label="'Message'"
                         :hint="'Message item'"
                         :value.sync="value.property.message"
+                        :required="true"
                 ></variables-field>
 
                 <path-field
                         :label="'Target Folder'"
                         :hint="'Folder for saving attachment to (needs to exist), defaults to users home directory if None'"
                         :value.sync="value.property.target_folder"
+                        :required="true"
                 ></path-field>
 
                 <switch-field
                         :label="'Overwrite'"
                         :hint="'Overwrite existing file if True, defaults to False'"
-                        :value.sync="value.property.over_write"
+                        :value.sync="value.property.overwrite"
                 ></switch-field>
 
                 <variables-field
@@ -30,11 +32,11 @@
                         :value.sync="value.property.prefix"
                 ></variables-field>
             </v-card-text>
-            
-            <return-values-field
-                    :value.sync="value.property.returnVal"
-            ></return-values-field>
         </v-card>
+
+        <return-values-field
+                :value.sync="value.property.returnVal"
+        ></return-values-field>
     </div>
 </template>
 
@@ -49,9 +51,5 @@
     })
     
     export default class SaveAttachmentPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Save mail attachment of a single given email on the local disk."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

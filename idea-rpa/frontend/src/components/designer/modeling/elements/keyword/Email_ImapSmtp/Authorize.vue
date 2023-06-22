@@ -9,7 +9,7 @@
     })
     export default class Authorize extends Mixins(KeywordElement) {
         mounted() {
-            this.init()
+            this.init();
         }
 
         init() {
@@ -18,10 +18,11 @@
                 this.value.property = new Map()
                 this.$set(this.value.property, "account", "None")
                 this.$set(this.value.property, "password", "None")
-                this.$set(this.value.property, "smtp server", "None")
-                this.$set(this.value.property, "imap server", "None")
-                this.$set(this.value.property, "smtp port", "None")
-                this.$set(this.value.property, "imap port", "None")
+                this.$set(this.value.property, "smtp_server", "None")
+                this.$set(this.value.property, "imap_server", "None")
+                this.$set(this.value.property, "smtp_port", "None")
+                this.$set(this.value.property, "imap_port", "None")
+                this.$set(this.value.property, "is_oauth", false)
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "token"
                 }])
@@ -33,17 +34,20 @@
             if (!this.value.property.hasOwnProperty("password")) {
                 this.$set(this.value.property, "password", "None")
             }
-            if (!this.value.property.hasOwnProperty("smtp server")) {
-                this.$set(this.value.property, "smtp server", "None")
+            if (!this.value.property.hasOwnProperty("smtp_server")) {
+                this.$set(this.value.property, "smtp_server", "None")
             }
-            if (!this.value.property.hasOwnProperty("imap server")) {
-                this.$set(this.value.property, "imap server", "None")
+            if (!this.value.property.hasOwnProperty("imap_server")) {
+                this.$set(this.value.property, "imap_server", "None")
             }
-            if (!this.value.property.hasOwnProperty("smtp port")) {
-                this.$set(this.value.property, "smtp port", "None")
+            if (!this.value.property.hasOwnProperty("smtp_port")) {
+                this.$set(this.value.property, "smtp_port", "None")
             }
-            if (!this.value.property.hasOwnProperty("imap port")) {
-                this.$set(this.value.property, "imap port", "None")
+            if (!this.value.property.hasOwnProperty("imap_port")) {
+                this.$set(this.value.property, "imap_port", "None")
+            }
+            if (!this.value.property.hasOwnProperty("is_oauth")) {
+                this.$set(this.value.property, "is_oauth", false)
             }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{

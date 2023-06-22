@@ -18,13 +18,15 @@
                 this.value.property = new Map()
                 this.$set(this.value.property, "path", null)
                 this.$set(this.value.property, "content", "None")
-                this.$set(this.value.property, "overwrite", null)
+                this.$set(this.value.property, "overwrite", false)
             }
 
             if (!this.value.property.hasOwnProperty("content")) {
                 this.$set(this.value.property, "content", "None")
             }
+            if (!this.value.property.hasOwnProperty("overwrite")) {
+                this.$set(this.value.property, "overwrite", false)
+            }
         }
-
     }
 </script>

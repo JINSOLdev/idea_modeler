@@ -16,15 +16,26 @@
             var keys = Object.keys(this.value.property)
             if (!keys || keys.length < 1) {
                 this.value.property = new Map()
+                this.$set(this.value.property, "sender", null)
+                this.$set(this.value.property, "recipients", "None")
+                this.$set(this.value.property, "subject", null)
+                this.$set(this.value.property, "body", null)
                 this.$set(this.value.property, "attachments", "None")
+                this.$set(this.value.property, "html", false)
                 this.$set(this.value.property, "images", "None")
                 this.$set(this.value.property, "cc", "None")
                 this.$set(this.value.property, "bcc", "None")
-                this.$set(this.value.property, "attachment position", "TOP")                
+                this.$set(this.value.property, "attachment_position", "TOP")
             }
 
+            if (!this.value.property.hasOwnProperty("recipients")) {
+                this.$set(this.value.property, "recipients", "None")
+            }
             if (!this.value.property.hasOwnProperty("attachments")) {
                 this.$set(this.value.property, "attachments", "None")
+            }
+            if (!this.value.property.hasOwnProperty("html")) {
+                this.$set(this.value.property, "html", false)
             }
             if (!this.value.property.hasOwnProperty("images")) {
                 this.$set(this.value.property, "images", "None")
@@ -35,8 +46,8 @@
             if (!this.value.property.hasOwnProperty("bcc")) {
                 this.$set(this.value.property, "bcc", "None")
             }
-            if (!this.value.property.hasOwnProperty("attachment position")) {
-                this.$set(this.value.property, "attachment position", "None")
+            if (!this.value.property.hasOwnProperty("attachment_position")) {
+                this.$set(this.value.property, "attachment_position", "TOP")
             }
         }
     }

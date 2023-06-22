@@ -2,7 +2,7 @@
     <div>
         <p>{{ value.name }}</p>
         <draggable 
-                class="dragArea" 
+                class="drag-area" 
                 tag="ul" 
                 :list="child" 
                 group="task"
@@ -11,12 +11,15 @@
                     :key="task.id"
                     class="child-task"
                     @dblclick="openPanel($event, task)"
-                    @contextmenu="openContextMenu($event, task)"
+                    @contextmenu.prevent="openContextMenu($event, task)"
+                    :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
             >
                 <component
                         :is="getComponentName(task)"
-                        :child="task.child"
-                        :value="task"
+                        :child.sync="task.child"
+                        :value.sync="task"
+                        :isOpenMenu.sync="isOpenMenu"
+                        :isOpenPanel.sync="isOpenPanel"
                         @openPanel="openPanel"
                         @openContextMenu="openContextMenu"
                 ></component>
@@ -35,39 +38,26 @@
         }
     })
     export default class WhileTask extends Mixins(ControlElement) {
-        mounted() {
-            this.init()
-        }
-
-        init() {
-            var keys = Object.keys(this.value.property)
-            if (!keys || keys.length < 1) {
-                this.value.property = new Map()
-                    this.$set(this.value.property, "limit", "Not set")
-            }
-
-            if (!this.value.property.hasOwnProperty("limit")) {
-                this.$set(this.value.property, "limit", "Not set")
-            }
-        }
         
-        // this.value.property.limit = "Not set"
     }
-
-    
 </script>
 
 <style scoped>
-    .dragArea {
+    .drag-area {
         list-style: none;
         min-height: 40px;
-        padding: 10px 0px;
+        padding: 4px;
     }
 
     .child-task {
-        margin: auto 10px;
+        margin: 12px;
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
+    }
+
+    .selected {
+        border: 1px solid #2196F3;
+        margin-bottom: 10px;
     }
 </style>

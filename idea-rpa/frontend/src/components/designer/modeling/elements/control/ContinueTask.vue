@@ -2,7 +2,7 @@
     <div>
         <p>{{ value.name }}</p>
         <draggable
-                class="dragArea" 
+                class="drag-area" 
                 tag="ul" 
                 :list="child" 
                 :group="{ name: 'task', put: false }"
@@ -25,7 +25,7 @@
 </script>
 
 <style scoped>
-    .dragArea {
+    .drag-area {
         list-style: none;
         padding: 10px 0px;
     }

@@ -19,7 +19,7 @@
                 this.$set(this.value.property, "time1", null)
                 this.$set(this.value.property, "time2", null)
                 this.$set(this.value.property, "result_format", "number")
-                this.$set(this.value.property, "exclude_millis", null)
+                this.$set(this.value.property, "exclude_millis", false)
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "result"
                 }])
@@ -27,6 +27,9 @@
 
             if (!this.value.property.hasOwnProperty("result_format")) {
                 this.$set(this.value.property, "result_format", "number")
+            }
+            if (!this.value.property.hasOwnProperty("exclude_mills")) {
+                this.$set(this.value.property, "exclude_mills", false)
             }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{

@@ -19,14 +19,20 @@
                 this.$set(this.value.property, "object", null)
                 this.$set(this.value.property, "method_name", null)
                 this.$set(this.value.property, "args", null)
-                this.$set(this.value.property, "kwargs", "Name")
+                this.$set(this.value.property, "kwargs", [{
+                    key: "Name",
+                    value: ""
+                }])
                 this.$set(this.value.property, "returnVal", [{
                     defaultValue: "value"
                 }])
             }
 
             if (!this.value.property.hasOwnProperty("kwargs")) {
-                this.$set(this.value.property, "kwargs", "Name")
+                this.$set(this.value.property, "kwargs", [{
+                    key: "Name",
+                    value: ""
+                }])
             }
             if (!this.value.property.hasOwnProperty("returnVal")) {
                 this.$set(this.value.property, "returnVal", [{

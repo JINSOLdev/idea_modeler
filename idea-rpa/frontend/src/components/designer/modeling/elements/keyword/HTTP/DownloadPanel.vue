@@ -15,7 +15,7 @@
                 <path-field
                         :label="'Target File'"
                         :hint="'Path to file'"
-                        :value.sync="value.property.targetFile"
+                        :value.sync="value.property.target_file"
                 ></path-field>
 
                 <switch-field

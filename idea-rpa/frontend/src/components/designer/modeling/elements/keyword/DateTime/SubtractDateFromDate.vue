@@ -19,7 +19,7 @@
                 this.$set(this.value.property, "date1", null)
                 this.$set(this.value.property, "date2", null)
                 this.$set(this.value.property, "result_format", "number")
-                this.$set(this.value.property, "exclude_millis", null)
+                this.$set(this.value.property, "exclude_millis", false)
                 this.$set(this.value.property, "date1_format", "None")
                 this.$set(this.value.property, "date2_format", "None")
                 this.$set(this.value.property, "returnVal", [{
@@ -29,6 +29,9 @@
 
             if (!this.value.property.hasOwnProperty("result_format")) {
                 this.$set(this.value.property, "result_format", "number")
+            }
+            if (!this.value.property.hasOwnProperty("exclude_mills")) {
+                this.$set(this.value.property, "exclude_mills", false)
             }
             if (!this.value.property.hasOwnProperty("date1_format")) {
                 this.$set(this.value.property, "date1_format", "None")
