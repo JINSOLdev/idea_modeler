@@ -1,10 +1,13 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage, shell } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { machineId, machineIdSync } from 'node-machine-id'
 import { error } from 'console'
+import { Server } from 'http'
+import { checkServerIdentity } from 'tls'
+import { userInfo } from 'os'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -14,16 +17,17 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function getMachineId() {
-  let id = await machineId()
-}
+// async function getMachineId() {
+//   let id = await machineId()
+// }
+
 
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    // autoHideMenuBar: true,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -40,11 +44,26 @@ const contextMenu = Menu.buildFromTemplate([
     label: 'Settings',
     submenu: [
       { 
-        label: (machineIdSync()),
-        click() {win.show()}
+        label: '고유ID',
+        submenu: [
+          {
+            label: (machineIdSync()),
+            click() {win.show()}
+          }
+        ],
+      },
+      {
+        label: '서버주소',
+        click: function() {
+          require('electron').shell.openExternal("http://ideasolution.co.kr:8090/bpm/")
+          // require('electron').shell.openExternal("https://electronjs.org")
+        }
+      },
+      {
+        label: '사용자ID',
+        
       }
     ]
-    // click() {console.log(machineIdSync())}
   },
   {
     label: 'Open',
