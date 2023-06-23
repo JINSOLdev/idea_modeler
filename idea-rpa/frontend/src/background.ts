@@ -3,9 +3,9 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { machineId } from 'node-machine-id'
+import { machineId, machineIdSync } from 'node-machine-id'
+import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
 
 
 // Scheme must be registered before the app is ready
@@ -13,10 +13,11 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function getMachineId() {
-  let id = await machineId()
-}
-
+// async function getMachineId() {
+  //   let id = await machineId()
+  // }
+  
+  
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
@@ -33,18 +34,27 @@ async function createWindow() {
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
+
+  // custom Menu
+  const template: any = [
+    {
+      role: 'viewMenu'
+    }
+  ]
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+  
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
 const contextMenu = Menu.buildFromTemplate([
-  // {
-  //   label: 'Settings',
-  //   submenu: [
-  //     { 
-  //       label: (machineIdSync()),
-  //       click() {win.show()}
-  //     }
-  //   ]
-  //   // click() {console.log(machineIdSync())}
-  // },
+  {
+    label: 'Settings',
+    submenu: [
+      { 
+        label: (machineIdSync()),
+        click() {win.show()}
+      }
+    ]
+    // click() {console.log(machineIdSync())}
+  },
   {
     label: 'Open',
     type: 'normal',
@@ -84,6 +94,7 @@ const contextMenu = Menu.buildFromTemplate([
       }
     })
   })
+
 
   ipcMain.on("toMain", (event, data) => {
     console.log(`Received [${data}] from renderer browser`);
