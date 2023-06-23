@@ -6,12 +6,12 @@
             </v-card-title>
 
             <v-card-text>  
-                <v-text-field 
+                <variables-field 
                         :label="'Url'"
                         :hint="'Expected location'"
                         :value.sync="value.property.url"
                         :required="true"
-                ></v-text-field> 
+                ></variables-field> 
             </v-card-text>
         </v-card> 
         

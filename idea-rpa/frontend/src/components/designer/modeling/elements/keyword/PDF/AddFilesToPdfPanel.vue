@@ -12,11 +12,11 @@
                         :value.sync="value.property.files"
                 ></variables-field>
 
-                <path-field
+                <Path-field
                         :label="'Target Document'"
                         :hint="'Path of target PDF'"
                         :value.sync="value.property.target_document"
-                ></path-field>
+                ></Path-field>
 
                 <switch-field
                         :label="'Append'"

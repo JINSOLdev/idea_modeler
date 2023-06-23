@@ -3,6 +3,7 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { machineId } from 'node-machine-id'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -34,16 +35,16 @@ async function createWindow() {
 
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
 const contextMenu = Menu.buildFromTemplate([
-  {
-    label: 'Settings',
-    submenu: [
-      { 
-        label: (machineIdSync()),
-        click() {win.show()}
-      }
-    ]
-    // click() {console.log(machineIdSync())}
-  },
+  // {
+  //   label: 'Settings',
+  //   submenu: [
+  //     { 
+  //       label: (machineIdSync()),
+  //       click() {win.show()}
+  //     }
+  //   ]
+  //   // click() {console.log(machineIdSync())}
+  // },
   {
     label: 'Open',
     type: 'normal',
