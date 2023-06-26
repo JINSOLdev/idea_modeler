@@ -7,6 +7,7 @@
 
             <v-card-text>
                 <locator-field
+                        :isWindows="true"
                         :hint="'Locator'"
                         :value.sync="value.property.locator"
                 ></locator-field>

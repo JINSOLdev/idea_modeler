@@ -7,9 +7,12 @@
         <v-text-field
                 v-model="newValue.defaultValue"
                 :hint="hint"
+                :placeholder="placeholder"
                 persistent-hint
+                persistent-placeholder
                 outlined
                 dense
+                @keydown="updateValue"
         >
             <template v-slot:append>
                 <v-icon @click="openFileDialog">
@@ -31,11 +34,12 @@
         @Prop() public value!: any
         @Prop() public label!: string
         @Prop() public hint!: string
+        @Prop() public placeholder!: string
         @Prop() public isDir!: boolean
         @Prop() public required!: boolean
 
         public newValue: any = {
-            name: "",
+            name: "path",
             valueType: "Path",
             defaultValue: "",
             required: this.required ? this.required : false,
@@ -46,7 +50,15 @@
 
         mounted() {
             if (this.value && this.value != null && this.value != undefined) {
-                this.newValue = this.value
+                if (typeof this.value == 'string') {
+                    this.newValue = {
+                        name: "path",
+                        valueType: "Path",
+                        defaultValue: this.value,
+                    }
+                } else {
+                    this.newValue = this.value
+                }
             }
         }
 
@@ -56,6 +68,14 @@
 
         // Methods
         updateValue() {
+            if (typeof this.newValue == 'string') {
+                this.newValue = {
+                    name: "path",
+                    valueType: "Path",
+                    defaultValue: this.newValue,
+                }
+            }
+
             this.$emit('update:value', this.newValue)
         }
 

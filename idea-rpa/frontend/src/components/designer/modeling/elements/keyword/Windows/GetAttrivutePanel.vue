@@ -9,9 +9,17 @@
                 <locator-field
                         :isWindows="true"
                         :label="'Locator'"
-                        :hint="'Locator for window to restore'"
+                        :hint="'Locator for element'"
                         :value.sync="value.property.locator"
+                        :required="true"
                 ></locator-field>
+
+                <variables-field 
+                        :label="'Attribute'"
+                        :hint="'Name of the attribute to get'"
+                        :value.sync="value.property.attribute"
+                        :required="true"
+                ></variables-field> 
             </v-card-text>
         </v-card>
 
@@ -30,9 +38,9 @@
             KeywordPanel,
         }
     })
-    export default class RestoreWindowPanel extends Mixins(KeywordPanel) {
+    export default class GetAttributePanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Window restore the current active window or the window defined by the locator."
+            var description = "Get attribute value of the element defined by the locator."
             this.$emit("setDescription", description)
         }
     }

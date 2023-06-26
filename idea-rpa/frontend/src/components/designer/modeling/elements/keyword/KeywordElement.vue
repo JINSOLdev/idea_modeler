@@ -27,8 +27,7 @@
                         :is="getComponentName(task)"
                         :child.sync="task.child"
                         :value.sync="task"
-                        :isOpenMenu.sync="isOpenMenu"
-                        :isOpenPanel.sync="isOpenPanel"
+                        :selectedValue.sync="selectedValue"
                         @openPanel="openPanel"
                         @openContextMenu="openContextMenu"
                 ></component>
@@ -67,10 +66,5 @@
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
-    }
-
-    .selected {
-        border: 1px solid #2196F3;
-        margin-bottom: 10px;
     }
 </style>

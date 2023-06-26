@@ -110,6 +110,7 @@
                                     :value.sync="task"
                                     :isOpenMenu.sync="isOpenMenu"
                                     :isOpenPanel.sync="isOpenPanel"
+                                    :selectedValue.sync="selectedValue"
                                     @openPanel="openPanel"
                                     @openContextMenu="openContextMenu"
                             ></component>
@@ -159,29 +160,23 @@
                 :resultText.sync="executeResultText"
                 :isExecuting.sync="isExecuting"
                 @close="closeExecutePanel"
+                @ended="endedSave($event)"
         ></execute-panel>
 
         <!-- Context Menu -->
         <v-menu v-model="isOpenMenu"
-                :position-x="menuStyle.x"
-                :position-y="menuStyle.y"
+                :position-x.sync="menuStyle.x"
+                :position-y.sync="menuStyle.y"
                 absolute
                 offset-y
         >
             <v-list>
-                <v-list-item v-if="selectedValue && selectedValue != null">
-                    <v-list-item-title @click.capture="deleteElement">
-                        Delete
-                    </v-list-item-title>
-                </v-list-item>
-                <v-list-item v-if="selectedValue && selectedValue != null">
-                    <v-list-item-title @click.capture="copyElement">
-                        Copy
-                    </v-list-item-title>
-                </v-list-item>
-                <v-list-item v-if="tmpObject">
-                    <v-list-item-title @click.capture="pasteElement($event)">
-                        Paste
+                <v-list-item v-for="menu in menuList" 
+                        :key="menu.name"
+                        link
+                >
+                    <v-list-item-title @click.prevent="clickedMenu(menu.name)">
+                        {{ menu.name }}
                     </v-list-item-title>
                 </v-list-item>
             </v-list>
@@ -190,7 +185,7 @@
         <!-- Property Panel -->
         <model-panel
                 v-if="isOpenPanel"
-                :value="selectedValue"
+                :value.sync="selectedValue"
                 @close="closePanel"
         ></model-panel>
     </div>
@@ -250,6 +245,7 @@
             msg: "",
             status: false,
         }
+        menuList: any[] = []
 
         $refs!: {
             elementList: ElementList;
@@ -274,7 +270,9 @@
         @Watch('isOpenMenu', { immediate: true, deep: true })
         menuStatus(val: any) {
             if (!val) {
-                this.$set(this, "selectedValue", null)
+                this.$nextTick(() => {
+                    this.$set(this, "selectedValue", null)
+                })
             }
         }
 
@@ -334,19 +332,23 @@
         }
 
         // Methods
+        endedSave(path: any) {
+          this.saveModel(path)
+        }
         startMoveElement(e: any) {
             e.draggedRect.width = 100
         }
-
-        saveModel() {
-            let direactoryPath, filePath;
+        saveModel(path: any) {
             if (this.$route.params.filePath) {
-                direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
-                filePath = this.$route.params.filePath;
+                const direactoryPath = path ? path : this.$route.params.filePath.replace(this.taskName + ".json", "");
+                const filePath = path ? path + "\\" + this.taskName + ".json" : this.$route.params.filePath;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
             } else {
-                direactoryPath = `./tasks`;
-                filePath = `${direactoryPath}/${this.taskName}.json`;
-            }
+                const direactoryPath = path? path : `./tasks`;
+                const filePath = `${direactoryPath}/${this.taskName}.json`;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
 
             const data = {
                 path: filePath,
@@ -355,6 +357,8 @@
             !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
             fs.writeFileSync(filePath, JSON.stringify(data));
         }
+    }
+    
 
         deleteElement() {
             var newChild = this.robot.delChild(this.selectedValue, this.robot.child);
@@ -368,7 +372,7 @@
 
         getRecordResult(result: any) {
             var keywordList = this.$refs.elementList.keywordList
-
+            console.log(result)
             result.forEach((str: string) => {
                 if (str) {
                     if (str.includes("Click") || str.includes("Control Window")) {
@@ -378,6 +382,7 @@
                                     const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
                                     element.library = item.library
                                     const locator = this.setLocator(str.replace(keyword, "").trim())
+                                    console.log(locator)
                                     element.property = new Map()
                                     this.$set(element.property, "locator", locator)
                                     this.robot.child.push(element)
@@ -390,38 +395,38 @@
         }
 
         setLocator(str: string): any {
+            console.log(str)
             var obj: any = {
-                name: "ref",
+                name: "locator",
                 valueType: "locator",
                 defaultValue: str,
             }
-            
-            if(str.includes("id:")) {
-                obj.name = "id"
-                var idArr: any = str.split("id:")
-                var idVal: any = idArr.pop()
+            let data = str.split(" and ");
+            obj.defaultValue = data[0];
+            // if(str.includes("id:")) {
+            //     var idArr: any = str.split("id:")
+            //     var idVal: any = idArr.pop()
 
-                if(idVal?.includes(" and ")) {
-                    idArr = idVal?.split(" and ")
-                    obj.defaultValue = idArr.shift()
-                } else {
-                    obj.defaultValue = idVal
-                }
-            }
+            //     if(idVal?.includes(" and ")) {
+            //         idArr = idVal?.split(" and ")
+            //         obj.defaultValue = idArr.shift()
+            //     } else {
+            //         obj.defaultValue = idVal
+            //     }
+            // }
 
-            if (str.includes("class:")) {
-                obj.name = "class"
-                var classArr: any = str.split("class:")
-                var classVal: any = classArr.pop()
+            // if (str.includes("class:")) {
+            //     var classArr: any = str.split("class:")
+            //     var classVal: any = classArr.pop()
 
-                if(classVal?.includes(" and ")) {
-                    classArr = classVal?.split(" and ")
-                    obj.defaultValue = classArr.shift()
-                } else {
-                    obj.defaultValue = classVal
-                }
-            }
-
+            //     if(classVal?.includes(" and ")) {
+            //         classArr = classVal?.split(" and ")
+            //         obj.defaultValue = classArr.shift()
+            //     } else {
+            //         obj.defaultValue = classVal
+            //     }
+            // }
+            console.log(obj)
             return obj
         }
         showOverlay(value: boolean) {
@@ -525,10 +530,25 @@
             if (evt.stopPropagation) {
                 evt.stopPropagation()
             }
+            
+            this.$set(this, "menuList", [])
             if(value) {
                 this.$set(this, "selectedValue", value)
+
+                var typeList = this.$refs.elementList.elementTypes
+                if(typeList.some((type: any) => type.name == value.type)
+                        || value.type == "DefinitionKeyword"
+                ) {
+                    this.menuList.push({ name: "Delete" })
+                    this.menuList.push({ name: "Copy" })
+                }
+                
             } else {
                 this.$set(this, "selectedValue", null)
+            }
+
+            if (this.tmpObject != null) {
+                this.menuList.push({ name: "Paste" })
             }
             
             this.$set(this.menuStyle, "x", evt.clientX)
@@ -538,6 +558,15 @@
         }
         closeContextMenu() {
             this.$set(this, "isOpenMenu", false)
+        }
+        clickedMenu(menu: string) {
+            if (menu.includes("Delete")) {
+                this.deleteElement()
+            } else if (menu.includes("Copy")) {
+                this.copyElement()
+            } else if (menu.includes("Paste")) {
+                this.pasteElement()
+            }
         }
 
         openPanel(evt: any, value: any) {
@@ -560,7 +589,7 @@
             this.$set(this, "tmpObject", JSON.parse(JSON.stringify(this.selectedValue)))
             this.$delete(this.tmpObject, "id")
         }
-        pasteElement(e: any) {
+        pasteElement() {
             this.$set(this, "isOpenMenu", false)
 
             try {
@@ -570,9 +599,12 @@
                 newEl.child = this.cloneChild(this.tmpObject.child)
 
                 if (this.selectedValue && this.selectedValue.type != "Keyword") {
-                    if (this.selectedValue.type == "IfTask" || this.selectedValue.type == "TryExceptTask") {
-                        // this.selectedValue.child.push(newEl)
-                    } else {
+                    if (this.selectedValue.type != "IfTask" 
+                            && this.selectedValue.type != "TryExceptTask"
+                            && this.selectedValue.type != "BreakTask"
+                            && this.selectedValue.type != "ContinueTask"
+                            && this.selectedValue.type != "ReturnTask"
+                    ) {
                         this.selectedValue.child.push(newEl)
                     }
                 } else {
@@ -599,6 +631,10 @@
                     if (clone.type == "IfTask") {
                         clone.property.conditions.forEach((condition: any) => {
                             condition.child = this.cloneChild(condition.child)
+                        })
+                    } else if (clone.type == "TryExceptTask") {
+                        clone.property.branch.forEach((item: any) => {
+                            item.child = this.cloneChild(item.child)
                         })
                     }
                     newChild.push(clone)
@@ -638,9 +674,4 @@
         list-style: none;
         outline: 1px solid;
     }
-
-    .selected {
-        border: 1px solid #2196F3;
-    }
-
 </style>

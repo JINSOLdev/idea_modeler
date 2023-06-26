@@ -30,17 +30,11 @@
     })
 
     export default class IfTaskPanel extends Mixins(ControlPanel) {
+        public hasElse: boolean = false
         
-        get hasElse() {
-            var elseIdx = this.value.property.conditions.findIndex((item: any) => item.type == 'Else')
-            if (elseIdx > -1) {
-                return true
-            } else {
-                return false
-            }
-        }
-
         mounted() {
+            var res = this.value.property.conditions.some((item: any) => item.type == 'Else')
+            this.$set(this, "hasElse", res)
         }
 
         destroyed() {
@@ -62,7 +56,9 @@
 
         addCondition(type: any) {
             if (type == 'Else If') {
+                var lengthIndex = this.value.property.conditions.filter((item: any) => item.type == type).length
                 this.value.property.conditions.push({
+                    id: `elseIf_${++lengthIndex}`,
                     type: 'Else If',
                     operator: '',
                     child: [],
@@ -74,13 +70,20 @@
             } else if (type == 'Else') {
                 if (!this.hasElse) {
                     this.value.property.conditions.push({
+                        id: 'else',
                         type: 'Else',
                         child: []
                     })
+                    this.$set(this, "hasElse", true)
+
                 } else {
-                    this.value.property.conditions = this.value.property.conditions.filter((item: any) => item.type != 'Else')
+                    var newConditions = this.value.property.conditions.filter((item: any) => item.type != 'Else')
+                    this.$set(this.value.property, "conditions", newConditions)
+                    this.$set(this, "hasElse", false)
                 }
             }
+
+            this.$emit('update:value', this.value)
         }
 
     }

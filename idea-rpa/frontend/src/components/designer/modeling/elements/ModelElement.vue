@@ -5,7 +5,7 @@
 
     import Draggable from "vuedraggable";
     import { Task } from "@/types/Task";
-    import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+    import { Component, Prop, Vue } from "vue-property-decorator";
 
     @Component({
         components: {
@@ -15,24 +15,7 @@
     export default class ModelElement extends Vue {
         @Prop({required: true}) readonly child!: Task[];
         @Prop({required: true}) value!: any;
-        @Prop() isOpenMenu!: boolean;
-        @Prop() isOpenPanel!: boolean;
-
-        // Data
-        public selectedValue: any = null
-
-        @Watch('isOpenMenu', { immediate: true, deep: true })
-        menuStatus(val: any) {
-            if (!val) {
-                this.$set(this, "selectedValue", null)
-            }
-        }
-        @Watch('isOpenPanel', { immediate: true, deep: true })
-        panelStatus(val: any) {
-            if (!val) {
-                this.$set(this, "selectedValue", null)
-            }
-        }
+        @Prop() selectedValue!: any;
 
         // Methods
         init() {}
@@ -54,20 +37,10 @@
         }
         
         openPanel(evt: any, value: any) {
-            if (value) {
-                this.$set(this, "selectedValue", value)
-            } else {
-                this.$set(this, "selectedValue", null)
-            }
             this.$emit('openPanel', evt, value)
         }
 
         openContextMenu(evt: any, value: any) {
-            if (value) {
-                this.$set(this, "selectedValue", value)
-            } else {
-                this.$set(this, "selectedValue", null)
-            }
             this.$emit('openContextMenu', evt, value)
         }
 

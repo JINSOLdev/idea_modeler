@@ -7,6 +7,7 @@
 
             <v-card-text>
                 <locator-field
+                        :isWindows="true"
                         :label="'Locator'"
                         :hint="'Locator for element or window to screenshot'"
                         :value.sync="value.property.locator"

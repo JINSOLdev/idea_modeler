@@ -8,14 +8,15 @@
                 class="pa-2"
         >
             <div class="row mx-auto my-0">
-                <v-col v-for="(item, idx) in value.property.conditions"
-                        :key="item.type+idx"
+                <v-col v-for="item in value.property.conditions"
+                        :key="item.id"
                 >
                     <v-sheet
                             rounded
                             max-width="300"
-                            class="mx-auto"
-                            color="grey lighten-3"
+                            class="condition-area"
+                            @contextmenu.prevent="openContextMenu($event, item)"
+                            :class="{ 'selected' : selectedValue && selectedValue.id == item.id }"
                     >
                         {{ item.type }}
                         <draggable 
@@ -26,7 +27,7 @@
                         >
                             <li v-for="task in item.child" 
                                     :key="task.id"
-                                    class="child-task mx-auto px-2"
+                                    class="child-task px-3"
                                     @dblclick="openPanel($event, task)"
                                     @contextmenu.prevent="openContextMenu($event, task)"
                                     :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
@@ -35,8 +36,7 @@
                                         :is="getComponentName(task)"
                                         :child.sync="task.child"
                                         :value.sync="task"
-                                        :isOpenMenu.sync="isOpenMenu"
-                                        :isOpenPanel.sync="isOpenPanel"
+                                        :selectedValue.sync="selectedValue"
                                         @openPanel="openPanel"
                                         @openContextMenu="openContextMenu"
                                 ></component>
@@ -75,9 +75,10 @@
         background-color: lightgrey;
         outline: 1px dashed;
     }
-    
-    .selected {
-        border: 1px solid #2196F3;
-        margin-bottom: 10px;
+
+    .condition-area {
+        margin: auto;
+        background-color: #eee !important;
+        border: 1px solid #eee;
     }
 </style>

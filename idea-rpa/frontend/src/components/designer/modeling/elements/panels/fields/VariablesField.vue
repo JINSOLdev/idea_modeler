@@ -8,6 +8,7 @@
                 <v-btn icon @click="addValue">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
+                <slot name="title-area"></slot>
             </div>
             
             <v-row v-for="(val, idx) in newValue" 
@@ -25,6 +26,8 @@
                             outlined
                             dense
                             clearable
+                            @keydown="updateValue"
+                            @change="updateValue"
                     ></v-combobox>
                 </v-col>
                 <v-col cols="1" style="padding: 12px 0px;">
@@ -34,10 +37,11 @@
                 </v-col>
             </v-row>
             <span class="multi-hint">{{ hint }}</span>
+            <slot name="no-value-area"></slot>
         </div>
 
         <div v-else>
-            <div class="d-flex mb-1">
+            <div v-if="label" class="d-flex mb-1">
                 <div class="mr-auto ml-2">{{ label }}</div>
                 <div v-if="required" class="mr-2">required</div>
             </div>
@@ -54,6 +58,8 @@
                     outlined
                     dense
                     clearable
+                    @keydown="updateValue"
+                    @change="updateValue"
             ></v-combobox>
         </div>
     </div>
