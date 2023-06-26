@@ -266,9 +266,13 @@
         }
 
         deleteVariable(item: any) {
-            this.value.variables = this.value.variables.filter((variable: any) => 
-                variable.name != item.name && variable.valueType != item.valueType
-            )
+            var newVariables = this.value.variables.filter((variable: any) => !(
+                variable.name === item.name &&
+                variable.valueType === item.valueType &&
+                variable.defaultValue === item.defaultValue
+
+            ))
+            this.$set(this.value, "variables", newVariables)
         }
 
         addValue() {

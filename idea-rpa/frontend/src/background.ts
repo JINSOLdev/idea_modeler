@@ -8,6 +8,7 @@ import { error } from 'console'
 import { Server } from 'http'
 import { checkServerIdentity } from 'tls'
 import { userInfo } from 'os'
+import { InitTray } from './backgroundTrayWindow'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -149,6 +150,7 @@ app.on('ready', async () => {
     }
   }
   createWindow()
+  InitTray()
 })
 
 // Exit cleanly on request from parent process in development mode.
