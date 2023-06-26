@@ -4,6 +4,14 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from '
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { machineId, machineIdSync } from 'node-machine-id'
+
+import { error } from 'console'
+import { Server } from 'http'
+import { checkServerIdentity } from 'tls'
+import { userInfo } from 'os'
+import { InitTray } from './backgroundTrayWindow'
+
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -161,6 +169,7 @@ app.on('ready', async () => {
     }
   }
   createWindow()
+  InitTray()
 })
 
 // Exit cleanly on request from parent process in development mode.
