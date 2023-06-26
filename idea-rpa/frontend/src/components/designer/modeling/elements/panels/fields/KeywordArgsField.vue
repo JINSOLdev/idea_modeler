@@ -9,28 +9,28 @@
             </v-btn>
         </div>
 
-        <v-row v-for="(val, idx) in newValue"
+        <div v-for="(val, idx) in newValue"
                 :key="val+idx"
-                style="max-height: 70px;"
+                class="d-flex"
         >
-            <v-col class="pr-0">
-                <v-text-field
-                        v-model="newValue[idx].key"
-                        outlined
-                        dense
-                ></v-text-field>
-            </v-col>
-            <v-col>
-                <variables-field
-                        :value.sync="newValue[idx].value"
-                ></variables-field>
-            </v-col>
-            <v-col cols="1" style="padding: 12px 0px;">
-                <v-btn icon @click="delValue(idx)">
-                    <v-icon>mdi-delete-outline</v-icon>
-                </v-btn>
-            </v-col>
-        </v-row>
+            <v-text-field
+                    v-model="newValue[idx].key"
+                    outlined
+                    dense
+                    class="mr-2"
+            ></v-text-field>
+
+            <variables-field
+                    :value.sync="newValue[idx].value"
+            ></variables-field>
+            
+            <v-btn @click="delValue(idx)"
+                    icon
+                    class="ml-2"
+            >
+                <v-icon>mdi-delete-outline</v-icon>
+            </v-btn>
+        </div>
     </div>
 </template>
 
@@ -43,16 +43,16 @@
         @Prop() public value!: any[]
         @Prop() public label!: string
         
-        newValue: any[] = []
+        public newValue: any[] = []
 
         mounted() {
             if(!this.value || this.value.length < 1) {
-                this.newValue = [{
+                this.$set(this, "newValue", [{
                     key: "",
                     value: "",
-                }]
+                }])
             } else {
-                this.newValue = this.value
+                this.$set(this, "newValue", this.value)
             }
         }
 

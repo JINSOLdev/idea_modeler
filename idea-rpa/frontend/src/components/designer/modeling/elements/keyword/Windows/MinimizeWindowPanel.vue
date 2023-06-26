@@ -7,6 +7,7 @@
             
             <v-card-text>
                 <locator-field
+                        :isWindows="true"
                         :label="'Locator'"
                         :hint="'Locator for window to minimize'"
                         :value.sync="value.property.locator"

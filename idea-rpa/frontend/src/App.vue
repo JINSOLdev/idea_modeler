@@ -34,4 +34,8 @@
     .v-application p {
         margin-bottom: 0px !important;
     }
+
+    .selected {
+        border: 1px solid #2196F3 !important;
+    }
 </style>

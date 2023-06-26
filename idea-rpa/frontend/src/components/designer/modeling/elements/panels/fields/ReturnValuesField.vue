@@ -26,12 +26,14 @@
                                 item-disabled="disabled"
                                 outlined
                                 dense
+                                @keydown="updateValue"
                         ></v-combobox>
                         <v-text-field
                                 v-else
                                 v-model="newValue[idx].defaultValue"
                                 outlined
                                 dense
+                                @keydown="updateValue"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="1" style="padding: 12px 0px;">
@@ -89,7 +91,7 @@
         updateValue() {
             this.newValue.forEach((val: any, idx: number) => {
                 if (typeof val == "string") {
-                    this.newValue[idx] = {
+                    val = {
                         name: val,
                         valueType: "Scalar",
                         defaultValue: val

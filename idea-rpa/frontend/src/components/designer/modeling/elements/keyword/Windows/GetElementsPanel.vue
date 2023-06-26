@@ -7,12 +7,14 @@
             
             <v-card-text>
                 <locator-field
+                        :isWindows="true"
                         :label="'Locator'"
                         :hint="'Locator for elements'"
                         :value.sync="value.property.locator"
                 ></locator-field>
                 
                 <locator-field
+                        :isWindows="true"
                         :label="'Root Element'"
                         :hint="'Locator will be used as search root element object if provided'"
                         :value.sync="value.property.root_element"
