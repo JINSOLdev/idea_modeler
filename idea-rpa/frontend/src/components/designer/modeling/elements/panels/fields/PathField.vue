@@ -7,7 +7,9 @@
         <v-text-field
                 v-model="newValue.defaultValue"
                 :hint="hint"
+                :placeholder="placeholder"
                 persistent-hint
+                persistent-placeholder
                 outlined
                 dense
                 @keydown="updateValue"
@@ -32,6 +34,7 @@
         @Prop() public value!: any
         @Prop() public label!: string
         @Prop() public hint!: string
+        @Prop() public placeholder!: string
         @Prop() public isDir!: boolean
         @Prop() public required!: boolean
 

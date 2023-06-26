@@ -4,55 +4,44 @@
             <div class="ml-2 mr-auto">Locator</div>
             <div v-if="required" class="mr-2">required</div>
         </div>
-        <v-row class="my-1">
-            <v-col cols="10" class="pr-0">
-                <open-child-browser
-                        v-if="!editMode && valueText == ''"
-                        :records.sync="locator"
-                        @closeLocator="closeLocator"
-                ></open-child-browser>
+        <div class="d-flex my-2">
+            <open-child-browser
+                    v-if="!editMode && valueText == '' && !isWindows"
+                    :records.sync="locator"
+                    @closeLocator="closeLocator"
+            ></open-child-browser>
 
-                <v-text-field
-                        v-else
-                        v-model="valueText"
-                        outlined
-                        dense
-                        hide-details="false"
-                        clearable
-                ></v-text-field>
-            </v-col>
+            <v-text-field
+                    v-else
+                    v-model="valueText"
+                    outlined
+                    dense
+                    hide-details="false"
+                    clearable
+                    full-width
+            ></v-text-field>
             
-            <v-col cols="2">
-                <v-tooltip bottom v-if="!editMode">
+            <div class="ml-2" v-if="!isWindows">
+                <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
                             @click="editMode = !editMode" 
                             v-bind="attrs"
                             v-on="on"
-                            color="primary"
+                            :color="editMode ? '' : 'primary'"
                             outlined
                         >
-                            <v-icon>mdi-unfold-more-vertical</v-icon>
+                            <v-icon>
+                                {{ editMode ? 'mdi-view-headline' : 'mdi-unfold-more-vertical' }}
+                            </v-icon>
                         </v-btn>
                     </template>
-                    <span>Edit as code</span>
+                    <span>
+                        {{ editMode ? 'Select from list' : 'Edit as code' }}
+                    </span>
                 </v-tooltip>
-                
-                <v-tooltip bottom v-else>
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn 
-                                @click="editMode = !editMode" 
-                                v-bind="attrs"
-                                v-on="on"
-                                outlined
-                        >
-                            <v-icon>mdi-view-headline</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>Select from list</span>
-                </v-tooltip>
-            </v-col>
-        </v-row>
+            </div>
+        </div>
 
         <v-dialog v-model="openSelectLocator" max-width="600">
             <v-card>
@@ -61,29 +50,18 @@
                 </v-card-title>
 
                 <v-card-text class="pb-0">
-                    <v-radio-group v-model="selected">
-                        <div v-for="(item, index) in locator"
-                                :key="item.xpath"
-                                class="d-flex"
-                        >
-                            <v-radio
-                                    :value="index"
-                                    class="mb-5"
-                            ></v-radio>
-                            <v-select
-                                    v-model="valueText"
-                                    :items="getList(item)"
-                                    :disabled="selected != index"
-                                    dense
-                                    outlined
-                            ></v-select>
-                        </div>
-                    </v-radio-group>
+                    <v-select
+                            v-model="valueText"
+                            :items="locatorItems"
+                            placeholder="Select Item"
+                            dense
+                            outlined
+                    ></v-select>
                 </v-card-text>
                 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="openSelectLocator=false; selected=-1;"
+                    <v-btn @click="openSelectLocator = false"
                             text
                             color="success"
                     >
@@ -110,10 +88,11 @@
         @Prop() public label!: string
         @Prop() public hint!: string
         @Prop() public required!: boolean
+        @Prop() public isWindows!: boolean
         
         
         locator: any[] = []
-        varItems: any[] = []
+        locatorItems: any[] = []
         newValue: any = {
             name: "locator",
             valueType: "locator",
@@ -121,11 +100,10 @@
         }
         editMode: boolean = false
         openSelectLocator: boolean = false
-        selected: number = -1
         
         get valueText() {
             var text = ""
-            if (this.newValue && this.newValue.defaultValue) {
+            if (this.newValue && this.newValue.defaultValue != null) {
                 text = this.newValue.defaultValue
             }
             return text
@@ -138,11 +116,17 @@
             }
         }
 
-        @Watch("selected")
+        @Watch("locator")
         updateLocator(val: any) {
-            if (val > -1) {
-                var list = this.getList(this.locator[val])
-                this.$set(this.newValue, "defaultValue", list.shift())
+            if (val && val.length > 0) {
+                var list: any[] = []
+                var lastEl = this.locator.pop()
+                Object.keys(lastEl).forEach((key: string) => {
+                    if (lastEl[key] && lastEl[key] != null && key != "type") {
+                        list.push(`${key}:${lastEl[key]}`)
+                    }
+                })
+                this.$set(this, "locatorItems", list)
             }
         }
 
@@ -163,16 +147,6 @@
 
         closeLocator() {
             this.$set(this, "openSelectLocator", true)
-        }
-
-        getList(item: any): any {
-            let list: any[] = []
-            Object.keys(item).forEach((key: string) => {
-                if (key != "type" && item[key] != null) {
-                    list.push(`${key}:${item[key]}`)
-                }
-            })
-            return list
         }
     }
 </script>
