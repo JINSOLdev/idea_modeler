@@ -2,65 +2,49 @@
     <div>
         <v-card flat>
             <v-card-title class="subtitle-1 d-flex">
-                <div class="mr-auto">Exceptions</div>
-                <v-btn icon @click="addExcept">
+                <div class="mr-auto">
+                    Exceptions
+                </div>
+                <v-btn @click="addExcept" icon>
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-card-title>
 
-            <v-card-text v-if="getExcept">
-                <div class="d-flex">
-                    <div class="mr-auto ml-2">
-                        Except
-                    </div>
-                    <v-btn icon @click="addValue">
-                        <v-icon>mdi-plus</v-icon>
-                    </v-btn>
-                    <v-btn icon @click="delExcept">
-                        <v-icon>mdi-delete-outline</v-icon>
-                    </v-btn>
-                </div>
-                <span v-if="getExcept.length == 0">
-                    No except patterns set
-                </span>
-                
-                <v-row v-for="(val, idx) in getExcept" 
-                        :key="val+idx"
-                        style="max-height: 70px;"
-                >
-                    <v-col>
-                        <v-combobox
-                                v-model="value[idx]"
-                                :items="varItems"
-                                item-disabled="disabled"
-                                persistent-hint
-                                outlined
-                                dense
-                                @change="updateValue(value[idx], idx)"
-                        ></v-combobox>
-                    </v-col>
-                    <v-col cols="1" style="padding: 12px 0px;">
-                        <v-btn icon @click="delValue(idx)">
-                            <v-icon>mdi-delete-outline</v-icon>
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-card-text>
-        </v-card>
-
-        <v-card flat>
             <v-card-text>
-                <v-switch
-                        v-model="value.property.elseBranch"
-                        label="Else Branch"
-                        class="py-0"
-                ></v-switch>
+                <div v-for="(item, index) in getExcept"
+                        :key="item.id+index"
+                >
+                    <variables-field
+                            :value.sync="item.variables"
+                            :label="'Except'"
+                            :isMultiple="true"
+                    >
+                        <template slot="title-area">
+                            <v-btn @click="delExcept(item)" icon>
+                                <v-icon>mdi-delete-outline</v-icon>
+                            </v-btn>
+                        </template>
 
-                <v-switch
-                        v-model="value.property.finallyBranch"
-                        label="Finally Branch"
-                        class="py-0"
-                ></v-switch>
+                        <template slot="no-value-area">
+                            <span v-if="item.variables == null || item.variables.length == 0">
+                                No except patterns set
+                            </span>
+                        </template>
+                    </variables-field>
+                </div>
+
+                <v-divider class="my-6"></v-divider>
+
+                <div v-for="item in value.property.branch"
+                        :key="item.id"
+                >
+                    <v-switch
+                            v-if="item.name == 'Else' || item.name == 'Finally'"
+                            v-model="item.status"
+                            :label="`${item.name} Branch`"
+                            class="py-0"
+                    ></v-switch>
+                </div>
             </v-card-text>
         </v-card>
     </div>
@@ -69,7 +53,6 @@
 <script lang="ts">
     import { Component, Mixins, Watch } from "vue-property-decorator"
     import ControlPanel from "../panels/ControlPanel.vue";
-    import { Variables } from  "@/types/Variables";
 
     @Component({
         components: {
@@ -78,46 +61,36 @@
     })
 
     export default class TryExceptTaskPanel extends Mixins(ControlPanel) {
-        varItems: any[] = []
-        getExcept: any = null
-
+        public getExcept: any = null
+        
         mounted() {
-            var variables = new Variables()
-            this.varItems = variables.getVarList()
-
-            if (this.value.property.hasOwnProperty('except')) {
-                this.getExcept = this.value.property.except
-            }
-        }
-
-        @Watch("getExcept", {immediate: true, deep: true})
-        setExcept(val: any) {
-            if (val) {
-                this.value.property.except = val
-            }
+            var list = this.value.property.branch.filter((item: any) => item.name == 'Except')
+            this.$set(this, "getExcept", list)
         }
 
         addExcept() {
-            this.getExcept = []
-        }
-
-        delExcept() {
-            this.getExcept = null
-        }
-
-        addValue() {
-            var lastIdx = this.getExcept.length - 1
-            if (lastIdx == -1 || (lastIdx >= 0 && this.getExcept[lastIdx] != "")) {
-                this.getExcept.push("")
+            var lengthIndex = this.value.property.branch.filter((item: any) => item.name == 'Except').length
+            var obj = {
+                id: `except_${++lengthIndex}`,
+                name: 'Except',
+                status: true,
+                variables: null,
+                child: []
             }
+            let newBranch = this.value.property.branch
+            newBranch.splice(lengthIndex, 0, obj)
+            var list = newBranch.filter((item: any) => item.name == 'Except')
+
+            this.$set(this.value.property, "branch", newBranch)
+            this.$set(this, "getExcept", list)
         }
 
-        updateValue(value: any, idx: number) {
-            this.getExcept[idx] = value
-        }
+        delExcept(value: any) {
+            var newBranch = this.value.property.branch.filter((item: any) => item.id != value.id)
+            var list = newBranch.filter((item: any) => item.name == 'Except')
 
-        delValue(idx: number) {
-            this.getExcept.splice(idx, 1)
+            this.$set(this.value.property, "branch", newBranch)
+            this.$set(this, "getExcept", list)
         }
     }
 </script>

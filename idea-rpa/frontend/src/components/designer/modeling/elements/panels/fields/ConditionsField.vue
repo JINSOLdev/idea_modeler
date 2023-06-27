@@ -2,8 +2,7 @@
     <div>
         <v-card v-for="(condition, index) in conditions"
                 :key="index"
-                outlined
-                :class="condition.type ? '': 'my-2'"
+                flat
         >
             <v-card-title 
                     v-if="condition.type && condition.type != 'Else'" 
@@ -59,7 +58,7 @@
                                     :items="operatorList"
                                     dense
                                     outlined
-                                    class="mx-1 pt-1"
+                                    class="mx-1"
                                     style="width: 100px;"
                             ></v-select>
 
@@ -75,7 +74,7 @@
                                     <v-btn v-bind="attrs"
                                             v-on="on"
                                             icon
-                                            class="mx-1 my-2"
+                                            class="ma-1"
                                     >
                                         <v-icon>mdi-dots-horizontal</v-icon>
                                     </v-btn>
@@ -92,7 +91,7 @@
                                 </v-list>
                             </v-menu>
                             <v-btn @click="deleteTerm(condition.terms, idx)"
-                                    icon class="my-2"
+                                    icon class="my-1"
                             >
                                 <v-icon>mdi-delete-outline</v-icon>
                             </v-btn>
@@ -255,6 +254,8 @@
                     }]
                 })
             }
+            
+            this.$emit('update:value', this.value)
         }
 
         addOperator(item: any) {

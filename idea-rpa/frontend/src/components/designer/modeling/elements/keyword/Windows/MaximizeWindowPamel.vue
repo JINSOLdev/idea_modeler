@@ -9,7 +9,7 @@
                 <locator-field
                         :isWindows="true"
                         :label="'Locator'"
-                        :hint="'Locator for window to restore'"
+                        :hint="'Locator for window to maximize'"
                         :value.sync="value.property.locator"
                 ></locator-field>
             </v-card-text>
@@ -30,9 +30,9 @@
             KeywordPanel,
         }
     })
-    export default class RestoreWindowPanel extends Mixins(KeywordPanel) {
+    export default class MaximizeWindowPanel extends Mixins(KeywordPanel) {
         mounted(){
-            var description = "Window restore the current active window or the window defined by the locator."
+            var description = "Maximize the current active window or the window defined by the locator."
             this.$emit("setDescription", description)
         }
     }

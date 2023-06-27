@@ -47,18 +47,9 @@ class Task extends Construct{
                     })
 
                 } else if (obj.type == "TryExceptTask") {
-                    if (obj.child.length > 0) {
-                        obj.child = this.delChild(value, obj.child)
-                    }
-                    if (obj.property.except && obj.property.exceptChild.length > 0) {
-                        obj.property.exceptChild = this.delChild(value, obj.property.exceptChild)
-                    }
-                    if (obj.property.elseBranch && obj.property.elseChild.length > 0) {
-                        obj.property.elseChild = this.delChild(value, obj.property.elseChild)
-                    }
-                    if (obj.property.finallyBranch && obj.property.finallyChild.length > 0) {
-                        obj.property.finallyChild = this.delChild(value, obj.property.finallyChild)
-                    }
+                    obj.property.branch.forEach((item: any) => {
+                        item.child = this.delChild(value, item.child)
+                    })
 
                 } else {
                     obj.child = this.delChild(value, obj.child)
@@ -218,6 +209,7 @@ class IfTask extends SeqTask{
     public property: any = {
         conditions: [
             {
+                id: 'if',
                 type: 'If',
                 isAll: 0,
                 child: [],
@@ -476,40 +468,48 @@ class ReturnTask extends SeqTask{
 class TryExceptTask extends SeqTask{
 
     public property: any = {
-        exceptChild: [],
-        elseBranch: false,
-        elseChild: [],
-        finallyBranch: true,
-        finallyChild: []
+        branch: [
+            {
+                id: 'try',
+                name: 'Try',
+                status: true,
+                child: []
+            },
+            {
+                id: 'else',
+                name: 'Else',
+                status: false,
+                child: []
+            },
+            {
+                id: 'finally',
+                name: 'Finally',
+                status: true,
+                child: []
+            },
+        ],
     }
     
     public toRobot(tab: number): string{
+        let robot = "";
 
-        let robot = Construct.tabs.substr(0, tab) + `TRY`;
-        
-        this.child?.forEach(child=> robot += "\n"+child.toRobot(tab + 1));
+        this.property.branch.forEach((item: any) => {
+            if (item.status) {
+                robot += Construct.tabs.substr(0, tab) + item.name.toUpperCase();
 
-        if (this.property.except) {
-            robot += "\n" + Construct.tabs.substr(0, tab) + `EXCEPT`
+                if (item.hasOwnProperty('variables')) {
+                    item.variables?.forEach((value: any) => robot += Construct.tabs.substr(0, tab) + this.checkType(value));
+                }
 
-            this.property.except?.forEach((except: string)=> robot += Construct.tabs.substr(0, tab) + `\$\{${except}\}`)
+                if (item.child.length > 0) {
+                    item.child?.forEach((child: any) => robot += "\n"+child.toRobot(tab + 1));
+                }
 
-            this.property.exceptChild?.forEach((child: any)=> robot += "\n"+child.toRobot(tab + 1))
-        }
+                robot += "\n"
+            }
+        })
 
-        if (this.property.elseBranch) {
-            robot += "\n" + Construct.tabs.substr(0, tab) + `ELSE`
-
-            this.property.elseChild?.forEach((child: any)=> robot += "\n"+child.toRobot(tab + 1))
-        }
-
-        if (this.property.finallyBranch) {
-            robot += "\n" + Construct.tabs.substr(0, tab) + `FINALLY`
-
-            this.property.finallyChild?.forEach((child: any)=> robot += "\n"+child.toRobot(tab + 1))
-        }
-
-        robot += '\n' + Construct.tabs.substr(0, tab) + "END";
+        robot += Construct.tabs.substr(0, tab) + "END";
 
         return robot
     }

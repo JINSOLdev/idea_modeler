@@ -160,7 +160,11 @@
                 :resultText.sync="executeResultText"
                 :isExecuting.sync="isExecuting"
                 @close="closeExecutePanel"
+<<<<<<< HEAD
                 @ended="endedSave"
+=======
+                @ended="endedSave($event)"
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
         ></execute-panel>
 
         <!-- Context Menu -->
@@ -333,12 +337,17 @@
 
         // Methods
         endedSave(path: any) {
+<<<<<<< HEAD
             this.saveModel(path)
+=======
+          this.saveModel(path)
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
         }
         startMoveElement(e: any) {
             e.draggedRect.width = 100
         }
         saveModel(path: any) {
+<<<<<<< HEAD
             let direactoryPath = "";
             let filePath = "";
 
@@ -360,6 +369,18 @@
 
                 filePath = `${direactoryPath}/${this.taskName}.json`;
             }
+=======
+            if (this.$route.params.filePath) {
+                const direactoryPath = path ? path : this.$route.params.filePath.replace(this.taskName + ".json", "");
+                const filePath = path ? path + "\\" + this.taskName + ".json" : this.$route.params.filePath;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+            } else {
+                const direactoryPath = path? path : `./tasks`;
+                const filePath = `${direactoryPath}/${this.taskName}.json`;
+                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
+                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
 
             const data = {
                 path: filePath,
@@ -368,6 +389,10 @@
             !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
             fs.writeFileSync(filePath, JSON.stringify(data));
         }
+<<<<<<< HEAD
+=======
+    }
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
     
 
         deleteElement() {
@@ -382,6 +407,10 @@
 
         getRecordResult(result: any) {
             var keywordList = this.$refs.elementList.keywordList
+<<<<<<< HEAD
+=======
+            console.log(result)
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
             result.forEach((str: string) => {
                 if (str) {
                     if (str.includes("Click") || str.includes("Control Window")) {
@@ -391,6 +420,7 @@
                                     const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
                                     element.library = item.library
                                     const locator = this.setLocator(str.replace(keyword, "").trim())
+                                    console.log(locator)
                                     element.property = new Map()
                                     this.$set(element.property, "locator", locator)
                                     this.robot.child.push(element)
@@ -403,6 +433,7 @@
         }
 
         setLocator(str: string): any {
+            console.log(str)
             var obj: any = {
                 name: "locator",
                 valueType: "locator",
@@ -433,6 +464,10 @@
             //         obj.defaultValue = classVal
             //     }
             // }
+<<<<<<< HEAD
+=======
+            console.log(obj)
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
             return obj
         }
         showOverlay(value: boolean) {

@@ -1,127 +1,39 @@
 <template>
-    <div class="try-excpet-area">
-        <!-- Try -->
-        <div class="try-area">
-            <p class="mb-2">Try</p>
-            <draggable 
-                    class="drag-area"
-                    tag="ul"
-                    :list="child"
-                    group="task"
-            >
-                <li v-for="task in child" 
-                        :key="task.id"
-                        class="child-task"
-                        @dblclick="openPanel($event, task)"
-                        @contextmenu="openContextMenu($event, task)"
-                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
-                >
-                    <component
-                            :is="getComponentName(task)"
-                            :child.sync="task.child"
-                            :value.sync="task"
-                            :isOpenMenu.sync="isOpenMenu"
-                            :isOpenPanel.sync="isOpenPanel"
-                            @openPanel="openPanel"
-                            @openContextMenu="openContextMenu"
-                    ></component>
-                </li>
-            </draggable>
-        </div>
-
-        <!-- Except -->
-        <div v-if="value.property.except"
-                class="except-area"
+    <div class="py-1">
+        <div v-for="item in value.property.branch"
+                :key="item.id"
         >
-            <p class="mb-2">Except</p>
-            <draggable 
-                    class="drag-area"
-                    tag="ul"
-                    :list="value.property.exceptChild"
-                    group="task"
+            <div v-if="item.status" 
+                    class="box-area"
+                    @contextmenu.prevent="openContextMenu($event, item)"
+                    :class="{ 'selected' : selectedValue && selectedValue.id == item.id }"
             >
-                <li v-for="task in value.property.exceptChild" 
-                        :key="task.id"
-                        class="child-task"
-                        @dblclick="openPanel($event, task)"
-                        @contextmenu="openContextMenu($event, task)"
-                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
+                <p class="mb-2">{{ item.name }}</p>
+                <draggable 
+                        class="drag-area"
+                        tag="ul"
+                        :list="item.child"
+                        group="task"
                 >
-                    <component
-                            :is="getComponentName(task)"
-                            :child.sync="task.child"
-                            :value.sync="task"
-                            :isOpenMenu.sync="isOpenMenu"
-                            :isOpenPanel.sync="isOpenPanel"
-                            @openPanel="openPanel"
-                            @openContextMenu="openContextMenu"
-                    ></component>
-                </li>
-            </draggable>
+                    <li v-for="task in item.child" 
+                            :key="task.id"
+                            class="child-task"
+                            @dblclick="openPanel($event, task)"
+                            @contextmenu="openContextMenu($event, task)"
+                            :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
+                    >
+                        <component
+                                :is="getComponentName(task)"
+                                :child.sync="task.child"
+                                :value.sync="task"
+                                :selectedValue.sync="selectedValue"
+                                @openPanel="openPanel"
+                                @openContextMenu="openContextMenu"
+                        ></component>
+                    </li>
+                </draggable>
+            </div>
         </div>
-
-        <!-- Else -->
-        <div v-if="value.property.elseBranch"
-                class="else-area"
-        >
-            <p class="mb-2">Else</p>
-            <draggable 
-                    class="drag-area"
-                    tag="ul"
-                    :list="value.property.elseChild"
-                    group="task"
-            >
-                <li v-for="task in value.property.elseChild" 
-                        :key="task.id"
-                        class="child-task"
-                        @dblclick="openPanel($event, task)"
-                        @contextmenu="openContextMenu($event, task)"
-                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
-                >
-                    <component
-                            :is="getComponentName(task)"
-                            :child.sync="task.child"
-                            :value.sync="task"
-                            :isOpenMenu.sync="isOpenMenu"
-                            :isOpenPanel.sync="isOpenPanel"
-                            @openPanel="openPanel"
-                            @openContextMenu="openContextMenu"
-                    ></component>
-                </li>
-            </draggable>
-        </div>
-
-        <!-- Finally -->
-        <div v-if="value.property.finallyBranch"
-                class="finally-area"
-        >
-            <p class="mb-2">Finally</p>
-            <draggable 
-                    class="drag-area"
-                    tag="ul"
-                    :list="value.property.finallyChild"
-                    group="task"
-            >
-                <li v-for="task in value.property.finallyChild" 
-                        :key="task.id"
-                        class="child-task"
-                        @dblclick="openPanel($event, task)"
-                        @contextmenu="openContextMenu($event, task)"
-                        :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
-                >
-                    <component
-                            :is="getComponentName(task)"
-                            :child.sync="task.child"
-                            :value.sync="task"
-                            :isOpenMenu.sync="isOpenMenu"
-                            :isOpenPanel.sync="isOpenPanel"
-                            @openPanel="openPanel"
-                            @openContextMenu="openContextMenu"
-                    ></component>
-                </li>
-            </draggable>
-        </div>
-
     </div>
 </template>
 
@@ -139,40 +51,14 @@
 </script>
 
 <style scoped>
-    .try-excpet-area {
-        min-height: 40px;
-        padding: 10px;
-    }
-    .try-area {
-        padding: 4px;
+    .box-area {
+        margin: 24px;
         outline: grey 1px solid;
     }
-    
-    .except-area {
-        list-style: none;
-        margin-top: 10px;
-        padding: 5px;
-        outline: grey 1px solid;
-    }
-
-    .else-area {
-        list-style: none;
-        margin-top: 10px;
-        padding: 5px;
-        outline: grey 1px solid;
-    }
-
-    .finally-area {
-        list-style: none;
-        margin-top: 10px;
-        padding: 5px;
-        outline: grey 1px solid;
-    }
-
     .drag-area {
-        padding: 4px;
         list-style: none;
-        min-height: 20px;
+        min-height: 30px;
+        padding: 4px;
     }
 
     .child-task {
@@ -180,10 +66,5 @@
         list-style: none;
         background-color: lightgrey;
         outline: 1px dashed;
-    }
-
-    .selected {
-        border: 1px solid #2196F3;
-        margin-bottom: 10px;
     }
 </style>
