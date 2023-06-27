@@ -8,7 +8,6 @@ import { error } from 'console'
 import { Server } from 'http'
 import { checkServerIdentity } from 'tls'
 import { userInfo } from 'os'
-import { InitTray } from './backgroundTrayWindow'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -41,28 +40,36 @@ async function createWindow() {
 
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
 const contextMenu = Menu.buildFromTemplate([
-  {
-    label: 'Settings',
-    submenu: [
-      { 
-        label: '고유ID',
-        submenu: [
-          {
-            label: (machineIdSync()),
-            click() {win.show()}
-          }
-        ],
-      },
-      {
-        label: '서버주소',
-        click: function() {
-          require('electron').shell.openExternal("http://ideasolution.co.kr:8090/bpm/")
-          // require('electron').shell.openExternal("https://electronjs.org")
-        }
-      },
-      {
-        label: '사용자ID',
+  // {
+  //   label: 'Settings',
+  //   submenu: [
+  //     { 
+  //       label: '고유ID',
+  //       submenu: [
+  //         {
+  //           label: (machineIdSync()),
+  //           click() {win.show()}
+  //         }
+  //       ],
+  //     },
+  //     {
+  //       label: '서버주소',
+  //       click: function() {
+  //         require('electron').shell.openExternal("http://ideasolution.co.kr:8090/bpm/")
+  //         // require('electron').shell.openExternal("https://electronjs.org")
+  //       }
+  //     },
+  //     {
+  //       label: '사용자ID',
         
+  //     }
+  //   ]
+  // },
+  {
+    label: 'Setting',
+    submenu: [
+      {
+        click() {tray.show()}
       }
     ]
   },
@@ -150,7 +157,6 @@ app.on('ready', async () => {
     }
   }
   createWindow()
-  InitTray()
 })
 
 // Exit cleanly on request from parent process in development mode.

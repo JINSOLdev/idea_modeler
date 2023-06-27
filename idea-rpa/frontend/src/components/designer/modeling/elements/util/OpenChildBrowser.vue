@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="v-input">
         <v-btn 
                 @click="openURLDialog"
                 outlined
@@ -71,9 +71,9 @@
                 this.$emit('update:records',this.records)
                 this.$emit('closeLocator')
             } else {
-                if (arg.id || arg.class || arg.xpath) {
+                if (arg.xpath) {
                     if (!this.records.find((item: any) => 
-                        item.id == arg.id || item.class == arg.class || item.xpath == arg.xpath
+                        item.id == arg.id || item.name == arg.name || item.xpath == arg.xpath
                     )) {
                         this.records.push(arg)
                     }
@@ -126,31 +126,63 @@
                             action: {
                                 trigger: "click",
                                 callback: (function (target) {
+                                    if (target.getAttribute('target') == "_blank") {
+                                        target.removeAttribute('target')
+                                    }
                                     function getXPathByElement (element) {
                                         if (!element) return null
 
                                         if (element.id) {
-                                            return "//*[@id="+element.id+"]"
+                                            return '//*[@id="'+element.id+'"]'
                                         } else if (element.tagName === 'BODY') {
-                                            return "/html/body"
+                                            return '/html/body'
                                         } else {
                                             const sameTagSiblings = Array.from(element.parentNode.childNodes)
-                                            .filter(e => e.nodeName === element.nodeName)
+                                                    .filter(e => e.nodeName === element.nodeName)
                                             const idx = sameTagSiblings.indexOf(element)
 
                                             return getXPathByElement(element.parentNode) + '/' +
-                                            element.tagName.toLowerCase() +
-                                            (sameTagSiblings.length > 1 ? "["+ (idx + 1)+"]" : "")
+                                                    element.tagName.toLowerCase() +
+                                                    (sameTagSiblings.length > 1 ? '['+ (idx + 1)+']' : '')
                                         }
                                     }
+
+                                    function getCssByElement (element) {
+                                        if (!element) return null
+
+                                        if (element.id) {
+                                            return '#' + element.id
+                                        } else {
+                                            const sameTagSiblings = Array.from(element.parentNode.childNodes)
+                                                    .filter(e => e.nodeName === element.nodeName)
+                                            const idx = sameTagSiblings.indexOf(element)
+
+                                            if (sameTagSiblings.length > 5) {
+                                                return getCssByElement(element.parentNode) + ' > ' + 
+                                                    element.tagName.toLowerCase() +
+                                                    (sameTagSiblings.length > 1 ? ':nth-child('+ (idx + 1)+')' : '')
+                                            } else {
+                                                const classList = Array.from(element.classList).join('.')
+                                                if (classList) {
+                                                    return getCssByElement(element.parentNode) + ' > ' + 
+                                                        element.tagName.toLowerCase() + '.' + classList
+                                                } else {
+                                                    return getCssByElement(element.parentNode) + ' > ' + 
+                                                        element.tagName.toLowerCase()
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     const obj = {
                                         type: 'msg',
-                                        class: target.getAttribute('class'),
-                                        ref: target.getAttribute('ref'),
-                                        name: target.getAttribute('name'),
-                                        link: target.getAttribute('href'),
                                         id: target.getAttribute('id'),
-                                        xpath: getXPathByElement(target)
+                                        css: getCssByElement(target),
+                                        xpath: getXPathByElement(target),
+                                        name: target.getAttribute('name'),
+                                        class: target.getAttribute('class'),
+                                        link: target.getAttribute('href'),
+                                        ref: target.getAttribute('ref')
                                     }
                                     require('electron').ipcRenderer.send('toMain', obj);
                                 })
