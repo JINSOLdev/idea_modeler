@@ -4,11 +4,6 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from '
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { machineId, machineIdSync } from 'node-machine-id'
-
-import { error } from 'console'
-import { Server } from 'http'
-import { checkServerIdentity } from 'tls'
-import { userInfo } from 'os'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -19,69 +14,52 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-// async function getMachineId() {
-  //   let id = await machineId()
-  // }
-  
-  
 async function createWindow() {
-  // Create the browser window.
+  // Create the browser window. 
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    // autoHideMenuBar: true,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
     },
   })
-  
-  win.once('ready-to-show', () => win.show())
-  win.on('closed', () => (win))
 
+  win.webContents.openDevTools()
+
+  win.once('ready-to-show', () => win.show())
+  win.on('closed', function() {
+    // win = null
+    // popWin = null
+  } )
+
+  const child = new BrowserWindow({
+    parent: win,
+    width: 400,
+    height: 400,
+    modal: true,
+    show: false
+  })
+
+  child.once('ready-to-show', () => {
+    child.show()
+  })
 
   // custom Menu
-  const template: any = [
-    {
-      role: 'viewMenu'
-    }
-  ]
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+  // const template: any = [
+  //   {
+  //     role: 'viewMenu'
+  //   }
+  // ]
+  // Menu.setApplicationMenu(Menu.buildFromTemplate(template))
   
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Settings',
-      submenu: [
-        { 
-          label: '고유ID',
-          submenu: [
-            {
-              label: (machineIdSync()),
-              click() {win.show()}
-            }
-          ],
-        },
-        {
-          label: '서버주소',
-          submenu:[
-            {
-              label: ("http://ideasolution.co.kr:8090/bpm/"),
-              click: function() {
-                require('electron').shell.openExternal("http://ideasolutions.co.kr:8090/bpm")
-              }
-            }
-          ] 
-          
-        },
-        {
-          label: '사용자ID',
-          submenu: [
-
-          ]
-        }
-      ]
+      click() {child.show()}
     },
     {
       role: 'window',
