@@ -9,7 +9,11 @@ import { error } from 'console'
 import { Server } from 'http'
 import { checkServerIdentity } from 'tls'
 import { userInfo } from 'os'
+<<<<<<< HEAD
+const isDevelopment = process.env.NODE_ENV !== 'production'
+=======
 import { InitTray } from './backgroundTrayWindow'
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
 
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -51,6 +55,60 @@ async function createWindow() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template))
   
   // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
+<<<<<<< HEAD
+const contextMenu = Menu.buildFromTemplate([
+  // {
+  //   label: 'Settings',
+  //   submenu: [
+  //     { 
+  //       label: '고유ID',
+  //       submenu: [
+  //         {
+  //           label: (machineIdSync()),
+  //           click() {win.show()}
+  //         }
+  //       ],
+  //     },
+  //     {
+  //       label: '서버주소',
+  //       click: function() {
+  //         require('electron').shell.openExternal("http://ideasolution.co.kr:8090/bpm/")
+  //         // require('electron').shell.openExternal("https://electronjs.org")
+  //       }
+  //     },
+  //     {
+  //       label: '사용자ID',
+        
+  //     }
+  //   ]
+  // },
+  {
+    label: 'Setting',
+    submenu: [
+      {
+        click() {tray.show()}
+      }
+    ]
+  },
+  {
+    label: 'Open',
+    type: 'normal',
+    click() {win.show()}
+  },
+  {
+    label: 'Close', 
+    type: 'normal',
+    click() {app.quit()}
+  },
+  {
+    label: 'Quit',
+    type: 'normal',
+    click() {app.exit()}
+  }
+])
+
+
+=======
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Settings',
@@ -103,6 +161,7 @@ async function createWindow() {
     }
   ])
   
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
   let tray : any = null
   app.whenReady().then(() => {
     tray = new Tray(
@@ -169,7 +228,6 @@ app.on('ready', async () => {
     }
   }
   createWindow()
-  InitTray()
 })
 
 // Exit cleanly on request from parent process in development mode.

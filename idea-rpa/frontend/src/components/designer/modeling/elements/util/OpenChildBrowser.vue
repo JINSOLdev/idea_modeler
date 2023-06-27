@@ -153,9 +153,30 @@
                                         if (element.id) {
                                             return '#' + element.id
                                         } else {
+<<<<<<< HEAD
+                                            const sameTagSiblings = Array.from(element.parentNode.childNodes)
+                                                    .filter(e => e.nodeName === element.nodeName)
+                                            const idx = sameTagSiblings.indexOf(element)
+
+                                            if (sameTagSiblings.length > 5) {
+                                                return getCssByElement(element.parentNode) + ' > ' + 
+                                                    element.tagName.toLowerCase() +
+                                                    (sameTagSiblings.length > 1 ? ':nth-child('+ (idx + 1)+')' : '')
+                                            } else {
+                                                const classList = Array.from(element.classList).join('.')
+                                                if (classList) {
+                                                    return getCssByElement(element.parentNode) + ' > ' + 
+                                                        element.tagName.toLowerCase() + '.' + classList
+                                                } else {
+                                                    return getCssByElement(element.parentNode) + ' > ' + 
+                                                        element.tagName.toLowerCase()
+                                                }
+                                            }
+=======
                                             return getCssByElement(element.parentNode) + ' > ' + 
                                                     element.tagName.toLowerCase() + '.' + 
                                                     Array.from(element.classList).join('.')
+>>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
                                         }
                                     }
 
