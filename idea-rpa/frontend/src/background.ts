@@ -7,8 +7,6 @@ import { machineId, machineIdSync } from 'node-machine-id'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
-
-
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -19,6 +17,8 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    title: "idea-rpa",
+    center: true,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
@@ -27,7 +27,7 @@ async function createWindow() {
     },
   })
 
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
   win.once('ready-to-show', () => win.show())
   win.on('closed', function() {
@@ -35,48 +35,42 @@ async function createWindow() {
     // popWin = null
   } )
 
+  // 자식창
   const child = new BrowserWindow({
     parent: win,
     width: 400,
     height: 400,
     modal: true,
-    show: false
+    show: false,
+    autoHideMenuBar: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
   })
 
   child.once('ready-to-show', () => {
     child.show()
   })
 
-  // custom Menu
-  // const template: any = [
-  //   {
-  //     role: 'viewMenu'
-  //   }
-  // ]
-  // Menu.setApplicationMenu(Menu.buildFromTemplate(template))
-  
-  // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
+  // (부모창) 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Settings',
       click() {child.show()}
     },
     {
-      role: 'window',
-      submenu: [
-        {
-          label: 'Open',
-          click() {win.show()}
-        },
-        {
-          label: 'Close',
-          click() {app.quit()}
-        },
-        {
-          label: 'Quit',
-          click() {app.quit()}
-        }
-      ]
+      label: 'Open',
+      click() {win.show()}
+    },
+    {
+      label: 'Close',
+      click() {app.quit()}
+    },
+    {
+      label: 'Quit',
+      click() {app.quit()}
     }
   ])
   

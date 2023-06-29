@@ -9,6 +9,23 @@
     })
     export default class SetValue extends Mixins(KeywordElement) {
         mounted() {
+            this.init()
+        }
+
+        init() {
+            var keys = Object.keys(this.value.property)
+            if (!keys || keys.length < 1) {
+                this.value.property = new Map()
+                this.$set(this.value.property, "locator", null)
+                this.$set(this.value.property, "value", "None")
+                this.$set(this.value.property, "append", null)
+                this.$set(this.value.property, "enter", null)
+                this.$set(this.value.property, "newline", null)
+            }
+
+            if (!this.value.property.hasOwnProperty("value")) {
+                this.$set(this.value.property, "value", "None")
+            }
         }
     }
 </script>
