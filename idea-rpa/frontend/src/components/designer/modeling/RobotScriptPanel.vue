@@ -50,7 +50,6 @@
     import SeparatePanelComponent from "./SeparatePanelComponent.vue";
     import { Robot, Task, Keyword } from "@/types/Task";
 
-    // @Component
     @Component({
         components: {
             SeparatePanelComponent,

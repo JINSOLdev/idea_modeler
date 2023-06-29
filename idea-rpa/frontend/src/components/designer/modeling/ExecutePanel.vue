@@ -1,9 +1,10 @@
 <template>
     <v-navigation-drawer
-            absolute
+            ref="drawer"
+            fixed
             permanent
             right
-            style="width: 600px;"
+            :width="navigation.width"
     >
         <v-card flat>
             <v-card-title class="d-flex">
@@ -58,11 +59,16 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Prop, Watch } from "vue-property-decorator"
+    import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator"
+    import SeparatePanelComponent from "./SeparatePanelComponent.vue";
     const { shell } = require('electron').remote;
 
-    @Component
-    export default class RobotScriptPanel extends Vue {
+    @Component({
+        components: {
+            SeparatePanelComponent,
+        }
+    })
+    export default class RobotScriptPanel extends Mixins(SeparatePanelComponent) {
         @Prop() public taskName!: string;
         @Prop() public resultText!: any;
         @Prop() public isExecuting!: boolean;
@@ -85,6 +91,9 @@
                                 name: "output.xml",
                                 path: path?.trim()
                             })
+                            const index = path?.lastIndexOf("\\")
+                            const folder = path?.substring(0,index)
+                            this.$emit('ended', folder)
                         } else if(str.includes("Log")) {
                             var path = str.split("Log:").pop()
                             this.artifacts.push({
@@ -121,7 +130,7 @@
 </script>
 
 <style scoped>
-    .script-text {
+    .scirpt-text {
         font-family: Roboto,sans-serif;
     }
 </style>
