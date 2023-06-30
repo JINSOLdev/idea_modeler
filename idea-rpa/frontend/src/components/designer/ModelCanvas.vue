@@ -99,7 +99,7 @@
                                 :targetTask="task"
                         ></model-relation>
                         
-                        <li class="task-element"
+                        <li class="task-element mx-auto"
                                 @dblclick="openPanel($event, task)"
                                 @contextmenu.prevent="openContextMenu($event, task)"
                                 :class="{ 'selected' : selectedValue && selectedValue.id == task.id }"
@@ -117,6 +117,11 @@
                         </li>
                     </div>
                 </draggable>
+
+                <model-relation
+                        v-if="robot.child.length > 0"
+                        :targetTask="{ type: 'end' }"
+                ></model-relation>
                 
                 <v-sheet
                         class="mx-auto mt-5"
@@ -341,10 +346,12 @@
         saveModel(path: any) {
             let direactoryPath = "";
             let filePath = "";
+            let robotPath = "";
 
             if (this.$route.params.filePath) {
                 direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
                 filePath = this.$route.params.filePath;
+                robotPath = this.$route.params.filePath.replace(".json", ".robot");
                 
             } else {
                 if (path) {
@@ -359,6 +366,8 @@
                 }
 
                 filePath = `${direactoryPath}/${this.taskName}.json`;
+                robotPath = `${direactoryPath}/${this.taskName}.robot`;
+
             }
 
             const data = {
@@ -367,6 +376,7 @@
             }
             !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
             fs.writeFileSync(filePath, JSON.stringify(data));
+            fs.writeFileSync(robotPath, this.robot.toRobot(0));
         }
     
 
@@ -645,12 +655,13 @@
 
     .drag-area {
         list-style: none;
-        min-height: 500px;
+        min-height: 50px;
         padding: 0px;
         cursor: pointer;
     }
 
     .task-element {
+        width: 500px;
         min-height: 30px;
         list-style: none;
         outline: 1px solid;

@@ -26,9 +26,5 @@
         }
     })
     export default class CloseDocumentPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Close the active document (if open)."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

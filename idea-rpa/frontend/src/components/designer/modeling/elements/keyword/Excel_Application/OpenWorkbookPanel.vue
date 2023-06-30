@@ -26,9 +26,5 @@
         }
     })
     export default class OpenWorkbookPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Open Excel by filename. By default sets active worksheet to sheet number 1."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

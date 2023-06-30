@@ -56,9 +56,5 @@
         }
     })
     export default class WriteToCellsPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Write value, number_format and/or formula into cell."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

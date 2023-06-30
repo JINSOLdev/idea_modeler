@@ -4,7 +4,9 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from '
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { machineId, machineIdSync } from 'node-machine-id'
+import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
 
 
 // Scheme must be registered before the app is ready
@@ -12,13 +14,15 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+async function getMachineId() {
+  let id = await machineId()
+}
+
 async function createWindow() {
-  // Create the browser window. 
+  // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "idea-rpa",
-    center: true,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
@@ -26,54 +30,40 @@ async function createWindow() {
       enableRemoteModule: true,
     },
   })
-
-  // win.webContents.openDevTools()
-
-  win.once('ready-to-show', () => win.show())
-  win.on('closed', function() {
-    // win = null
-    // popWin = null
-  } )
-
-  // 자식창
-  const child = new BrowserWindow({
-    parent: win,
-    width: 400,
-    height: 400,
-    modal: true,
-    show: false,
-    autoHideMenuBar: true,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true
-    }
-  })
-
-  child.once('ready-to-show', () => {
-    child.show()
-  })
-
-  // (부모창) 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Settings',
-      click() {child.show()}
-    },
-    {
-      label: 'Open',
-      click() {win.show()}
-    },
-    {
-      label: 'Close',
-      click() {app.quit()}
-    },
-    {
-      label: 'Quit',
-      click() {app.quit()}
-    }
-  ])
   
+  win.once('ready-to-show', () => win.show())
+  win.on('closed', () => (win))
+
+  // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
+const contextMenu = Menu.buildFromTemplate([
+  {
+    label: 'Settings',
+    submenu: [
+      { 
+        label: (machineIdSync()),
+        click() {win.show()}
+      }
+    ]
+    // click() {console.log(machineIdSync())}
+  },
+  {
+    label: 'Open',
+    type: 'normal',
+    click() {win.show()}
+  },
+  {
+    label: 'Close', 
+    type: 'normal',
+    click() {app.quit()}
+  },
+  {
+    label: 'Quit',
+    type: 'normal',
+    click() {app.exit()}
+  }
+])
+
+
   let tray : any = null
   app.whenReady().then(() => {
     tray = new Tray(

@@ -85,6 +85,21 @@
                     </template>
                     <span>Select Task Folder</span>
                 </v-tooltip>
+
+                <v-tooltip left>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn @click="setDownloadDirectory"
+                                v-bind="attrs"
+                                v-on="on"
+                                fab 
+                                dark 
+                                color="grey"
+                        >
+                            <v-icon>mdi-folder-download-outline</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Download Folder</span>
+                </v-tooltip>
             </v-speed-dial>
 
             <!-- Location Dialog -->
@@ -282,6 +297,24 @@
                 } catch (e) {
                     console.log(e)
                 }
+            }
+        }
+
+        setDownloadDirectory() {
+            let me = this
+            let dic = "../Download"
+            try {
+                me.lists = [];
+                fs.readdirSync(dic).forEach((file) => {
+                    if (file.includes(".json")) {
+                        me.lists.push({
+                            name: file.replace(".json", ""),
+                            path: `${dic}/`+ file
+                        });
+                    }
+                });
+            } catch (e) {
+                console.log(e)
             }
         }
     }

@@ -15,7 +15,7 @@
                 <variables-field
                         :label="'Method Name'"
                         :hint="'Name of method'"
-                        :value.sync="value.property.methodName"
+                        :value.sync="value.property.method_name"
                 ></variables-field>
                 
                 <variables-field
