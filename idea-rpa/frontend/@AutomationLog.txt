@@ -1,0 +1,2 @@
+element.CurrentControlType returns 0, invalid ControlType!
+element.CurrentControlType returns 0, invalid ControlType!

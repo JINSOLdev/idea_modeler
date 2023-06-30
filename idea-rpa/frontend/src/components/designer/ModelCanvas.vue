@@ -47,7 +47,7 @@
                     @openAlert="openAlert"
             ></execute-python>
 
-            <v-btn @click="saveModel"
+            <v-btn @click="saveModel(null)"
                     text
                     color="purple" 
             >
@@ -160,7 +160,7 @@
                 :resultText.sync="executeResultText"
                 :isExecuting.sync="isExecuting"
                 @close="closeExecutePanel"
-                @ended="endedSave($event)"
+                @ended="endedSave"
         ></execute-panel>
 
         <!-- Context Menu -->
@@ -333,22 +333,33 @@
 
         // Methods
         endedSave(path: any) {
-          this.saveModel(path)
+            this.saveModel(path)
         }
         startMoveElement(e: any) {
             e.draggedRect.width = 100
         }
         saveModel(path: any) {
+            let direactoryPath = "";
+            let filePath = "";
+
             if (this.$route.params.filePath) {
-                const direactoryPath = path ? path : this.$route.params.filePath.replace(this.taskName + ".json", "");
-                const filePath = path ? path + "\\" + this.taskName + ".json" : this.$route.params.filePath;
-                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
-                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+                direactoryPath = this.$route.params.filePath.replace(this.taskName + ".json", "");
+                filePath = this.$route.params.filePath;
+                
             } else {
-                const direactoryPath = path? path : `./tasks`;
-                const filePath = `${direactoryPath}/${this.taskName}.json`;
-                !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
-                fs.writeFileSync(filePath, JSON.stringify(this.robot));
+                if (path) {
+                    direactoryPath = path
+                } else {
+                    const location = window.localStorage.getItem("location");
+                    if (location && location.length > 0) {
+                        direactoryPath = location;
+                    } else {
+                        direactoryPath = `./tasks`;
+                    }
+                }
+
+                filePath = `${direactoryPath}/${this.taskName}.json`;
+            }
 
             const data = {
                 path: filePath,
@@ -357,7 +368,6 @@
             !fs.existsSync(direactoryPath) && fs.mkdirSync(direactoryPath);
             fs.writeFileSync(filePath, JSON.stringify(data));
         }
-    }
     
 
         deleteElement() {
@@ -372,7 +382,6 @@
 
         getRecordResult(result: any) {
             var keywordList = this.$refs.elementList.keywordList
-            console.log(result)
             result.forEach((str: string) => {
                 if (str) {
                     if (str.includes("Click") || str.includes("Control Window")) {
@@ -382,7 +391,6 @@
                                     const element = new Keyword(this.$refs.elementList.idGlobal++, keyword, "Keyword")
                                     element.library = item.library
                                     const locator = this.setLocator(str.replace(keyword, "").trim())
-                                    console.log(locator)
                                     element.property = new Map()
                                     this.$set(element.property, "locator", locator)
                                     this.robot.child.push(element)
@@ -395,38 +403,11 @@
         }
 
         setLocator(str: string): any {
-            console.log(str)
-            var obj: any = {
+            let obj: any = {
                 name: "locator",
                 valueType: "locator",
                 defaultValue: str,
             }
-            let data = str.split(" and ");
-            obj.defaultValue = data[0];
-            // if(str.includes("id:")) {
-            //     var idArr: any = str.split("id:")
-            //     var idVal: any = idArr.pop()
-
-            //     if(idVal?.includes(" and ")) {
-            //         idArr = idVal?.split(" and ")
-            //         obj.defaultValue = idArr.shift()
-            //     } else {
-            //         obj.defaultValue = idVal
-            //     }
-            // }
-
-            // if (str.includes("class:")) {
-            //     var classArr: any = str.split("class:")
-            //     var classVal: any = classArr.pop()
-
-            //     if(classVal?.includes(" and ")) {
-            //         classArr = classVal?.split(" and ")
-            //         obj.defaultValue = classArr.shift()
-            //     } else {
-            //         obj.defaultValue = classVal
-            //     }
-            // }
-            console.log(obj)
             return obj
         }
         showOverlay(value: boolean) {

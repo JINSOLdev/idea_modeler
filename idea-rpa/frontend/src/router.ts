@@ -14,11 +14,6 @@ const routes: Array<RouteConfig> = [
       name: "RobotDesigner",
       component: () => import("./components/designer/ModelCanvas.vue")
     },
-    // {
-    //   path: "/robot",
-    //   name: "RobotDesigner",
-    //   component: () => import("./components/RobotDesigner.vue")
-    // },
 ];
 
 const router = new VueRouter({

@@ -6,11 +6,11 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field 
+                <locator-field 
                         :label="'Locator'"
                         :hint="'Locator for element'"
                         :value.sync="value.property.locator"
-                    ></variables-field> 
+                ></locator-field> 
 
                 <variables-field
                         :label="'Expected'"
