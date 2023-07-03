@@ -26,9 +26,5 @@
         }
     })
     export default class QuitApplicationPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Quit the application."
-            this.$emit("setDescription", description)
-        }
     }
 </script>

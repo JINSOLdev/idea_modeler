@@ -87,7 +87,7 @@ class Task extends Construct{
                     text = `\@\{${item.name}\}`
                     
                 } else if (item.valueType == "Dictionary") {
-                    text = `&\{${item.name}\}`
+                    text = `\&\{${item.name}\}`
                     
                 } else if (item.valueType == "Environment") {
                     text = `\%\{${item.name}\}`

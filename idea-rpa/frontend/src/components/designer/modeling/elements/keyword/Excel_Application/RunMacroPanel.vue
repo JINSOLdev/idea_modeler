@@ -27,9 +27,5 @@
         }
     })
     export default class RunMacroPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Run Excel macro with given name"
-            this.$emit("setDescription", description)
-        }
     }
 </script>

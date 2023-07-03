@@ -13,9 +13,5 @@
         }
     })
     export default class SaveExcelPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Saves Excel file"
-            this.$emit("setDescription", description)
-        }
     }
 </script>

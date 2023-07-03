@@ -32,10 +32,6 @@
         }
     })
     export default class OpenApplicationPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Open the Excel application."
-            this.$emit("setDescription", description)
-        }
         
     }
 </script>

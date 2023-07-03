@@ -33,9 +33,5 @@
         }
     })
     export default class SetActiveWorksheetPanel extends Mixins(KeywordPanel) {
-        mounted() {
-            var description = "Set active worksheet by either its sheet number or name"
-            this.$emit("setDescription", description)
-        }
     }
 </script>

@@ -153,7 +153,6 @@
                                         if (element.id) {
                                             return '#' + element.id
                                         } else {
-<<<<<<< HEAD
                                             const sameTagSiblings = Array.from(element.parentNode.childNodes)
                                                     .filter(e => e.nodeName === element.nodeName)
                                             const idx = sameTagSiblings.indexOf(element)
@@ -172,11 +171,6 @@
                                                         element.tagName.toLowerCase()
                                                 }
                                             }
-=======
-                                            return getCssByElement(element.parentNode) + ' > ' + 
-                                                    element.tagName.toLowerCase() + '.' + 
-                                                    Array.from(element.classList).join('.')
->>>>>>> b45baf26cafe4b3862da6064059250d3465fac9d
                                         }
                                     }
 
