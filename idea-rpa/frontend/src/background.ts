@@ -3,8 +3,6 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { machineId, machineIdSync } from 'node-machine-id'
-import { error } from 'console'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
@@ -13,10 +11,6 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
-
-async function getMachineId() {
-  let id = await machineId()
-}
 
 async function createWindow() {
   // Create the browser window.
@@ -32,37 +26,41 @@ async function createWindow() {
   })
   
   win.once('ready-to-show', () => win.show())
-  win.on('closed', () => (win))
+  win.on('closed', function() {
 
-  // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
-const contextMenu = Menu.buildFromTemplate([
-  {
-    label: 'Settings',
-    submenu: [
-      { 
-        label: (machineIdSync()),
-        click() {win.show()}
-      }
-    ]
-    // click() {console.log(machineIdSync())}
-  },
-  {
-    label: 'Open',
-    type: 'normal',
-    click() {win.show()}
-  },
-  {
-    label: 'Close', 
-    type: 'normal',
-    click() {app.quit()}
-  },
-  {
-    label: 'Quit',
-    type: 'normal',
-    click() {app.exit()}
-  }
-])
+  })
 
+  const child = new BrowserWindow({
+    parent: win,
+    width: 400,
+    height: 400,
+    modal: true,
+    show: false,
+    autoHideMenuBar: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
+  })
+
+  // Menu.setApplicationMenu(Menu.buildFromTemplate())
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Settings',
+      click() {child.show()}
+    },
+    {
+      label: 'Open',
+      type: 'normal',
+      click() {win.show()}
+    },
+    {
+      label: 'Close', 
+      type: 'normal',
+      click() {app.quit()}
+    }
+  ])
 
   let tray : any = null
   app.whenReady().then(() => {
@@ -85,7 +83,6 @@ const contextMenu = Menu.buildFromTemplate([
       }
     })
   })
-
   
   ipcMain.on("toMain", (event, data) => {
     console.log(`Received [${data}] from renderer browser`);
@@ -95,7 +92,7 @@ const contextMenu = Menu.buildFromTemplate([
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
