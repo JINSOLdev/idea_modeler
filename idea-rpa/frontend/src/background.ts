@@ -14,9 +14,9 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function getMachineId() {
-  let id = await machineId()
-}
+// async function getMachineId() {
+//   let id = await machineId()
+// }
 
 async function createWindow() {
   // Create the browser window.
