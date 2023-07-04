@@ -80,7 +80,33 @@
                 console.log(`child process exited with code ${code}`);
             });
         }
-
+        execute(script:string) {
+            var me = this
+            const pythonChild = execFile(
+                './public/static/main.exe', 
+                [
+                    "--mode",
+                    "execute",
+                    "--script",
+                    script.replace(/\t/g, "    ")
+                ],
+                { encoding: "utf-8" }
+            );
+            pythonChild.stdout?.on("data", function (data: any) {
+                let result = decode(data,"euc-kr")
+                // console.log(result)
+                me.executeText = result
+                me.$emit('executeResult', me.executeText)
+            });
+            pythonChild.stderr?.on("data", (data: any) => {
+                console.error(`stderr: ${data}`);
+                console.log(`stderr: ${data}`);
+            });
+            pythonChild.on("close", (code: any) => {
+                me.$emit('endExecution')
+                console.log(`child process exited with code ${code}`);
+            });
+        }
         executePython() {
             // console.log(this.task.toRobot(0))
             // const pythonChild = execFile('./public/static/main.exe', ["--mode", "execute", "--script", "*** Settings ***\r\nLibrary     RPA.Browser.Selenium\r\nLibrary     RPA.Excel.Files\r\nLibrary     RPA.HTTP\r\n\r\n\r\n*** Tasks ***\r\nSolve The Challenge\r\n    [Documentation]    Solve the first challenge at rpachallenge.com, which\r\n    ...    consists of filling a form that randomly rearranges itself,\r\n    ...    with data taken from a provided Microsoft Excel file.\r\n    Open Available Browser    http:\/\/rpachallenge.com\/\r\n    Download    http:\/\/rpachallenge.com\/assets\/downloadFiles\/challenge.xlsx    overwrite=${TRUE}\r\n    Click Button    Start\r\n    ${people}=    Read People From Excel File\r\n    FOR    ${person}    IN    @{people}\r\n        Fill And Submit Form    ${person}\r\n    END\r\n    Capture Element Screenshot    alias:Congratulations\r\n    Sleep    2 seconds\r\n    [Teardown]    Close All Browsers\r\n\r\n\r\n*** Keywords ***\r\nRead People From Excel File\r\n    Open Workbook    challenge.xlsx\r\n    ${table}=    Read Worksheet As Table    header=${TRUE}\r\n    Close Workbook\r\n    RETURN    ${table}\r\n\r\nFill And Submit Form\r\n    [Arguments]    ${person}\r\n    Input Text    alias:First Name    ${person}[First Name]\r\n    Input Text    alias:Last Name    ${person}[Last Name]\r\n    Input Text    alias:Company Name    ${person}[Company Name]\r\n    Input Text    alias:Role in Company    ${person}[Role in Company]\r\n    Input Text    alias:Address    ${person}[Address]\r\n    Input Text    alias:Email    ${person}[Email]\r\n    Input Text    alias:Phone Number    ${person}[Phone Number]\r\n    Click Button    Submit\r\n"], {encoding: "euc-kr"});

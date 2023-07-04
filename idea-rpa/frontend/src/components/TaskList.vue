@@ -193,8 +193,10 @@
         public locationBtn: boolean = false;
         public taskDialog: boolean = false;
         public taskName: string = "";
+        public systemPath: string = "";
 
         mounted() {
+            this.systemPath = __dirname.substring(0, __dirname.lastIndexOf("\\"));
             window.localStorage.removeItem("list")
 
             var location: any = window.localStorage.getItem("location")
@@ -203,12 +205,24 @@
             ) {
                 this.taskLocation = location;
             } else {
-                this.taskLocation = "./tasks";
+                this.taskLocation = "\\tasks";
             }
-
+            console.log(fs.existsSync(this.systemPath+this.taskLocation))
+            if (fs.existsSync(this.systemPath+this.taskLocation)){ 
+                // Exist Path
+            } else {
+                // Not Exist Path
+                fs.mkdirSync(this.systemPath+this.taskLocation)
+                // Do something
+            }
             this.setTaskList();
         }
-
+        // existCheck() {
+            // if (fs.existsSync(__dirname+"/"+this.taskLocation)) {
+            //     fs.mkdirSync(__dirname+"/"+this.taskLocation)
+            //     // Do something
+            // }
+        // }
         removeFile(task: any) {
             let filtered = this.lists.filter((element) => 
                 element.name !== task.name && element.path !== task.path
@@ -254,7 +268,7 @@
             let me = this
             try {
                 me.lists = [];
-                fs.readdirSync(me.taskLocation).forEach((file) => {
+                fs.readdirSync(this.systemPath+me.taskLocation).forEach((file) => {
                     if (file.includes(".json")) {
                         me.lists.push({
                             name: file.replace(".json", ""),
@@ -271,7 +285,7 @@
 
         createNewTask() {
             let me = this;
-            const filePath = `${me.taskLocation}/${me.taskName}.json`;
+            const filePath = `${this.systemPath+this.taskLocation}/${me.taskName}.json`;
 
             const hasTask = me.lists.some((item) => 
                 me.taskName == "" || (item.name == me.taskName && item.path == filePath)
