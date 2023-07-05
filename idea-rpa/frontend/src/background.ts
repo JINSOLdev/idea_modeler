@@ -14,16 +14,13 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-// async function getMachineId() {
-//   let id = await machineId()
-// }
 
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    autoHideMenuBar: true,
+    // autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -34,35 +31,37 @@ async function createWindow() {
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
-  // 트레이 아이콘 오른쪽 버튼 클릭 시 보여줄 메뉴 설정
-const contextMenu = Menu.buildFromTemplate([
-  {
-    label: 'Settings',
-    submenu: [
-      { 
-        label: (machineIdSync()),
-        click() {win.show()}
-      }
-    ]
-    // click() {console.log(machineIdSync())}
-  },
-  {
-    label: 'Open',
-    type: 'normal',
-    click() {win.show()}
-  },
-  {
-    label: 'Close', 
-    type: 'normal',
-    click() {app.quit()}
-  },
-  {
-    label: 'Quit',
-    type: 'normal',
-    click() {app.exit()}
-  }
-])
+  const win2 = new BrowserWindow({
+    parent: win,
+    width: 400,
+    height: 400,
+    show: false,
+    // autoHideMenuBar: true,
+    webPreferences: {
+      nodeIntegration: true,
+    }
+  })
 
+  win2.loadFile('index2.html')
+
+  win2.on('closed', () => (win2))
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Settings',
+      click() {win2.show()}
+    },
+    {
+      label: 'Open',
+      type: 'normal',
+      click() {win.show()}
+    },
+    {
+      label: 'Close',
+      type: 'normal',
+      click() {app.quit()}
+    }
+  ])
 
   let tray : any = null
   app.whenReady().then(() => {
@@ -84,13 +83,24 @@ const contextMenu = Menu.buildFromTemplate([
         e.preventDefault()
       }
     })
+
+    win2.on('close', e => {
+      if(win2.isVisible()) {
+        win2.hide()
+        e.preventDefault()
+      }
+    })
   })
 
-  
   ipcMain.on("toMain", (event, data) => {
-    console.log(`Received [${data}] from renderer browser`);
-    win.webContents.send("fromMain", data);
+  console.log(`Received [${data}] from renderer browser`);
+  win.webContents.send("fromMain", data);
   });
+
+  ipcMain.on("toMain", (event, data) => {
+    console.log(`Received [${data}] from renderer browser`)
+    win2.webContents.send("fromMain", data)
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -101,6 +111,16 @@ const contextMenu = Menu.buildFromTemplate([
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  // if (process.env.WEBPACK_DEV_SERVER_URL) {
+  //   // Load the url of the dev server if in development mode
+  //   await win2.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
+  //   if (!process.env.IS_TEST) win2.webContents.openDevTools()
+  // } else {
+  //   createProtocol('app')
+  //   // Load the index.html when not in development
+  //   win2.loadURL('app://./index2.html')
+  // }
 }
 
 // Quit when all windows are closed.
