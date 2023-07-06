@@ -58,6 +58,8 @@ Vue.use(Word_Application)
 Vue.use(Panels)
 Vue.use(Fields)
 
+
+
 Vue.config.productionTip = false
 
 new Vue({

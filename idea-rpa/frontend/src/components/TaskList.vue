@@ -100,6 +100,7 @@
                     </template>
                     <span>Download Folder</span>
                 </v-tooltip>
+
             </v-speed-dial>
 
             <!-- Location Dialog -->
@@ -175,6 +176,7 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
+
         </v-container>
     </div>
 </template>
@@ -317,7 +319,11 @@
                 console.log(e)
             }
         }
+
     }
+
+    
+    
 </script>
 
 <style scoped>
