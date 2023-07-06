@@ -20,7 +20,7 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    // autoHideMenuBar: true,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -31,26 +31,7 @@ async function createWindow() {
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
-  const win2 = new BrowserWindow({
-    parent: win,
-    width: 400,
-    height: 400,
-    show: false,
-    // autoHideMenuBar: true,
-    webPreferences: {
-      nodeIntegration: true,
-    }
-  })
-
-  win2.loadFile('index2.html')
-
-  win2.on('closed', () => (win2))
-
   const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Settings',
-      click() {win2.show()}
-    },
     {
       label: 'Open',
       type: 'normal',
@@ -83,24 +64,12 @@ async function createWindow() {
         e.preventDefault()
       }
     })
-
-    win2.on('close', e => {
-      if(win2.isVisible()) {
-        win2.hide()
-        e.preventDefault()
-      }
-    })
   })
 
   ipcMain.on("toMain", (event, data) => {
   console.log(`Received [${data}] from renderer browser`);
   win.webContents.send("fromMain", data);
   });
-
-  ipcMain.on("toMain", (event, data) => {
-    console.log(`Received [${data}] from renderer browser`)
-    win2.webContents.send("fromMain", data)
-  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -112,15 +81,6 @@ async function createWindow() {
     win.loadURL('app://./index.html')
   }
 
-  // if (process.env.WEBPACK_DEV_SERVER_URL) {
-  //   // Load the url of the dev server if in development mode
-  //   await win2.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
-  //   if (!process.env.IS_TEST) win2.webContents.openDevTools()
-  // } else {
-  //   createProtocol('app')
-  //   // Load the index.html when not in development
-  //   win2.loadURL('app://./index2.html')
-  // }
 }
 
 // Quit when all windows are closed.
