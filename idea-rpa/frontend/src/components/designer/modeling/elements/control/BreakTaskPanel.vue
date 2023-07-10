@@ -2,7 +2,7 @@
     <div>
         <v-card flat>
             <v-card-text>
-                Allows exiting from a running loop structure, and continuing execution.
+                <!-- Allows exiting from a running loop structure, and continuing execution. -->
             </v-card-text>
         </v-card>
     </div>
@@ -20,6 +20,8 @@
 
     export default class BreakTaskPanel extends Mixins(ControlPanel) {
         mounted() {
+            var description = "Stop current FOR or WHILE loop"
+            this.$emit("setDescription", description)
         }
     }
 </script>

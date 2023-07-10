@@ -43,5 +43,9 @@
         }
     })
     export default class ExportTablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Convert a table object into standard Python containers."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

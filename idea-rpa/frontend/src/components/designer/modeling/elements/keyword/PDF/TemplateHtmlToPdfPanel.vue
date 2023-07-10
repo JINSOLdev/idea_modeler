@@ -47,5 +47,9 @@
         }
     })
     export default class TemplateHtmlToPdfPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Use HTML templates file to generate PDF file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

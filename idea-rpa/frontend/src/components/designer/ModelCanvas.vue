@@ -285,7 +285,7 @@
             let me = this
 
             try {
-                let path: any
+                let path: any = __dirname.substring(0, __dirname.lastIndexOf("node_modules"));
                 const location = window.localStorage.getItem("location")
 
                 if (me.$route.params.filePath) {

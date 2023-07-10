@@ -39,7 +39,7 @@
     })
     export default class SetConvertSettingsPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Change settings for PDFMiner document coversion."
+            var description = "Change settings for PDFMiner document conversion."
             this.$emit("setDescription", description)
         }
 

@@ -42,5 +42,9 @@
         }
     })
     export default class DownloadPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "An alias for the HTTP Get keyword."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

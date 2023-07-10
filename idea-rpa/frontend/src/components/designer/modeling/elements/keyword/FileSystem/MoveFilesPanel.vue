@@ -21,7 +21,7 @@
                 ></path-field>
 
                 <switch-field
-                        :valur.sync="value.property.overwrite"
+                        :value.sync="value.property.overwrite"
                         :label="'Overwrite'"
                         :hint="'Replace files in destination'"
                 ></switch-field>

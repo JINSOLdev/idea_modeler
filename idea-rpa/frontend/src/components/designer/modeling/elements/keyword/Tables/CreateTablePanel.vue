@@ -42,5 +42,9 @@
         }
     })
     export default class CreateTablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Create Table object from data."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

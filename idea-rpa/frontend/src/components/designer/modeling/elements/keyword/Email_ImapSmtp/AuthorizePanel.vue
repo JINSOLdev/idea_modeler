@@ -67,5 +67,9 @@
     })
     
     export default class AuthorizePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Authorize user to SMTP and IMAP servers."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

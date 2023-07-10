@@ -51,5 +51,9 @@
     })
     
     export default class SaveAttachmentPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Save email attachment of a single given email on the local disk."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

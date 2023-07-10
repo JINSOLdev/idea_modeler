@@ -48,5 +48,9 @@
         }
     })
     export default class FilterTableRowsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Find all the rows in a table which match a condition for a given column."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

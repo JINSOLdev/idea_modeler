@@ -6,12 +6,7 @@
             </v-card-title>
 
             <v-card-text>
-                <variables-field
-                        :label="'Table'"
-                        :hint="'Table to modify'"
-                        :value.sync="value.property.table"
-                        :required="true"
-                ></variables-field>
+                
             </v-card-text>
         </v-card>
     </div>
@@ -26,9 +21,9 @@
             KeywordPanel,
         }
     })
-    export default class FilterEmptyRowsPanel extends Mixins(KeywordPanel) {
+    export default class SaveDocumentPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Remove all rows from a table which have only None values."
+            var description = "Save active document"
             this.$emit("setDescription", description)
         }
     }

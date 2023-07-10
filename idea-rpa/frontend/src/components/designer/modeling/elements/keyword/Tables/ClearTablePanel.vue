@@ -27,5 +27,9 @@
         }
     })
     export default class ClearTablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Clear table in-place, but keep columns."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -83,5 +83,9 @@
     })
     
     export default class SendMessagePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Send SMTP email"
+            this.$emit("setDescription", description)
+        }
     }
 </script>
