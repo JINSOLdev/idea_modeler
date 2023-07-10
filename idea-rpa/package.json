@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "node-machine-id": "^1.1.12",
-    "vuetify-dialog": "^2.0.17"
+    "node-machine-id": "^1.1.12"
   }
 }

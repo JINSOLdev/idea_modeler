@@ -1,7 +1,16 @@
 const { defineConfig } = require('@vue/cli-service')
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const proxy = require('http-proxy-middleware')
 module.exports = defineConfig({
   transpileDependencies: true,
+  pluginOptions: {
+    electronBuilder: {
+      nsis: {
+        oneClick: false,
+        allowToChangeInstallationDirectory: true
+      }
+    }
+  },
   configureWebpack: {
     target:'electron-renderer',
     plugins: [new NodePolyfillPlugin()],
@@ -11,4 +20,12 @@ module.exports = defineConfig({
       },
     },
   },
+  devServer: {
+    proxy: {
+      '/api/' : {
+        target: 'http://ideasolutions.co.kr:8090/bpm',
+        changeOrigin: true
+      }
+    }
+  }
 })

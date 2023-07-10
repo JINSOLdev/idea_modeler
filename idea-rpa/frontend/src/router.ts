@@ -13,11 +13,11 @@ const routes: Array<RouteConfig> = [
       path: "/robot/:taskName",
       name: "RobotDesigner",
       component: () => import("./components/designer/ModelCanvas.vue")
-    }
+    },
 ];
 
 const router = new VueRouter({
-    mode: "history",
+    mode: "hash",
     base: process.env.BASE_URL,
     routes
 });
