@@ -64,6 +64,9 @@
         public getExcept: any = null
         
         mounted() {
+            var description = "Attempt an action and catch potential errors"
+            this.$emit("setDescription", description)
+
             var list = this.value.property.branch.filter((item: any) => item.name == 'Except')
             this.$set(this, "getExcept", list)
         }

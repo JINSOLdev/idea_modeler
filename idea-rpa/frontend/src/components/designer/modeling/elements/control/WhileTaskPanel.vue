@@ -34,6 +34,8 @@
 
     export default class WhileTaskPanel extends Mixins(ControlPanel) {
         mounted() {
+            var description = "Repeat the same action while a condition is met"
+            this.$emit("setDescription", description)
         }
 
         destroyed() {

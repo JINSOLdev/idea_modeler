@@ -20,6 +20,8 @@
 
     export default class ContinueTaskPanel extends Mixins(ControlPanel) {
         mounted() {
+            var description = "Skip to next FOR or WHILE loop iteration"
+            this.$emit("setDescription", description)
         }
     }
 </script>

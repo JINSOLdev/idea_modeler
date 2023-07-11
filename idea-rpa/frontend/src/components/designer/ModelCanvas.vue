@@ -364,7 +364,7 @@
                   `${this.taskName}.robot`
               );
    
-              axios.post("/common/insertRpaProcessByDeviceList", formData).then((data: any) => {
+              axios.post("http://ideasolutions.co.kr/bpm/common/insertRpaProcessByDeviceList", formData, { headers: formData.getHeaders()}).then((data: any) => {
                   console.log("Upload End")
                   console.log(data);
               })

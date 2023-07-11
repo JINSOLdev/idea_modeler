@@ -33,7 +33,7 @@ import Fields from '@/components/designer/modeling/elements/panels/fields'
 
 Vue.prototype.$http = axios;
     
-// axios.defaults.baseURL = `http://ideasolutions.co.kr:8090/bpm`
+axios.defaults.baseURL = `http://ideasolutions.co.kr:8090/bpm`
 
 Vue.component('keyword-element', Keyword)
 Vue.use(Control)

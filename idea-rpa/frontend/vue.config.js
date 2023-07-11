@@ -20,12 +20,12 @@ module.exports = defineConfig({
       },
     },
   },
-  devServer: {
-    proxy: {
-      '/api/' : {
-        target: 'http://ideasolutions.co.kr:8090/bpm',
-        changeOrigin: true
-      }
-    }
-  }
+  // devServer: {
+  //   proxy: {
+  //     '/api/' : {
+  //       target: 'http://localhost:8080/bpm',
+  //       changeOrigin: true
+  //     }
+  //   }
+  // }
 })
