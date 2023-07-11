@@ -41,6 +41,10 @@
             KeywordPanel,
         }
     })
-    export default class ContorlChildWindowPanel extends Mixins(KeywordPanel) {
+    export default class ControlChildWindowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get control of child window of the active window by locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

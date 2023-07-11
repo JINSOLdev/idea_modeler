@@ -35,5 +35,9 @@
         }
     })
     export default class DoubleClickPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Double mouse click on element matching given locator."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
