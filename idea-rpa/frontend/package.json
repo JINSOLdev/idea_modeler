@@ -68,6 +68,5 @@
     "oneClick": false,
     "perMachine": false,
     "allowToChangeInstallationDirectory": true
-  },
-  "proxy" : "http://ideasolutions.co.kr:8090/bpm"
-}
+
+  }
