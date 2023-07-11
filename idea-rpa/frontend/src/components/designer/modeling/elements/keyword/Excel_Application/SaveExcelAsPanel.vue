@@ -9,17 +9,17 @@
                 <variables-field
                         :label="'Filename'"
                         :hint="'Path to save'"
-                        :value.sync="value.property.sheetname"
+                        :value.sync="value.property.sheet_name"
                 ></variables-field>
 
                 <switch-field
-                        :value.sync="value.property.autofit"
-                        :label="'Autofit'"
-                        :hint="'Autofit cell widths if True, defaults to False'"
+                        :label="'Auto fit'"
+                        :hint="'Auto fit cell widths if True, defaults to False'"
+                        :value.sync="value.property.auto_fit"
                 ></switch-field>
 
                 <variables-field
-                        :label="'File fornat'"
+                        :label="'File format'"
                         :hint="'Format of file'"
                         :value.sync="value.property.file_format"
                 ></variables-field>             

@@ -9,13 +9,13 @@
                 <variables-field
                         :label="'Sheet'"
                         :hint="'Name of sheet'"
-                        :value.sync="value.property.sheetname"
+                        :value.sync="value.property.sheet_name"
                 ></variables-field>
 
                 <variables-field
                         :label="'Tab'"
                         :hint="'Name of tab'"
-                        :value.sync="value.property.tabname"
+                        :value.sync="value.property.tab_name"
                 ></variables-field>
 
                 <switch-field
