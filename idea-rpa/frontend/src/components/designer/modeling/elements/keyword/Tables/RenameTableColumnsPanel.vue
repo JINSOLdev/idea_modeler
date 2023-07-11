@@ -41,5 +41,9 @@ import { match } from "assert";
         }
     })
     export default class RenameTableColumnsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Renames columns in the Table with given values. Columns with name as None will use the previous value."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

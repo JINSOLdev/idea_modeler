@@ -43,5 +43,9 @@
         }
     })
     export default class TableHeadPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return first count rows from a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

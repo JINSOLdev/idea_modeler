@@ -58,5 +58,9 @@
         }
     })
     export default class WriteTableToCSVPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Write a table as a CSV file."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

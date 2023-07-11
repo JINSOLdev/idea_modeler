@@ -61,5 +61,9 @@
         }
     })
     export default class ReadtablefromCSVPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Read a CSV file as a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

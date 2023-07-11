@@ -41,5 +41,9 @@
         }
     })
     export default class SetTableRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Assign values to a row in the table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

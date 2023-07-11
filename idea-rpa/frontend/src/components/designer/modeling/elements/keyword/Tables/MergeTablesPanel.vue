@@ -37,5 +37,9 @@
         }
     })
     export default class MergeTablesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Create a union of two tables and their contents."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

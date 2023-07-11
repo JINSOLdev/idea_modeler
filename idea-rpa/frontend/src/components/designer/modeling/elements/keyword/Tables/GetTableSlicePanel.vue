@@ -43,5 +43,9 @@
         }
     })
     export default class GetTableSlicePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return a new Table from a range of given Table rows."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

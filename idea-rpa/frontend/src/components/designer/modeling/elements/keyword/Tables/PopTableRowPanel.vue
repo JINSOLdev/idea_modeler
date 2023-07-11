@@ -43,5 +43,9 @@
         }
     })
     export default class PopTableRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove row from table and return it."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

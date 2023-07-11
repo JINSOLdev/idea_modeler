@@ -27,5 +27,9 @@
         }
     })
     export default class TrimColumnNamesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove all extraneous whitespace from column names."
+            this.$emit("setDescription", description)
+        }
     }
 </script>
