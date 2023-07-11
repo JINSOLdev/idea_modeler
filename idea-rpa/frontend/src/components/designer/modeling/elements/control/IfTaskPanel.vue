@@ -35,6 +35,9 @@
         mounted() {
             var res = this.value.property.conditions.some((item: any) => item.type == 'Else')
             this.$set(this, "hasElse", res)
+
+            var description = "Run an action conditionally"
+            this.$emit("setDescription", description)
         }
 
         destroyed() {

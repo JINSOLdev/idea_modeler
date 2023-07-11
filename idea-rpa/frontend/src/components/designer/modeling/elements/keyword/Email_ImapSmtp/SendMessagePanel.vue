@@ -14,7 +14,7 @@
                 ></variables-field>
 
                 <variables-field
-                        :label="'Recipents'"
+                        :label="'Recipients'"
                         :hint="'Who is receiving, ie. \'to\' (either as comma-separated or as list object) '"
                         :value.sync="value.property.recipients"
                         :required="true"
@@ -83,5 +83,9 @@
     })
     
     export default class SendMessagePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Send SMTP email"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

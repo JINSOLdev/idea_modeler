@@ -9,7 +9,7 @@
                 <path-field
                         :label="'Path'"
                         :hint="'Path to file on disk'"
-                        :value.sync="value.propert.path"
+                        :value.sync="value.property.path"
                 ></path-field>
 
                 <variables-field 

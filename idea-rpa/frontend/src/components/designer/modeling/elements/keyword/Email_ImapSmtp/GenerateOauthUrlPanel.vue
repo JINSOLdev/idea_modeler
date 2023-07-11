@@ -32,5 +32,9 @@
     })
     
     export default class GenerateOauthUrlPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Generate an authorization URL which must be opened by the user to start the OAuth2 flow and obtain an authorization code as response."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

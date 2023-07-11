@@ -27,5 +27,9 @@
         }
     })
     export default class TrimEmptyRowsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove all rows from the end of a table which have only None as values."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

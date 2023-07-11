@@ -31,5 +31,9 @@
         }
     })
     export default class GetTableDimensionsPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return table dimensions, as (rows, columns)."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

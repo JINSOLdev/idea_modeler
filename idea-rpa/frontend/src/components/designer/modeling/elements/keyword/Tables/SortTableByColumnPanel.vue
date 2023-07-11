@@ -40,5 +40,9 @@
         }
     })
     export default class SortTableByColumnPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Sort a table in-place according to column."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

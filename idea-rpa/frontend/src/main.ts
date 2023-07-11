@@ -27,12 +27,15 @@ import EmailExchange from '@/components/designer/modeling/elements/keyword/Email
 import EmailImapSmtp from '@/components/designer/modeling/elements/keyword/Email_ImapSmtp'
 import PDF from '@/components/designer/modeling/elements/keyword/PDF'
 import Word_Application from '@/components/designer/modeling/elements/keyword/Word_Application'
-
+import axios from 'axios'
 import Panels from '@/components/designer/modeling/elements/panels'
 import Fields from '@/components/designer/modeling/elements/panels/fields'
 
-Vue.component('keyword-element', Keyword)
+Vue.prototype.$http = axios;
+    
+axios.defaults.baseURL = `http://ideasolutions.co.kr:8090/bpm`
 
+Vue.component('keyword-element', Keyword)
 Vue.use(Control)
 Vue.use(BuiltIn)
 Vue.use(Collections)

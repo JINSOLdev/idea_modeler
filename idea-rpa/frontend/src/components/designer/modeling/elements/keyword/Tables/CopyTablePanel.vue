@@ -31,5 +31,9 @@
         }
     })
     export default class CopyTablePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Make a copy of a table object."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

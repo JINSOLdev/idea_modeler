@@ -42,5 +42,9 @@
         }
     })
     export default class FilterTableWithKeywordPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Run a keyword for each row of a table, then remove all rows where the called keyword returns a falsy value. Can be used to create custom RF keyword based filters."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

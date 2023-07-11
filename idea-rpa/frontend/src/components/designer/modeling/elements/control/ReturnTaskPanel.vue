@@ -21,6 +21,8 @@
 
     export default class ReturnTaskPanel extends Mixins(ControlPanel) {
         mounted() {
+            var description = "Return from a user keyword"
+            this.$emit("setDescription", description)
         }
     }
 </script>

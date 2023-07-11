@@ -10,7 +10,7 @@
                         <v-card-title>
                             {{ task.name }}
                         </v-card-title>
-
+ 
                         <v-card-text>
                             Path: {{ task.path }}
                         </v-card-text>
@@ -35,7 +35,7 @@
                     </v-card>
                 </v-col>
             </v-row>
-
+ 
             <v-speed-dial
                     v-model="locationBtn"
                     absolute
@@ -55,7 +55,7 @@
                         </v-icon>
                     </v-btn>
                 </template>
-
+ 
                 <v-tooltip left>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn @click="openTaskDialog"
@@ -70,7 +70,7 @@
                     </template>
                     <span>Add New Task</span>
                 </v-tooltip>
-
+ 
                 <v-tooltip left>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn @click="openLocationDialog"
@@ -85,7 +85,7 @@
                     </template>
                     <span>Select Task Folder</span>
                 </v-tooltip>
-
+ 
                 <v-tooltip left>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn @click="setDownloadDirectory"
@@ -101,7 +101,7 @@
                     <span>Download Folder</span>
                 </v-tooltip>
             </v-speed-dial>
-
+ 
             <!-- Location Dialog -->
             <v-dialog v-model="locationDialog" max-width="600">
                 <v-card>
@@ -141,7 +141,7 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-
+ 
             <!-- Task Dialog -->
             <v-dialog v-model="taskDialog" max-width="600">
                 <v-card>
@@ -178,13 +178,14 @@
         </v-container>
     </div>
 </template>
-
+ 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator';
     import fs from 'fs';
+    import axios from 'axios';
     import { Robot } from '@/types/Task';
     const { dialog } = require('electron').remote;
-
+ 
     @Component({})
     export default class TaskList extends Vue {
         public lists: any[] = [];
@@ -194,106 +195,120 @@
         public taskDialog: boolean = false;
         public taskName: string = "";
         public systemPath: string = "";
-
+ 
         mounted() {
-            this.systemPath = __dirname.substring(0, __dirname.lastIndexOf("\\"));
+            this.systemPath = __dirname.substring(0, __dirname.lastIndexOf("node_modules"));
             window.localStorage.removeItem("list")
-
+ 
             var location: any = window.localStorage.getItem("location")
             if (location && location != null && location != "null"
                     && location != undefined && location != "undefined"
             ) {
                 this.taskLocation = location;
             } else {
-                this.taskLocation = "\\tasks";
+                this.taskLocation = this.systemPath + "\\tasks";
             }
-            console.log(fs.existsSync(this.systemPath+this.taskLocation))
-            if (fs.existsSync(this.systemPath+this.taskLocation)){ 
+            
+            if (fs.existsSync(this.taskLocation)){ 
                 // Exist Path
             } else {
                 // Not Exist Path
-                fs.mkdirSync(this.systemPath+this.taskLocation)
+                fs.mkdirSync(this.taskLocation)
                 // Do something
             }
             this.setTaskList();
         }
-        // existCheck() {
-            // if (fs.existsSync(__dirname+"/"+this.taskLocation)) {
-            //     fs.mkdirSync(__dirname+"/"+this.taskLocation)
-            //     // Do something
-            // }
-        // }
+        downloadModel() {
+            const tmp: any = {
+                "machine_id": "",
+                "file_name": "file"
+            }
+            axios.get("/common/download/robot", tmp).then(function (data: any) {
+                console.log("Donwload Robot")
+                console.log(data)
+            }) 
+        }
         removeFile(task: any) {
             let filtered = this.lists.filter((element) => 
                 element.name !== task.name && element.path !== task.path
             );
             this.lists= filtered
-
+ 
             fs.rmSync(`${task.path}`, {
                 force: true
             })
-
+ 
             window.localStorage.setItem("list", JSON.stringify({ 'tasks': this.lists }))
         }
-
+ 
         openLocationDialog() {
             this.locationDialog = true;
         }
-
+ 
         openTaskDialog() {
             this.taskName = "";
             this.taskDialog = true;
         }
-
+ 
         setTaskLocation() {
             let me = this
-
+ 
             dialog.showOpenDialog({
                 defaultPath: "",
                 properties: ["openDirectory"]
             }).then(result => {
                 if (result && !result.canceled) {
                     var path: any = result.filePaths.shift()
-                    me.taskLocation = path?.replace(/\\/g, "/")
+                    me.taskLocation = path
                     window.localStorage.setItem("location", me.taskLocation)
                 }
-
+ 
             }).catch(err => {
                 console.log(err)
-
+ 
             });
         }
-
+ 
         setTaskList() {
             let me = this
             try {
+                let path = this.taskLocation
                 me.lists = [];
-                fs.readdirSync(this.systemPath+me.taskLocation).forEach((file) => {
+                
+                if (!fs.existsSync(path)) {
+                    return
+                }
+ 
+                fs.readdirSync(path).forEach((file) => {
                     if (file.includes(".json")) {
                         me.lists.push({
                             name: file.replace(".json", ""),
-                            path: `${me.taskLocation}/`+ file
+                            path: `${me.taskLocation}\\`+ file
                         });
                     }
                 });
                 me.locationDialog = false;
-
+ 
             } catch (e) {
                 console.log(e)
             }
         }
-
+ 
         createNewTask() {
             let me = this;
-            const filePath = `${this.systemPath+this.taskLocation}/${me.taskName}.json`;
-
+            let path = this.taskLocation
+            if (!fs.existsSync(path)) {
+                return
+            }
+            const filePath = `${path}\\${me.taskName}.json`;
+ 
             const hasTask = me.lists.some((item) => 
                 me.taskName == "" || (item.name == me.taskName && item.path == filePath)
             )
-
+ 
             if (hasTask) {
                 return;
-
+ 
             } else {
                 try {
                     const newTask = new Robot(1, me.taskName, "Task", []);
@@ -307,13 +322,13 @@
                         path: filePath
                     });
                     me.taskDialog = false;
-
+ 
                 } catch (e) {
                     console.log(e)
                 }
             }
         }
-
+ 
         setDownloadDirectory() {
             let me = this
             let dic = "../Download"
@@ -323,7 +338,7 @@
                     if (file.includes(".json")) {
                         me.lists.push({
                             name: file.replace(".json", ""),
-                            path: `${dic}/`+ file
+                            path: `${dic}\\`+ file
                         });
                     }
                 });
@@ -333,7 +348,7 @@
         }
     }
 </script>
-
+ 
 <style scoped>
   .v-text-field.v-text-field--enclosed .v-text-field__details {
       height: 0px !important;

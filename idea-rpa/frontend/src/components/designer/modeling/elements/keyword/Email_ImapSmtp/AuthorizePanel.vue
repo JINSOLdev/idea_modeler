@@ -14,19 +14,19 @@
                 
                 <variables-field
                         :label="'Password'"
-                        :hint="'User passwod as string'"
+                        :hint="'User password as string'"
                         :value.sync="value.property.password"
                 ></variables-field>
                 
                 <variables-field
                         :label="'Smtp Server'"
-                        :hint="'SMTP sercer address'"
+                        :hint="'SMTP server address'"
                         :value.sync="value.property.smtp_server"
                 ></variables-field>
 
                 <variables-field
                         :label="'Imap Server'"
-                        :hint="'IMAP sercer address'"
+                        :hint="'IMAP server address'"
                         :value.sync="value.property.imap_server"
                 ></variables-field>
 
@@ -67,5 +67,9 @@
     })
     
     export default class AuthorizePanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Authorize user to SMTP and IMAP servers."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

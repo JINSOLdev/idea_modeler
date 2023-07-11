@@ -22,7 +22,7 @@
             }
 
             if (!this.value.property.hasOwnProperty("action")) {
-                this.$set(this.value.property, "actioni", "ACCEPT")
+                this.$set(this.value.property, "action", "ACCEPT")
             }
             if (!this.value.property.hasOwnProperty("timeout")) {
                 this.$set(this.value.property, "timeout", "None")

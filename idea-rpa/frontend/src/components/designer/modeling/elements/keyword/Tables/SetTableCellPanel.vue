@@ -47,5 +47,9 @@
         }
     })
     export default class SetTableCellPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set a cell value in a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

@@ -34,5 +34,9 @@
         }
     })
     export default class SetRowAsColumnNamesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Set existing row as names for columns."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

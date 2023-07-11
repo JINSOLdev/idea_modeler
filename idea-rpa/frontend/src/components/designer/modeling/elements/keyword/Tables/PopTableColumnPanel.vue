@@ -37,5 +37,9 @@
         }
     })
     export default class PopTableColumnPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove column from table and return it."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

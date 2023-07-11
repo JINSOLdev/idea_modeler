@@ -48,5 +48,9 @@
         }
     })
     export default class MapColumnValuesPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "The cell value will be given as the first argument to the mapping keyword."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

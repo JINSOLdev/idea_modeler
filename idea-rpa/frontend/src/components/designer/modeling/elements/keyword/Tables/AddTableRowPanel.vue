@@ -33,5 +33,9 @@
         }
     })
     export default class AddTableRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Append rows to a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

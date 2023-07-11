@@ -47,5 +47,9 @@
         }
     })
     export default class FilterTableByColumnPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Remove all rows where column values don't match the given condition."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

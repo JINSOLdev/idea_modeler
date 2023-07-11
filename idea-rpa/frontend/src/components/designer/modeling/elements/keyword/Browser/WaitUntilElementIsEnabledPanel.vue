@@ -41,7 +41,7 @@
     
     export default class WaitUntilElementIsEnabledPanel extends Mixins(KeywordPanel) {
         mounted() {
-            var description = "Waits until the element loator is enabled."
+            var description = "Waits until the element locator is enabled."
             this.$emit("setDescription", description)
         }
     }

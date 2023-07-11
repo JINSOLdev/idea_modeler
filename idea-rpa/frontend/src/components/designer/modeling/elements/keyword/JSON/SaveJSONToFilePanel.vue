@@ -28,7 +28,7 @@
 
                 <variables-field
                         :label="'Encoding'"
-                        :hint="'Output character endcoding'"
+                        :hint="'Output character encoding'"
                         :value.sync="value.property.encoding"
                 ></variables-field>
             </v-card-text>

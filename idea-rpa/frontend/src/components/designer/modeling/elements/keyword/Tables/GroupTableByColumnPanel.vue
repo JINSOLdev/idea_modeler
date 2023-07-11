@@ -34,5 +34,9 @@
         }
     })
     export default class GroupTableByColumnPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Group a table by column and return a list of grouped Tables."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

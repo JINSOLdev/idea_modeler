@@ -20,7 +20,7 @@
                 ></variables-field> 
 
                 <variables-field 
-                        :label="'Stlye'"
+                        :label="'Style'"
                         :hint="'Border style, e.g.dotted, dashed, or solid'"
                         :value.sync="value.property.style"
                 ></variables-field> 

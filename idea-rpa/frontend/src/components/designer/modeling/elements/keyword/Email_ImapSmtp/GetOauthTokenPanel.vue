@@ -39,5 +39,9 @@
     })
     
     export default class GetOauthTokenPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Exchanges the code obtained previously with Generate OAuth URL for a token."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

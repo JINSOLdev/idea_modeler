@@ -43,5 +43,9 @@
         }
     })
     export default class TableTailPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Return last count rows from a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

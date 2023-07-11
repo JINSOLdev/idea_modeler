@@ -45,5 +45,9 @@
         }
     })
     export default class GetTableCellPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get a cell value from a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

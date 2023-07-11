@@ -44,5 +44,9 @@
         }
     })
     export default class GetTableRowPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get a single row from a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

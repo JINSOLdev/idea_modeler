@@ -38,5 +38,9 @@
         }
     })
     export default class GetTableColumnPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Get all values for a single column ini a table."
+            this.$emit("setDescription", description)
+        }
     }
 </script>

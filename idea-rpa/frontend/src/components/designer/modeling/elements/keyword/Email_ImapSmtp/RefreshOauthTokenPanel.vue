@@ -46,5 +46,9 @@
     })
     
     export default class RefreshOauthTokenPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Refreshes the token as the access one usually expires after 1h and the refresh one never expires. (as long as it doesn't get revoked)"
+            this.$emit("setDescription", description)
+        }
     }
 </script>

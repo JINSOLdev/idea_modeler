@@ -30,5 +30,9 @@
         }
     })
     export default class DoesPageContainButtonPanel extends Mixins(KeywordPanel) {
+        mounted() {
+            var description = "Does page contain expected button"
+            this.$emit("setDescription", description)
+        }
     }
 </script>
