@@ -54,13 +54,13 @@
                   <v-icon>mdi-content-save</v-icon>
                   Save
               </v-btn>
-              <v-btn @click="saveToServer()"
+              <!-- <v-btn @click="saveToServer()"
                       text
                       color="deep-purple" 
               >
                   <v-icon>mdi-upload</v-icon>
                   Save To Server
-              </v-btn>
+              </v-btn> -->
           </v-app-bar>
    
           <v-overlay v-model="isOverlay" style="z-index: 10;">
@@ -349,26 +349,26 @@
           }
    
           // Methods
-          saveToServer() {
-              // Upload Code
-              let formData: any = new FormData();
-              formData.append("0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867", "");
-              formData.append(
-                  "robot_file", 
-                  new Blob([JSON.stringify(this.robot)]), 
-                  `${this.taskName}.json`
-              );
-              formData.append(
-                  "robot_json", 
-                  new Blob([this.robot.toRobot(0)]),
-                  `${this.taskName}.robot`
-              );
+        //   saveToServer() {
+        //       // Upload Code
+        //       let formData: any = new FormData();
+        //       formData.append("0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867", "");
+        //       formData.append(
+        //           "robot_file", 
+        //           new Blob([JSON.stringify(this.robot)]), 
+        //           `${this.taskName}.json`
+        //       );
+        //       formData.append(
+        //           "robot_json", 
+        //           new Blob([this.robot.toRobot(0)]),
+        //           `${this.taskName}.robot`
+        //       );
    
-              axios.post("http://ideasolutions.co.kr/bpm/common/insertRpaProcessByDeviceList", formData, { headers: formData.getHeaders()}).then((data: any) => {
-                  console.log("Upload End")
-                  console.log(data);
-              })
-          }
+        //       axios.post("http://ideasolutions.co.kr/bpm/common/insertRpaProcessByDeviceList", formData, { headers: formData.getHeaders()}).then((data: any) => {
+        //           console.log("Upload End")
+        //           console.log(data);
+        //       })
+        //   }
    
           endedSave(path: any) {
               this.saveModel(path)

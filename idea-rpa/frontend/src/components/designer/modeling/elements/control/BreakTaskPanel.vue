@@ -23,4 +23,5 @@
             var description = "Stop current FOR or WHILE loop"
             this.$emit("setDescription", description)
         }
+    }
 </script>

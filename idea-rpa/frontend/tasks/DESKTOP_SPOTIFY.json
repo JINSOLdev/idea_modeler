@@ -1,1 +1,0 @@
-{"path":"C:\\Users\\jinso\\DESKTOP\\idea_modeler\\idea-rpa\\frontend\\tasks\\DESKTOP_SPOTIFY.json","robot":{"name":"DESKTOP_SPOTIFY","id":1,"type":"Task","child":[{"name":"Windows Search","id":50,"type":"Keyword","child":[],"property":{"text":{"name":"Spotify","valueType":"String","defaultValue":"Spotify","required":true}},"library":"RPA.Windows"}],"variables":[],"keywords":[]}}
