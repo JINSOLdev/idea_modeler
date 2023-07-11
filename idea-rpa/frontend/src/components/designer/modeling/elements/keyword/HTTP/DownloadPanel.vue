@@ -19,9 +19,9 @@
                 ></path-field>
 
                 <switch-field
-                        :valur.sync="value.property.overwrite"
                         :label="'Overwrite'"
                         :hint="'Overwrite destination file if it exists'"
+                        :value.sync="value.property.overwrite"
                 ></switch-field>
             </v-card-text>
         </v-card>
