@@ -14,7 +14,7 @@
                 ></variables-field>
 
                 <variables-field
-                        :label="'Recipents'"
+                        :label="'Recipients'"
                         :hint="'Who is receiving, ie. \'to\' (either as comma-separated or as list object) '"
                         :value.sync="value.property.recipients"
                         :required="true"
