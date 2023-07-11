@@ -21,7 +21,7 @@
 
                 <switch-field
                         :label="'Clear'"
-                        :hint="'Cleaar input before text is typed'"
+                        :hint="'Clear input before text is typed'"
                         :value.sync="value.property.clear"
                 ></switch-field>
             </v-card-text>
