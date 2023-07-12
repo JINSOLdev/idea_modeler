@@ -3,8 +3,8 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { machineIdSync } from 'node-machine-id'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const path = require('path')
  
  
  
@@ -19,6 +19,7 @@ async function createWindow() {
     width: 800,
     height: 600,
     autoHideMenuBar: false,
+    // fullscreen: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -29,28 +30,52 @@ async function createWindow() {
   win.once('ready-to-show', () => win.show())
   win.on('closed', () => (win))
 
-  const template = [
+  // const template = [
+  //   {
+  //     label: 'Setting',
+  //     click() {
+  //       const htmlPath = path.join('file://', __dirname, './child.html')
+  //       let child = new BrowserWindow({
+  //         width: 600,
+  //         height: 500,
+  //         resizable: false
+  //       })
+  //       child.loadURL(htmlPath)
+  //       child.show()
+  //     }
+  //   }
+  // ]
+
+  const template : any = [
     {
-      label: 'Setting',
-      click() {
-        const htmlPath = path.join('file://', __dirname, 'C:\Users\jinso\DESKTOP\idea_modeler_Copy\idea-rpa\frontend\public\static\setting.html')
-        let child = new BrowserWindow({
-          width: 600,
-          height: 500,
-          resizable: false
-        })
-        child.loadURL(htmlPath)
-        child.show()
-      }
+      label: 'View',
+      submenu: [
+        { role: 'toggleDevTools'}
+      ]
     }
   ]
-
-  const menu  = Menu.buildFromTemplate(template)
+  const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 
 
- 
   const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Setting',
+      submenu: [
+        {
+          label: 'machine_id : ' + (machineIdSync()),
+        },
+        {
+          label: 'server : ' + 'http://ideasolutions.co.kr:8090/bpm'
+        },
+        // {
+        //   label: 'user_id : ' + '(userid())'
+        // }
+      ]
+    },
+    {
+      type: 'separator'
+    },
     {
       label: 'Open',
       type: 'normal',
@@ -67,7 +92,7 @@ async function createWindow() {
       click() {app.exit()}
     }
   ])
- 
+  
   let tray : any = null
   app.whenReady().then(() => {
     tray = new Tray(
