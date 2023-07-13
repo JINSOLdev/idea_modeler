@@ -7,6 +7,8 @@
 <script lang="ts">
     import { Vue, Component, Mixins } from "vue-property-decorator";
     import ExecutePython from "./components/designer/modeling/elements/util/ExecutePython.vue";
+    import fs from 'fs';
+import { stringify } from "querystring";
 
     @Component({components: {
         ExecutePython,
@@ -14,7 +16,7 @@
     export default class App extends Mixins(ExecutePython) {
         mounted() {
             let machine_id = localStorage.getItem("machine_id");
-            console.log(machine_id)
+            // console.log(machine_id)
             //localStorage.setItem("machine_id", "0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867");
             let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId='+ machine_id);///websocket
             //let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId=0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867');///websocket
@@ -31,9 +33,16 @@
                     console.log('RPA 작업 세번째 시작')
                     // this.execute(event.data.script)
                 }
-                let fs = require('fs')
-                fs.readFile('tasks/DESKTOP_SPOTIFY.robot', 'utf-8', (err:any, DESKTOP_SPOTIFY:any) => {
-                    this.execute(DESKTOP_SPOTIFY)
+
+                const taskName: string = `${stringify}`
+                const fileName: string = `tasks/${taskName}.robot`;
+
+                fs.readFile(fileName, 'utf-8', (err:any, fileContent:any) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    this.execute(fileContent)
                 })
             }
 
