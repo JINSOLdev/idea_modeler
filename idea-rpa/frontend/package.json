@@ -26,20 +26,23 @@
     "fs": "0.0.1-security",
     "html-element-picker": "^1.1.2",
     "iconv-lite": "^0.6.3",
+    "material-design-icons-iconfont": "^6.7.0",
     "node-machine-id": "^1.1.12",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "path-browserify": "^1.0.1",
     "ts-loader": "^5.2.0",
+    "typeface-roboto": "^1.1.13",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.6.5",
     "vuedraggable": "^2.24.3",
     "vuetify": "^2.4.0",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@mdi/font": "^7.1.96",
+    "@mdi/font": "^7.2.96",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/node": "^18.15.11",
     "@vue/cli-plugin-typescript": "^5.0.8",
@@ -68,6 +71,5 @@
     "oneClick": false,
     "perMachine": false,
     "allowToChangeInstallationDirectory": true
-
   }
 }

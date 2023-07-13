@@ -20,6 +20,7 @@ async function createWindow() {
     autoHideMenuBar: false,
     // fullscreen: true,
     webPreferences: {
+      webSecurity: false,
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
@@ -72,7 +73,9 @@ async function createWindow() {
     //     // }
     //   ]
     // },
-    
+    // {
+    //   type: 'separator'
+    // },
     {
       label: 'Open',
       type: 'normal',

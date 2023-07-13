@@ -176,7 +176,6 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-
         </v-container>
     </div>
 </template>
@@ -227,7 +226,7 @@
                 "machine_id": "",
                 "file_name": "file"
             }
-            axios.get("/bpm/common/download/robot", tmp).then(function (data: any) {
+            axios.get("/common/download/robot", tmp).then(function (data: any) {
                 console.log("Donwload Robot")
                 console.log(data)
             }) 
@@ -351,6 +350,7 @@
             }
         }
 
+        
     }
 
     

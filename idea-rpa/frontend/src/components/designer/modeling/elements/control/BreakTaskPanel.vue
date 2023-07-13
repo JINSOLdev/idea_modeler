@@ -20,8 +20,6 @@
 
     export default class BreakTaskPanel extends Mixins(ControlPanel) {
         mounted() {
-            var description = "Stop current FOR or WHILE loop"
-            this.$emit("setDescription", description)
         }
     }
 </script>

@@ -9,7 +9,7 @@
     import ExecutePython from "./components/designer/modeling/elements/util/ExecutePython.vue";
     import fs from 'fs';
     import { stringify } from "querystring";
-
+    
     @Component({components: {
         ExecutePython,
     }})
@@ -18,7 +18,7 @@
             let machine_id = localStorage.getItem("machine_id");
             // console.log(machine_id)
             //localStorage.setItem("machine_id", "0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867");
-            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId='+ machine_id);///websocket
+            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId='+machine_id);///websocket
             //let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId=0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867');///websocket
             //localStorage.getItem("machine_id")
             connection.onmessage = (event) => {
@@ -31,11 +31,11 @@
                     console.log('RPA 작업 두번째 시작')
                 } else if (event.data === 'taskName3-filePath3') {
                     console.log('RPA 작업 세번째 시작')
-                    // this.execute(event.data.script)
+                    this.execute(event.data.script)
                 }
 
-                const taskName: string = `${stringify}`
-                const fileName: string = `tasks/${taskName}.robot`;
+                const file_name: string = `${stringify}`
+                const fileName: string = `tasks/${file_name}.robot`;
 
                 fs.readFile(fileName, 'utf-8', (err:any, fileContent:any) => {
                     if (err) {
@@ -45,7 +45,6 @@
                     this.execute(fileContent)
                 })
             }
-
             connection.onopen = () => {
                 console.log('Info: WebSocket connection opened.');
             };

@@ -44,7 +44,7 @@
             "in zip",
         ]
         mounted() {
-            var description = "Repeat the same action multiple times"
+            var description = "Allows execution a set of keywords multiple times"
             this.$emit("setDescription", description)
         }
     }

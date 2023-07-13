@@ -30,11 +30,10 @@ import Word_Application from '@/components/designer/modeling/elements/keyword/Wo
 import axios from 'axios'
 import Panels from '@/components/designer/modeling/elements/panels'
 import Fields from '@/components/designer/modeling/elements/panels/fields'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
+axios.defaults.baseURL = `http://ideasolutions.co.kr:8090/bpm`;
 Vue.prototype.$http = axios;
-    
-axios.defaults.baseURL = `http://ideasolutions.co.kr:8090/bpm`
-
 Vue.component('keyword-element', Keyword)
 Vue.use(Control)
 Vue.use(BuiltIn)

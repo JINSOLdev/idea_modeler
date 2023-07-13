@@ -69,7 +69,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from "vue-property-decorator";
     import { Variables } from  "@/types/Variables";
-
+    
     @Component
     export default class VariablesField extends Vue {
         @Prop() public value!: any
