@@ -351,13 +351,6 @@
             }
         }
 
-        closeDialog(): void {
-            this.dialog = false
-        }
-
-        saveData(): void {
-            this.dialog = false
-        }
     }
 
     
