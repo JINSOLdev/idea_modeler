@@ -3,7 +3,6 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { machineIdSync } from 'node-machine-id'
 const isDevelopment = process.env.NODE_ENV !== 'production'
  
  

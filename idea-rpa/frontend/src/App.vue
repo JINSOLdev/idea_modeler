@@ -8,7 +8,7 @@
     import { Vue, Component, Mixins } from "vue-property-decorator";
     import ExecutePython from "./components/designer/modeling/elements/util/ExecutePython.vue";
     import fs from 'fs';
-import { stringify } from "querystring";
+    import { stringify } from "querystring";
 
     @Component({components: {
         ExecutePython,
