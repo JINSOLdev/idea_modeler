@@ -8,6 +8,12 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 
     <!-- jQuery-->
+    <script type="text/javascript"> 
+      function init() {
+        window.localStorage.setItem("machine_id", "0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867")
+        window.localStorage.setItem("server", "http://ideasolutions.co.kr:8090")
+      }
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <!-- jquery-ui -->
@@ -20,10 +26,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">    
   </head>
-  <body>
+  <body onload="init()">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <div id="result"></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

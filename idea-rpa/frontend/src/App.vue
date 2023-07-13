@@ -7,8 +7,7 @@
 <script lang="ts">
     import { Vue, Component, Mixins } from "vue-property-decorator";
     import ExecutePython from "./components/designer/modeling/elements/util/ExecutePython.vue";
-    import { machineId, machineIdSync }  from "node-machine-id";
-    const fs = require('fs')
+
     @Component({components: {
         ExecutePython,
     }})
@@ -16,7 +15,10 @@
         mounted() {
             let machine_id = localStorage.getItem("machine_id");
             console.log(machine_id)
-            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId='+machine_id);///websocket
+            //localStorage.setItem("machine_id", "0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867");
+            let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId='+ machine_id);///websocket
+            //let connection = new WebSocket('ws://ideasolutions.co.kr:8090/bpm/websocket?userId=0c42819f7026a5b7f407c011c0b9523dad249b9ceef29cddcc5140b6ab922867');///websocket
+            //localStorage.getItem("machine_id")
             connection.onmessage = (event) => {
                 console.log(event);     
                 console.log(event.data)     // taskName1-filePath1, taskName2-filePath2, taskName3-filePath3
@@ -27,13 +29,14 @@
                     console.log('RPA 작업 두번째 시작')
                 } else if (event.data === 'taskName3-filePath3') {
                     console.log('RPA 작업 세번째 시작')
-                    this.execute(event.data.script)
+                    // this.execute(event.data.script)
                 }
-
-                
-                
-
+                let fs = require('fs')
+                fs.readFile('tasks/DESKTOP_SPOTIFY.robot', 'utf-8', (err:any, DESKTOP_SPOTIFY:any) => {
+                    this.execute(DESKTOP_SPOTIFY)
+                })
             }
+
             connection.onopen = () => {
                 console.log('Info: WebSocket connection opened.');
             };

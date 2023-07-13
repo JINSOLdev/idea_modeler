@@ -59,23 +59,21 @@ async function createWindow() {
 
 
   const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Setting',
-      submenu: [
-        {
-          label: 'machine_id : ' + (machineIdSync()),
-        },
-        {
-          label: 'server : ' + 'http://ideasolutions.co.kr:8090/bpm'
-        },
-        // {
-        //   label: 'user_id : ' + '(userid())'
-        // }
-      ]
-    },
-    {
-      type: 'separator'
-    },
+    // {
+    //   label: 'Setting',
+    //   submenu: [
+    //     {
+    //       label: 'machine_id : ' + (machineIdSync()),
+    //     },
+    //     {
+    //       label: 'server : ' + 'http://ideasolutions.co.kr:8090/bpm'
+    //     },
+    //     // {
+    //     //   label: 'user_id : ' + '(userid())'
+    //     // }
+    //   ]
+    // },
+    
     {
       label: 'Open',
       type: 'normal',

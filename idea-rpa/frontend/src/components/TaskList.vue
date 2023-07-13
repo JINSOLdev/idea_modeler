@@ -101,19 +101,6 @@
                     <span>Download Folder</span>
                 </v-tooltip>
 
-                <v-tooltip left>
-                    <template v-slot:activator="{ props }">
-                        <v-btn @click="dialog"
-                            color="primary"
-                            v-bind="props"
-                            fab
-                            dark
-                        >
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>Open Dialog</span>
-                </v-tooltip>    
             </v-speed-dial>
  
             <!-- Location Dialog -->
@@ -190,51 +177,6 @@
                 </v-card>
             </v-dialog>
 
-            <v-dialog v-model="dialog" max-width="800">
-                <v-card>
-                    <v-card-title>
-                        <span class="text-h5">Setting</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-text-field
-                                        label="machine_id"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field
-                                        label="Server"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field
-                                        label="user ID"
-                                    ></v-text-field>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            color="blue-darken-1"
-                            variant="text"
-                            @click="dialog = false"
-                        >
-                         Close
-                        </v-btn>
-                        <v-btn
-                            color="blue-darken-1"
-                            variant="text"
-                            @click="dialog = false"
-                        >
-                         Save
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
         </v-container>
     </div>
 </template>
@@ -285,7 +227,7 @@
                 "machine_id": "",
                 "file_name": "file"
             }
-            axios.get("/common/download/robot", tmp).then(function (data: any) {
+            axios.get("/bpm/common/download/robot", tmp).then(function (data: any) {
                 console.log("Donwload Robot")
                 console.log(data)
             }) 
